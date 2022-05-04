@@ -8,7 +8,7 @@
   </a>
   <a href="https://github.com/yandeu/arcade-physics/tree/gh-pages/bundle">
     <img
-      src="https://badgen.net/badgesize/gzip/yandeu/arcade-physics/gh-pages/bundle/main.js"
+      src="https://badgen.net/badgesize/gzip/yandeu/arcade-physics/gh-pages/bundle/arcade-physics.min.js"
       alt="gzip size"
     />
   </a>
