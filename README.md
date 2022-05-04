@@ -28,16 +28,13 @@ Completely detach the Arcade Physics from the PhaserJS package and convert it to
 
 TileMap and Group support has been removed. Instead of Group, use an array.
 
-## Demo
+## Demo (client-side)
 
 https://yandeu.github.io/arcade-physics/
 
-## Try it
+## NPM
 
-```
-npm install
-npm start
-```
+`npm i arcade-physics`
 
 ## Usage
 
