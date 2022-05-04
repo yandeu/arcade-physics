@@ -1,6 +1,6 @@
 {
   "name": "arcade-physics",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Use Arcade Physics without Phaser.",
   "main": "dev.mjs",
   "type": "commonjs",
