@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches-ignore:
+      - gh-pages
+  pull_request:
+    branches-ignore:
+      - gh-pages
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Packages
+        run: npm run tsc && npm run bundle
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Run Prettier
+        run: npm run format
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+
+      - name: Deploy to gh-pages
+        run: |
+          mkdir tmp -p
+          mv index.html tmp/index.html
+          mv bundle tmp
+          ls tmp
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          npx deploy-website gh tmp
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
