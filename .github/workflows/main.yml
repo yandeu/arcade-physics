@@ -44,6 +44,7 @@ jobs:
         uses: codecov/codecov-action@v2
 
       - name: Deploy to gh-pages
+        if: github.ref == 'refs/heads/main'
         run: |
           mkdir tmp -p
           mv index.html tmp/index.html
