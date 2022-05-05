@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Rectangle = require('./Rectangle')
+import Rectangle from './Rectangle'
 
 /**
  * Create the smallest Rectangle containing two coordinate pairs.
@@ -22,7 +22,7 @@ var Rectangle = require('./Rectangle')
  *
  * @return {Phaser.Geom.Rectangle} The adjusted `out` Rectangle, or a new Rectangle if none was provided.
  */
-var FromXY = function (x1, y1, x2, y2, out) {
+const FromXY = (x1, y1, x2, y2, out) => {
   if (out === undefined) {
     out = new Rectangle()
   }
@@ -30,4 +30,4 @@ var FromXY = function (x1, y1, x2, y2, out) {
   return out.setTo(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x1 - x2), Math.abs(y1 - y2))
 }
 
-module.exports = FromXY
+export default FromXY

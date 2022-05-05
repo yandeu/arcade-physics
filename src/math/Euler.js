@@ -4,12 +4,13 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Clamp = require('./Clamp')
-var Class = require('../utils/Class')
-var Matrix4 = require('./Matrix4')
-var NOOP = require('../utils/NOOP')
+import Clamp from './Clamp'
 
-var tempMatrix = new Matrix4()
+import Class from '../utils/Class'
+import Matrix4 from './Matrix4'
+import NOOP from '../utils/NOOP'
+
+const tempMatrix = new Matrix4()
 
 /**
  * @classdesc
@@ -23,7 +24,7 @@ var tempMatrix = new Matrix4()
  * @param {number} [y] - The y component.
  * @param {number} [z] - The z component.
  */
-var Euler = new Class({
+const Euler = new Class({
   initialize: function Euler(x, y, z, order) {
     if (x === undefined) {
       x = 0
@@ -134,23 +135,23 @@ var Euler = new Class({
       update = false
     }
 
-    var elements = matrix.val
+    const elements = matrix.val
 
     //  Upper 3x3 of matrix is un-scaled rotation matrix
-    var m11 = elements[0]
-    var m12 = elements[4]
-    var m13 = elements[8]
-    var m21 = elements[1]
-    var m22 = elements[5]
-    var m23 = elements[9]
-    var m31 = elements[2]
-    var m32 = elements[6]
-    var m33 = elements[10]
+    const m11 = elements[0]
+    const m12 = elements[4]
+    const m13 = elements[8]
+    const m21 = elements[1]
+    const m22 = elements[5]
+    const m23 = elements[9]
+    const m31 = elements[2]
+    const m32 = elements[6]
+    const m33 = elements[10]
 
-    var x = 0
-    var y = 0
-    var z = 0
-    var epsilon = 0.99999
+    let x = 0
+    let y = 0
+    let z = 0
+    const epsilon = 0.99999
 
     switch (order) {
       case 'XYZ': {
@@ -249,4 +250,4 @@ Euler.RotationOrders = ['XYZ', 'YXZ', 'ZXY', 'ZYX', 'YZX', 'XZY']
 
 Euler.DefaultOrder = 'XYZ'
 
-module.exports = Euler
+export default Euler

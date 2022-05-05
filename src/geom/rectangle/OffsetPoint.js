@@ -17,11 +17,11 @@
  *
  * @return {Phaser.Geom.Rectangle} The adjusted Rectangle.
  */
-var OffsetPoint = function (rect, point) {
+const OffsetPoint = (rect, point) => {
   rect.x += point.x
   rect.y += point.y
 
   return rect
 }
 
-module.exports = OffsetPoint
+export default OffsetPoint

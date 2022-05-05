@@ -24,7 +24,7 @@
  *
  * @return {Phaser.Geom.Point[]} An array containing all the points from `points` that are within the triangle, if an array was provided as `out`, points will be appended to that array and it will also be returned here.
  */
-var ContainsArray = function (triangle, points, returnFirst, out) {
+const ContainsArray = (triangle, points, returnFirst, out) => {
   if (returnFirst === undefined) {
     returnFirst = false
   }
@@ -32,31 +32,31 @@ var ContainsArray = function (triangle, points, returnFirst, out) {
     out = []
   }
 
-  var v0x = triangle.x3 - triangle.x1
-  var v0y = triangle.y3 - triangle.y1
+  const v0x = triangle.x3 - triangle.x1
+  const v0y = triangle.y3 - triangle.y1
 
-  var v1x = triangle.x2 - triangle.x1
-  var v1y = triangle.y2 - triangle.y1
+  const v1x = triangle.x2 - triangle.x1
+  const v1y = triangle.y2 - triangle.y1
 
-  var dot00 = v0x * v0x + v0y * v0y
-  var dot01 = v0x * v1x + v0y * v1y
-  var dot11 = v1x * v1x + v1y * v1y
+  const dot00 = v0x * v0x + v0y * v0y
+  const dot01 = v0x * v1x + v0y * v1y
+  const dot11 = v1x * v1x + v1y * v1y
 
   // Compute barycentric coordinates
-  var b = dot00 * dot11 - dot01 * dot01
-  var inv = b === 0 ? 0 : 1 / b
+  const b = dot00 * dot11 - dot01 * dot01
+  const inv = b === 0 ? 0 : 1 / b
 
-  var u
-  var v
-  var v2x
-  var v2y
-  var dot02
-  var dot12
+  let u
+  let v
+  let v2x
+  let v2y
+  let dot02
+  let dot12
 
-  var x1 = triangle.x1
-  var y1 = triangle.y1
+  const x1 = triangle.x1
+  const y1 = triangle.y1
 
-  for (var i = 0; i < points.length; i++) {
+  for (let i = 0; i < points.length; i++) {
     v2x = points[i].x - x1
     v2y = points[i].y - y1
 
@@ -78,4 +78,4 @@ var ContainsArray = function (triangle, points, returnFirst, out) {
   return out
 }
 
-module.exports = ContainsArray
+export default ContainsArray

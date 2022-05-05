@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var renderWebGL = require('../../../utils/NOOP')
-var renderCanvas = require('../../../utils/NOOP')
+import renderWebGL from '../../../utils/NOOP'
+
+import renderCanvas from '../../../utils/NOOP'
 
 if (typeof WEBGL_RENDERER) {
   renderWebGL = require('./StarWebGLRenderer')
@@ -15,7 +16,7 @@ if (typeof CANVAS_RENDERER) {
   renderCanvas = require('./StarCanvasRenderer')
 }
 
-module.exports = {
+export default {
   renderWebGL: renderWebGL,
   renderCanvas: renderCanvas
 }

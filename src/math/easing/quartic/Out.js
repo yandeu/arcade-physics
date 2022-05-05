@@ -14,8 +14,8 @@
  *
  * @return {number} The tweened value.
  */
-var Out = function (v) {
+const Out = v => {
   return 1 - --v * v * v * v
 }
 
-module.exports = Out
+export default Out

@@ -15,7 +15,7 @@
  *
  * @return {boolean} `true` if the object is plain, otherwise `false`.
  */
-var IsPlainObject = function (obj) {
+const IsPlainObject = obj => {
   // Not plain objects:
   // - Any object or value whose internal [[Class]] property is not "[object Object]"
   // - DOM nodes
@@ -41,4 +41,4 @@ var IsPlainObject = function (obj) {
   return true
 }
 
-module.exports = IsPlainObject
+export default IsPlainObject

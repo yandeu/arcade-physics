@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Factorial = require('./Factorial')
+import Factorial from './Factorial'
 
 /**
  * Calculates the Bernstein basis from the three factorial coefficients.
@@ -17,8 +17,8 @@ var Factorial = require('./Factorial')
  *
  * @return {number} The Bernstein basis of Factorial(n) / Factorial(i) / Factorial(n - i)
  */
-var Bernstein = function (n, i) {
+const Bernstein = (n, i) => {
   return Factorial(n) / Factorial(i) / Factorial(n - i)
 }
 
-module.exports = Bernstein
+export default Bernstein

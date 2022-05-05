@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Rectangle = require('./Rectangle')
+import Rectangle from './Rectangle'
 
 Rectangle.Area = require('./Area')
 Rectangle.Ceil = require('./Ceil')
@@ -45,4 +45,4 @@ Rectangle.SameDimensions = require('./SameDimensions')
 Rectangle.Scale = require('./Scale')
 Rectangle.Union = require('./Union')
 
-module.exports = Rectangle
+export default Rectangle

@@ -17,8 +17,8 @@
  *
  * @return {*} The element that was moved.
  */
-var MoveTo = function (array, item, index) {
-  var currentIndex = array.indexOf(item)
+const MoveTo = (array, item, index) => {
+  const currentIndex = array.indexOf(item)
 
   if (currentIndex === -1 || index < 0 || index >= array.length) {
     throw new Error('Supplied index out of bounds')
@@ -35,4 +35,4 @@ var MoveTo = function (array, item, index) {
   return item
 }
 
-module.exports = MoveTo
+export default MoveTo

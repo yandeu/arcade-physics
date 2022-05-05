@@ -4,10 +4,11 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../utils/Class')
-var Components = require('../components')
-var GameObject = require('../GameObject')
-var Line = require('../../geom/line/Line')
+import Class from '../../utils/Class'
+
+import Components from '../components'
+import GameObject from '../GameObject'
+import Line from '../../geom/line/Line'
 
 /**
  * @classdesc
@@ -35,7 +36,7 @@ var Line = require('../../geom/line/Line')
  * @param {string} [type] - The internal type of the Shape.
  * @param {any} [data] - The data of the source shape geometry, if any.
  */
-var Shape = new Class({
+const Shape = new Class({
   Extends: GameObject,
 
   Mixins: [
@@ -395,4 +396,4 @@ var Shape = new Class({
   }
 })
 
-module.exports = Shape
+export default Shape

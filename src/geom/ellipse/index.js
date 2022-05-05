@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Ellipse = require('./Ellipse')
+import Ellipse from './Ellipse'
 
 Ellipse.Area = require('./Area')
 Ellipse.Circumference = require('./Circumference')
@@ -22,4 +22,4 @@ Ellipse.Offset = require('./Offset')
 Ellipse.OffsetPoint = require('./OffsetPoint')
 Ellipse.Random = require('./Random')
 
-module.exports = Ellipse
+export default Ellipse

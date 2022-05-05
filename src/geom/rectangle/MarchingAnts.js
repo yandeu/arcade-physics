@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Perimeter = require('./Perimeter')
-var Point = require('../point/Point')
+import Perimeter from './Perimeter'
+
+import Point from '../point/Point'
 
 /**
  * Returns an array of points from the perimeter of the Rectangle, where each point is spaced out based
@@ -23,7 +24,7 @@ var Point = require('../point/Point')
  *
  * @return {(array|Phaser.Geom.Point[])} An array containing the perimeter points from the Rectangle.
  */
-var MarchingAnts = function (rect, step, quantity, out) {
+const MarchingAnts = (rect, step, quantity, out) => {
   if (out === undefined) {
     out = []
   }
@@ -41,13 +42,13 @@ var MarchingAnts = function (rect, step, quantity, out) {
     quantity = Math.round(Perimeter(rect) / step)
   }
 
-  var x = rect.x
-  var y = rect.y
-  var face = 0
+  let x = rect.x
+  let y = rect.y
+  let face = 0
 
   //  Loop across each face of the rectangle
 
-  for (var i = 0; i < quantity; i++) {
+  for (let i = 0; i < quantity; i++) {
     out.push(new Point(x, y))
 
     switch (face) {
@@ -99,4 +100,4 @@ var MarchingAnts = function (rect, step, quantity, out) {
   return out
 }
 
-module.exports = MarchingAnts
+export default MarchingAnts

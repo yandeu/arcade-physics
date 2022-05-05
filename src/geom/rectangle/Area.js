@@ -14,8 +14,8 @@
  *
  * @return {number} The area of the Rectangle object.
  */
-var Area = function (rect) {
+const Area = rect => {
   return rect.width * rect.height
 }
 
-module.exports = Area
+export default Area

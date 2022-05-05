@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var RotateLeft = require('../RotateLeft')
-var RotateRight = require('../RotateRight')
+import RotateLeft from '../RotateLeft'
+
+import RotateRight from '../RotateRight'
 
 /**
  * Translates the given Array Matrix by shifting each column and row the
@@ -37,7 +38,7 @@ var RotateRight = require('../RotateRight')
  *
  * @return {T[][]} The translated matrix.
  */
-var TranslateMatrix = function (matrix, x, y) {
+const TranslateMatrix = (matrix, x, y) => {
   if (x === undefined) {
     x = 0
   }
@@ -60,8 +61,8 @@ var TranslateMatrix = function (matrix, x, y) {
   //  Horizontal translation
 
   if (x !== 0) {
-    for (var i = 0; i < matrix.length; i++) {
-      var row = matrix[i]
+    for (let i = 0; i < matrix.length; i++) {
+      const row = matrix[i]
 
       if (x < 0) {
         RotateLeft(row, Math.abs(x))
@@ -74,4 +75,4 @@ var TranslateMatrix = function (matrix, x, y) {
   return matrix
 }
 
-module.exports = TranslateMatrix
+export default TranslateMatrix

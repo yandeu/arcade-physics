@@ -18,7 +18,7 @@
  *
  * @return {Phaser.Types.Math.Vector2Like[]} The array of coordinates on the line.
  */
-var BresenhamPoints = function (line, stepRate, results) {
+const BresenhamPoints = (line, stepRate, results) => {
   if (stepRate === undefined) {
     stepRate = 1
   }
@@ -26,23 +26,23 @@ var BresenhamPoints = function (line, stepRate, results) {
     results = []
   }
 
-  var x1 = Math.round(line.x1)
-  var y1 = Math.round(line.y1)
-  var x2 = Math.round(line.x2)
-  var y2 = Math.round(line.y2)
+  let x1 = Math.round(line.x1)
+  let y1 = Math.round(line.y1)
+  const x2 = Math.round(line.x2)
+  const y2 = Math.round(line.y2)
 
-  var dx = Math.abs(x2 - x1)
-  var dy = Math.abs(y2 - y1)
-  var sx = x1 < x2 ? 1 : -1
-  var sy = y1 < y2 ? 1 : -1
-  var err = dx - dy
+  const dx = Math.abs(x2 - x1)
+  const dy = Math.abs(y2 - y1)
+  const sx = x1 < x2 ? 1 : -1
+  const sy = y1 < y2 ? 1 : -1
+  let err = dx - dy
 
   results.push({ x: x1, y: y1 })
 
-  var i = 1
+  let i = 1
 
   while (!(x1 === x2 && y1 === y2)) {
-    var e2 = err << 1
+    const e2 = err << 1
 
     if (e2 > -dy) {
       err -= dy
@@ -64,4 +64,4 @@ var BresenhamPoints = function (line, stepRate, results) {
   return results
 }
 
-module.exports = BresenhamPoints
+export default BresenhamPoints

@@ -4,12 +4,13 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../utils/Class')
-var Contains = require('./Contains')
-var GetPoint = require('./GetPoint')
-var GetPoints = require('./GetPoints')
-var GEOM_CONST = require('../const')
-var Random = require('./Random')
+import Class from '../../utils/Class'
+
+import Contains from './Contains'
+import GetPoint from './GetPoint'
+import GetPoints from './GetPoints'
+import GEOM_CONST from '../const'
+import Random from './Random'
 
 /**
  * @classdesc
@@ -29,7 +30,7 @@ var Random = require('./Random')
  * @param {number} [width=0] - The width of the ellipse.
  * @param {number} [height=0] - The height of the ellipse.
  */
-var Ellipse = new Class({
+const Ellipse = new Class({
   initialize: function Ellipse(x, y, width, height) {
     if (x === undefined) {
       x = 0
@@ -353,4 +354,4 @@ var Ellipse = new Class({
   }
 })
 
-module.exports = Ellipse
+export default Ellipse

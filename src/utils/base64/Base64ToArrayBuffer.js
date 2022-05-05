@@ -5,12 +5,12 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 
 //  Use a lookup table to find the index.
-var lookup = new Uint8Array(256)
+const lookup = new Uint8Array(256)
 
-for (var i = 0; i < chars.length; i++) {
+for (let i = 0; i < chars.length; i++) {
   lookup[chars.charCodeAt(i)] = i
 }
 
@@ -24,17 +24,17 @@ for (var i = 0; i < chars.length; i++) {
  *
  * @return {ArrayBuffer} An ArrayBuffer decoded from the base64 data.
  */
-var Base64ToArrayBuffer = function (base64) {
+const Base64ToArrayBuffer = base64 => {
   //  Is it a data uri? if so, strip the header away
   base64 = base64.substr(base64.indexOf(',') + 1)
 
-  var len = base64.length
-  var bufferLength = len * 0.75
-  var p = 0
-  var encoded1
-  var encoded2
-  var encoded3
-  var encoded4
+  const len = base64.length
+  let bufferLength = len * 0.75
+  let p = 0
+  let encoded1
+  let encoded2
+  let encoded3
+  let encoded4
 
   if (base64[len - 1] === '=') {
     bufferLength--
@@ -44,10 +44,10 @@ var Base64ToArrayBuffer = function (base64) {
     }
   }
 
-  var arrayBuffer = new ArrayBuffer(bufferLength)
-  var bytes = new Uint8Array(arrayBuffer)
+  const arrayBuffer = new ArrayBuffer(bufferLength)
+  const bytes = new Uint8Array(arrayBuffer)
 
-  for (var i = 0; i < len; i += 4) {
+  for (let i = 0; i < len; i += 4) {
     encoded1 = lookup[base64.charCodeAt(i)]
     encoded2 = lookup[base64.charCodeAt(i + 1)]
     encoded3 = lookup[base64.charCodeAt(i + 2)]
@@ -61,4 +61,4 @@ var Base64ToArrayBuffer = function (base64) {
   return arrayBuffer
 }
 
-module.exports = Base64ToArrayBuffer
+export default Base64ToArrayBuffer

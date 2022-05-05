@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point')
+import Point from '../point/Point'
 
 //  This is based off an explanation and expanded math presented by Paul Bourke:
 //  See http:'local.wasp.uwa.edu.au/~pbourke/geometry/lineline2d/
@@ -21,24 +21,24 @@ var Point = require('../point/Point')
  *
  * @return {boolean} `true` if the two Lines intersect, and the `out` object will be populated, if given. Otherwise, `false`.
  */
-var LineToLine = function (line1, line2, out) {
+const LineToLine = (line1, line2, out) => {
   if (out === undefined) {
     out = new Point()
   }
 
-  var x1 = line1.x1
-  var y1 = line1.y1
-  var x2 = line1.x2
-  var y2 = line1.y2
+  const x1 = line1.x1
+  const y1 = line1.y1
+  const x2 = line1.x2
+  const y2 = line1.y2
 
-  var x3 = line2.x1
-  var y3 = line2.y1
-  var x4 = line2.x2
-  var y4 = line2.y2
+  const x3 = line2.x1
+  const y3 = line2.y1
+  const x4 = line2.x2
+  const y4 = line2.y2
 
-  var numA = (x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)
-  var numB = (x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)
-  var deNom = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1)
+  const numA = (x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)
+  const numB = (x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)
+  const deNom = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1)
 
   //  Make sure there is not a division by zero - this also indicates that the lines are parallel.
   //  If numA and numB were both equal to zero the lines would be on top of each other (coincidental).
@@ -50,8 +50,8 @@ var LineToLine = function (line1, line2, out) {
 
   //  Calculate the intermediate fractional point that the lines potentially intersect.
 
-  var uA = numA / deNom
-  var uB = numB / deNom
+  const uA = numA / deNom
+  const uB = numB / deNom
 
   //  The fractional point will be between 0 and 1 inclusive if the lines intersect.
   //  If the fractional calculation is larger than 1 or smaller than 0 the lines would need to be longer to intersect.
@@ -66,4 +66,4 @@ var LineToLine = function (line1, line2, out) {
   return false
 }
 
-module.exports = LineToLine
+export default LineToLine

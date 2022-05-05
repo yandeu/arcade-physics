@@ -14,7 +14,7 @@
  * @since 3.0.0
  */
 
-var Origin = {
+const Origin = {
   /**
    * A property indicating that a Game Object has this component.
    *
@@ -185,4 +185,4 @@ var Origin = {
   }
 }
 
-module.exports = Origin
+export default Origin

@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var EarCut = require('../polygon/Earcut')
-var Triangle = require('./Triangle')
+import EarCut from '../polygon/Earcut'
+
+import Triangle from './Triangle'
 
 /**
  * Takes an array of vertex coordinates, and optionally an array of hole indices, then returns an array
@@ -24,7 +25,7 @@ var Triangle = require('./Triangle')
  *
  * @return {(array|Phaser.Geom.Triangle[])} An array of Triangle instances, where each triangle is based on the decomposed vertices data.
  */
-var BuildFromPolygon = function (data, holes, scaleX, scaleY, out) {
+const BuildFromPolygon = (data, holes, scaleX, scaleY, out) => {
   if (holes === undefined) {
     holes = null
   }
@@ -38,22 +39,22 @@ var BuildFromPolygon = function (data, holes, scaleX, scaleY, out) {
     out = []
   }
 
-  var tris = EarCut(data, holes)
+  const tris = EarCut(data, holes)
 
-  var a
-  var b
-  var c
+  let a
+  let b
+  let c
 
-  var x1
-  var y1
+  let x1
+  let y1
 
-  var x2
-  var y2
+  let x2
+  let y2
 
-  var x3
-  var y3
+  let x3
+  let y3
 
-  for (var i = 0; i < tris.length; i += 3) {
+  for (let i = 0; i < tris.length; i += 3) {
     a = tris[i]
     b = tris[i + 1]
     c = tris[i + 2]
@@ -73,4 +74,4 @@ var BuildFromPolygon = function (data, holes, scaleX, scaleY, out) {
   return out
 }
 
-module.exports = BuildFromPolygon
+export default BuildFromPolygon

@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('./Point')
-var GetMagnitudeSq = require('./GetMagnitudeSq')
+import Point from './Point'
+
+import GetMagnitudeSq from './GetMagnitudeSq'
 
 /**
  * Calculates the vector projection of `pointA` onto the nonzero `pointB`. This is the
@@ -22,13 +23,13 @@ var GetMagnitudeSq = require('./GetMagnitudeSq')
  *
  * @return {Phaser.Geom.Point} A Point object holding the coordinates of the vector projection of `pointA` onto `pointB`.
  */
-var Project = function (pointA, pointB, out) {
+const Project = (pointA, pointB, out) => {
   if (out === undefined) {
     out = new Point()
   }
 
-  var dot = pointA.x * pointB.x + pointA.y * pointB.y
-  var amt = dot / GetMagnitudeSq(pointB)
+  const dot = pointA.x * pointB.x + pointA.y * pointB.y
+  const amt = dot / GetMagnitudeSq(pointB)
 
   if (amt !== 0) {
     out.x = amt * pointB.x
@@ -38,4 +39,4 @@ var Project = function (pointA, pointB, out) {
   return out
 }
 
-module.exports = Project
+export default Project

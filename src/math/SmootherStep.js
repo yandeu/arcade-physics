@@ -23,10 +23,10 @@
  *
  * @return {number} The percentage of interpolation, between 0 and 1.
  */
-var SmootherStep = function (x, min, max) {
+const SmootherStep = (x, min, max) => {
   x = Math.max(0, Math.min(1, (x - min) / (max - min)))
 
   return x * x * x * (x * (x * 6 - 15) + 10)
 }
 
-module.exports = SmootherStep
+export default SmootherStep

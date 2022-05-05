@@ -18,10 +18,10 @@
  *
  * @return {Phaser.Geom.Polygon} The modified Polygon.
  */
-var Translate = function (polygon, x, y) {
-  var points = polygon.points
+const Translate = (polygon, x, y) => {
+  const points = polygon.points
 
-  for (var i = 0; i < points.length; i++) {
+  for (let i = 0; i < points.length; i++) {
     points[i].x += x
     points[i].y += y
   }
@@ -29,4 +29,4 @@ var Translate = function (polygon, x, y) {
   return polygon
 }
 
-module.exports = Translate
+export default Translate

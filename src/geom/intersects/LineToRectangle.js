@@ -23,19 +23,19 @@
  *
  * @return {boolean} `true` if the Line and the Rectangle intersect, `false` otherwise.
  */
-var LineToRectangle = function (line, rect) {
-  var x1 = line.x1
-  var y1 = line.y1
+const LineToRectangle = (line, rect) => {
+  const x1 = line.x1
+  const y1 = line.y1
 
-  var x2 = line.x2
-  var y2 = line.y2
+  const x2 = line.x2
+  const y2 = line.y2
 
-  var bx1 = rect.x
-  var by1 = rect.y
-  var bx2 = rect.right
-  var by2 = rect.bottom
+  const bx1 = rect.x
+  const by1 = rect.y
+  const bx2 = rect.right
+  const by2 = rect.bottom
 
-  var t = 0
+  let t = 0
 
   //  If the start or end of the line is inside the rect then we assume
   //  collision, as rects are solid for our use-case.
@@ -79,4 +79,4 @@ var LineToRectangle = function (line, rect) {
   return false
 }
 
-module.exports = LineToRectangle
+export default LineToRectangle

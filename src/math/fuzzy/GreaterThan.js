@@ -18,7 +18,7 @@
  *
  * @return {boolean} `true` if `a` is fuzzily greater than than `b`, otherwise `false`.
  */
-var GreaterThan = function (a, b, epsilon) {
+const GreaterThan = (a, b, epsilon) => {
   if (epsilon === undefined) {
     epsilon = 0.0001
   }
@@ -26,4 +26,4 @@ var GreaterThan = function (a, b, epsilon) {
   return a > b - epsilon
 }
 
-module.exports = GreaterThan
+export default GreaterThan

@@ -16,7 +16,7 @@
  *
  * @return {Phaser.Geom.Rectangle} The adjusted Rectangle.
  */
-var FloorAll = function (rect) {
+const FloorAll = rect => {
   rect.x = Math.floor(rect.x)
   rect.y = Math.floor(rect.y)
   rect.width = Math.floor(rect.width)
@@ -25,4 +25,4 @@ var FloorAll = function (rect) {
   return rect
 }
 
-module.exports = FloorAll
+export default FloorAll

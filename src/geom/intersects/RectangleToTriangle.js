@@ -4,10 +4,11 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var LineToLine = require('./LineToLine')
-var Contains = require('../rectangle/Contains')
-var ContainsArray = require('../triangle/ContainsArray')
-var Decompose = require('../rectangle/Decompose')
+import LineToLine from './LineToLine'
+
+import Contains from '../rectangle/Contains'
+import ContainsArray from '../triangle/ContainsArray'
+import Decompose from '../rectangle/Decompose'
 
 /**
  * Checks for intersection between Rectangle shape and Triangle shape.
@@ -20,7 +21,7 @@ var Decompose = require('../rectangle/Decompose')
  *
  * @return {boolean} A value of `true` if objects intersect; otherwise `false`.
  */
-var RectangleToTriangle = function (rect, triangle) {
+const RectangleToTriangle = (rect, triangle) => {
   //  First the cheapest ones:
 
   if (
@@ -32,9 +33,9 @@ var RectangleToTriangle = function (rect, triangle) {
     return false
   }
 
-  var triA = triangle.getLineA()
-  var triB = triangle.getLineB()
-  var triC = triangle.getLineC()
+  const triA = triangle.getLineA()
+  const triB = triangle.getLineB()
+  const triC = triangle.getLineC()
 
   //  Are any of the triangle points within the rectangle?
 
@@ -52,10 +53,10 @@ var RectangleToTriangle = function (rect, triangle) {
 
   //  Cheap tests over, now to see if any of the lines intersect ...
 
-  var rectA = rect.getLineA()
-  var rectB = rect.getLineB()
-  var rectC = rect.getLineC()
-  var rectD = rect.getLineD()
+  const rectA = rect.getLineA()
+  const rectB = rect.getLineB()
+  const rectC = rect.getLineC()
+  const rectD = rect.getLineD()
 
   if (LineToLine(triA, rectA) || LineToLine(triA, rectB) || LineToLine(triA, rectC) || LineToLine(triA, rectD)) {
     return true
@@ -71,10 +72,10 @@ var RectangleToTriangle = function (rect, triangle) {
 
   //  None of the lines intersect, so are any rectangle points within the triangle?
 
-  var points = Decompose(rect)
-  var within = ContainsArray(triangle, points, true)
+  const points = Decompose(rect)
+  const within = ContainsArray(triangle, points, true)
 
   return within.length > 0
 }
 
-module.exports = RectangleToTriangle
+export default RectangleToTriangle

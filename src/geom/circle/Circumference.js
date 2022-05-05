@@ -14,8 +14,8 @@
  *
  * @return {number} The circumference of the Circle.
  */
-var Circumference = function (circle) {
+const Circumference = circle => {
   return 2 * (Math.PI * circle.radius)
 }
 
-module.exports = Circumference
+export default Circumference

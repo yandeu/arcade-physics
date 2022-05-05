@@ -14,8 +14,8 @@
  *
  * @return {number} The area of the Circle.
  */
-var Area = function (circle) {
+const Area = circle => {
   return circle.radius > 0 ? Math.PI * circle.radius * circle.radius : 0
 }
 
-module.exports = Area
+export default Area

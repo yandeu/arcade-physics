@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point')
-var Length = require('../line/Length')
+import Point from '../point/Point'
+
+import Length from '../line/Length'
 
 /**
  * Returns a Point from around the perimeter of a Triangle.
@@ -21,14 +22,14 @@ var Length = require('../line/Length')
  *
  * @return {(Phaser.Geom.Point|object)} A Point object containing the given position from the perimeter of the triangle.
  */
-var GetPoint = function (triangle, position, out) {
+const GetPoint = (triangle, position, out) => {
   if (out === undefined) {
     out = new Point()
   }
 
-  var line1 = triangle.getLineA()
-  var line2 = triangle.getLineB()
-  var line3 = triangle.getLineC()
+  const line1 = triangle.getLineA()
+  const line2 = triangle.getLineB()
+  const line3 = triangle.getLineC()
 
   if (position <= 0 || position >= 1) {
     out.x = line1.x1
@@ -37,14 +38,14 @@ var GetPoint = function (triangle, position, out) {
     return out
   }
 
-  var length1 = Length(line1)
-  var length2 = Length(line2)
-  var length3 = Length(line3)
+  const length1 = Length(line1)
+  const length2 = Length(line2)
+  const length3 = Length(line3)
 
-  var perimeter = length1 + length2 + length3
+  const perimeter = length1 + length2 + length3
 
-  var p = perimeter * position
-  var localPosition = 0
+  let p = perimeter * position
+  let localPosition = 0
 
   //  Which line is it on?
 
@@ -73,4 +74,4 @@ var GetPoint = function (triangle, position, out) {
   return out
 }
 
-module.exports = GetPoint
+export default GetPoint

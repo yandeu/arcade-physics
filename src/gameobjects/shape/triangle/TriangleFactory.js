@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GameObjectFactory = require('../../GameObjectFactory')
-var Triangle = require('./Triangle')
+import GameObjectFactory from '../../GameObjectFactory'
+
+import Triangle from './Triangle'
 
 /**
  * Creates a new Triangle Shape Game Object and adds it to the Scene.

@@ -17,8 +17,8 @@
  *
  * @return {boolean} True if the range is safe, otherwise false.
  */
-var SafeRange = function (array, startIndex, endIndex, throwError) {
-  var len = array.length
+const SafeRange = (array, startIndex, endIndex, throwError) => {
+  const len = array.length
 
   if (startIndex < 0 || startIndex > len || startIndex >= endIndex || endIndex > len || startIndex + endIndex > len) {
     if (throwError) {
@@ -31,4 +31,4 @@ var SafeRange = function (array, startIndex, endIndex, throwError) {
   }
 }
 
-module.exports = SafeRange
+export default SafeRange

@@ -11,7 +11,7 @@
  * @since 3.12.0
  */
 
-var Crop = {
+const Crop = {
   /**
    * The Texture this Game Object is using to render with.
    *
@@ -81,7 +81,7 @@ var Crop = {
       if (typeof x === 'number') {
         this.frame.setCropUVs(this._crop, x, y, width, height, this.flipX, this.flipY)
       } else {
-        var rect = x
+        const rect = x
 
         this.frame.setCropUVs(this._crop, rect.x, rect.y, rect.width, rect.height, this.flipX, this.flipY)
       }
@@ -121,4 +121,4 @@ var Crop = {
   }
 }
 
-module.exports = Crop
+export default Crop

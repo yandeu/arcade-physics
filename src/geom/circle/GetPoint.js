@@ -4,10 +4,11 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CircumferencePoint = require('./CircumferencePoint')
-var FromPercent = require('../../math/FromPercent')
-var MATH_CONST = require('../../math/const')
-var Point = require('../point/Point')
+import CircumferencePoint from './CircumferencePoint'
+
+import FromPercent from '../../math/FromPercent'
+import MATH_CONST from '../../math/const'
+import Point from '../point/Point'
 
 /**
  * Returns a Point object containing the coordinates of a point on the circumference of the Circle
@@ -25,14 +26,14 @@ var Point = require('../point/Point')
  *
  * @return {(Phaser.Geom.Point|object)} A Point, or point-like object, containing the coordinates of the point around the circle.
  */
-var GetPoint = function (circle, position, out) {
+const GetPoint = (circle, position, out) => {
   if (out === undefined) {
     out = new Point()
   }
 
-  var angle = FromPercent(position, 0, MATH_CONST.PI2)
+  const angle = FromPercent(position, 0, MATH_CONST.PI2)
 
   return CircumferencePoint(circle, angle, out)
 }
 
-module.exports = GetPoint
+export default GetPoint

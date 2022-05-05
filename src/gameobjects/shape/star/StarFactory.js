@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Star = require('./Star')
-var GameObjectFactory = require('../../GameObjectFactory')
+import Star from './Star'
+
+import GameObjectFactory from '../../GameObjectFactory'
 
 /**
  * Creates a new Star Shape Game Object and adds it to the Scene.

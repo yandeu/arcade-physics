@@ -4,4 +4,4 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-module.exports = require('./Linear')
+export default require('./Linear')

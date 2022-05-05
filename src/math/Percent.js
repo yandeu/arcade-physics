@@ -20,12 +20,12 @@
  *
  * @return {number} A value between 0 and 1 representing the percentage.
  */
-var Percent = function (value, min, max, upperMax) {
+const Percent = (value, min, max, upperMax) => {
   if (max === undefined) {
     max = min + 1
   }
 
-  var percentage = (value - min) / (max - min)
+  let percentage = (value - min) / (max - min)
 
   if (percentage > 1) {
     if (upperMax !== undefined) {
@@ -44,4 +44,4 @@ var Percent = function (value, min, max, upperMax) {
   return percentage
 }
 
-module.exports = Percent
+export default Percent

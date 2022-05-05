@@ -16,8 +16,8 @@
  *
  * @return {Phaser.Geom.Point} The Point with `Math.floor()` applied to its coordinates.
  */
-var Floor = function (point) {
+const Floor = point => {
   return point.setTo(Math.floor(point.x), Math.floor(point.y))
 }
 
-module.exports = Floor
+export default Floor

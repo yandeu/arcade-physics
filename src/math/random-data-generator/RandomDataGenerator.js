@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../utils/Class')
+import Class from '../../utils/Class'
 
 /**
  * @classdesc
@@ -26,7 +26,7 @@ var Class = require('../../utils/Class')
  *
  * @param {(string|string[])} [seeds] - The seeds to use for the random number generator.
  */
-var RandomDataGenerator = new Class({
+const RandomDataGenerator = new Class({
   initialize: function RandomDataGenerator(seeds) {
     if (seeds === undefined) {
       seeds = [(Date.now() * Math.random()).toString()]
@@ -111,7 +111,7 @@ var RandomDataGenerator = new Class({
    * @return {number} A random number.
    */
   rnd: function () {
-    var t = 2091639 * this.s0 + this.c * 2.3283064365386963e-10 // 2^-32
+    const t = 2091639 * this.s0 + this.c * 2.3283064365386963e-10 // 2^-32
 
     this.c = t | 0
     this.s0 = this.s1
@@ -133,12 +133,12 @@ var RandomDataGenerator = new Class({
    * @return {number} The hashed value.
    */
   hash: function (data) {
-    var h
-    var n = this.n
+    let h
+    let n = this.n
 
     data = data.toString()
 
-    for (var i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       n += data.charCodeAt(i)
       h = 0.02519603282416938 * n
       n = h >>> 0
@@ -193,8 +193,8 @@ var RandomDataGenerator = new Class({
     }
 
     // Apply any seeds
-    for (var i = 0; i < seeds.length && seeds[i] != null; i++) {
-      var seed = seeds[i]
+    for (let i = 0; i < seeds.length && seeds[i] != null; i++) {
+      const seed = seeds[i]
 
       this.s0 -= this.hash(seed)
       this.s0 += ~~(this.s0 < 0)
@@ -310,8 +310,8 @@ var RandomDataGenerator = new Class({
    * @return {string} A valid RFC4122 version4 ID hex string
    */
   uuid: function () {
-    var a = ''
-    var b = ''
+    let a = ''
+    let b = ''
 
     for (
       b = a = '';
@@ -458,11 +458,11 @@ var RandomDataGenerator = new Class({
    * @return {T[]} The shuffled array.
    */
   shuffle: function (array) {
-    var len = array.length - 1
+    const len = array.length - 1
 
-    for (var i = len; i > 0; i--) {
-      var randomIndex = Math.floor(this.frac() * (i + 1))
-      var itemAtIndex = array[randomIndex]
+    for (let i = len; i > 0; i--) {
+      const randomIndex = Math.floor(this.frac() * (i + 1))
+      const itemAtIndex = array[randomIndex]
 
       array[randomIndex] = array[i]
       array[i] = itemAtIndex
@@ -472,4 +472,4 @@ var RandomDataGenerator = new Class({
   }
 })
 
-module.exports = RandomDataGenerator
+export default RandomDataGenerator

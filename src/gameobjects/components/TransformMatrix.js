@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var MATH_CONST = require('../../math/const')
-var Vector2 = require('../../math/Vector2')
+import MATH_CONST from '../../math/const'
+
+import Vector2 from '../../math/Vector2'
 
 /**
  * @classdesc
@@ -227,12 +228,12 @@ export class TransformMatrix {
    */
 
   get rotationNormalized() {
-    var matrix = this.matrix
+    const matrix = this.matrix
 
-    var a = matrix[0]
-    var b = matrix[1]
-    var c = matrix[2]
-    var d = matrix[3]
+    const a = matrix[0]
+    const b = matrix[1]
+    const c = matrix[2]
+    const d = matrix[3]
 
     if (a || b) {
       // var r = Math.sqrt(a * a + b * b);
@@ -281,7 +282,7 @@ export class TransformMatrix {
    * @return {this} This TransformMatrix.
    */
   loadIdentity() {
-    var matrix = this.matrix
+    const matrix = this.matrix
 
     matrix[0] = 1
     matrix[1] = 0
@@ -305,7 +306,7 @@ export class TransformMatrix {
    * @return {this} This TransformMatrix.
    */
   translate(x, y) {
-    var matrix = this.matrix
+    const matrix = this.matrix
 
     matrix[4] = matrix[0] * x + matrix[2] * y + matrix[4]
     matrix[5] = matrix[1] * x + matrix[3] * y + matrix[5]
@@ -325,7 +326,7 @@ export class TransformMatrix {
    * @return {this} This TransformMatrix.
    */
   scale(x, y) {
-    var matrix = this.matrix
+    const matrix = this.matrix
 
     matrix[0] *= x
     matrix[1] *= x
@@ -346,15 +347,15 @@ export class TransformMatrix {
    * @return {this} This TransformMatrix.
    */
   rotate(angle) {
-    var sin = Math.sin(angle)
-    var cos = Math.cos(angle)
+    const sin = Math.sin(angle)
+    const cos = Math.cos(angle)
 
-    var matrix = this.matrix
+    const matrix = this.matrix
 
-    var a = matrix[0]
-    var b = matrix[1]
-    var c = matrix[2]
-    var d = matrix[3]
+    const a = matrix[0]
+    const b = matrix[1]
+    const c = matrix[2]
+    const d = matrix[3]
 
     matrix[0] = a * cos + c * sin
     matrix[1] = b * cos + d * sin
@@ -380,24 +381,24 @@ export class TransformMatrix {
    * @return {(this|Phaser.GameObjects.Components.TransformMatrix)} Either this TransformMatrix, or the `out` Matrix, if given in the arguments.
    */
   multiply(rhs, out) {
-    var matrix = this.matrix
-    var source = rhs.matrix
+    const matrix = this.matrix
+    const source = rhs.matrix
 
-    var localA = matrix[0]
-    var localB = matrix[1]
-    var localC = matrix[2]
-    var localD = matrix[3]
-    var localE = matrix[4]
-    var localF = matrix[5]
+    const localA = matrix[0]
+    const localB = matrix[1]
+    const localC = matrix[2]
+    const localD = matrix[3]
+    const localE = matrix[4]
+    const localF = matrix[5]
 
-    var sourceA = source[0]
-    var sourceB = source[1]
-    var sourceC = source[2]
-    var sourceD = source[3]
-    var sourceE = source[4]
-    var sourceF = source[5]
+    const sourceA = source[0]
+    const sourceB = source[1]
+    const sourceC = source[2]
+    const sourceD = source[3]
+    const sourceE = source[4]
+    const sourceF = source[5]
 
-    var destinationMatrix = out === undefined ? this : out
+    const destinationMatrix = out === undefined ? this : out
 
     destinationMatrix.a = sourceA * localA + sourceB * localC
     destinationMatrix.b = sourceA * localB + sourceB * localD
@@ -425,25 +426,25 @@ export class TransformMatrix {
    * @return {this} This TransformMatrix.
    */
   multiplyWithOffset(src, offsetX, offsetY) {
-    var matrix = this.matrix
-    var otherMatrix = src.matrix
+    const matrix = this.matrix
+    const otherMatrix = src.matrix
 
-    var a0 = matrix[0]
-    var b0 = matrix[1]
-    var c0 = matrix[2]
-    var d0 = matrix[3]
-    var tx0 = matrix[4]
-    var ty0 = matrix[5]
+    const a0 = matrix[0]
+    const b0 = matrix[1]
+    const c0 = matrix[2]
+    const d0 = matrix[3]
+    const tx0 = matrix[4]
+    const ty0 = matrix[5]
 
-    var pse = offsetX * a0 + offsetY * c0 + tx0
-    var psf = offsetX * b0 + offsetY * d0 + ty0
+    const pse = offsetX * a0 + offsetY * c0 + tx0
+    const psf = offsetX * b0 + offsetY * d0 + ty0
 
-    var a1 = otherMatrix[0]
-    var b1 = otherMatrix[1]
-    var c1 = otherMatrix[2]
-    var d1 = otherMatrix[3]
-    var tx1 = otherMatrix[4]
-    var ty1 = otherMatrix[5]
+    const a1 = otherMatrix[0]
+    const b1 = otherMatrix[1]
+    const c1 = otherMatrix[2]
+    const d1 = otherMatrix[3]
+    const tx1 = otherMatrix[4]
+    const ty1 = otherMatrix[5]
 
     matrix[0] = a1 * a0 + b1 * c0
     matrix[1] = a1 * b0 + b1 * d0
@@ -471,14 +472,14 @@ export class TransformMatrix {
    * @return {this} This TransformMatrix.
    */
   transform(a, b, c, d, tx, ty) {
-    var matrix = this.matrix
+    const matrix = this.matrix
 
-    var a0 = matrix[0]
-    var b0 = matrix[1]
-    var c0 = matrix[2]
-    var d0 = matrix[3]
-    var tx0 = matrix[4]
-    var ty0 = matrix[5]
+    const a0 = matrix[0]
+    const b0 = matrix[1]
+    const c0 = matrix[2]
+    const d0 = matrix[3]
+    const tx0 = matrix[4]
+    const ty0 = matrix[5]
 
     matrix[0] = a * a0 + b * c0
     matrix[1] = a * b0 + b * d0
@@ -507,14 +508,14 @@ export class TransformMatrix {
       point = { x: 0, y: 0 }
     }
 
-    var matrix = this.matrix
+    const matrix = this.matrix
 
-    var a = matrix[0]
-    var b = matrix[1]
-    var c = matrix[2]
-    var d = matrix[3]
-    var tx = matrix[4]
-    var ty = matrix[5]
+    const a = matrix[0]
+    const b = matrix[1]
+    const c = matrix[2]
+    const d = matrix[3]
+    const tx = matrix[4]
+    const ty = matrix[5]
 
     point.x = x * a + y * c + tx
     point.y = x * b + y * d + ty
@@ -531,16 +532,16 @@ export class TransformMatrix {
    * @return {this} This TransformMatrix.
    */
   invert() {
-    var matrix = this.matrix
+    const matrix = this.matrix
 
-    var a = matrix[0]
-    var b = matrix[1]
-    var c = matrix[2]
-    var d = matrix[3]
-    var tx = matrix[4]
-    var ty = matrix[5]
+    const a = matrix[0]
+    const b = matrix[1]
+    const c = matrix[2]
+    const d = matrix[3]
+    const tx = matrix[4]
+    const ty = matrix[5]
 
-    var n = a * d - b * c
+    const n = a * d - b * c
 
     matrix[0] = d / n
     matrix[1] = -b / n
@@ -563,7 +564,7 @@ export class TransformMatrix {
    * @return {this} This TransformMatrix.
    */
   copyFrom(src) {
-    var matrix = this.matrix
+    const matrix = this.matrix
 
     matrix[0] = src.a
     matrix[1] = src.b
@@ -587,7 +588,7 @@ export class TransformMatrix {
    * @return {this} This TransformMatrix.
    */
   copyFromArray(src) {
-    var matrix = this.matrix
+    const matrix = this.matrix
 
     matrix[0] = src[0]
     matrix[1] = src[1]
@@ -611,7 +612,7 @@ export class TransformMatrix {
    * @return {CanvasRenderingContext2D} The Canvas Rendering Context.
    */
   copyToContext(ctx) {
-    var matrix = this.matrix
+    const matrix = this.matrix
 
     ctx.transform(matrix[0], matrix[1], matrix[2], matrix[3], matrix[4], matrix[5])
 
@@ -630,7 +631,7 @@ export class TransformMatrix {
    * @return {CanvasRenderingContext2D} The Canvas Rendering Context.
    */
   setToContext(ctx) {
-    var matrix = this.matrix
+    const matrix = this.matrix
 
     ctx.setTransform(matrix[0], matrix[1], matrix[2], matrix[3], matrix[4], matrix[5])
 
@@ -650,7 +651,7 @@ export class TransformMatrix {
    * @return {array} An array where elements 0 to 5 contain the values from this matrix.
    */
   copyToArray(out) {
-    var matrix = this.matrix
+    const matrix = this.matrix
 
     if (out === undefined) {
       out = [matrix[0], matrix[1], matrix[2], matrix[3], matrix[4], matrix[5]]
@@ -682,7 +683,7 @@ export class TransformMatrix {
    * @return {this} This TransformMatrix.
    */
   setTransform(a, b, c, d, tx, ty) {
-    var matrix = this.matrix
+    const matrix = this.matrix
 
     matrix[0] = a
     matrix[1] = b
@@ -707,33 +708,33 @@ export class TransformMatrix {
    * @return {object} The decomposed Matrix.
    */
   decomposeMatrix() {
-    var decomposedMatrix = this.decomposedMatrix
+    const decomposedMatrix = this.decomposedMatrix
 
-    var matrix = this.matrix
+    const matrix = this.matrix
 
     //  a = scale X (1)
     //  b = shear Y (0)
     //  c = shear X (0)
     //  d = scale Y (1)
 
-    var a = matrix[0]
-    var b = matrix[1]
-    var c = matrix[2]
-    var d = matrix[3]
+    const a = matrix[0]
+    const b = matrix[1]
+    const c = matrix[2]
+    const d = matrix[3]
 
-    var determ = a * d - b * c
+    const determ = a * d - b * c
 
     decomposedMatrix.translateX = matrix[4]
     decomposedMatrix.translateY = matrix[5]
 
     if (a || b) {
-      var r = Math.sqrt(a * a + b * b)
+      const r = Math.sqrt(a * a + b * b)
 
       decomposedMatrix.rotation = b > 0 ? Math.acos(a / r) : -Math.acos(a / r)
       decomposedMatrix.scaleX = r
       decomposedMatrix.scaleY = determ / r
     } else if (c || d) {
-      var s = Math.sqrt(c * c + d * d)
+      const s = Math.sqrt(c * c + d * d)
 
       decomposedMatrix.rotation = Math.PI * 0.5 - (d > 0 ? Math.acos(-c / s) : -Math.acos(c / s))
       decomposedMatrix.scaleX = determ / s
@@ -762,10 +763,10 @@ export class TransformMatrix {
    * @return {this} This TransformMatrix.
    */
   applyITRS(x, y, rotation, scaleX, scaleY) {
-    var matrix = this.matrix
+    const matrix = this.matrix
 
-    var radianSin = Math.sin(rotation)
-    var radianCos = Math.cos(rotation)
+    const radianSin = Math.sin(rotation)
+    const radianCos = Math.cos(rotation)
 
     // Translate
     matrix[4] = x
@@ -800,16 +801,16 @@ export class TransformMatrix {
       output = new Vector2()
     }
 
-    var matrix = this.matrix
+    const matrix = this.matrix
 
-    var a = matrix[0]
-    var b = matrix[1]
-    var c = matrix[2]
-    var d = matrix[3]
-    var tx = matrix[4]
-    var ty = matrix[5]
+    const a = matrix[0]
+    const b = matrix[1]
+    const c = matrix[2]
+    const d = matrix[3]
+    const tx = matrix[4]
+    const ty = matrix[5]
 
-    var id = 1 / (a * d + c * -b)
+    const id = 1 / (a * d + c * -b)
 
     output.x = d * id * x + -c * id * y + (ty * c - tx * d) * id
     output.y = a * id * y + -b * id * x + (-ty * a + tx * b) * id
@@ -864,7 +865,7 @@ export class TransformMatrix {
    * @return {number} The calculated x value.
    */
   getXRound(x, y, round) {
-    var v = this.getX(x, y)
+    let v = this.getX(x, y)
 
     if (round) {
       v = Math.round(v)
@@ -888,7 +889,7 @@ export class TransformMatrix {
    * @return {number} The calculated y value.
    */
   getYRound(x, y, round) {
-    var v = this.getY(x, y)
+    let v = this.getY(x, y)
 
     if (round) {
       v = Math.round(v)
@@ -906,7 +907,7 @@ export class TransformMatrix {
    * @return {string} A string containing the CSS Transform matrix values.
    */
   getCSSMatrix() {
-    var m = this.matrix
+    const m = this.matrix
 
     return `matrix(${m[0]},${m[1]},${m[2]},${m[3]},${m[4]},${m[5]})`
   }

@@ -18,11 +18,11 @@
  *
  * @return {Phaser.Geom.Ellipse} The Ellipse that was offset.
  */
-var Offset = function (ellipse, x, y) {
+const Offset = (ellipse, x, y) => {
   ellipse.x += x
   ellipse.y += y
 
   return ellipse
 }
 
-module.exports = Offset
+export default Offset

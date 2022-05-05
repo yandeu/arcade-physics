@@ -12,7 +12,7 @@
  * @since 3.0.0
  */
 
-var Depth = {
+const Depth = {
   /**
    * Private internal value. Holds the depth of the Game Object.
    *
@@ -82,4 +82,4 @@ var Depth = {
   }
 }
 
-module.exports = Depth
+export default Depth

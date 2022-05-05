@@ -4,10 +4,11 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var ArrayUtils = require('../utils/array')
-var Class = require('../utils/Class')
-var NOOP = require('../utils/NOOP')
-var StableSort = require('../utils/array/StableSort')
+import ArrayUtils from '../utils/array'
+
+import Class from '../utils/Class'
+import NOOP from '../utils/NOOP'
+import StableSort from '../utils/array/StableSort'
 
 /**
  * @callback EachListCallback<I>
@@ -29,7 +30,7 @@ var StableSort = require('../utils/array/StableSort')
  *
  * @param {*} parent - The parent of this list.
  */
-var List = new Class({
+const List = new Class({
   initialize: function List(parent) {
     /**
      * The parent of this list.
@@ -188,7 +189,7 @@ var List = new Class({
     }
 
     if (handler === undefined) {
-      handler = function (childA, childB) {
+      handler = (childA, childB) => {
         return childA[property] - childB[property]
       }
     }
@@ -440,7 +441,7 @@ var List = new Class({
    * @return {Phaser.Structs.List} This List object.
    */
   removeAll: function (skipCallback) {
-    var i = this.list.length
+    let i = this.list.length
 
     while (i--) {
       this.remove(this.list[i], skipCallback)
@@ -614,7 +615,7 @@ var List = new Class({
    * @param {...*} [args] - Additional arguments that will be passed to the callback, after the child.
    */
   each: function (callback, context) {
-    var args = [null]
+    const args = [null]
 
     for (var i = 2; i < arguments.length; i++) {
       args.push(arguments[i])
@@ -756,4 +757,4 @@ var List = new Class({
   }
 })
 
-module.exports = List
+export default List

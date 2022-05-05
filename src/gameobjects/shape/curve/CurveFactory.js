@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GameObjectFactory = require('../../GameObjectFactory')
-var Curve = require('./Curve')
+import GameObjectFactory from '../../GameObjectFactory'
+
+import Curve from './Curve'
 
 /**
  * Creates a new Curve Shape Game Object and adds it to the Scene.

@@ -15,11 +15,11 @@
  *
  * @return {number} The distance between the points.
  */
-var DistanceBetweenPoints = function (a, b) {
-  var dx = a.x - b.x
-  var dy = a.y - b.y
+const DistanceBetweenPoints = (a, b) => {
+  const dx = a.x - b.x
+  const dy = a.y - b.y
 
   return Math.sqrt(dx * dx + dy * dy)
 }
 
-module.exports = DistanceBetweenPoints
+export default DistanceBetweenPoints

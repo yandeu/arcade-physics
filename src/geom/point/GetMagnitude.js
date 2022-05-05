@@ -14,8 +14,8 @@
  *
  * @return {number} The resulting magnitude
  */
-var GetMagnitude = function (point) {
+const GetMagnitude = point => {
   return Math.sqrt(point.x * point.x + point.y * point.y)
 }
 
-module.exports = GetMagnitude
+export default GetMagnitude

@@ -16,15 +16,15 @@
  * @param {number} [altColor] - An alternative color to render with.
  * @param {number} [altAlpha] - An alternative alpha to render with.
  */
-var FillStyleCanvas = function (ctx, src, altColor, altAlpha) {
-  var fillColor = altColor ? altColor : src.fillColor
-  var fillAlpha = altAlpha ? altAlpha : src.fillAlpha
+const FillStyleCanvas = (ctx, src, altColor, altAlpha) => {
+  const fillColor = altColor ? altColor : src.fillColor
+  const fillAlpha = altAlpha ? altAlpha : src.fillAlpha
 
-  var red = (fillColor & 0xff0000) >>> 16
-  var green = (fillColor & 0xff00) >>> 8
-  var blue = fillColor & 0xff
+  const red = (fillColor & 0xff0000) >>> 16
+  const green = (fillColor & 0xff00) >>> 8
+  const blue = fillColor & 0xff
 
   ctx.fillStyle = `rgba(${red},${green},${blue},${fillAlpha})`
 }
 
-module.exports = FillStyleCanvas
+export default FillStyleCanvas

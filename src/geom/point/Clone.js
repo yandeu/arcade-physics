@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('./Point')
+import Point from './Point'
 
 /**
  * Clone the given Point.
@@ -16,8 +16,8 @@ var Point = require('./Point')
  *
  * @return {Phaser.Geom.Point} The cloned Point.
  */
-var Clone = function (source) {
+const Clone = source => {
   return new Point(source.x, source.y)
 }
 
-module.exports = Clone
+export default Clone

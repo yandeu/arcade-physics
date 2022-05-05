@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var MATH_CONST = require('../const')
+import MATH_CONST from '../const'
 
 /**
  * Rotates `currentAngle` towards `targetAngle`, taking the shortest rotation distance. The `lerp` argument is the amount to rotate by in this call.
@@ -18,7 +18,7 @@ var MATH_CONST = require('../const')
  *
  * @return {number} The adjusted angle.
  */
-var RotateTo = function (currentAngle, targetAngle, lerp) {
+const RotateTo = (currentAngle, targetAngle, lerp) => {
   if (lerp === undefined) {
     lerp = 0.05
   }
@@ -48,4 +48,4 @@ var RotateTo = function (currentAngle, targetAngle, lerp) {
   return currentAngle
 }
 
-module.exports = RotateTo
+export default RotateTo

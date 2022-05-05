@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Bernstein = require('../Bernstein')
+import Bernstein from '../Bernstein'
 
 /**
  * A bezier interpolation method.
@@ -17,15 +17,15 @@ var Bernstein = require('../Bernstein')
  *
  * @return {number} The interpolated value.
  */
-var BezierInterpolation = function (v, k) {
-  var b = 0
-  var n = v.length - 1
+const BezierInterpolation = (v, k) => {
+  let b = 0
+  const n = v.length - 1
 
-  for (var i = 0; i <= n; i++) {
+  for (let i = 0; i <= n; i++) {
     b += Math.pow(1 - k, n - i) * Math.pow(k, i) * v[i] * Bernstein(n, i)
   }
 
   return b
 }
 
-module.exports = BezierInterpolation
+export default BezierInterpolation

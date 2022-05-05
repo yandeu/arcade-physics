@@ -8,7 +8,7 @@
  * @namespace Phaser.Math.Fuzzy
  */
 
-module.exports = {
+export default {
   Ceil: require('./Ceil'),
   Equal: require('./Equal'),
   Floor: require('./Floor'),

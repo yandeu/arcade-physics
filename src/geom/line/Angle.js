@@ -14,8 +14,8 @@
  *
  * @return {number} The angle of the line, in radians.
  */
-var Angle = function (line) {
+const Angle = line => {
   return Math.atan2(line.y2 - line.y1, line.x2 - line.x1)
 }
 
-module.exports = Angle
+export default Angle

@@ -16,8 +16,8 @@
  *
  * @return {*} The value if found; otherwise, defaultValue (null if none provided)
  */
-var GetFastValue = function (source, key, defaultValue) {
-  var t = typeof source
+const GetFastValue = (source, key, defaultValue) => {
+  const t = typeof source
 
   if (!source || t === 'number' || t === 'string') {
     return defaultValue
@@ -28,4 +28,4 @@ var GetFastValue = function (source, key, defaultValue) {
   }
 }
 
-module.exports = GetFastValue
+export default GetFastValue

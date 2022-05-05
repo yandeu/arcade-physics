@@ -4,9 +4,10 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var MATH_CONST = require('../../math/const')
-var Wrap = require('../../math/Wrap')
-var Angle = require('./Angle')
+import MATH_CONST from '../../math/const'
+
+import Wrap from '../../math/Wrap'
+import Angle from './Angle'
 
 /**
  * Get the angle of the normal of the given line in radians.
@@ -18,10 +19,10 @@ var Angle = require('./Angle')
  *
  * @return {number} The angle of the normal of the line in radians.
  */
-var NormalAngle = function (line) {
-  var angle = Angle(line) - MATH_CONST.TAU
+const NormalAngle = line => {
+  const angle = Angle(line) - MATH_CONST.TAU
 
   return Wrap(angle, -Math.PI, Math.PI)
 }
 
-module.exports = NormalAngle
+export default NormalAngle

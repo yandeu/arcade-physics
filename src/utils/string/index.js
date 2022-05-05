@@ -8,7 +8,7 @@
  * @namespace Phaser.Utils.String
  */
 
-module.exports = {
+export default {
   Format: require('./Format'),
   Pad: require('./Pad'),
   RemoveAt: require('./RemoveAt'),

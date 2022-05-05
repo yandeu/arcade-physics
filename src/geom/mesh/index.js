@@ -8,7 +8,7 @@
  * @namespace Phaser.Geom.Mesh
  */
 
-var Mesh = {
+const Mesh = {
   Face: require('./Face'),
   GenerateGridVerts: require('./GenerateGridVerts'),
   GenerateObjVerts: require('./GenerateObjVerts'),
@@ -19,4 +19,4 @@ var Mesh = {
   Vertex: require('./Vertex')
 }
 
-module.exports = Mesh
+export default Mesh

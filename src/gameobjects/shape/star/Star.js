@@ -4,10 +4,11 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var StarRender = require('./StarRender')
-var Class = require('../../../utils/Class')
-var Earcut = require('../../../geom/polygon/Earcut')
-var Shape = require('../Shape')
+import StarRender from './StarRender'
+
+import Class from '../../../utils/Class'
+import Earcut from '../../../geom/polygon/Earcut'
+import Shape from '../Shape'
 
 /**
  * @classdesc
@@ -41,7 +42,7 @@ var Shape = require('../Shape')
  * @param {number} [fillColor] - The color the star will be filled with, i.e. 0xff0000 for red.
  * @param {number} [fillAlpha] - The alpha the star will be filled with. You can also set the alpha of the overall Shape using its `alpha` property.
  */
-var Star = new Class({
+const Star = new Class({
   Extends: Shape,
 
   Mixins: [StarRender],
@@ -230,22 +231,22 @@ var Star = new Class({
    * @return {this} This Game Object instance.
    */
   updateData: function () {
-    var path = []
+    const path = []
 
-    var points = this._points
-    var innerRadius = this._innerRadius
-    var outerRadius = this._outerRadius
+    const points = this._points
+    const innerRadius = this._innerRadius
+    const outerRadius = this._outerRadius
 
-    var rot = (Math.PI / 2) * 3
-    var step = Math.PI / points
+    let rot = (Math.PI / 2) * 3
+    const step = Math.PI / points
 
     //  So origin 0.5 = the center of the star
-    var x = outerRadius
-    var y = outerRadius
+    const x = outerRadius
+    const y = outerRadius
 
     path.push(x, y + -outerRadius)
 
-    for (var i = 0; i < points; i++) {
+    for (let i = 0; i < points; i++) {
       path.push(x + Math.cos(rot) * outerRadius, y + Math.sin(rot) * outerRadius)
 
       rot += step
@@ -264,4 +265,4 @@ var Star = new Class({
   }
 })
 
-module.exports = Star
+export default Star

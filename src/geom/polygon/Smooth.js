@@ -8,7 +8,7 @@
 /**
  * @ignore
  */
-var copy = function (out, a) {
+const copy = (out, a) => {
   out[0] = a[0]
   out[1] = a[1]
 
@@ -27,28 +27,28 @@ var copy = function (out, a) {
  *
  * @return {Phaser.Geom.Polygon} The input polygon.
  */
-var Smooth = function (polygon) {
-  var i
-  var points = []
-  var data = polygon.points
+const Smooth = polygon => {
+  let i
+  const points = []
+  const data = polygon.points
 
   for (i = 0; i < data.length; i++) {
     points.push([data[i].x, data[i].y])
   }
 
-  var output = []
+  const output = []
 
   if (points.length > 0) {
     output.push(copy([0, 0], points[0]))
   }
 
   for (i = 0; i < points.length - 1; i++) {
-    var p0 = points[i]
-    var p1 = points[i + 1]
-    var p0x = p0[0]
-    var p0y = p0[1]
-    var p1x = p1[0]
-    var p1y = p1[1]
+    const p0 = points[i]
+    const p1 = points[i + 1]
+    const p0x = p0[0]
+    const p0y = p0[1]
+    const p1x = p1[0]
+    const p1y = p1[1]
 
     output.push([0.85 * p0x + 0.15 * p1x, 0.85 * p0y + 0.15 * p1y])
     output.push([0.15 * p0x + 0.85 * p1x, 0.15 * p0y + 0.85 * p1y])
@@ -61,4 +61,4 @@ var Smooth = function (polygon) {
   return polygon.setTo(output)
 }
 
-module.exports = Smooth
+export default Smooth

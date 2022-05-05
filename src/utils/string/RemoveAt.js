@@ -15,7 +15,7 @@
  *
  * @return {string} The modified string.
  */
-var RemoveAt = function (string, index) {
+const RemoveAt = (string, index) => {
   if (index === 0) {
     return string.slice(1)
   } else {
@@ -23,4 +23,4 @@ var RemoveAt = function (string, index) {
   }
 }
 
-module.exports = RemoveAt
+export default RemoveAt

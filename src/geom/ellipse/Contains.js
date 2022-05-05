@@ -16,14 +16,14 @@
  *
  * @return {boolean} True if the coordinates are within the ellipse, otherwise false.
  */
-var Contains = function (ellipse, x, y) {
+const Contains = (ellipse, x, y) => {
   if (ellipse.width <= 0 || ellipse.height <= 0) {
     return false
   }
 
   //  Normalize the coords to an ellipse with center 0,0 and a radius of 0.5
-  var normx = (x - ellipse.x) / ellipse.width
-  var normy = (y - ellipse.y) / ellipse.height
+  let normx = (x - ellipse.x) / ellipse.width
+  let normy = (y - ellipse.y) / ellipse.height
 
   normx *= normx
   normy *= normy
@@ -31,4 +31,4 @@ var Contains = function (ellipse, x, y) {
   return normx + normy < 0.25
 }
 
-module.exports = Contains
+export default Contains

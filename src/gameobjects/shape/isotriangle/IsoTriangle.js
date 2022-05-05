@@ -4,9 +4,10 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../../utils/Class')
-var IsoTriangleRender = require('./IsoTriangleRender')
-var Shape = require('../Shape')
+import Class from '../../../utils/Class'
+
+import IsoTriangleRender from './IsoTriangleRender'
+import Shape from '../Shape'
 
 /**
  * @classdesc
@@ -41,7 +42,7 @@ var Shape = require('../Shape')
  * @param {number} [fillLeft=0x999999] - The fill color of the left face of the iso triangle.
  * @param {number} [fillRight=0xcccccc] - The fill color of the right face of the iso triangle.
  */
-var IsoTriangle = new Class({
+const IsoTriangle = new Class({
   Extends: Shape,
 
   Mixins: [IsoTriangleRender],
@@ -248,4 +249,4 @@ var IsoTriangle = new Class({
   }
 })
 
-module.exports = IsoTriangle
+export default IsoTriangle

@@ -18,7 +18,7 @@
  *
  * @return {Phaser.Geom.Line} The offset line.
  */
-var Offset = function (line, x, y) {
+const Offset = (line, x, y) => {
   line.x1 += x
   line.y1 += y
 
@@ -28,4 +28,4 @@ var Offset = function (line, x, y) {
   return line
 }
 
-module.exports = Offset
+export default Offset

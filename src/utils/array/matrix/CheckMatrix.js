@@ -31,16 +31,16 @@
  *
  * @return {boolean} `true` if the given `matrix` array is a valid matrix.
  */
-var CheckMatrix = function (matrix) {
+const CheckMatrix = matrix => {
   if (!Array.isArray(matrix) || matrix.length < 2 || !Array.isArray(matrix[0])) {
     return false
   }
 
   //  How long is the first row?
-  var size = matrix[0].length
+  const size = matrix[0].length
 
   //  Validate the rest of the rows are the same length
-  for (var i = 1; i < matrix.length; i++) {
+  for (let i = 1; i < matrix.length; i++) {
     if (matrix[i].length !== size) {
       return false
     }
@@ -49,4 +49,4 @@ var CheckMatrix = function (matrix) {
   return true
 }
 
-module.exports = CheckMatrix
+export default CheckMatrix

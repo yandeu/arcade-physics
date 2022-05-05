@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var MATH = require('../../math')
-var GetValue = require('./GetValue')
+import MATH from '../../math'
+
+import GetValue from './GetValue'
 
 /**
  * Retrieves a value from an object. Allows for more advanced selection options, including:
@@ -47,8 +48,8 @@ var GetValue = require('./GetValue')
  *
  * @return {*} The value of the requested key.
  */
-var GetAdvancedValue = function (source, key, defaultValue) {
-  var value = GetValue(source, key, null)
+const GetAdvancedValue = (source, key, defaultValue) => {
+  const value = GetValue(source, key, null)
 
   if (value === null) {
     return defaultValue
@@ -67,4 +68,4 @@ var GetAdvancedValue = function (source, key, defaultValue) {
   return value
 }
 
-module.exports = GetAdvancedValue
+export default GetAdvancedValue

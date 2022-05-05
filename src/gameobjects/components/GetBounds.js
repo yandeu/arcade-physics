@@ -4,9 +4,10 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Rectangle = require('../../geom/rectangle/Rectangle')
-var RotateAround = require('../../math/RotateAround')
-var Vector2 = require('../../math/Vector2')
+import Rectangle from '../../geom/rectangle/Rectangle'
+
+import RotateAround from '../../math/RotateAround'
+import Vector2 from '../../math/Vector2'
 
 /**
  * Provides methods used for obtaining the bounds of a Game Object.
@@ -16,7 +17,7 @@ var Vector2 = require('../../math/Vector2')
  * @since 3.0.0
  */
 
-var GetBounds = {
+const GetBounds = {
   /**
    * Processes the bounds output vector before returning it.
    *
@@ -41,7 +42,7 @@ var GetBounds = {
     }
 
     if (includeParent && this.parentContainer) {
-      var parentMatrix = this.parentContainer.getBoundsTransformMatrix()
+      const parentMatrix = this.parentContainer.getBoundsTransformMatrix()
 
       parentMatrix.transformPoint(output.x, output.y, output)
     }
@@ -293,12 +294,12 @@ var GetBounds = {
 
     //  We can use the output object to temporarily store the x/y coords in:
 
-    var TLx, TLy, TRx, TRy, BLx, BLy, BRx, BRy
+    let TLx, TLy, TRx, TRy, BLx, BLy, BRx, BRy
 
     // Instead of doing a check if parent container is
     // defined per corner we only do it once.
     if (this.parentContainer) {
-      var parentMatrix = this.parentContainer.getBoundsTransformMatrix()
+      const parentMatrix = this.parentContainer.getBoundsTransformMatrix()
 
       this.getTopLeft(output)
       parentMatrix.transformPoint(output.x, output.y, output)
@@ -354,4 +355,4 @@ var GetBounds = {
   }
 }
 
-module.exports = GetBounds
+export default GetBounds

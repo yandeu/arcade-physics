@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../utils/Class')
+import Class from '../utils/Class'
 
 /**
  * @callback EachMapCallback<E>
@@ -38,7 +38,7 @@ var Class = require('../utils/Class')
  *
  * @param {Array.<*>} elements - An optional array of key-value pairs to populate this Map with.
  */
-var Map = new Class({
+const Map = new Class({
   initialize: function Map(elements) {
     /**
      * The entries in this Map.
@@ -63,7 +63,7 @@ var Map = new Class({
     this.size = 0
 
     if (Array.isArray(elements)) {
-      for (var i = 0; i < elements.length; i++) {
+      for (let i = 0; i < elements.length; i++) {
         this.set(elements[i][0], elements[i][1])
       }
     }
@@ -125,10 +125,10 @@ var Map = new Class({
    * @return {Array.<*>} An array of the values stored in this Map.
    */
   getArray: function () {
-    var output = []
-    var entries = this.entries
+    const output = []
+    const entries = this.entries
 
-    for (var key in entries) {
+    for (const key in entries) {
       output.push(entries[key])
     }
 
@@ -218,10 +218,10 @@ var Map = new Class({
    * @return {Array.<*>} An `Array` of entries.
    */
   values: function () {
-    var output = []
-    var entries = this.entries
+    const output = []
+    const entries = this.entries
 
-    for (var key in entries) {
+    for (const key in entries) {
       output.push(entries[key])
     }
 
@@ -235,12 +235,12 @@ var Map = new Class({
    * @since 3.0.0
    */
   dump: function () {
-    var entries = this.entries
+    const entries = this.entries
 
     // eslint-disable-next-line no-console
     console.group('Map')
 
-    for (var key in entries) {
+    for (const key in entries) {
       console.log(key, entries[key])
     }
 
@@ -264,9 +264,9 @@ var Map = new Class({
    * @return {Phaser.Structs.Map} This Map object.
    */
   each: function (callback) {
-    var entries = this.entries
+    const entries = this.entries
 
-    for (var key in entries) {
+    for (const key in entries) {
       if (callback(key, entries[key]) === false) {
         break
       }
@@ -288,9 +288,9 @@ var Map = new Class({
    * @return {boolean} `true` if the value is found, otherwise `false`.
    */
   contains: function (value) {
-    var entries = this.entries
+    const entries = this.entries
 
-    for (var key in entries) {
+    for (const key in entries) {
       if (entries[key] === value) {
         return true
       }
@@ -318,10 +318,10 @@ var Map = new Class({
       override = false
     }
 
-    var local = this.entries
-    var source = map.entries
+    const local = this.entries
+    const source = map.entries
 
-    for (var key in source) {
+    for (const key in source) {
       if (local.hasOwnProperty(key) && override) {
         local[key] = source[key]
       } else {
@@ -333,4 +333,4 @@ var Map = new Class({
   }
 })
 
-module.exports = Map
+export default Map

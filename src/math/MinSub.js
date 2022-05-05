@@ -16,8 +16,8 @@
  *
  * @return {number} The resulting value.
  */
-var MinSub = function (value, amount, min) {
+const MinSub = (value, amount, min) => {
   return Math.max(value - amount, min)
 }
 
-module.exports = MinSub
+export default MinSub

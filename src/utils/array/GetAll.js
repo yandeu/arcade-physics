@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SafeRange = require('./SafeRange')
+import SafeRange from './SafeRange'
 
 /**
  * Returns all elements in the array.
@@ -28,7 +28,7 @@ var SafeRange = require('./SafeRange')
  *
  * @return {array} All matching elements from the array.
  */
-var GetAll = function (array, property, value, startIndex, endIndex) {
+const GetAll = (array, property, value, startIndex, endIndex) => {
   if (startIndex === undefined) {
     startIndex = 0
   }
@@ -36,11 +36,11 @@ var GetAll = function (array, property, value, startIndex, endIndex) {
     endIndex = array.length
   }
 
-  var output = []
+  const output = []
 
   if (SafeRange(array, startIndex, endIndex)) {
-    for (var i = startIndex; i < endIndex; i++) {
-      var child = array[i]
+    for (let i = startIndex; i < endIndex; i++) {
+      const child = array[i]
 
       if (
         !property ||
@@ -55,4 +55,4 @@ var GetAll = function (array, property, value, startIndex, endIndex) {
   return output
 }
 
-module.exports = GetAll
+export default GetAll

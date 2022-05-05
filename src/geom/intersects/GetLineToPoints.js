@@ -4,15 +4,16 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Vector3 = require('../../math/Vector3')
-var GetLineToLine = require('./GetLineToLine')
-var Line = require('../line/Line')
+import Vector3 from '../../math/Vector3'
+
+import GetLineToLine from './GetLineToLine'
+import Line from '../line/Line'
 
 //  Temp calculation segment
-var segment = new Line()
+const segment = new Line()
 
 //  Temp vec3
-var tempIntersect = new Vector3()
+const tempIntersect = new Vector3()
 
 /**
  * Checks for the closest point of intersection between a line segment and an array of points, where each pair
@@ -34,21 +35,21 @@ var tempIntersect = new Vector3()
  *
  * @return {Phaser.Math.Vector3} A Vector3 containing the intersection results, or `null`.
  */
-var GetLineToPoints = function (line, points, out) {
+const GetLineToPoints = (line, points, out) => {
   if (out === undefined) {
     out = new Vector3()
   }
 
-  var closestIntersect = false
+  let closestIntersect = false
 
   //  Reset our vec3s
   out.set()
   tempIntersect.set()
 
-  var prev = points[0]
+  let prev = points[0]
 
-  for (var i = 1; i < points.length; i++) {
-    var current = points[i]
+  for (let i = 1; i < points.length; i++) {
+    const current = points[i]
 
     segment.setTo(prev.x, prev.y, current.x, current.y)
 
@@ -66,4 +67,4 @@ var GetLineToPoints = function (line, points, out) {
   return closestIntersect ? out : null
 }
 
-module.exports = GetLineToPoints
+export default GetLineToPoints

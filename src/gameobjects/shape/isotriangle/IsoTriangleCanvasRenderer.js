@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var FillStyleCanvas = require('../FillStyleCanvas')
-var SetTransform = require('../../../renderer/canvas/utils/SetTransform')
+import FillStyleCanvas from '../FillStyleCanvas'
+
+import SetTransform from '../../../renderer/canvas/utils/SetTransform'
 
 /**
  * Renders this Game Object with the Canvas Renderer to the given Camera.
@@ -21,19 +22,19 @@ var SetTransform = require('../../../renderer/canvas/utils/SetTransform')
  * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera that is rendering the Game Object.
  * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
  */
-var IsoTriangleCanvasRenderer = function (renderer, src, camera, parentMatrix) {
+const IsoTriangleCanvasRenderer = (renderer, src, camera, parentMatrix) => {
   camera.addToRenderList(src)
 
-  var ctx = renderer.currentContext
+  const ctx = renderer.currentContext
 
   if (SetTransform(renderer, ctx, src, camera, parentMatrix) && src.isFilled) {
-    var size = src.width
-    var height = src.height
+    const size = src.width
+    const height = src.height
 
-    var sizeA = size / 2
-    var sizeB = size / src.projection
+    const sizeA = size / 2
+    const sizeB = size / src.projection
 
-    var reversed = src.isReversed
+    const reversed = src.isReversed
 
     //  Top Face
 
@@ -95,4 +96,4 @@ var IsoTriangleCanvasRenderer = function (renderer, src, camera, parentMatrix) {
   }
 }
 
-module.exports = IsoTriangleCanvasRenderer
+export default IsoTriangleCanvasRenderer

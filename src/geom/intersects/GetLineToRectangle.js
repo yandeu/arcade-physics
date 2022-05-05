@@ -5,9 +5,10 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point')
-var LineToLine = require('./LineToLine')
-var LineToRectangle = require('./LineToRectangle')
+import Point from '../point/Point'
+
+import LineToLine from './LineToLine'
+import LineToRectangle from './LineToRectangle'
 
 /**
  * Checks for intersection between the Line and a Rectangle shape,
@@ -22,27 +23,27 @@ var LineToRectangle = require('./LineToRectangle')
  *
  * @return {array} An array with the points of intersection if objects intersect, otherwise an empty array.
  */
-var GetLineToRectangle = function (line, rect, out) {
+const GetLineToRectangle = (line, rect, out) => {
   if (out === undefined) {
     out = []
   }
 
   if (LineToRectangle(line, rect)) {
-    var lineA = rect.getLineA()
-    var lineB = rect.getLineB()
-    var lineC = rect.getLineC()
-    var lineD = rect.getLineD()
+    const lineA = rect.getLineA()
+    const lineB = rect.getLineB()
+    const lineC = rect.getLineC()
+    const lineD = rect.getLineD()
 
-    var output = [new Point(), new Point(), new Point(), new Point()]
+    const output = [new Point(), new Point(), new Point(), new Point()]
 
-    var result = [
+    const result = [
       LineToLine(lineA, line, output[0]),
       LineToLine(lineB, line, output[1]),
       LineToLine(lineC, line, output[2]),
       LineToLine(lineD, line, output[3])
     ]
 
-    for (var i = 0; i < 4; i++) {
+    for (let i = 0; i < 4; i++) {
       if (result[i]) {
         out.push(output[i])
       }
@@ -52,4 +53,4 @@ var GetLineToRectangle = function (line, rect, out) {
   return out
 }
 
-module.exports = GetLineToRectangle
+export default GetLineToRectangle

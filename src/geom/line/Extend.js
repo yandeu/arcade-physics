@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Length = require('./Length')
+import Length from './Length'
 
 /**
  * Extends the start and end points of a Line by the given amounts.
@@ -25,15 +25,15 @@ var Length = require('./Length')
  *
  * @return {Phaser.Geom.Line} The modified Line instance.
  */
-var Extend = function (line, left, right) {
+const Extend = (line, left, right) => {
   if (right === undefined) {
     right = left
   }
 
-  var length = Length(line)
+  const length = Length(line)
 
-  var slopX = line.x2 - line.x1
-  var slopY = line.y2 - line.y1
+  const slopX = line.x2 - line.x1
+  const slopY = line.y2 - line.y1
 
   if (left) {
     line.x1 = line.x1 - (slopX / length) * left
@@ -48,4 +48,4 @@ var Extend = function (line, left, right) {
   return line
 }
 
-module.exports = Extend
+export default Extend

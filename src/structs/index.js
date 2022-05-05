@@ -8,7 +8,7 @@
  * @namespace Phaser.Structs
  */
 
-module.exports = {
+export default {
   Events: require('./events'),
   List: require('./List'),
   Map: require('./Map'),

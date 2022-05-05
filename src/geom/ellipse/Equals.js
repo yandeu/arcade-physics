@@ -16,7 +16,7 @@
  *
  * @return {boolean} `true` if the two Ellipse equal each other, otherwise `false`.
  */
-var Equals = function (ellipse, toCompare) {
+const Equals = (ellipse, toCompare) => {
   return (
     ellipse.x === toCompare.x &&
     ellipse.y === toCompare.y &&
@@ -25,4 +25,4 @@ var Equals = function (ellipse, toCompare) {
   )
 }
 
-module.exports = Equals
+export default Equals

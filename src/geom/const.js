@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GEOM_CONST = {
+const GEOM_CONST = {
   /**
    * A Circle Geometry object type.
    *
@@ -69,4 +69,4 @@ var GEOM_CONST = {
   TRIANGLE: 6
 }
 
-module.exports = GEOM_CONST
+export default GEOM_CONST

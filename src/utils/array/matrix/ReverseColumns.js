@@ -31,8 +31,8 @@
  *
  * @return {T[][]} The column reversed matrix.
  */
-var ReverseColumns = function (matrix) {
+const ReverseColumns = matrix => {
   return matrix.reverse()
 }
 
-module.exports = ReverseColumns
+export default ReverseColumns

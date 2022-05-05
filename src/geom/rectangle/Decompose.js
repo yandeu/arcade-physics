@@ -16,7 +16,7 @@
  *
  * @return {array} Will return the array you specified or a new array containing the points of the Rectangle.
  */
-var Decompose = function (rect, out) {
+const Decompose = (rect, out) => {
   if (out === undefined) {
     out = []
   }
@@ -29,4 +29,4 @@ var Decompose = function (rect, out) {
   return out
 }
 
-module.exports = Decompose
+export default Decompose

@@ -21,12 +21,12 @@
  *
  * @return {Phaser.Types.Math.Vector2Like} The given point.
  */
-var RotateAround = function (point, x, y, angle) {
-  var c = Math.cos(angle)
-  var s = Math.sin(angle)
+const RotateAround = (point, x, y, angle) => {
+  const c = Math.cos(angle)
+  const s = Math.sin(angle)
 
-  var tx = point.x - x
-  var ty = point.y - y
+  const tx = point.x - x
+  const ty = point.y - y
 
   point.x = tx * c - ty * s + x
   point.y = tx * s + ty * c + y
@@ -34,4 +34,4 @@ var RotateAround = function (point, x, y, angle) {
   return point
 }
 
-module.exports = RotateAround
+export default RotateAround

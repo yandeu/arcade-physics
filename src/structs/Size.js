@@ -4,10 +4,11 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Clamp = require('../math/Clamp')
-var Class = require('../utils/Class')
-var SnapFloor = require('../math/snap/SnapFloor')
-var Vector2 = require('../math/Vector2')
+import Clamp from '../math/Clamp'
+
+import Class from '../utils/Class'
+import SnapFloor from '../math/snap/SnapFloor'
+import Vector2 from '../math/Vector2'
 
 /**
  * @classdesc
@@ -27,7 +28,7 @@ var Vector2 = require('../math/Vector2')
  * @param {number} [aspectMode=0] - The aspect mode of the Size component. Defaults to 0, no mode.
  * @param {any} [parent=null] - The parent of this Size component. Can be any object with public `width` and `height` properties. Dimensions are clamped to keep them within the parent bounds where possible.
  */
-var Size = new Class({
+const Size = new Class({
   initialize: function Size(width, height, aspectMode, parent) {
     if (width === undefined) {
       width = 0
@@ -494,8 +495,8 @@ var Size = new Class({
     width = this.getNewWidth(width)
     height = this.getNewHeight(height)
 
-    var snap = this.snapTo
-    var newRatio = height === 0 ? 1 : width / height
+    const snap = this.snapTo
+    const newRatio = height === 0 ? 1 : width / height
 
     if ((fit && this.aspectRatio > newRatio) || (!fit && this.aspectRatio < newRatio)) {
       //  We need to change the height to fit the width
@@ -764,4 +765,4 @@ Size.FIT = 3
  */
 Size.ENVELOP = 4
 
-module.exports = Size
+export default Size

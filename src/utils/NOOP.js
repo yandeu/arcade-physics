@@ -13,8 +13,8 @@
  * @function Phaser.Utils.NOOP
  * @since 3.0.0
  */
-var NOOP = function () {
+const NOOP = () => {
   //  NOOP
 }
 
-module.exports = NOOP
+export default NOOP

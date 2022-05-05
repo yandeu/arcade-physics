@@ -4,11 +4,12 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../../utils/Class')
-var Earcut = require('../../../geom/polygon/Earcut')
-var EllipseRender = require('./EllipseRender')
-var GeomEllipse = require('../../../geom/ellipse/Ellipse')
-var Shape = require('../Shape')
+import Class from '../../../utils/Class'
+
+import Earcut from '../../../geom/polygon/Earcut'
+import EllipseRender from './EllipseRender'
+import GeomEllipse from '../../../geom/ellipse/Ellipse'
+import Shape from '../Shape'
 
 /**
  * @classdesc
@@ -42,7 +43,7 @@ var Shape = require('../Shape')
  * @param {number} [fillColor] - The color the ellipse will be filled with, i.e. 0xff0000 for red.
  * @param {number} [fillAlpha] - The alpha the ellipse will be filled with. You can also set the alpha of the overall Shape using its `alpha` property.
  */
-var Ellipse = new Class({
+const Ellipse = new Class({
   Extends: Shape,
 
   Mixins: [EllipseRender],
@@ -157,10 +158,10 @@ var Ellipse = new Class({
    * @return {this} This Game Object instance.
    */
   updateData: function () {
-    var path = []
-    var points = this.geom.getPoints(this._smoothness)
+    const path = []
+    const points = this.geom.getPoints(this._smoothness)
 
-    for (var i = 0; i < points.length; i++) {
+    for (let i = 0; i < points.length; i++) {
       path.push(points[i].x, points[i].y)
     }
 
@@ -173,4 +174,4 @@ var Ellipse = new Class({
   }
 })
 
-module.exports = Ellipse
+export default Ellipse

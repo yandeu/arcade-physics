@@ -4,12 +4,13 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Vector3 = require('../../math/Vector3')
-var Vector4 = require('../../math/Vector4')
-var GetLineToPoints = require('./GetLineToPoints')
+import Vector3 from '../../math/Vector3'
+
+import Vector4 from '../../math/Vector4'
+import GetLineToPoints from './GetLineToPoints'
 
 //  Temp vec3
-var tempIntersect = new Vector3()
+const tempIntersect = new Vector3()
 
 /**
  * Checks for the closest point of intersection between a line segment and an array of polygons.
@@ -31,7 +32,7 @@ var tempIntersect = new Vector3()
  *
  * @return {Phaser.Math.Vector4} A Vector4 containing the intersection results, or `null`.
  */
-var GetLineToPolygon = function (line, polygons, out) {
+const GetLineToPolygon = (line, polygons, out) => {
   if (out === undefined) {
     out = new Vector4()
   }
@@ -40,13 +41,13 @@ var GetLineToPolygon = function (line, polygons, out) {
     polygons = [polygons]
   }
 
-  var closestIntersect = false
+  let closestIntersect = false
 
   //  Reset our vec4s
   out.set()
   tempIntersect.set()
 
-  for (var i = 0; i < polygons.length; i++) {
+  for (let i = 0; i < polygons.length; i++) {
     if (GetLineToPoints(line, polygons[i].points, tempIntersect)) {
       if (!closestIntersect || tempIntersect.z < out.z) {
         out.set(tempIntersect.x, tempIntersect.y, tempIntersect.z, i)
@@ -59,4 +60,4 @@ var GetLineToPolygon = function (line, polygons, out) {
   return closestIntersect ? out : null
 }
 
-module.exports = GetLineToPolygon
+export default GetLineToPolygon

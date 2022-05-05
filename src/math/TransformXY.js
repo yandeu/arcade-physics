@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Vector2 = require('./Vector2')
+import Vector2 from './Vector2'
 
 /**
  * Takes the `x` and `y` coordinates and transforms them into the same space as
@@ -24,22 +24,22 @@ var Vector2 = require('./Vector2')
  *
  * @return {(Phaser.Math.Vector2|Phaser.Geom.Point|object)} The translated point.
  */
-var TransformXY = function (x, y, positionX, positionY, rotation, scaleX, scaleY, output) {
+const TransformXY = (x, y, positionX, positionY, rotation, scaleX, scaleY, output) => {
   if (output === undefined) {
     output = new Vector2()
   }
 
-  var radianSin = Math.sin(rotation)
-  var radianCos = Math.cos(rotation)
+  const radianSin = Math.sin(rotation)
+  const radianCos = Math.cos(rotation)
 
   // Rotate and Scale
-  var a = radianCos * scaleX
-  var b = radianSin * scaleX
-  var c = -radianSin * scaleY
-  var d = radianCos * scaleY
+  const a = radianCos * scaleX
+  const b = radianSin * scaleX
+  const c = -radianSin * scaleY
+  const d = radianCos * scaleY
 
   //  Invert
-  var id = 1 / (a * d + c * -b)
+  const id = 1 / (a * d + c * -b)
 
   output.x = d * id * x + -c * id * y + (positionY * c - positionX * d) * id
   output.y = a * id * y + -b * id * x + (-positionY * a + positionX * b) * id
@@ -47,4 +47,4 @@ var TransformXY = function (x, y, positionX, positionY, rotation, scaleX, scaleY
   return output
 }
 
-module.exports = TransformXY
+export default TransformXY

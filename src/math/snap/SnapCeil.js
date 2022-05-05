@@ -20,7 +20,7 @@
  *
  * @return {number} The snapped value.
  */
-var SnapCeil = function (value, gap, start, divide) {
+const SnapCeil = (value, gap, start, divide) => {
   if (start === undefined) {
     start = 0
   }
@@ -35,4 +35,4 @@ var SnapCeil = function (value, gap, start, divide) {
   return divide ? (start + value) / gap : start + value
 }
 
-module.exports = SnapCeil
+export default SnapCeil

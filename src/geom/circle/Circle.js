@@ -4,12 +4,13 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../utils/Class')
-var Contains = require('./Contains')
-var GetPoint = require('./GetPoint')
-var GetPoints = require('./GetPoints')
-var GEOM_CONST = require('../const')
-var Random = require('./Random')
+import Class from '../../utils/Class'
+
+import Contains from './Contains'
+import GetPoint from './GetPoint'
+import GetPoints from './GetPoints'
+import GEOM_CONST from '../const'
+import Random from './Random'
 
 /**
  * @classdesc

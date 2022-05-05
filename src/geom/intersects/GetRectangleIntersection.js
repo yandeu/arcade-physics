@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Rectangle = require('../rectangle/Rectangle')
-var RectangleToRectangle = require('./RectangleToRectangle')
+import Rectangle from '../rectangle/Rectangle'
+
+import RectangleToRectangle from './RectangleToRectangle'
 
 /**
  * Checks if two Rectangle shapes intersect and returns the area of this intersection as Rectangle object.
@@ -25,7 +26,7 @@ var RectangleToRectangle = require('./RectangleToRectangle')
  *
  * @return {Phaser.Geom.Rectangle} A rectangle object with intersection data.
  */
-var GetRectangleIntersection = function (rectA, rectB, output) {
+const GetRectangleIntersection = (rectA, rectB, output) => {
   if (output === undefined) {
     output = new Rectangle()
   }
@@ -40,4 +41,4 @@ var GetRectangleIntersection = function (rectA, rectB, output) {
   return output
 }
 
-module.exports = GetRectangleIntersection
+export default GetRectangleIntersection

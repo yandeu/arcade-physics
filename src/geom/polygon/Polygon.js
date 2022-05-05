@@ -4,10 +4,11 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../utils/Class')
-var Contains = require('./Contains')
-var GetPoints = require('./GetPoints')
-var GEOM_CONST = require('../const')
+import Class from '../../utils/Class'
+
+import Contains from './Contains'
+import GetPoints from './GetPoints'
+import GEOM_CONST from '../const'
 
 /**
  * @classdesc
@@ -31,7 +32,7 @@ var GEOM_CONST = require('../const')
  * - An array of paired numbers that represent point coordinates: `[x1,y1, x2,y2, ...]`
  * - An array of arrays with two elements representing x/y coordinates: `[[x1, y1], [x2, y2], ...]`
  */
-var Polygon = new Class({
+const Polygon = new Class({
   initialize: function Polygon(points) {
     /**
      * The geometry constant type of this object: `GEOM_CONST.POLYGON`.
@@ -115,11 +116,11 @@ var Polygon = new Class({
       return this
     }
 
-    var p
-    var y0 = Number.MAX_VALUE
+    let p
+    let y0 = Number.MAX_VALUE
 
     //  The points argument is an array, so iterate through it
-    for (var i = 0; i < points.length; i++) {
+    for (let i = 0; i < points.length; i++) {
       p = { x: 0, y: 0 }
 
       if (typeof points[i] === 'number' || typeof points[i] === 'string') {
@@ -163,11 +164,11 @@ var Polygon = new Class({
       return this.area
     }
 
-    var sum = 0
-    var p1
-    var p2
+    let sum = 0
+    let p1
+    let p2
 
-    for (var i = 0; i < this.points.length - 1; i++) {
+    for (let i = 0; i < this.points.length - 1; i++) {
       p1 = this.points[i]
       p2 = this.points[i + 1]
 
@@ -204,4 +205,4 @@ var Polygon = new Class({
   }
 })
 
-module.exports = Polygon
+export default Polygon

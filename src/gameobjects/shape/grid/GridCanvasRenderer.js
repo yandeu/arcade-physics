@@ -4,9 +4,10 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var FillStyleCanvas = require('../FillStyleCanvas')
-var LineStyleCanvas = require('../LineStyleCanvas')
-var SetTransform = require('../../../renderer/canvas/utils/SetTransform')
+import FillStyleCanvas from '../FillStyleCanvas'
+
+import LineStyleCanvas from '../LineStyleCanvas'
+import SetTransform from '../../../renderer/canvas/utils/SetTransform'
 
 /**
  * Renders this Game Object with the Canvas Renderer to the given Camera.
@@ -22,43 +23,43 @@ var SetTransform = require('../../../renderer/canvas/utils/SetTransform')
  * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera that is rendering the Game Object.
  * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
  */
-var GridCanvasRenderer = function (renderer, src, camera, parentMatrix) {
+const GridCanvasRenderer = (renderer, src, camera, parentMatrix) => {
   camera.addToRenderList(src)
 
-  var ctx = renderer.currentContext
+  const ctx = renderer.currentContext
 
   if (SetTransform(renderer, ctx, src, camera, parentMatrix)) {
-    var dx = -src._displayOriginX
-    var dy = -src._displayOriginY
+    const dx = -src._displayOriginX
+    const dy = -src._displayOriginY
 
-    var alpha = camera.alpha * src.alpha
+    const alpha = camera.alpha * src.alpha
 
     //  Work out the grid size
 
-    var width = src.width
-    var height = src.height
+    const width = src.width
+    const height = src.height
 
-    var cellWidth = src.cellWidth
-    var cellHeight = src.cellHeight
+    const cellWidth = src.cellWidth
+    const cellHeight = src.cellHeight
 
-    var gridWidth = Math.ceil(width / cellWidth)
-    var gridHeight = Math.ceil(height / cellHeight)
+    const gridWidth = Math.ceil(width / cellWidth)
+    const gridHeight = Math.ceil(height / cellHeight)
 
-    var cellWidthA = cellWidth
-    var cellHeightA = cellHeight
+    let cellWidthA = cellWidth
+    let cellHeightA = cellHeight
 
-    var cellWidthB = cellWidth - (gridWidth * cellWidth - width)
-    var cellHeightB = cellHeight - (gridHeight * cellHeight - height)
+    let cellWidthB = cellWidth - (gridWidth * cellWidth - width)
+    let cellHeightB = cellHeight - (gridHeight * cellHeight - height)
 
-    var showCells = src.showCells
-    var showAltCells = src.showAltCells
-    var showOutline = src.showOutline
+    const showCells = src.showCells
+    const showAltCells = src.showAltCells
+    const showOutline = src.showOutline
 
-    var x = 0
-    var y = 0
-    var r = 0
-    var cw = 0
-    var ch = 0
+    let x = 0
+    let y = 0
+    let r = 0
+    let cw = 0
+    let ch = 0
 
     if (showOutline) {
       //  To make room for the grid lines (in case alpha < 1)
@@ -126,7 +127,7 @@ var GridCanvasRenderer = function (renderer, src, camera, parentMatrix) {
       LineStyleCanvas(ctx, src, src.outlineFillColor, src.outlineFillAlpha * alpha)
 
       for (x = 1; x < gridWidth; x++) {
-        var x1 = x * cellWidth
+        const x1 = x * cellWidth
 
         ctx.beginPath()
 
@@ -137,7 +138,7 @@ var GridCanvasRenderer = function (renderer, src, camera, parentMatrix) {
       }
 
       for (y = 1; y < gridHeight; y++) {
-        var y1 = y * cellHeight
+        const y1 = y * cellHeight
 
         ctx.beginPath()
 
@@ -153,4 +154,4 @@ var GridCanvasRenderer = function (renderer, src, camera, parentMatrix) {
   }
 }
 
-module.exports = GridCanvasRenderer
+export default GridCanvasRenderer

@@ -14,8 +14,8 @@
  *
  * @return {number} The width/height ratio of the rectangle.
  */
-var GetAspectRatio = function (rect) {
+const GetAspectRatio = rect => {
   return rect.height === 0 ? NaN : rect.width / rect.height
 }
 
-module.exports = GetAspectRatio
+export default GetAspectRatio

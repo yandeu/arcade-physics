@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Angle = require('./Angle')
-var NormalAngle = require('./NormalAngle')
+import Angle from './Angle'
+
+import NormalAngle from './NormalAngle'
 
 /**
  * Calculate the reflected angle between two lines.
@@ -20,8 +21,8 @@ var NormalAngle = require('./NormalAngle')
  *
  * @return {number} The reflected angle between each line.
  */
-var ReflectAngle = function (lineA, lineB) {
+const ReflectAngle = (lineA, lineB) => {
   return 2 * NormalAngle(lineB) - Math.PI - Angle(lineA)
 }
 
-module.exports = ReflectAngle
+export default ReflectAngle

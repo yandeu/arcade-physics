@@ -16,16 +16,16 @@
  * @param {number} [altColor] - An alternative color to render with.
  * @param {number} [altAlpha] - An alternative alpha to render with.
  */
-var LineStyleCanvas = function (ctx, src, altColor, altAlpha) {
-  var strokeColor = altColor ? altColor : src.strokeColor
-  var strokeAlpha = altAlpha ? altAlpha : src.strokeAlpha
+const LineStyleCanvas = (ctx, src, altColor, altAlpha) => {
+  const strokeColor = altColor ? altColor : src.strokeColor
+  const strokeAlpha = altAlpha ? altAlpha : src.strokeAlpha
 
-  var red = (strokeColor & 0xff0000) >>> 16
-  var green = (strokeColor & 0xff00) >>> 8
-  var blue = strokeColor & 0xff
+  const red = (strokeColor & 0xff0000) >>> 16
+  const green = (strokeColor & 0xff00) >>> 8
+  const blue = strokeColor & 0xff
 
   ctx.strokeStyle = `rgba(${red},${green},${blue},${strokeAlpha})`
   ctx.lineWidth = src.lineWidth
 }
 
-module.exports = LineStyleCanvas
+export default LineStyleCanvas

@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Vector2 = require('../../math/Vector2')
+import Vector2 from '../../math/Vector2'
 
 //  Adapted from http://bjornharrtell.github.io/jsts/doc/api/jsts_geom_Triangle.js.html
 
@@ -43,23 +43,23 @@ function det(m00, m01, m10, m11) {
  *
  * @return {Phaser.Math.Vector2} A Vector2 object holding the coordinates of the circumcenter of the Triangle.
  */
-var CircumCenter = function (triangle, out) {
+const CircumCenter = (triangle, out) => {
   if (out === undefined) {
     out = new Vector2()
   }
 
-  var cx = triangle.x3
-  var cy = triangle.y3
+  const cx = triangle.x3
+  const cy = triangle.y3
 
-  var ax = triangle.x1 - cx
-  var ay = triangle.y1 - cy
+  const ax = triangle.x1 - cx
+  const ay = triangle.y1 - cy
 
-  var bx = triangle.x2 - cx
-  var by = triangle.y2 - cy
+  const bx = triangle.x2 - cx
+  const by = triangle.y2 - cy
 
-  var denom = 2 * det(ax, ay, bx, by)
-  var numx = det(ay, ax * ax + ay * ay, by, bx * bx + by * by)
-  var numy = det(ax, ax * ax + ay * ay, bx, bx * bx + by * by)
+  const denom = 2 * det(ax, ay, bx, by)
+  const numx = det(ay, ax * ax + ay * ay, by, bx * bx + by * by)
+  const numy = det(ax, ax * ax + ay * ay, bx, bx * bx + by * by)
 
   out.x = cx - numx / denom
   out.y = cy + numy / denom
@@ -67,4 +67,4 @@ var CircumCenter = function (triangle, out) {
   return out
 }
 
-module.exports = CircumCenter
+export default CircumCenter

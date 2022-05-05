@@ -16,8 +16,8 @@
  *
  * @return {boolean} Returns `true` if `a` is less than or equal to the tolerance of `b`.
  */
-var Within = function (a, b, tolerance) {
+const Within = (a, b, tolerance) => {
   return Math.abs(a - b) <= tolerance
 }
 
-module.exports = Within
+export default Within

@@ -15,7 +15,7 @@
  *
  * @return {number} The floor of the value.
  */
-var Floor = function (value, epsilon) {
+const Floor = (value, epsilon) => {
   if (epsilon === undefined) {
     epsilon = 0.0001
   }
@@ -23,4 +23,4 @@ var Floor = function (value, epsilon) {
   return Math.floor(value + epsilon)
 }
 
-module.exports = Floor
+export default Floor

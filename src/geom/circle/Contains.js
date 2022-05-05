@@ -16,11 +16,11 @@
  *
  * @return {boolean} True if the coordinates are within the circle, otherwise false.
  */
-var Contains = function (circle, x, y) {
+const Contains = (circle, x, y) => {
   //  Check if x/y are within the bounds first
   if (circle.radius > 0 && x >= circle.left && x <= circle.right && y >= circle.top && y <= circle.bottom) {
-    var dx = (circle.x - x) * (circle.x - x)
-    var dy = (circle.y - y) * (circle.y - y)
+    const dx = (circle.x - x) * (circle.x - x)
+    const dy = (circle.y - y) * (circle.y - y)
 
     return dx + dy <= circle.radius * circle.radius
   } else {
@@ -28,4 +28,4 @@ var Contains = function (circle, x, y) {
   }
 }
 
-module.exports = Contains
+export default Contains

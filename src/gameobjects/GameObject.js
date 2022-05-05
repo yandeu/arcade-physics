@@ -5,7 +5,8 @@
  */
 
 // var Class = require('../utils/Class')
-var ComponentsToJSON = require('./components/ToJSON')
+import ComponentsToJSON from './components/ToJSON'
+
 // var DataManager = require('../data/DataManager');
 // var EventEmitter = require('eventemitter3')
 // var Events = require('./events')
@@ -601,10 +602,10 @@ export class GameObject {
    */
   getIndexList() {
     // eslint-disable-next-line consistent-this
-    var child = this
-    var parent = this.parentContainer
+    let child = this
+    let parent = this.parentContainer
 
-    var indexes = []
+    const indexes = []
 
     while (parent) {
       indexes.unshift(parent.getIndex(child))
@@ -719,7 +720,7 @@ export class GameObject {
    * @return {this} This Game Object.
    */
   removeFromDisplayList() {
-    var displayList = this.displayList || this.scene.sys.displayList
+    const displayList = this.displayList || this.scene.sys.displayList
 
     if (displayList.exists(this)) {
       displayList.remove(this, true)

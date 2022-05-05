@@ -11,7 +11,7 @@
  * @since 3.0.0
  */
 
-var Size = {
+const Size = {
   /**
    * A property indicating that a Game Object has this component.
    *
@@ -167,4 +167,4 @@ var Size = {
   }
 }
 
-module.exports = Size
+export default Size

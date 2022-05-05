@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Linear = require('../Linear')
+import Linear from '../Linear'
 
 /**
  * A linear interpolation method.
@@ -18,10 +18,10 @@ var Linear = require('../Linear')
  *
  * @return {!number} The interpolated value.
  */
-var LinearInterpolation = function (v, k) {
-  var m = v.length - 1
-  var f = m * k
-  var i = Math.floor(f)
+const LinearInterpolation = (v, k) => {
+  const m = v.length - 1
+  const f = m * k
+  const i = Math.floor(f)
 
   if (k < 0) {
     return Linear(v[0], v[1], f)
@@ -32,4 +32,4 @@ var LinearInterpolation = function (v, k) {
   }
 }
 
-module.exports = LinearInterpolation
+export default LinearInterpolation

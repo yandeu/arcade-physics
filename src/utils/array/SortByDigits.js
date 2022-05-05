@@ -17,14 +17,14 @@
  *
  * @return {string[]} The sorted input array.
  */
-var SortByDigits = function (array) {
-  var re = /\D/g
+const SortByDigits = array => {
+  const re = /\D/g
 
-  array.sort(function (a, b) {
+  array.sort((a, b) => {
     return parseInt(a.replace(re, ''), 10) - parseInt(b.replace(re, ''), 10)
   })
 
   return array
 }
 
-module.exports = SortByDigits
+export default SortByDigits

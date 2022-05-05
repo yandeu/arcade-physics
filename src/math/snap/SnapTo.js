@@ -19,7 +19,7 @@
  *
  * @return {number} The snapped value.
  */
-var SnapTo = function (value, gap, start, divide) {
+const SnapTo = (value, gap, start, divide) => {
   if (start === undefined) {
     start = 0
   }
@@ -34,4 +34,4 @@ var SnapTo = function (value, gap, start, divide) {
   return divide ? (start + value) / gap : start + value
 }
 
-module.exports = SnapTo
+export default SnapTo

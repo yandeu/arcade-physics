@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CatmullRom = require('../CatmullRom')
+import CatmullRom from '../CatmullRom'
 
 /**
  * A Catmull-Rom interpolation method.
@@ -17,10 +17,10 @@ var CatmullRom = require('../CatmullRom')
  *
  * @return {number} The interpolated value.
  */
-var CatmullRomInterpolation = function (v, k) {
-  var m = v.length - 1
-  var f = m * k
-  var i = Math.floor(f)
+const CatmullRomInterpolation = (v, k) => {
+  const m = v.length - 1
+  let f = m * k
+  let i = Math.floor(f)
 
   if (v[0] === v[m]) {
     if (k < 0) {
@@ -41,4 +41,4 @@ var CatmullRomInterpolation = function (v, k) {
   }
 }
 
-module.exports = CatmullRomInterpolation
+export default CatmullRomInterpolation

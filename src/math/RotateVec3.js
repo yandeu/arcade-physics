@@ -4,13 +4,14 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Vector3 = require('../math/Vector3')
-var Matrix4 = require('../math/Matrix4')
-var Quaternion = require('../math/Quaternion')
+import Vector3 from '../math/Vector3'
 
-var tmpMat4 = new Matrix4()
-var tmpQuat = new Quaternion()
-var tmpVec3 = new Vector3()
+import Matrix4 from '../math/Matrix4'
+import Quaternion from '../math/Quaternion'
+
+const tmpMat4 = new Matrix4()
+const tmpQuat = new Quaternion()
+const tmpVec3 = new Vector3()
 
 /**
  * Rotates a vector in place by axis angle.
@@ -27,7 +28,7 @@ var tmpVec3 = new Vector3()
  *
  * @return {Phaser.Math.Vector3} The given vector.
  */
-var RotateVec3 = function (vec, axis, radians) {
+const RotateVec3 = (vec, axis, radians) => {
   //  Set the quaternion to our axis angle
   tmpQuat.setAxisAngle(axis, radians)
 
@@ -38,4 +39,4 @@ var RotateVec3 = function (vec, axis, radians) {
   return vec.transformMat4(tmpMat4)
 }
 
-module.exports = RotateVec3
+export default RotateVec3

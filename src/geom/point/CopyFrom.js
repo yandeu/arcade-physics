@@ -17,8 +17,8 @@
  *
  * @return {Phaser.Geom.Point} The destination Point.
  */
-var CopyFrom = function (source, dest) {
+const CopyFrom = (source, dest) => {
   return dest.setTo(source.x, source.y)
 }
 
-module.exports = CopyFrom
+export default CopyFrom

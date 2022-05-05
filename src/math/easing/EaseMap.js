@@ -4,21 +4,22 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Back = require('./back')
-var Bounce = require('./bounce')
-var Circular = require('./circular')
-var Cubic = require('./cubic')
-var Elastic = require('./elastic')
-var Expo = require('./expo')
-var Linear = require('./linear')
-var Quadratic = require('./quadratic')
-var Quartic = require('./quartic')
-var Quintic = require('./quintic')
-var Sine = require('./sine')
-var Stepped = require('./stepped')
+import Back from './back'
+
+import Bounce from './bounce'
+import Circular from './circular'
+import Cubic from './cubic'
+import Elastic from './elastic'
+import Expo from './expo'
+import Linear from './linear'
+import Quadratic from './quadratic'
+import Quartic from './quartic'
+import Quintic from './quintic'
+import Sine from './sine'
+import Stepped from './stepped'
 
 //  EaseMap
-module.exports = {
+export default {
   Power0: Linear,
   Power1: Quadratic.Out,
   Power2: Cubic.Out,

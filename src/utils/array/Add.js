@@ -27,7 +27,7 @@
  *
  * @return {array} The input array.
  */
-var Add = function (array, item, limit, callback, context) {
+const Add = (array, item, limit, callback, context) => {
   if (context === undefined) {
     context = array
   }
@@ -59,7 +59,7 @@ var Add = function (array, item, limit, callback, context) {
   //  If we got this far, we have an array of items to insert
 
   //  Ensure all the items are unique
-  var itemLength = item.length - 1
+  let itemLength = item.length - 1
 
   while (itemLength >= 0) {
     if (array.indexOf(item[itemLength]) !== -1) {
@@ -83,8 +83,8 @@ var Add = function (array, item, limit, callback, context) {
     itemLength = remaining
   }
 
-  for (var i = 0; i < itemLength; i++) {
-    var entry = item[i]
+  for (let i = 0; i < itemLength; i++) {
+    const entry = item[i]
 
     array.push(entry)
 
@@ -96,4 +96,4 @@ var Add = function (array, item, limit, callback, context) {
   return item
 }
 
-module.exports = Add
+export default Add

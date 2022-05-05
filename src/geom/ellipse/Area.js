@@ -14,7 +14,7 @@
  *
  * @return {number} The area of the Ellipse.
  */
-var Area = function (ellipse) {
+const Area = ellipse => {
   if (ellipse.isEmpty()) {
     return 0
   }
@@ -23,4 +23,4 @@ var Area = function (ellipse) {
   return ellipse.getMajorRadius() * ellipse.getMinorRadius() * Math.PI
 }
 
-module.exports = Area
+export default Area

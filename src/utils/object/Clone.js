@@ -14,10 +14,10 @@
  *
  * @return {object} A new object with the same properties as the input object.
  */
-var Clone = function (obj) {
-  var clone = {}
+const Clone = obj => {
+  const clone = {}
 
-  for (var key in obj) {
+  for (const key in obj) {
     if (Array.isArray(obj[key])) {
       clone[key] = obj[key].slice(0)
     } else {
@@ -28,4 +28,4 @@ var Clone = function (obj) {
   return clone
 }
 
-module.exports = Clone
+export default Clone

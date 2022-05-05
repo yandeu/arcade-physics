@@ -16,11 +16,11 @@
  *
  * @return {Phaser.Geom.Rectangle} The rectangle that was passed to this function with its coordinates floored.
  */
-var Floor = function (rect) {
+const Floor = rect => {
   rect.x = Math.floor(rect.x)
   rect.y = Math.floor(rect.y)
 
   return rect
 }
 
-module.exports = Floor
+export default Floor

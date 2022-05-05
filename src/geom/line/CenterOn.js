@@ -16,9 +16,9 @@
  *
  * @return {Phaser.Geom.Line} The centered line.
  */
-var CenterOn = function (line, x, y) {
-  var tx = x - (line.x1 + line.x2) / 2
-  var ty = y - (line.y1 + line.y2) / 2
+const CenterOn = (line, x, y) => {
+  const tx = x - (line.x1 + line.x2) / 2
+  const ty = y - (line.y1 + line.y2) / 2
 
   line.x1 += tx
   line.y1 += ty
@@ -29,4 +29,4 @@ var CenterOn = function (line, x, y) {
   return line
 }
 
-module.exports = CenterOn
+export default CenterOn

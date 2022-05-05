@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var LineToLine = require('./LineToLine')
+import LineToLine from './LineToLine'
 
 /**
  * Checks if a Triangle and a Line intersect.
@@ -19,7 +19,7 @@ var LineToLine = require('./LineToLine')
  *
  * @return {boolean} `true` if the Triangle and the Line intersect, otherwise `false`.
  */
-var TriangleToLine = function (triangle, line) {
+const TriangleToLine = (triangle, line) => {
   //  If the Triangle contains either the start or end point of the line, it intersects
   if (triangle.contains(line.x1, line.y1) || triangle.contains(line.x2, line.y2)) {
     return true
@@ -41,4 +41,4 @@ var TriangleToLine = function (triangle, line) {
   return false
 }
 
-module.exports = TriangleToLine
+export default TriangleToLine

@@ -20,11 +20,11 @@
  *
  * @return {Phaser.Types.Math.Vector2Like} The given point.
  */
-var RotateTo = function (point, x, y, angle, distance) {
+const RotateTo = (point, x, y, angle, distance) => {
   point.x = x + distance * Math.cos(angle)
   point.y = y + distance * Math.sin(angle)
 
   return point
 }
 
-module.exports = RotateTo
+export default RotateTo

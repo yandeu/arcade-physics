@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Rectangle = require('./Rectangle')
-var Intersects = require('../intersects/RectangleToRectangle')
+import Rectangle from './Rectangle'
+
+import Intersects from '../intersects/RectangleToRectangle'
 
 /**
  * Takes two Rectangles and first checks to see if they intersect.
@@ -23,7 +24,7 @@ var Intersects = require('../intersects/RectangleToRectangle')
  *
  * @return {Phaser.Geom.Rectangle} The intersection result. If the width and height are zero, no intersection occurred.
  */
-var Intersection = function (rectA, rectB, out) {
+const Intersection = (rectA, rectB, out) => {
   if (out === undefined) {
     out = new Rectangle()
   }
@@ -40,4 +41,4 @@ var Intersection = function (rectA, rectB, out) {
   return out
 }
 
-module.exports = Intersection
+export default Intersection

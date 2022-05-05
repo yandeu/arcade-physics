@@ -5,8 +5,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetLineToCircle = require('./GetLineToCircle')
-var TriangleToCircle = require('./TriangleToCircle')
+import GetLineToCircle from './GetLineToCircle'
+
+import TriangleToCircle from './TriangleToCircle'
 
 /**
  * Checks if a Triangle and a Circle intersect, and returns the intersection points as a Point object array.
@@ -22,15 +23,15 @@ var TriangleToCircle = require('./TriangleToCircle')
  *
  * @return {array} An array with the points of intersection if objects intersect, otherwise an empty array.
  */
-var GetTriangleToCircle = function (triangle, circle, out) {
+const GetTriangleToCircle = (triangle, circle, out) => {
   if (out === undefined) {
     out = []
   }
 
   if (TriangleToCircle(triangle, circle)) {
-    var lineA = triangle.getLineA()
-    var lineB = triangle.getLineB()
-    var lineC = triangle.getLineC()
+    const lineA = triangle.getLineA()
+    const lineB = triangle.getLineB()
+    const lineC = triangle.getLineC()
 
     GetLineToCircle(lineA, circle, out)
     GetLineToCircle(lineB, circle, out)
@@ -40,4 +41,4 @@ var GetTriangleToCircle = function (triangle, circle, out) {
   return out
 }
 
-module.exports = GetTriangleToCircle
+export default GetTriangleToCircle

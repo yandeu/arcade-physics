@@ -14,14 +14,14 @@
  *
  * @return {number} The average value.
  */
-var Average = function (values) {
-  var sum = 0
+const Average = values => {
+  let sum = 0
 
-  for (var i = 0; i < values.length; i++) {
+  for (let i = 0; i < values.length; i++) {
     sum += +values[i]
   }
 
   return sum / values.length
 }
 
-module.exports = Average
+export default Average

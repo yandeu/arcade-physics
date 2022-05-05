@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Rectangle = require('../rectangle/Rectangle')
+import Rectangle from '../rectangle/Rectangle'
 
 /**
  * Returns the bounds of the Ellipse object.
@@ -19,7 +19,7 @@ var Rectangle = require('../rectangle/Rectangle')
  *
  * @return {(Phaser.Geom.Rectangle|object)} The Rectangle object containing the Ellipse bounds.
  */
-var GetBounds = function (ellipse, out) {
+const GetBounds = (ellipse, out) => {
   if (out === undefined) {
     out = new Rectangle()
   }
@@ -32,4 +32,4 @@ var GetBounds = function (ellipse, out) {
   return out
 }
 
-module.exports = GetBounds
+export default GetBounds

@@ -15,7 +15,7 @@
  *
  * @return {boolean} True only if rectA fully contains rectB.
  */
-var ContainsRect = function (rectA, rectB) {
+const ContainsRect = (rectA, rectB) => {
   //  Volume check (if rectB volume > rectA then rectA cannot contain it)
   if (rectB.width * rectB.height > rectA.width * rectA.height) {
     return false
@@ -33,4 +33,4 @@ var ContainsRect = function (rectA, rectB) {
   )
 }
 
-module.exports = ContainsRect
+export default ContainsRect

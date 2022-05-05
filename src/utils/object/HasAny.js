@@ -15,8 +15,8 @@
  *
  * @return {boolean} true if the source object contains at least one of the keys, false otherwise
  */
-var HasAny = function (source, keys) {
-  for (var i = 0; i < keys.length; i++) {
+const HasAny = (source, keys) => {
+  for (let i = 0; i < keys.length; i++) {
     if (source.hasOwnProperty(keys[i])) {
       return true
     }
@@ -25,4 +25,4 @@ var HasAny = function (source, keys) {
   return false
 }
 
-module.exports = HasAny
+export default HasAny

@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SafeRange = require('./SafeRange')
+import SafeRange from './SafeRange'
 
 /**
  * Returns the first element in the array.
@@ -27,7 +27,7 @@ var SafeRange = require('./SafeRange')
  *
  * @return {object} The first matching element from the array, or `null` if no element could be found in the range given.
  */
-var GetFirst = function (array, property, value, startIndex, endIndex) {
+const GetFirst = (array, property, value, startIndex, endIndex) => {
   if (startIndex === undefined) {
     startIndex = 0
   }
@@ -36,8 +36,8 @@ var GetFirst = function (array, property, value, startIndex, endIndex) {
   }
 
   if (SafeRange(array, startIndex, endIndex)) {
-    for (var i = startIndex; i < endIndex; i++) {
-      var child = array[i]
+    for (let i = startIndex; i < endIndex; i++) {
+      const child = array[i]
 
       if (
         !property ||
@@ -52,4 +52,4 @@ var GetFirst = function (array, property, value, startIndex, endIndex) {
   return null
 }
 
-module.exports = GetFirst
+export default GetFirst

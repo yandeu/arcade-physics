@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SafeRange = require('./SafeRange')
+import SafeRange from './SafeRange'
 
 /**
  * Removes the item within the given range in the array.
@@ -24,7 +24,7 @@ var SafeRange = require('./SafeRange')
  *
  * @return {Array.<*>} An array of items that were removed.
  */
-var RemoveBetween = function (array, startIndex, endIndex, callback, context) {
+const RemoveBetween = (array, startIndex, endIndex, callback, context) => {
   if (startIndex === undefined) {
     startIndex = 0
   }
@@ -36,13 +36,13 @@ var RemoveBetween = function (array, startIndex, endIndex, callback, context) {
   }
 
   if (SafeRange(array, startIndex, endIndex)) {
-    var size = endIndex - startIndex
+    const size = endIndex - startIndex
 
-    var removed = array.splice(startIndex, size)
+    const removed = array.splice(startIndex, size)
 
     if (callback) {
-      for (var i = 0; i < removed.length; i++) {
-        var entry = removed[i]
+      for (let i = 0; i < removed.length; i++) {
+        const entry = removed[i]
 
         callback.call(context, entry)
       }
@@ -54,4 +54,4 @@ var RemoveBetween = function (array, startIndex, endIndex, callback, context) {
   }
 }
 
-module.exports = RemoveBetween
+export default RemoveBetween

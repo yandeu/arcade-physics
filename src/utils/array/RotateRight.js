@@ -16,14 +16,14 @@
  *
  * @return {*} The most recently shifted element.
  */
-var RotateRight = function (array, total) {
+const RotateRight = (array, total) => {
   if (total === undefined) {
     total = 1
   }
 
-  var element = null
+  let element = null
 
-  for (var i = 0; i < total; i++) {
+  for (let i = 0; i < total; i++) {
     element = array.pop()
     array.unshift(element)
   }
@@ -31,4 +31,4 @@ var RotateRight = function (array, total) {
   return element
 }
 
-module.exports = RotateRight
+export default RotateRight

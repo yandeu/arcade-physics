@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var IsPlainObject = require('./IsPlainObject')
+import IsPlainObject from './IsPlainObject'
 
 // @param {boolean} deep - Perform a deep copy?
 // @param {object} target - The target object to copy to.
@@ -20,17 +20,17 @@ var IsPlainObject = require('./IsPlainObject')
  *
  * @return {object} The extended object.
  */
-var Extend = function () {
-  var options,
-    name,
-    src,
-    copy,
-    copyIsArray,
-    clone,
-    target = arguments[0] || {},
-    i = 1,
-    length = arguments.length,
-    deep = false
+const Extend = function () {
+  let options
+  let name
+  let src
+  let copy
+  let copyIsArray
+  let clone
+  let target = arguments[0] || {}
+  let i = 1
+  const length = arguments.length
+  let deep = false
 
   // Handle a deep copy situation
   if (typeof target === 'boolean') {
@@ -84,4 +84,4 @@ var Extend = function () {
   return target
 }
 
-module.exports = Extend
+export default Extend

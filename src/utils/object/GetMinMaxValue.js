@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetValue = require('./GetValue')
-var Clamp = require('../../math/Clamp')
+import GetValue from './GetValue'
+
+import Clamp from '../../math/Clamp'
 
 /**
  * Retrieves and clamps a numerical value from an object.
@@ -21,14 +22,14 @@ var Clamp = require('../../math/Clamp')
  *
  * @return {number} The clamped value from the `source` object.
  */
-var GetMinMaxValue = function (source, key, min, max, defaultValue) {
+const GetMinMaxValue = (source, key, min, max, defaultValue) => {
   if (defaultValue === undefined) {
     defaultValue = min
   }
 
-  var value = GetValue(source, key, defaultValue)
+  const value = GetValue(source, key, defaultValue)
 
   return Clamp(value, min, max)
 }
 
-module.exports = GetMinMaxValue
+export default GetMinMaxValue

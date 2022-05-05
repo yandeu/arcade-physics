@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Contains = require('./Contains')
+import Contains from './Contains'
 
 /**
  * Tests if a triangle contains a point.
@@ -17,8 +17,8 @@ var Contains = require('./Contains')
  *
  * @return {boolean} `true` if the point is within the triangle, otherwise `false`.
  */
-var ContainsPoint = function (triangle, point) {
+const ContainsPoint = (triangle, point) => {
   return Contains(triangle, point.x, point.y)
 }
 
-module.exports = ContainsPoint
+export default ContainsPoint

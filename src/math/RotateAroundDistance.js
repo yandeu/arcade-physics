@@ -22,8 +22,8 @@
  *
  * @return {Phaser.Types.Math.Vector2Like} The given point.
  */
-var RotateAroundDistance = function (point, x, y, angle, distance) {
-  var t = angle + Math.atan2(point.y - y, point.x - x)
+const RotateAroundDistance = (point, x, y, angle, distance) => {
+  const t = angle + Math.atan2(point.y - y, point.x - x)
 
   point.x = x + distance * Math.cos(t)
   point.y = y + distance * Math.sin(t)
@@ -31,4 +31,4 @@ var RotateAroundDistance = function (point, x, y, angle, distance) {
   return point
 }
 
-module.exports = RotateAroundDistance
+export default RotateAroundDistance

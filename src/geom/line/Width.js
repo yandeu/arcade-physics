@@ -14,8 +14,8 @@
  *
  * @return {number} The width of the line.
  */
-var Width = function (line) {
+const Width = line => {
   return Math.abs(line.x1 - line.x2)
 }
 
-module.exports = Width
+export default Width

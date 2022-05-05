@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point')
-var DegToRad = require('../../math/DegToRad')
+import Point from '../point/Point'
+
+import DegToRad from '../../math/DegToRad'
 
 /**
  * Returns a Point from the perimeter of a Rectangle based on the given angle.
@@ -21,18 +22,18 @@ var DegToRad = require('../../math/DegToRad')
  *
  * @return {Phaser.Geom.Point} A Point object holding the coordinates of the Rectangle perimeter.
  */
-var PerimeterPoint = function (rectangle, angle, out) {
+const PerimeterPoint = (rectangle, angle, out) => {
   if (out === undefined) {
     out = new Point()
   }
 
   angle = DegToRad(angle)
 
-  var s = Math.sin(angle)
-  var c = Math.cos(angle)
+  const s = Math.sin(angle)
+  const c = Math.cos(angle)
 
-  var dx = c > 0 ? rectangle.width / 2 : rectangle.width / -2
-  var dy = s > 0 ? rectangle.height / 2 : rectangle.height / -2
+  let dx = c > 0 ? rectangle.width / 2 : rectangle.width / -2
+  let dy = s > 0 ? rectangle.height / 2 : rectangle.height / -2
 
   if (Math.abs(dx * s) < Math.abs(dy * c)) {
     dy = (dx * s) / c
@@ -46,4 +47,4 @@ var PerimeterPoint = function (rectangle, angle, out) {
   return out
 }
 
-module.exports = PerimeterPoint
+export default PerimeterPoint

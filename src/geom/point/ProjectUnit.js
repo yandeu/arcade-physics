@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('./Point')
+import Point from './Point'
 
 /**
  * Calculates the vector projection of `pointA` onto the nonzero `pointB`. This is the
@@ -21,12 +21,12 @@ var Point = require('./Point')
  *
  * @return {Phaser.Geom.Point} A unit Point object holding the coordinates of the vector projection of `pointA` onto `pointB`.
  */
-var ProjectUnit = function (pointA, pointB, out) {
+const ProjectUnit = (pointA, pointB, out) => {
   if (out === undefined) {
     out = new Point()
   }
 
-  var amt = pointA.x * pointB.x + pointA.y * pointB.y
+  const amt = pointA.x * pointB.x + pointA.y * pointB.y
 
   if (amt !== 0) {
     out.x = amt * pointB.x
@@ -36,4 +36,4 @@ var ProjectUnit = function (pointA, pointB, out) {
   return out
 }
 
-module.exports = ProjectUnit
+export default ProjectUnit

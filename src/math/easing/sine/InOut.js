@@ -14,7 +14,7 @@
  *
  * @return {number} The tweened value.
  */
-var InOut = function (v) {
+const InOut = v => {
   if (v === 0) {
     return 0
   } else if (v === 1) {
@@ -24,4 +24,4 @@ var InOut = function (v) {
   }
 }
 
-module.exports = InOut
+export default InOut

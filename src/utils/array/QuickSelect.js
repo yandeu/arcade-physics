@@ -8,7 +8,7 @@
  * @ignore
  */
 function swap(arr, i, j) {
-  var tmp = arr[i]
+  const tmp = arr[i]
   arr[i] = arr[j]
   arr[j] = tmp
 }
@@ -39,7 +39,7 @@ function defaultCompare(a, b) {
  * @param {number} [right] - The index of the right part of the range.
  * @param {function} [compare] - An optional comparison function. Is passed two elements and should return 0, 1 or -1.
  */
-var QuickSelect = function (arr, k, left, right, compare) {
+const QuickSelect = (arr, k, left, right, compare) => {
   if (left === undefined) {
     left = 0
   }
@@ -52,20 +52,20 @@ var QuickSelect = function (arr, k, left, right, compare) {
 
   while (right > left) {
     if (right - left > 600) {
-      var n = right - left + 1
-      var m = k - left + 1
-      var z = Math.log(n)
-      var s = 0.5 * Math.exp((2 * z) / 3)
-      var sd = 0.5 * Math.sqrt((z * s * (n - s)) / n) * (m - n / 2 < 0 ? -1 : 1)
-      var newLeft = Math.max(left, Math.floor(k - (m * s) / n + sd))
-      var newRight = Math.min(right, Math.floor(k + ((n - m) * s) / n + sd))
+      const n = right - left + 1
+      const m = k - left + 1
+      const z = Math.log(n)
+      const s = 0.5 * Math.exp((2 * z) / 3)
+      const sd = 0.5 * Math.sqrt((z * s * (n - s)) / n) * (m - n / 2 < 0 ? -1 : 1)
+      const newLeft = Math.max(left, Math.floor(k - (m * s) / n + sd))
+      const newRight = Math.min(right, Math.floor(k + ((n - m) * s) / n + sd))
 
       QuickSelect(arr, k, newLeft, newRight, compare)
     }
 
-    var t = arr[k]
-    var i = left
-    var j = right
+    const t = arr[k]
+    let i = left
+    let j = right
 
     swap(arr, left, k)
 
@@ -105,4 +105,4 @@ var QuickSelect = function (arr, k, left, right, compare) {
   }
 }
 
-module.exports = QuickSelect
+export default QuickSelect

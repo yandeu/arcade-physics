@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var MATH_CONST = require('../../math/const')
-var Angle = require('./Angle')
+import MATH_CONST from '../../math/const'
+
+import Angle from './Angle'
 
 /**
  * Returns the x component of the normal vector of the given line.
@@ -17,8 +18,8 @@ var Angle = require('./Angle')
  *
  * @return {number} The x component of the normal vector of the line.
  */
-var NormalX = function (line) {
+const NormalX = line => {
   return Math.cos(Angle(line) - MATH_CONST.TAU)
 }
 
-module.exports = NormalX
+export default NormalX

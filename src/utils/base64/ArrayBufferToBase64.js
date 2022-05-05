@@ -5,7 +5,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 
 /**
  * Converts an ArrayBuffer into a base64 string.
@@ -22,13 +22,13 @@ var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
  *
  * @return {string} The base64 encoded Array Buffer.
  */
-var ArrayBufferToBase64 = function (arrayBuffer, mediaType) {
-  var bytes = new Uint8Array(arrayBuffer)
-  var len = bytes.length
+const ArrayBufferToBase64 = (arrayBuffer, mediaType) => {
+  const bytes = new Uint8Array(arrayBuffer)
+  const len = bytes.length
 
-  var base64 = mediaType ? `data:${mediaType};base64,` : ''
+  let base64 = mediaType ? `data:${mediaType};base64,` : ''
 
-  for (var i = 0; i < len; i += 3) {
+  for (let i = 0; i < len; i += 3) {
     base64 += chars[bytes[i] >> 2]
     base64 += chars[((bytes[i] & 3) << 4) | (bytes[i + 1] >> 4)]
     base64 += chars[((bytes[i + 1] & 15) << 2) | (bytes[i + 2] >> 6)]
@@ -44,4 +44,4 @@ var ArrayBufferToBase64 = function (arrayBuffer, mediaType) {
   return base64
 }
 
-module.exports = ArrayBufferToBase64
+export default ArrayBufferToBase64

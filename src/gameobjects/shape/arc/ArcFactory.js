@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Arc = require('./Arc')
-var GameObjectFactory = require('../../GameObjectFactory')
+import Arc from './Arc'
+
+import GameObjectFactory from '../../GameObjectFactory'
 
 /**
  * Creates a new Arc Shape Game Object and adds it to the Scene.

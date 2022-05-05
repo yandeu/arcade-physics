@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SpliceOne = require('./SpliceOne')
+import SpliceOne from './SpliceOne'
 
 /**
  * Removes the given item, or array of items, from the array.
@@ -23,12 +23,12 @@ var SpliceOne = require('./SpliceOne')
  *
  * @return {*|Array.<*>} The item, or array of items, that were successfully removed from the array.
  */
-var Remove = function (array, item, callback, context) {
+const Remove = (array, item, callback, context) => {
   if (context === undefined) {
     context = array
   }
 
-  var index
+  let index
 
   //  Fast path to avoid array mutation and iteration
   if (!Array.isArray(item)) {
@@ -49,11 +49,11 @@ var Remove = function (array, item, callback, context) {
 
   //  If we got this far, we have an array of items to remove
 
-  var itemLength = item.length - 1
-  var removed = []
+  let itemLength = item.length - 1
+  const removed = []
 
   while (itemLength >= 0) {
-    var entry = item[itemLength]
+    const entry = item[itemLength]
 
     index = array.indexOf(entry)
 
@@ -73,4 +73,4 @@ var Remove = function (array, item, callback, context) {
   return removed
 }
 
-module.exports = Remove
+export default Remove

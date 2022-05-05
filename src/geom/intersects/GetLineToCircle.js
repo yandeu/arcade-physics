@@ -5,8 +5,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point')
-var LineToCircle = require('./LineToCircle')
+import Point from '../point/Point'
+
+import LineToCircle from './LineToCircle'
 
 /**
  * Checks for intersection between the line segment and circle,
@@ -21,51 +22,51 @@ var LineToCircle = require('./LineToCircle')
  *
  * @return {array} An array with the points of intersection if objects intersect, otherwise an empty array.
  */
-var GetLineToCircle = function (line, circle, out) {
+const GetLineToCircle = (line, circle, out) => {
   if (out === undefined) {
     out = []
   }
 
   if (LineToCircle(line, circle)) {
-    var lx1 = line.x1
-    var ly1 = line.y1
+    const lx1 = line.x1
+    const ly1 = line.y1
 
-    var lx2 = line.x2
-    var ly2 = line.y2
+    const lx2 = line.x2
+    const ly2 = line.y2
 
-    var cx = circle.x
-    var cy = circle.y
-    var cr = circle.radius
+    const cx = circle.x
+    const cy = circle.y
+    const cr = circle.radius
 
-    var lDirX = lx2 - lx1
-    var lDirY = ly2 - ly1
-    var oDirX = lx1 - cx
-    var oDirY = ly1 - cy
+    const lDirX = lx2 - lx1
+    const lDirY = ly2 - ly1
+    const oDirX = lx1 - cx
+    const oDirY = ly1 - cy
 
-    var coefficientA = lDirX * lDirX + lDirY * lDirY
-    var coefficientB = 2 * (lDirX * oDirX + lDirY * oDirY)
-    var coefficientC = oDirX * oDirX + oDirY * oDirY - cr * cr
+    const coefficientA = lDirX * lDirX + lDirY * lDirY
+    const coefficientB = 2 * (lDirX * oDirX + lDirY * oDirY)
+    const coefficientC = oDirX * oDirX + oDirY * oDirY - cr * cr
 
-    var lambda = coefficientB * coefficientB - 4 * coefficientA * coefficientC
+    const lambda = coefficientB * coefficientB - 4 * coefficientA * coefficientC
 
-    var x, y
+    let x, y
 
     if (lambda === 0) {
-      var root = -coefficientB / (2 * coefficientA)
+      const root = -coefficientB / (2 * coefficientA)
       x = lx1 + root * lDirX
       y = ly1 + root * lDirY
       if (root >= 0 && root <= 1) {
         out.push(new Point(x, y))
       }
     } else if (lambda > 0) {
-      var root1 = (-coefficientB - Math.sqrt(lambda)) / (2 * coefficientA)
+      const root1 = (-coefficientB - Math.sqrt(lambda)) / (2 * coefficientA)
       x = lx1 + root1 * lDirX
       y = ly1 + root1 * lDirY
       if (root1 >= 0 && root1 <= 1) {
         out.push(new Point(x, y))
       }
 
-      var root2 = (-coefficientB + Math.sqrt(lambda)) / (2 * coefficientA)
+      const root2 = (-coefficientB + Math.sqrt(lambda)) / (2 * coefficientA)
       x = lx1 + root2 * lDirX
       y = ly1 + root2 * lDirY
       if (root2 >= 0 && root2 <= 1) {
@@ -77,4 +78,4 @@ var GetLineToCircle = function (line, circle, out) {
   return out
 }
 
-module.exports = GetLineToCircle
+export default GetLineToCircle

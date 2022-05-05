@@ -4,10 +4,11 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../../utils/Class')
-var Shape = require('../Shape')
-var GeomTriangle = require('../../../geom/triangle/Triangle')
-var TriangleRender = require('./TriangleRender')
+import Class from '../../../utils/Class'
+
+import Shape from '../Shape'
+import GeomTriangle from '../../../geom/triangle/Triangle'
+import TriangleRender from './TriangleRender'
 
 /**
  * @classdesc
@@ -40,7 +41,7 @@ var TriangleRender = require('./TriangleRender')
  * @param {number} [fillColor] - The color the triangle will be filled with, i.e. 0xff0000 for red.
  * @param {number} [fillAlpha] - The alpha the triangle will be filled with. You can also set the alpha of the overall Shape using its `alpha` property.
  */
-var Triangle = new Class({
+const Triangle = new Class({
   Extends: Shape,
 
   Mixins: [TriangleRender],
@@ -73,8 +74,8 @@ var Triangle = new Class({
 
     Shape.call(this, scene, 'Triangle', new GeomTriangle(x1, y1, x2, y2, x3, y3))
 
-    var width = this.geom.right - this.geom.left
-    var height = this.geom.bottom - this.geom.top
+    const width = this.geom.right - this.geom.left
+    const height = this.geom.bottom - this.geom.top
 
     this.setPosition(x, y)
     this.setSize(width, height)
@@ -118,9 +119,9 @@ var Triangle = new Class({
    * @return {this} This Game Object instance.
    */
   updateData: function () {
-    var path = []
-    var tri = this.geom
-    var line = this._tempLine
+    const path = []
+    const tri = this.geom
+    const line = this._tempLine
 
     tri.getLineA(line)
 
@@ -140,4 +141,4 @@ var Triangle = new Class({
   }
 })
 
-module.exports = Triangle
+export default Triangle

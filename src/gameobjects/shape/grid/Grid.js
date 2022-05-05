@@ -4,9 +4,10 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../../utils/Class')
-var Shape = require('../Shape')
-var GridRender = require('./GridRender')
+import Class from '../../../utils/Class'
+
+import Shape from '../Shape'
+import GridRender from './GridRender'
 
 /**
  * @classdesc
@@ -43,7 +44,7 @@ var GridRender = require('./GridRender')
  * @param {number} [outlineFillColor] - The color of the lines between the grid cells. See the `setOutline` method.
  * @param {number} [outlineFillAlpha] - The alpha of the lines between the grid cells.
  */
-var Grid = new Class({
+const Grid = new Class({
   Extends: Shape,
 
   Mixins: [GridRender],
@@ -280,4 +281,4 @@ var Grid = new Class({
   }
 })
 
-module.exports = Grid
+export default Grid

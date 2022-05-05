@@ -18,7 +18,7 @@
  *
  * @return {number} The rounded value.
  */
-var CeilTo = function (value, place, base) {
+const CeilTo = (value, place, base) => {
   if (place === undefined) {
     place = 0
   }
@@ -26,9 +26,9 @@ var CeilTo = function (value, place, base) {
     base = 10
   }
 
-  var p = Math.pow(base, -place)
+  const p = Math.pow(base, -place)
 
   return Math.ceil(value * p) / p
 }
 
-module.exports = CeilTo
+export default CeilTo

@@ -18,7 +18,7 @@
  *
  * @return {boolean} `true` if the values are fuzzily equal, otherwise `false`.
  */
-var Equal = function (a, b, epsilon) {
+const Equal = (a, b, epsilon) => {
   if (epsilon === undefined) {
     epsilon = 0.0001
   }
@@ -26,4 +26,4 @@ var Equal = function (a, b, epsilon) {
   return Math.abs(a - b) < epsilon
 }
 
-module.exports = Equal
+export default Equal

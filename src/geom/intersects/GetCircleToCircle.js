@@ -5,8 +5,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point')
-var CircleToCircle = require('./CircleToCircle')
+import Point from '../point/Point'
+
+import CircleToCircle from './CircleToCircle'
 
 /**
  * Checks if two Circles intersect and returns the intersection points as a Point object array.
@@ -20,21 +21,21 @@ var CircleToCircle = require('./CircleToCircle')
  *
  * @return {array} An array with the points of intersection if objects intersect, otherwise an empty array.
  */
-var GetCircleToCircle = function (circleA, circleB, out) {
+const GetCircleToCircle = (circleA, circleB, out) => {
   if (out === undefined) {
     out = []
   }
 
   if (CircleToCircle(circleA, circleB)) {
-    var x0 = circleA.x
-    var y0 = circleA.y
-    var r0 = circleA.radius
+    const x0 = circleA.x
+    const y0 = circleA.y
+    const r0 = circleA.radius
 
-    var x1 = circleB.x
-    var y1 = circleB.y
-    var r1 = circleB.radius
+    const x1 = circleB.x
+    const y1 = circleB.y
+    const r1 = circleB.radius
 
-    var coefficientA, coefficientB, coefficientC, lambda, x
+    let coefficientA, coefficientB, coefficientC, lambda, x
 
     if (y0 === y1) {
       x = (r1 * r1 - r0 * r0 - x1 * x1 + x0 * x0) / (2 * (x0 - x1))
@@ -52,8 +53,8 @@ var GetCircleToCircle = function (circleA, circleB, out) {
         out.push(new Point(x, (-coefficientB - Math.sqrt(lambda)) / (2 * coefficientA)))
       }
     } else {
-      var v1 = (x0 - x1) / (y0 - y1)
-      var n = (r1 * r1 - r0 * r0 - x1 * x1 + x0 * x0 - y1 * y1 + y0 * y0) / (2 * (y0 - y1))
+      const v1 = (x0 - x1) / (y0 - y1)
+      const n = (r1 * r1 - r0 * r0 - x1 * x1 + x0 * x0 - y1 * y1 + y0 * y0) / (2 * (y0 - y1))
 
       coefficientA = v1 * v1 + 1
       coefficientB = 2 * y0 * v1 - 2 * n * v1 - 2 * x0
@@ -76,4 +77,4 @@ var GetCircleToCircle = function (circleA, circleB, out) {
   return out
 }
 
-module.exports = GetCircleToCircle
+export default GetCircleToCircle

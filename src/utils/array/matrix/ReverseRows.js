@@ -31,12 +31,12 @@
  *
  * @return {T[][]} The column reversed matrix.
  */
-var ReverseRows = function (matrix) {
-  for (var i = 0; i < matrix.length; i++) {
+const ReverseRows = matrix => {
+  for (let i = 0; i < matrix.length; i++) {
     matrix[i].reverse()
   }
 
   return matrix
 }
 
-module.exports = ReverseRows
+export default ReverseRows

@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Length = require('../line/Length')
-var Line = require('../line/Line')
+import Length from '../line/Length'
+
+import Line from '../line/Line'
 
 /**
  * Returns the perimeter of the given Polygon.
@@ -17,14 +18,14 @@ var Line = require('../line/Line')
  *
  * @return {number} The perimeter of the Polygon.
  */
-var Perimeter = function (polygon) {
-  var points = polygon.points
-  var perimeter = 0
+const Perimeter = polygon => {
+  const points = polygon.points
+  let perimeter = 0
 
-  for (var i = 0; i < points.length; i++) {
-    var pointA = points[i]
-    var pointB = points[(i + 1) % points.length]
-    var line = new Line(pointA.x, pointA.y, pointB.x, pointB.y)
+  for (let i = 0; i < points.length; i++) {
+    const pointA = points[i]
+    const pointB = points[(i + 1) % points.length]
+    const line = new Line(pointA.x, pointA.y, pointB.x, pointB.y)
 
     perimeter += Length(line)
   }
@@ -32,4 +33,4 @@ var Perimeter = function (polygon) {
   return perimeter
 }
 
-module.exports = Perimeter
+export default Perimeter

@@ -12,7 +12,7 @@
  * @since 3.0.0
  */
 
-var ComputedSize = {
+const ComputedSize = {
   /**
    * The native (un-scaled) width of this Game Object.
    *
@@ -128,4 +128,4 @@ var ComputedSize = {
   }
 }
 
-module.exports = ComputedSize
+export default ComputedSize

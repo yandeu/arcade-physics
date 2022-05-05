@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Triangle = require('./Triangle')
+import Triangle from './Triangle'
 
 /**
  * Builds an equilateral triangle. In the equilateral triangle, all the sides are the same length (congruent) and all the angles are the same size (congruent).
@@ -19,19 +19,19 @@ var Triangle = require('./Triangle')
  *
  * @return {Phaser.Geom.Triangle} The Triangle object of the given size.
  */
-var BuildEquilateral = function (x, y, length) {
-  var height = length * (Math.sqrt(3) / 2)
+const BuildEquilateral = (x, y, length) => {
+  const height = length * (Math.sqrt(3) / 2)
 
-  var x1 = x
-  var y1 = y
+  const x1 = x
+  const y1 = y
 
-  var x2 = x + length / 2
-  var y2 = y + height
+  const x2 = x + length / 2
+  const y2 = y + height
 
-  var x3 = x - length / 2
-  var y3 = y + height
+  const x3 = x - length / 2
+  const y3 = y + height
 
   return new Triangle(x1, y1, x2, y2, x3, y3)
 }
 
-module.exports = BuildEquilateral
+export default BuildEquilateral

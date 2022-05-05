@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Line = require('./Line')
+import Line from './Line'
 
 Line.Angle = require('./Angle')
 Line.BresenhamPoints = require('./BresenhamPoints')
@@ -36,4 +36,4 @@ Line.SetToAngle = require('./SetToAngle')
 Line.Slope = require('./Slope')
 Line.Width = require('./Width')
 
-module.exports = Line
+export default Line

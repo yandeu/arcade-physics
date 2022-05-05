@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SafeRange = require('./SafeRange')
+import SafeRange from './SafeRange'
 
 /**
  * Scans the array for elements with the given property. If found, the property is set to the `value`.
@@ -25,7 +25,7 @@ var SafeRange = require('./SafeRange')
  *
  * @return {array} The input array.
  */
-var SetAll = function (array, property, value, startIndex, endIndex) {
+const SetAll = (array, property, value, startIndex, endIndex) => {
   if (startIndex === undefined) {
     startIndex = 0
   }
@@ -34,8 +34,8 @@ var SetAll = function (array, property, value, startIndex, endIndex) {
   }
 
   if (SafeRange(array, startIndex, endIndex)) {
-    for (var i = startIndex; i < endIndex; i++) {
-      var entry = array[i]
+    for (let i = startIndex; i < endIndex; i++) {
+      const entry = array[i]
 
       if (entry.hasOwnProperty(property)) {
         entry[property] = value
@@ -46,4 +46,4 @@ var SetAll = function (array, property, value, startIndex, endIndex) {
   return array
 }
 
-module.exports = SetAll
+export default SetAll

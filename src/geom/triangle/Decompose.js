@@ -15,7 +15,7 @@
  *
  * @return {array} The provided `out` array, or a new array if none was provided, with three objects with `x` and `y` properties representing each point of the Triangle appended to it.
  */
-var Decompose = function (triangle, out) {
+const Decompose = (triangle, out) => {
   if (out === undefined) {
     out = []
   }
@@ -27,4 +27,4 @@ var Decompose = function (triangle, out) {
   return out
 }
 
-module.exports = Decompose
+export default Decompose

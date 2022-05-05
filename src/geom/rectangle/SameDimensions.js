@@ -15,8 +15,8 @@
  *
  * @return {boolean} `true` if the objects have equivalent values for the `width` and `height` properties, otherwise `false`.
  */
-var SameDimensions = function (rect, toCompare) {
+const SameDimensions = (rect, toCompare) => {
   return rect.width === toCompare.width && rect.height === toCompare.height
 }
 
-module.exports = SameDimensions
+export default SameDimensions

@@ -18,7 +18,7 @@
  *
  * @return {Phaser.Geom.Triangle} The modified Triangle.
  */
-var Offset = function (triangle, x, y) {
+const Offset = (triangle, x, y) => {
   triangle.x1 += x
   triangle.y1 += y
 
@@ -31,4 +31,4 @@ var Offset = function (triangle, x, y) {
   return triangle
 }
 
-module.exports = Offset
+export default Offset

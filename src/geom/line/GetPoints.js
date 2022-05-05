@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Length = require('./Length')
-var Point = require('../point/Point')
+import Length from './Length'
+
+import Point from '../point/Point'
 
 /**
  * Get a number of points along a line's length.
@@ -27,7 +28,7 @@ var Point = require('../point/Point')
  *
  * @return {(array|Phaser.Geom.Point[])} An array of Points, or point-like objects, containing the coordinates of the points on the line.
  */
-var GetPoints = function (line, quantity, stepRate, out) {
+const GetPoints = (line, quantity, stepRate, out) => {
   if (out === undefined) {
     out = []
   }
@@ -37,17 +38,17 @@ var GetPoints = function (line, quantity, stepRate, out) {
     quantity = Length(line) / stepRate
   }
 
-  var x1 = line.x1
-  var y1 = line.y1
+  const x1 = line.x1
+  const y1 = line.y1
 
-  var x2 = line.x2
-  var y2 = line.y2
+  const x2 = line.x2
+  const y2 = line.y2
 
-  for (var i = 0; i < quantity; i++) {
-    var position = i / quantity
+  for (let i = 0; i < quantity; i++) {
+    const position = i / quantity
 
-    var x = x1 + (x2 - x1) * position
-    var y = y1 + (y2 - y1) * position
+    const x = x1 + (x2 - x1) * position
+    const y = y1 + (y2 - y1) * position
 
     out.push(new Point(x, y))
   }
@@ -55,4 +56,4 @@ var GetPoints = function (line, quantity, stepRate, out) {
   return out
 }
 
-module.exports = GetPoints
+export default GetPoints

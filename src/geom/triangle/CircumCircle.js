@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Circle = require('../circle/Circle')
+import Circle from '../circle/Circle'
 
 //  Adapted from https://gist.github.com/mutoo/5617691
 
@@ -21,40 +21,40 @@ var Circle = require('../circle/Circle')
  *
  * @return {Phaser.Geom.Circle} The updated `out` Circle, or a new Circle if none was provided.
  */
-var CircumCircle = function (triangle, out) {
+const CircumCircle = (triangle, out) => {
   if (out === undefined) {
     out = new Circle()
   }
 
   //  A
-  var x1 = triangle.x1
-  var y1 = triangle.y1
+  const x1 = triangle.x1
+  const y1 = triangle.y1
 
   //  B
-  var x2 = triangle.x2
-  var y2 = triangle.y2
+  const x2 = triangle.x2
+  const y2 = triangle.y2
 
   //  C
-  var x3 = triangle.x3
-  var y3 = triangle.y3
+  const x3 = triangle.x3
+  const y3 = triangle.y3
 
-  var A = x2 - x1
-  var B = y2 - y1
-  var C = x3 - x1
-  var D = y3 - y1
-  var E = A * (x1 + x2) + B * (y1 + y2)
-  var F = C * (x1 + x3) + D * (y1 + y3)
-  var G = 2 * (A * (y3 - y2) - B * (x3 - x2))
+  const A = x2 - x1
+  const B = y2 - y1
+  const C = x3 - x1
+  const D = y3 - y1
+  const E = A * (x1 + x2) + B * (y1 + y2)
+  const F = C * (x1 + x3) + D * (y1 + y3)
+  const G = 2 * (A * (y3 - y2) - B * (x3 - x2))
 
-  var dx
-  var dy
+  let dx
+  let dy
 
   //  If the points of the triangle are collinear, then just find the
   //  extremes and use the midpoint as the center of the circumcircle.
 
   if (Math.abs(G) < 0.000001) {
-    var minX = Math.min(x1, x2, x3)
-    var minY = Math.min(y1, y2, y3)
+    const minX = Math.min(x1, x2, x3)
+    const minY = Math.min(y1, y2, y3)
     dx = (Math.max(x1, x2, x3) - minX) * 0.5
     dy = (Math.max(y1, y2, y3) - minY) * 0.5
 
@@ -72,4 +72,4 @@ var CircumCircle = function (triangle, out) {
   return out
 }
 
-module.exports = CircumCircle
+export default CircumCircle

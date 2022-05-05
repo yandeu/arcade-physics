@@ -16,8 +16,8 @@
  *
  * @return {Phaser.Types.GameObjects.JSONGameObject} A JSON representation of the Game Object.
  */
-var ToJSON = function (gameObject) {
-  var out = {
+const ToJSON = gameObject => {
+  const out = {
     name: gameObject.name,
     type: gameObject.type,
     x: gameObject.x,
@@ -50,4 +50,4 @@ var ToJSON = function (gameObject) {
   return out
 }
 
-module.exports = ToJSON
+export default ToJSON

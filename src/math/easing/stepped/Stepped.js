@@ -15,7 +15,7 @@
  *
  * @return {number} The tweened value.
  */
-var Stepped = function (v, steps) {
+const Stepped = (v, steps) => {
   if (steps === undefined) {
     steps = 1
   }
@@ -29,4 +29,4 @@ var Stepped = function (v, steps) {
   }
 }
 
-module.exports = Stepped
+export default Stepped

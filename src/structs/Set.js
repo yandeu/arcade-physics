@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../utils/Class')
+import Class from '../utils/Class'
 
 /**
  * @callback EachSetCallback<E>
@@ -29,7 +29,7 @@ var Class = require('../utils/Class')
  *
  * @param {Array.<*>} [elements] - An optional array of elements to insert into this Set.
  */
-var Set = new Class({
+const Set = new Class({
   initialize: function Set(elements) {
     /**
      * The entries of this Set. Stored internally as an array.
@@ -44,7 +44,7 @@ var Set = new Class({
     this.entries = []
 
     if (Array.isArray(elements)) {
-      for (var i = 0; i < elements.length; i++) {
+      for (let i = 0; i < elements.length; i++) {
         this.set(elements[i])
       }
     }
@@ -86,8 +86,8 @@ var Set = new Class({
    * @return {*} The first element of this Set that meets the required condition, or `null` if this Set contains no elements that meet the condition.
    */
   get: function (property, value) {
-    for (var i = 0; i < this.entries.length; i++) {
-      var entry = this.entries[i]
+    for (let i = 0; i < this.entries.length; i++) {
+      const entry = this.entries[i]
 
       if (entry[property] === value) {
         return entry
@@ -123,7 +123,7 @@ var Set = new Class({
    * @return {Phaser.Structs.Set} This Set object.
    */
   delete: function (value) {
-    var index = this.entries.indexOf(value)
+    const index = this.entries.indexOf(value)
 
     if (index > -1) {
       this.entries.splice(index, 1)
@@ -142,8 +142,8 @@ var Set = new Class({
     // eslint-disable-next-line no-console
     console.group('Set')
 
-    for (var i = 0; i < this.entries.length; i++) {
-      var entry = this.entries[i]
+    for (let i = 0; i < this.entries.length; i++) {
+      const entry = this.entries[i]
       console.log(entry)
     }
 
@@ -167,9 +167,9 @@ var Set = new Class({
    * @return {Phaser.Structs.Set} This Set object.
    */
   each: function (callback, callbackScope) {
-    var i
-    var temp = this.entries.slice()
-    var len = temp.length
+    let i
+    const temp = this.entries.slice()
+    const len = temp.length
 
     if (callbackScope) {
       for (i = 0; i < len; i++) {
@@ -204,8 +204,8 @@ var Set = new Class({
    * @return {Phaser.Structs.Set} This Set object.
    */
   iterate: function (callback, callbackScope) {
-    var i
-    var len = this.entries.length
+    let i
+    const len = this.entries.length
 
     if (callbackScope) {
       for (i = 0; i < len; i++) {
@@ -238,17 +238,17 @@ var Set = new Class({
    * @return {Phaser.Structs.Set} This Set object.
    */
   iterateLocal: function (callbackKey) {
-    var i
-    var args = []
+    let i
+    const args = []
 
     for (i = 1; i < arguments.length; i++) {
       args.push(arguments[i])
     }
 
-    var len = this.entries.length
+    const len = this.entries.length
 
     for (i = 0; i < len; i++) {
-      var entry = this.entries[i]
+      const entry = this.entries[i]
 
       entry[callbackKey].apply(entry, args)
     }
@@ -301,13 +301,13 @@ var Set = new Class({
    * @return {Phaser.Structs.Set} A new Set containing all the values in this Set and the Set provided as an argument.
    */
   union: function (set) {
-    var newSet = new Set()
+    const newSet = new Set()
 
-    set.entries.forEach(function (value) {
+    set.entries.forEach(value => {
       newSet.set(value)
     })
 
-    this.entries.forEach(function (value) {
+    this.entries.forEach(value => {
       newSet.set(value)
     })
 
@@ -327,9 +327,9 @@ var Set = new Class({
    * @return {Phaser.Structs.Set} The result of the intersection, as a new Set.
    */
   intersect: function (set) {
-    var newSet = new Set()
+    const newSet = new Set()
 
-    this.entries.forEach(function (value) {
+    this.entries.forEach(value => {
       if (set.contains(value)) {
         newSet.set(value)
       }
@@ -351,9 +351,9 @@ var Set = new Class({
    * @return {Phaser.Structs.Set} A new Set containing all the values in this Set that are not also in the Set provided as an argument to this method.
    */
   difference: function (set) {
-    var newSet = new Set()
+    const newSet = new Set()
 
-    this.entries.forEach(function (value) {
+    this.entries.forEach(value => {
       if (!set.contains(value)) {
         newSet.set(value)
       }
@@ -386,4 +386,4 @@ var Set = new Class({
   }
 })
 
-module.exports = Set
+export default Set

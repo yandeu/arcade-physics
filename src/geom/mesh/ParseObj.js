@@ -4,17 +4,17 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var flip = true
+let flip = true
 
-var defaultModelName = 'untitled'
-var currentGroup = ''
-var currentMaterial = ''
+const defaultModelName = 'untitled'
+let currentGroup = ''
+let currentMaterial = ''
 
 /**
  * @ignore
  */
 function stripComments(line) {
-  var idx = line.indexOf('#')
+  const idx = line.indexOf('#')
 
   return idx > -1 ? line.substring(0, idx) : line
 }
@@ -42,7 +42,7 @@ function currentModel(result) {
  * @ignore
  */
 function parseObject(lineItems, result) {
-  var modelName = lineItems.length >= 2 ? lineItems[1] : defaultModelName
+  const modelName = lineItems.length >= 2 ? lineItems[1] : defaultModelName
 
   result.models.push({
     faces: [],
@@ -68,11 +68,11 @@ function parseGroup(lineItems) {
  * @ignore
  */
 function parseVertexCoords(lineItems, result) {
-  var len = lineItems.length
+  const len = lineItems.length
 
-  var x = len >= 2 ? parseFloat(lineItems[1]) : 0
-  var y = len >= 3 ? parseFloat(lineItems[2]) : 0
-  var z = len >= 4 ? parseFloat(lineItems[3]) : 0
+  const x = len >= 2 ? parseFloat(lineItems[1]) : 0
+  const y = len >= 3 ? parseFloat(lineItems[2]) : 0
+  const z = len >= 4 ? parseFloat(lineItems[3]) : 0
 
   currentModel(result).vertices.push({ x: x, y: y, z: z })
 }
@@ -81,11 +81,11 @@ function parseVertexCoords(lineItems, result) {
  * @ignore
  */
 function parseTextureCoords(lineItems, result) {
-  var len = lineItems.length
+  const len = lineItems.length
 
-  var u = len >= 2 ? parseFloat(lineItems[1]) : 0
-  var v = len >= 3 ? parseFloat(lineItems[2]) : 0
-  var w = len >= 4 ? parseFloat(lineItems[3]) : 0
+  let u = len >= 2 ? parseFloat(lineItems[1]) : 0
+  let v = len >= 3 ? parseFloat(lineItems[2]) : 0
+  let w = len >= 4 ? parseFloat(lineItems[3]) : 0
 
   if (isNaN(u)) {
     u = 0
@@ -110,11 +110,11 @@ function parseTextureCoords(lineItems, result) {
  * @ignore
  */
 function parseVertexNormal(lineItems, result) {
-  var len = lineItems.length
+  const len = lineItems.length
 
-  var x = len >= 2 ? parseFloat(lineItems[1]) : 0
-  var y = len >= 3 ? parseFloat(lineItems[2]) : 0
-  var z = len >= 4 ? parseFloat(lineItems[3]) : 0
+  const x = len >= 2 ? parseFloat(lineItems[1]) : 0
+  const y = len >= 3 ? parseFloat(lineItems[2]) : 0
+  const z = len >= 4 ? parseFloat(lineItems[3]) : 0
 
   currentModel(result).vertexNormals.push({ x: x, y: y, z: z })
 }
@@ -123,30 +123,30 @@ function parseVertexNormal(lineItems, result) {
  * @ignore
  */
 function parsePolygon(lineItems, result) {
-  var totalVertices = lineItems.length - 1
+  const totalVertices = lineItems.length - 1
 
   if (totalVertices < 3) {
     return
   }
 
-  var face = {
+  const face = {
     group: currentGroup,
     material: currentMaterial,
     vertices: []
   }
 
-  for (var i = 0; i < totalVertices; i++) {
-    var vertexString = lineItems[i + 1]
-    var vertexValues = vertexString.split('/')
-    var vvLen = vertexValues.length
+  for (let i = 0; i < totalVertices; i++) {
+    const vertexString = lineItems[i + 1]
+    const vertexValues = vertexString.split('/')
+    const vvLen = vertexValues.length
 
     if (vvLen < 1 || vvLen > 3) {
       continue
     }
 
-    var vertexIndex = 0
-    var textureCoordsIndex = 0
-    var vertexNormalIndex = 0
+    let vertexIndex = 0
+    let textureCoordsIndex = 0
+    let vertexNormalIndex = 0
 
     vertexIndex = parseInt(vertexValues[0], 10)
 
@@ -211,7 +211,7 @@ function parseUseMtl(lineItems) {
  *
  * @return {Phaser.Types.Geom.Mesh.OBJData} The parsed model and material data.
  */
-var ParseObj = function (data, flipUV) {
+const ParseObj = (data, flipUV) => {
   if (flipUV === undefined) {
     flipUV = true
   }
@@ -219,7 +219,7 @@ var ParseObj = function (data, flipUV) {
   flip = flipUV
 
   //  Store results in here
-  var result = {
+  const result = {
     materials: {},
     materialLibraries: [],
     models: []
@@ -228,12 +228,12 @@ var ParseObj = function (data, flipUV) {
   currentGroup = ''
   currentMaterial = ''
 
-  var lines = data.split('\n')
+  const lines = data.split('\n')
 
-  for (var i = 0; i < lines.length; i++) {
-    var line = stripComments(lines[i])
+  for (let i = 0; i < lines.length; i++) {
+    const line = stripComments(lines[i])
 
-    var lineItems = line.replace(/\s\s+/g, ' ').trim().split(' ')
+    const lineItems = line.replace(/\s\s+/g, ' ').trim().split(' ')
 
     switch (lineItems[0].toLowerCase()) {
       case 'o':
@@ -281,4 +281,4 @@ var ParseObj = function (data, flipUV) {
   return result
 }
 
-module.exports = ParseObj
+export default ParseObj

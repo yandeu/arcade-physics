@@ -16,8 +16,8 @@
  *
  * @return {boolean} `true` if the two Circles equal each other, otherwise `false`.
  */
-var Equals = function (circle, toCompare) {
+const Equals = (circle, toCompare) => {
   return circle.x === toCompare.x && circle.y === toCompare.y && circle.radius === toCompare.radius
 }
 
-module.exports = Equals
+export default Equals

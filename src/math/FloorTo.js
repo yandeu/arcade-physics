@@ -18,7 +18,7 @@
  *
  * @return {number} The rounded value.
  */
-var FloorTo = function (value, place, base) {
+const FloorTo = (value, place, base) => {
   if (place === undefined) {
     place = 0
   }
@@ -26,9 +26,9 @@ var FloorTo = function (value, place, base) {
     base = 10
   }
 
-  var p = Math.pow(base, -place)
+  const p = Math.pow(base, -place)
 
   return Math.floor(value * p) / p
 }
 
-module.exports = FloorTo
+export default FloorTo

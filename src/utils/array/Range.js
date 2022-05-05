@@ -4,15 +4,16 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetValue = require('../object/GetValue')
-var Shuffle = require('./Shuffle')
+import GetValue from '../object/GetValue'
 
-var BuildChunk = function (a, b, qty) {
-  var out = []
+import Shuffle from './Shuffle'
 
-  for (var aIndex = 0; aIndex < a.length; aIndex++) {
-    for (var bIndex = 0; bIndex < b.length; bIndex++) {
-      for (var i = 0; i < qty; i++) {
+const BuildChunk = (a, b, qty) => {
+  const out = []
+
+  for (let aIndex = 0; aIndex < a.length; aIndex++) {
+    for (let bIndex = 0; bIndex < b.length; bIndex++) {
+      for (let i = 0; i < qty; i++) {
         out.push({ a: a[aIndex], b: b[bIndex] })
       }
     }
@@ -61,15 +62,15 @@ var BuildChunk = function (a, b, qty) {
  *
  * @return {array} An array of arranged elements.
  */
-var Range = function (a, b, options) {
-  var max = GetValue(options, 'max', 0)
-  var qty = GetValue(options, 'qty', 1)
-  var random = GetValue(options, 'random', false)
-  var randomB = GetValue(options, 'randomB', false)
-  var repeat = GetValue(options, 'repeat', 0)
-  var yoyo = GetValue(options, 'yoyo', false)
+const Range = (a, b, options) => {
+  const max = GetValue(options, 'max', 0)
+  const qty = GetValue(options, 'qty', 1)
+  const random = GetValue(options, 'random', false)
+  const randomB = GetValue(options, 'randomB', false)
+  let repeat = GetValue(options, 'repeat', 0)
+  const yoyo = GetValue(options, 'yoyo', false)
 
-  var out = []
+  let out = []
 
   if (randomB) {
     Shuffle(b)
@@ -81,7 +82,7 @@ var Range = function (a, b, options) {
       repeat = 0
     } else {
       //  Work out how many repeats we need
-      var total = a.length * b.length * qty
+      let total = a.length * b.length * qty
 
       if (yoyo) {
         total *= 2
@@ -91,8 +92,8 @@ var Range = function (a, b, options) {
     }
   }
 
-  for (var i = 0; i <= repeat; i++) {
-    var chunk = BuildChunk(a, b, qty)
+  for (let i = 0; i <= repeat; i++) {
+    const chunk = BuildChunk(a, b, qty)
 
     if (random) {
       Shuffle(chunk)
@@ -114,4 +115,4 @@ var Range = function (a, b, options) {
   return out
 }
 
-module.exports = Range
+export default Range

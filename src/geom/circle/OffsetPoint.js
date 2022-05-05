@@ -17,11 +17,11 @@
  *
  * @return {Phaser.Geom.Circle} The Circle that was offset.
  */
-var OffsetPoint = function (circle, point) {
+const OffsetPoint = (circle, point) => {
   circle.x += point.x
   circle.y += point.y
 
   return circle
 }
 
-module.exports = OffsetPoint
+export default OffsetPoint

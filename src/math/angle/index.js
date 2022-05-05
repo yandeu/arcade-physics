@@ -8,7 +8,7 @@
  * @namespace Phaser.Math.Angle
  */
 
-module.exports = {
+export default {
   Between: require('./Between'),
   BetweenPoints: require('./BetweenPoints'),
   BetweenPointsY: require('./BetweenPointsY'),

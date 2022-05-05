@@ -15,8 +15,8 @@
  *
  * @return {number} The random integer.
  */
-var Between = function (min, max) {
+const Between = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-module.exports = Between
+export default Between

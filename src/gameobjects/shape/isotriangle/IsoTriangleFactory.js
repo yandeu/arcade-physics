@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GameObjectFactory = require('../../GameObjectFactory')
-var IsoTriangle = require('./IsoTriangle')
+import GameObjectFactory from '../../GameObjectFactory'
+
+import IsoTriangle from './IsoTriangle'
 
 /**
  * Creates a new IsoTriangle Shape Game Object and adds it to the Scene.

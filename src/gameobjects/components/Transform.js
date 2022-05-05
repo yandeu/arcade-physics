@@ -4,15 +4,16 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var MATH_CONST = require('../../math/const')
-var TransformMatrix = require('./TransformMatrix')
-var TransformXY = require('../../math/TransformXY')
-var WrapAngle = require('../../math/angle/Wrap')
-var WrapAngleDegrees = require('../../math/angle/WrapDegrees')
-var Vector2 = require('../../math/Vector2')
+import MATH_CONST from '../../math/const'
+
+import TransformMatrix from './TransformMatrix'
+import TransformXY from '../../math/TransformXY'
+import WrapAngle from '../../math/angle/Wrap'
+import WrapAngleDegrees from '../../math/angle/WrapDegrees'
+import Vector2 from '../../math/Vector2'
 
 //  global bitmask flag for GameObject.renderMask (used by Scale)
-var _FLAG = 4 // 0100
+const _FLAG = 4 // 0100
 
 /**
  * Provides methods used for getting and setting the position, scale and rotation of a Game Object.
@@ -21,7 +22,7 @@ var _FLAG = 4 // 0100
  * @since 3.0.0
  */
 
-var Transform = {
+const Transform = {
   /**
    * Private internal value. Holds the horizontal scale value.
    *
@@ -509,7 +510,7 @@ var Transform = {
       parentMatrix = new TransformMatrix()
     }
 
-    var parent = this.parentContainer
+    let parent = this.parentContainer
 
     if (!parent) {
       return this.getLocalTransformMatrix(tempMatrix)
@@ -556,11 +557,11 @@ var Transform = {
       camera = this.scene.sys.cameras.main
     }
 
-    var csx = camera.scrollX
-    var csy = camera.scrollY
+    const csx = camera.scrollX
+    const csy = camera.scrollY
 
-    var px = x + csx * this.scrollFactorX - csx
-    var py = y + csy * this.scrollFactorY - csy
+    const px = x + csx * this.scrollFactorX - csx
+    const py = y + csy * this.scrollFactorY - csy
 
     if (this.parentContainer) {
       this.getWorldTransformMatrix().applyInverse(px, py, point)
@@ -588,9 +589,9 @@ var Transform = {
    * @return {number} The sum total rotation, in radians, of all parent containers of this Game Object.
    */
   getParentRotation() {
-    var rotation = 0
+    let rotation = 0
 
-    var parent = this.parentContainer
+    let parent = this.parentContainer
 
     while (parent) {
       rotation += parent.rotation
@@ -602,4 +603,4 @@ var Transform = {
   }
 }
 
-module.exports = Transform
+export default Transform

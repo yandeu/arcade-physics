@@ -14,8 +14,8 @@
  *
  * @return {number} Returns square of the magnitude of given point.
  */
-var GetMagnitudeSq = function (point) {
+const GetMagnitudeSq = point => {
   return point.x * point.x + point.y * point.y
 }
 
-module.exports = GetMagnitudeSq
+export default GetMagnitudeSq

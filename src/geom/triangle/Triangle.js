@@ -4,13 +4,14 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../utils/Class')
-var Contains = require('./Contains')
-var GetPoint = require('./GetPoint')
-var GetPoints = require('./GetPoints')
-var GEOM_CONST = require('../const')
-var Line = require('../line/Line')
-var Random = require('./Random')
+import Class from '../../utils/Class'
+
+import Contains from './Contains'
+import GetPoint from './GetPoint'
+import GetPoints from './GetPoints'
+import GEOM_CONST from '../const'
+import Line from '../line/Line'
+import Random from './Random'
 
 /**
  * @classdesc
@@ -30,7 +31,7 @@ var Random = require('./Random')
  * @param {number} [x3=0] - `x` coordinate of the third point.
  * @param {number} [y3=0] - `y` coordinate of the third point.
  */
-var Triangle = new Class({
+const Triangle = new Class({
   initialize: function Triangle(x1, y1, x2, y2, x3, y3) {
     if (x1 === undefined) {
       x1 = 0
@@ -315,7 +316,7 @@ var Triangle = new Class({
     },
 
     set: function (value) {
-      var diff = 0
+      let diff = 0
 
       if (this.x1 <= this.x2 && this.x1 <= this.x3) {
         diff = this.x1 - value
@@ -344,7 +345,7 @@ var Triangle = new Class({
     },
 
     set: function (value) {
-      var diff = 0
+      let diff = 0
 
       if (this.x1 >= this.x2 && this.x1 >= this.x3) {
         diff = this.x1 - value
@@ -373,7 +374,7 @@ var Triangle = new Class({
     },
 
     set: function (value) {
-      var diff = 0
+      let diff = 0
 
       if (this.y1 <= this.y2 && this.y1 <= this.y3) {
         diff = this.y1 - value
@@ -402,7 +403,7 @@ var Triangle = new Class({
     },
 
     set: function (value) {
-      var diff = 0
+      let diff = 0
 
       if (this.y1 >= this.y2 && this.y1 >= this.y3) {
         diff = this.y1 - value
@@ -419,4 +420,4 @@ var Triangle = new Class({
   }
 })
 
-module.exports = Triangle
+export default Triangle

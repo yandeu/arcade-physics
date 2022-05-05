@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SafeRange = require('./SafeRange')
+import SafeRange from './SafeRange'
 
 /**
  * Passes each element in the array, between the start and end indexes, to the given callback.
@@ -21,7 +21,7 @@ var SafeRange = require('./SafeRange')
  *
  * @return {array} The input array.
  */
-var EachInRange = function (array, callback, context, startIndex, endIndex) {
+const EachInRange = function (array, callback, context, startIndex, endIndex) {
   if (startIndex === undefined) {
     startIndex = 0
   }
@@ -30,8 +30,8 @@ var EachInRange = function (array, callback, context, startIndex, endIndex) {
   }
 
   if (SafeRange(array, startIndex, endIndex)) {
-    var i
-    var args = [null]
+    let i
+    const args = [null]
 
     for (i = 5; i < arguments.length; i++) {
       args.push(arguments[i])
@@ -47,4 +47,4 @@ var EachInRange = function (array, callback, context, startIndex, endIndex) {
   return array
 }
 
-module.exports = EachInRange
+export default EachInRange

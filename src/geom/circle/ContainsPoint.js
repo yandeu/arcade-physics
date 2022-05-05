@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Contains = require('./Contains')
+import Contains from './Contains'
 
 /**
  * Check to see if the Circle contains the given Point object.
@@ -17,8 +17,8 @@ var Contains = require('./Contains')
  *
  * @return {boolean} True if the Point coordinates are within the circle, otherwise false.
  */
-var ContainsPoint = function (circle, point) {
+const ContainsPoint = (circle, point) => {
   return Contains(circle, point.x, point.y)
 }
 
-module.exports = ContainsPoint
+export default ContainsPoint

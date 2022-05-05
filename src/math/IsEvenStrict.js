@@ -14,9 +14,9 @@
  *
  * @return {boolean} Whether the number is even or not.
  */
-var IsEvenStrict = function (value) {
+const IsEvenStrict = value => {
   // Use strict equality === for "is number" test
   return value === parseFloat(value) ? !(value % 2) : void 0
 }
 
-module.exports = IsEvenStrict
+export default IsEvenStrict

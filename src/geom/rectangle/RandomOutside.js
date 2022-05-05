@@ -4,9 +4,10 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Between = require('../../math/Between')
-var ContainsRect = require('./ContainsRect')
-var Point = require('../point/Point')
+import Between from '../../math/Between'
+
+import ContainsRect from './ContainsRect'
+import Point from '../point/Point'
 
 /**
  * Calculates a random point that lies within the `outer` Rectangle, but outside of the `inner` Rectangle.
@@ -23,7 +24,7 @@ var Point = require('../point/Point')
  *
  * @return {Phaser.Geom.Point} A Point object containing the random values in its `x` and `y` properties.
  */
-var RandomOutside = function (outer, inner, out) {
+const RandomOutside = (outer, inner, out) => {
   if (out === undefined) {
     out = new Point()
   }
@@ -61,4 +62,4 @@ var RandomOutside = function (outer, inner, out) {
   return out
 }
 
-module.exports = RandomOutside
+export default RandomOutside

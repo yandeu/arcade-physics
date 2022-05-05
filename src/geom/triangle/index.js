@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Triangle = require('./Triangle')
+import Triangle from './Triangle'
 
 Triangle.Area = require('./Area')
 Triangle.BuildEquilateral = require('./BuildEquilateral')
@@ -31,4 +31,4 @@ Triangle.Rotate = require('./Rotate')
 Triangle.RotateAroundPoint = require('./RotateAroundPoint')
 Triangle.RotateAroundXY = require('./RotateAroundXY')
 
-module.exports = Triangle
+export default Triangle

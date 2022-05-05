@@ -30,7 +30,7 @@
  *
  * @return {array} The input array.
  */
-var AddAt = function (array, item, index, limit, callback, context) {
+const AddAt = (array, item, index, limit, callback, context) => {
   if (index === undefined) {
     index = 0
   }
@@ -65,7 +65,7 @@ var AddAt = function (array, item, index, limit, callback, context) {
   //  If we got this far, we have an array of items to insert
 
   //  Ensure all the items are unique
-  var itemLength = item.length - 1
+  let itemLength = item.length - 1
 
   while (itemLength >= 0) {
     if (array.indexOf(item[itemLength]) !== -1) {
@@ -90,8 +90,8 @@ var AddAt = function (array, item, index, limit, callback, context) {
     itemLength = remaining
   }
 
-  for (var i = itemLength - 1; i >= 0; i--) {
-    var entry = item[i]
+  for (let i = itemLength - 1; i >= 0; i--) {
+    const entry = item[i]
 
     array.splice(index, 0, entry)
 
@@ -103,4 +103,4 @@ var AddAt = function (array, item, index, limit, callback, context) {
   return item
 }
 
-module.exports = AddAt
+export default AddAt

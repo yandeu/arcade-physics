@@ -8,7 +8,7 @@
  * @namespace Phaser.Math.Interpolation
  */
 
-module.exports = {
+export default {
   Bezier: require('./BezierInterpolation'),
   CatmullRom: require('./CatmullRomInterpolation'),
   CubicBezier: require('./CubicBezierInterpolation'),

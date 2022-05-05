@@ -17,8 +17,8 @@
  *
  * @return {Phaser.Geom.Line} The destination line.
  */
-var CopyFrom = function (source, dest) {
+const CopyFrom = (source, dest) => {
   return dest.setTo(source.x1, source.y1, source.x2, source.y2)
 }
 
-module.exports = CopyFrom
+export default CopyFrom

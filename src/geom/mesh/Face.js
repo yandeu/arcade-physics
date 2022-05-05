@@ -4,9 +4,10 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../utils/Class')
-var Rectangle = require('../rectangle/Rectangle')
-var Vector2 = require('../../math/Vector2')
+import Class from '../../utils/Class'
+
+import Rectangle from '../rectangle/Rectangle'
+import Vector2 from '../../math/Vector2'
 
 /**
  * Returns the length of the line.
@@ -22,9 +23,9 @@ var Vector2 = require('../../math/Vector2')
  * @return {number} The length of the line.
  */
 function GetLength(x1, y1, x2, y2) {
-  var x = x1 - x2
-  var y = y1 - y2
-  var magnitude = x * x + y * y
+  const x = x1 - x2
+  const y = y1 - y2
+  const magnitude = x * x + y * y
 
   return Math.sqrt(magnitude)
 }
@@ -48,7 +49,7 @@ function GetLength(x1, y1, x2, y2) {
  * @param {Phaser.Geom.Mesh.Vertex} vertex2 - The second vertex of the Face.
  * @param {Phaser.Geom.Mesh.Vertex} vertex3 - The third vertex of the Face.
  */
-var Face = new Class({
+const Face = new Class({
   initialize: function Face(vertex1, vertex2, vertex3) {
     /**
      * The first vertex in this Face.
@@ -114,18 +115,18 @@ var Face = new Class({
       local = true
     }
 
-    var v1 = this.vertex1
-    var v2 = this.vertex2
-    var v3 = this.vertex3
+    const v1 = this.vertex1
+    const v2 = this.vertex2
+    const v3 = this.vertex3
 
-    var v1x
-    var v1y
+    let v1x
+    let v1y
 
-    var v2x
-    var v2y
+    let v2x
+    let v2y
 
-    var v3x
-    var v3y
+    let v3x
+    let v3y
 
     if (local) {
       v1x = v1.x
@@ -147,11 +148,11 @@ var Face = new Class({
       v3y = v3.vy
     }
 
-    var d1 = GetLength(v3x, v3y, v2x, v2y)
-    var d2 = GetLength(v1x, v1y, v3x, v3y)
-    var d3 = GetLength(v2x, v2y, v1x, v1y)
+    const d1 = GetLength(v3x, v3y, v2x, v2y)
+    const d2 = GetLength(v1x, v1y, v3x, v3y)
+    const d3 = GetLength(v2x, v2y, v1x, v1y)
 
-    var p = d1 + d2 + d3
+    const p = d1 + d2 + d3
 
     return this._inCenter.set((v1x * d1 + v2x * d2 + v3x * d3) / p, (v1y * d1 + v2y * d2 + v3y * d3) / p)
   },
@@ -172,26 +173,26 @@ var Face = new Class({
    * @return {boolean} `true` if the coordinates lay within this Face, otherwise `false`.
    */
   contains: function (x, y, calcMatrix) {
-    var vertex1 = this.vertex1
-    var vertex2 = this.vertex2
-    var vertex3 = this.vertex3
+    const vertex1 = this.vertex1
+    const vertex2 = this.vertex2
+    const vertex3 = this.vertex3
 
-    var v1x = vertex1.vx
-    var v1y = vertex1.vy
+    let v1x = vertex1.vx
+    let v1y = vertex1.vy
 
-    var v2x = vertex2.vx
-    var v2y = vertex2.vy
+    let v2x = vertex2.vx
+    let v2y = vertex2.vy
 
-    var v3x = vertex3.vx
-    var v3y = vertex3.vy
+    let v3x = vertex3.vx
+    let v3y = vertex3.vy
 
     if (calcMatrix) {
-      var a = calcMatrix.a
-      var b = calcMatrix.b
-      var c = calcMatrix.c
-      var d = calcMatrix.d
-      var e = calcMatrix.e
-      var f = calcMatrix.f
+      const a = calcMatrix.a
+      const b = calcMatrix.b
+      const c = calcMatrix.c
+      const d = calcMatrix.d
+      const e = calcMatrix.e
+      const f = calcMatrix.f
 
       v1x = vertex1.vx * a + vertex1.vy * c + e
       v1y = vertex1.vx * b + vertex1.vy * d + f
@@ -203,26 +204,26 @@ var Face = new Class({
       v3y = vertex3.vx * b + vertex3.vy * d + f
     }
 
-    var t0x = v3x - v1x
-    var t0y = v3y - v1y
+    const t0x = v3x - v1x
+    const t0y = v3y - v1y
 
-    var t1x = v2x - v1x
-    var t1y = v2y - v1y
+    const t1x = v2x - v1x
+    const t1y = v2y - v1y
 
-    var t2x = x - v1x
-    var t2y = y - v1y
+    const t2x = x - v1x
+    const t2y = y - v1y
 
-    var dot00 = t0x * t0x + t0y * t0y
-    var dot01 = t0x * t1x + t0y * t1y
-    var dot02 = t0x * t2x + t0y * t2y
-    var dot11 = t1x * t1x + t1y * t1y
-    var dot12 = t1x * t2x + t1y * t2y
+    const dot00 = t0x * t0x + t0y * t0y
+    const dot01 = t0x * t1x + t0y * t1y
+    const dot02 = t0x * t2x + t0y * t2y
+    const dot11 = t1x * t1x + t1y * t1y
+    const dot12 = t1x * t2x + t1y * t2y
 
     //  Compute barycentric coordinates
-    var bc = dot00 * dot11 - dot01 * dot01
-    var inv = bc === 0 ? 0 : 1 / bc
-    var u = (dot11 * dot02 - dot01 * dot12) * inv
-    var v = (dot00 * dot12 - dot01 * dot02) * inv
+    const bc = dot00 * dot11 - dot01 * dot01
+    const inv = bc === 0 ? 0 : 1 / bc
+    const u = (dot11 * dot02 - dot01 * dot12) * inv
+    const v = (dot00 * dot12 - dot01 * dot02) * inv
 
     return u >= 0 && v >= 0 && u + v < 1
   },
@@ -240,11 +241,11 @@ var Face = new Class({
    * @return {boolean} `true` if the vertices in this Face run counter-clockwise, otherwise `false`.
    */
   isCounterClockwise: function (z) {
-    var v1 = this.vertex1
-    var v2 = this.vertex2
-    var v3 = this.vertex3
+    const v1 = this.vertex1
+    const v2 = this.vertex2
+    const v3 = this.vertex3
 
-    var d = (v2.vx - v1.vx) * (v3.vy - v1.vy) - (v2.vy - v1.vy) * (v3.vx - v1.vx)
+    const d = (v2.vx - v1.vx) * (v3.vy - v1.vy) - (v2.vy - v1.vy) * (v3.vx - v1.vx)
 
     return z <= 0 ? d >= 0 : d < 0
   },
@@ -303,11 +304,11 @@ var Face = new Class({
    * @return {this} This Face instance.
    */
   updateBounds: function () {
-    var v1 = this.vertex1
-    var v2 = this.vertex2
-    var v3 = this.vertex3
+    const v1 = this.vertex1
+    const v2 = this.vertex2
+    const v3 = this.vertex3
 
-    var bounds = this.bounds
+    const bounds = this.bounds
 
     bounds.x = Math.min(v1.vx, v2.vx, v3.vx)
     bounds.y = Math.min(v1.vy, v2.vy, v3.vy)
@@ -351,9 +352,9 @@ var Face = new Class({
    * @return {boolean} `true` if this Face can be seen by the Camera.
    */
   isInView: function (camera, hideCCW, z, alpha, a, b, c, d, e, f, roundPixels) {
-    var v1 = this.vertex1.update(a, b, c, d, e, f, roundPixels, alpha)
-    var v2 = this.vertex2.update(a, b, c, d, e, f, roundPixels, alpha)
-    var v3 = this.vertex3.update(a, b, c, d, e, f, roundPixels, alpha)
+    const v1 = this.vertex1.update(a, b, c, d, e, f, roundPixels, alpha)
+    const v2 = this.vertex2.update(a, b, c, d, e, f, roundPixels, alpha)
+    const v3 = this.vertex3.update(a, b, c, d, e, f, roundPixels, alpha)
 
     //  Alpha check first
     if (v1.ta <= 0 && v2.ta <= 0 && v3.ta <= 0) {
@@ -366,15 +367,15 @@ var Face = new Class({
     }
 
     //  Bounds check
-    var bounds = this.bounds
+    const bounds = this.bounds
 
     bounds.x = Math.min(v1.tx, v2.tx, v3.tx)
     bounds.y = Math.min(v1.ty, v2.ty, v3.ty)
     bounds.width = Math.max(v1.tx, v2.tx, v3.tx) - bounds.x
     bounds.height = Math.max(v1.ty, v2.ty, v3.ty) - bounds.y
 
-    var cr = camera.x + camera.width
-    var cb = camera.y + camera.height
+    const cr = camera.x + camera.width
+    const cb = camera.y + camera.height
 
     if (bounds.width <= 0 || bounds.height <= 0 || camera.width <= 0 || camera.height <= 0) {
       return false
@@ -403,9 +404,9 @@ var Face = new Class({
       y = 0
     }
 
-    var v1 = this.vertex1
-    var v2 = this.vertex2
-    var v3 = this.vertex3
+    const v1 = this.vertex1
+    const v2 = this.vertex2
+    const v3 = this.vertex3
 
     v1.x += x
     v1.y += y
@@ -432,7 +433,7 @@ var Face = new Class({
     },
 
     set: function (value) {
-      var current = this.getInCenter()
+      const current = this.getInCenter()
 
       this.translate(value - current.x, 0)
     }
@@ -451,7 +452,7 @@ var Face = new Class({
     },
 
     set: function (value) {
-      var current = this.getInCenter()
+      const current = this.getInCenter()
 
       this.translate(0, value - current.y)
     }
@@ -472,9 +473,9 @@ var Face = new Class({
    */
   alpha: {
     get: function () {
-      var v1 = this.vertex1
-      var v2 = this.vertex2
-      var v3 = this.vertex3
+      const v1 = this.vertex1
+      const v2 = this.vertex2
+      const v3 = this.vertex3
 
       return (v1.alpha + v2.alpha + v3.alpha) / 3
     },
@@ -498,9 +499,9 @@ var Face = new Class({
    */
   depth: {
     get: function () {
-      var v1 = this.vertex1
-      var v2 = this.vertex2
-      var v3 = this.vertex3
+      const v1 = this.vertex1
+      const v2 = this.vertex2
+      const v3 = this.vertex3
 
       return (v1.vz + v2.vz + v3.vz) / 3
     }
@@ -519,4 +520,4 @@ var Face = new Class({
   }
 })
 
-module.exports = Face
+export default Face

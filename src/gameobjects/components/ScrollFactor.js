@@ -11,7 +11,7 @@
  * @since 3.0.0
  */
 
-var ScrollFactor = {
+const ScrollFactor = {
   /**
    * The horizontal scroll factor of this Game Object.
    *
@@ -97,4 +97,4 @@ var ScrollFactor = {
   }
 }
 
-module.exports = ScrollFactor
+export default ScrollFactor

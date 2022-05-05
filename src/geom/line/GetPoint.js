@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point')
+import Point from '../point/Point'
 
 /**
  * Get a point on a line that's a given percentage along its length.
@@ -20,7 +20,7 @@ var Point = require('../point/Point')
  *
  * @return {(Phaser.Geom.Point|object)} The point on the line.
  */
-var GetPoint = function (line, position, out) {
+const GetPoint = (line, position, out) => {
   if (out === undefined) {
     out = new Point()
   }
@@ -31,4 +31,4 @@ var GetPoint = function (line, position, out) {
   return out
 }
 
-module.exports = GetPoint
+export default GetPoint

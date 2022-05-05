@@ -18,13 +18,13 @@
  *
  * @return {array} The input array.
  */
-var MoveAbove = function (array, item1, item2) {
+const MoveAbove = (array, item1, item2) => {
   if (item1 === item2) {
     return array
   }
 
-  var currentIndex = array.indexOf(item1)
-  var baseIndex = array.indexOf(item2)
+  const currentIndex = array.indexOf(item1)
+  const baseIndex = array.indexOf(item2)
 
   if (currentIndex < 0 || baseIndex < 0) {
     throw new Error('Supplied items must be elements of the same array')
@@ -48,4 +48,4 @@ var MoveAbove = function (array, item1, item2) {
   return array
 }
 
-module.exports = MoveAbove
+export default MoveAbove

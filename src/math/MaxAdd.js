@@ -16,8 +16,8 @@
  *
  * @return {number} The resulting value.
  */
-var MaxAdd = function (value, amount, max) {
+const MaxAdd = (value, amount, max) => {
   return Math.min(value + amount, max)
 }
 
-module.exports = MaxAdd
+export default MaxAdd

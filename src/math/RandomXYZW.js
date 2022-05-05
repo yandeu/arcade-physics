@@ -15,7 +15,7 @@
  *
  * @return {Phaser.Math.Vector4} The given Vector.
  */
-var RandomXYZW = function (vec4, scale) {
+const RandomXYZW = (vec4, scale) => {
   if (scale === undefined) {
     scale = 1
   }
@@ -28,4 +28,4 @@ var RandomXYZW = function (vec4, scale) {
   return vec4
 }
 
-module.exports = RandomXYZW
+export default RandomXYZW

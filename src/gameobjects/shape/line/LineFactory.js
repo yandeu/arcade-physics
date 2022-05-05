@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GameObjectFactory = require('../../GameObjectFactory')
-var Line = require('./Line')
+import GameObjectFactory from '../../GameObjectFactory'
+
+import Line from './Line'
 
 /**
  * Creates a new Line Shape Game Object and adds it to the Scene.

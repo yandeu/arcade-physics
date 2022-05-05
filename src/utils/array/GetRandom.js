@@ -16,7 +16,7 @@
  *
  * @return {*} A random element from the array, or `null` if no element could be found in the range given.
  */
-var GetRandom = function (array, startIndex, length) {
+const GetRandom = (array, startIndex, length) => {
   if (startIndex === undefined) {
     startIndex = 0
   }
@@ -24,9 +24,9 @@ var GetRandom = function (array, startIndex, length) {
     length = array.length
   }
 
-  var randomIndex = startIndex + Math.floor(Math.random() * length)
+  const randomIndex = startIndex + Math.floor(Math.random() * length)
 
   return array[randomIndex] === undefined ? null : array[randomIndex]
 }
 
-module.exports = GetRandom
+export default GetRandom

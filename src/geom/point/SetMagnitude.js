@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetMagnitude = require('./GetMagnitude')
+import GetMagnitude from './GetMagnitude'
 
 /**
  * Changes the magnitude (length) of a two-dimensional vector without changing its direction.
@@ -19,9 +19,9 @@ var GetMagnitude = require('./GetMagnitude')
  *
  * @return {Phaser.Geom.Point} The modified Point.
  */
-var SetMagnitude = function (point, magnitude) {
+const SetMagnitude = (point, magnitude) => {
   if (point.x !== 0 || point.y !== 0) {
-    var m = GetMagnitude(point)
+    const m = GetMagnitude(point)
 
     point.x /= m
     point.y /= m
@@ -33,4 +33,4 @@ var SetMagnitude = function (point, magnitude) {
   return point
 }
 
-module.exports = SetMagnitude
+export default SetMagnitude

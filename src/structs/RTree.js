@@ -5,7 +5,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var quickselect = require('../utils/array/QuickSelect')
+import quickselect from '../utils/array/QuickSelect'
 
 /**
  * @classdesc
@@ -27,7 +27,7 @@ var quickselect = require('../utils/array/QuickSelect')
  */
 
 function rbush(maxEntries) {
-  var format = ['.left', '.top', '.right', '.bottom']
+  const format = ['.left', '.top', '.right', '.bottom']
 
   if (!(this instanceof rbush)) return new rbush(maxEntries, format)
 
@@ -44,17 +44,17 @@ rbush.prototype = {
   },
 
   search(bbox) {
-    var node = this.data,
-      result = [],
-      toBBox = this.toBBox
+    let node = this.data
+    const result = []
+    const toBBox = this.toBBox
 
     if (!intersects(bbox, node)) return result
 
-    var nodesToSearch = [],
-      i,
-      len,
-      child,
-      childBBox
+    const nodesToSearch = []
+    let i
+    let len
+    let child
+    let childBBox
 
     while (node) {
       for (i = 0, len = node.children.length; i < len; i++) {
@@ -74,16 +74,16 @@ rbush.prototype = {
   },
 
   collides(bbox) {
-    var node = this.data,
-      toBBox = this.toBBox
+    let node = this.data
+    const toBBox = this.toBBox
 
     if (!intersects(bbox, node)) return false
 
-    var nodesToSearch = [],
-      i,
-      len,
-      child,
-      childBBox
+    const nodesToSearch = []
+    let i
+    let len
+    let child
+    let childBBox
 
     while (node) {
       for (i = 0, len = node.children.length; i < len; i++) {
@@ -105,14 +105,14 @@ rbush.prototype = {
     if (!(data && data.length)) return this
 
     if (data.length < this._minEntries) {
-      for (var i = 0, len = data.length; i < len; i++) {
+      for (let i = 0, len = data.length; i < len; i++) {
         this.insert(data[i])
       }
       return this
     }
 
     // recursively build the tree with the given data from scratch using OMT algorithm
-    var node = this._build(data.slice(), 0, data.length - 1, 0)
+    let node = this._build(data.slice(), 0, data.length - 1, 0)
 
     if (!this.data.children.length) {
       // save as is if tree is empty
@@ -123,7 +123,7 @@ rbush.prototype = {
     } else {
       if (this.data.height < node.height) {
         // swap trees if inserted one is bigger
-        var tmpNode = this.data
+        const tmpNode = this.data
         this.data = node
         node = tmpNode
       }
@@ -148,14 +148,14 @@ rbush.prototype = {
   remove(item, equalsFn) {
     if (!item) return this
 
-    var node = this.data,
-      bbox = this.toBBox(item),
-      path = [],
-      indexes = [],
-      i,
-      parent,
-      index,
-      goingUp
+    let node = this.data
+    const bbox = this.toBBox(item)
+    const path = []
+    const indexes = []
+    let i
+    let parent
+    let index
+    let goingUp
 
     // depth-first iterative tree traversal
     while (node || path.length) {
@@ -215,7 +215,7 @@ rbush.prototype = {
   },
 
   _all(node, result) {
-    var nodesToSearch = []
+    const nodesToSearch = []
     while (node) {
       if (node.leaf) result.push.apply(result, node.children)
       else nodesToSearch.push.apply(nodesToSearch, node.children)
@@ -226,9 +226,9 @@ rbush.prototype = {
   },
 
   _build(items, left, right, height) {
-    var N = right - left + 1,
-      M = this._maxEntries,
-      node
+    const N = right - left + 1
+    let M = this._maxEntries
+    let node
 
     if (N <= M) {
       // reached leaf level; return leaf
@@ -251,12 +251,13 @@ rbush.prototype = {
 
     // split the items into M mostly square tiles
 
-    var N2 = Math.ceil(N / M),
-      N1 = N2 * Math.ceil(Math.sqrt(M)),
-      i,
-      j,
-      right2,
-      right3
+    const N2 = Math.ceil(N / M)
+
+    const N1 = N2 * Math.ceil(Math.sqrt(M))
+    let i
+    let j
+    let right2
+    let right3
 
     multiSelect(items, left, right, N1, this.compareMinX)
 
@@ -279,7 +280,7 @@ rbush.prototype = {
   },
 
   _chooseSubtree(bbox, node, level, path) {
-    var i, len, child, targetNode, area, enlargement, minArea, minEnlargement
+    let i, len, child, targetNode, area, enlargement, minArea, minEnlargement
 
     while (true) {
       path.push(node)
@@ -314,12 +315,12 @@ rbush.prototype = {
   },
 
   _insert(item, level, isNode) {
-    var toBBox = this.toBBox,
+    const toBBox = this.toBBox,
       bbox = isNode ? item : toBBox(item),
       insertPath = []
 
     // find the best node for accommodating the item, saving all nodes along the path too
-    var node = this._chooseSubtree(bbox, this.data, level, insertPath)
+    const node = this._chooseSubtree(bbox, this.data, level, insertPath)
 
     // put the item into the node
     node.children.push(item)
@@ -339,15 +340,15 @@ rbush.prototype = {
 
   // split overflowed node into two
   _split(insertPath, level) {
-    var node = insertPath[level],
+    const node = insertPath[level],
       M = node.children.length,
       m = this._minEntries
 
     this._chooseSplitAxis(node, m, M)
 
-    var splitIndex = this._chooseSplitIndex(node, m, M)
+    const splitIndex = this._chooseSplitIndex(node, m, M)
 
-    var newNode = createNode(node.children.splice(splitIndex, node.children.length - splitIndex))
+    const newNode = createNode(node.children.splice(splitIndex, node.children.length - splitIndex))
     newNode.height = node.height
     newNode.leaf = node.leaf
 
@@ -367,7 +368,7 @@ rbush.prototype = {
   },
 
   _chooseSplitIndex(node, m, M) {
-    var i, bbox1, bbox2, overlap, area, minOverlap, minArea, index
+    let i, bbox1, bbox2, overlap, area, minOverlap, minArea, index
 
     minOverlap = minArea = Infinity
 
@@ -398,7 +399,7 @@ rbush.prototype = {
 
   // sorts node children by the best axis for split
   _chooseSplitAxis(node, m, M) {
-    var compareMinX = node.leaf ? this.compareMinX : compareNodeMinX,
+    const compareMinX = node.leaf ? this.compareMinX : compareNodeMinX,
       compareMinY = node.leaf ? this.compareMinY : compareNodeMinY,
       xMargin = this._allDistMargin(node, m, M, compareMinX),
       yMargin = this._allDistMargin(node, m, M, compareMinY)
@@ -412,12 +413,12 @@ rbush.prototype = {
   _allDistMargin(node, m, M, compare) {
     node.children.sort(compare)
 
-    var toBBox = this.toBBox,
-      leftBBox = distBBox(node, 0, m, toBBox),
-      rightBBox = distBBox(node, M - m, M, toBBox),
-      margin = bboxMargin(leftBBox) + bboxMargin(rightBBox),
-      i,
-      child
+    const toBBox = this.toBBox
+    const leftBBox = distBBox(node, 0, m, toBBox)
+    const rightBBox = distBBox(node, M - m, M, toBBox)
+    let margin = bboxMargin(leftBBox) + bboxMargin(rightBBox)
+    let i
+    let child
 
     for (i = m; i < M - m; i++) {
       child = node.children[i]
@@ -436,14 +437,14 @@ rbush.prototype = {
 
   _adjustParentBBoxes(bbox, path, level) {
     // adjust bboxes along the given tree path
-    for (var i = level; i >= 0; i--) {
+    for (let i = level; i >= 0; i--) {
       extend(path[i], bbox)
     }
   },
 
   _condense(path) {
     // go through the path, removing empty nodes and updating bboxes
-    for (var i = path.length - 1, siblings; i >= 0; i--) {
+    for (let i = path.length - 1, siblings; i >= 0; i--) {
       if (path[i].children.length === 0) {
         if (i > 0) {
           siblings = path[i - 1].children
@@ -474,7 +475,7 @@ rbush.prototype = {
 function findItem(item, items, equalsFn) {
   if (!equalsFn) return items.indexOf(item)
 
-  for (var i = 0; i < items.length; i++) {
+  for (let i = 0; i < items.length; i++) {
     if (equalsFn(item, items[i])) return i
   }
   return -1
@@ -493,7 +494,7 @@ function distBBox(node, k, p, toBBox, destNode) {
   destNode.maxX = -Infinity
   destNode.maxY = -Infinity
 
-  for (var i = k, child; i < p; i++) {
+  for (let i = k, child; i < p; i++) {
     child = node.children[i]
     extend(destNode, node.leaf ? toBBox(child) : child)
   }
@@ -528,7 +529,7 @@ function enlargedArea(a, b) {
 }
 
 function intersectionArea(a, b) {
-  var minX = Math.max(a.minX, b.minX),
+  const minX = Math.max(a.minX, b.minX),
     minY = Math.max(a.minY, b.minY),
     maxX = Math.min(a.maxX, b.maxX),
     maxY = Math.min(a.maxY, b.maxY)
@@ -560,8 +561,8 @@ function createNode(children) {
 // combines selection algorithm with binary divide & conquer approach
 
 function multiSelect(arr, left, right, n, compare) {
-  var stack = [left, right],
-    mid
+  const stack = [left, right]
+  let mid
 
   while (stack.length) {
     right = stack.pop()
@@ -576,4 +577,4 @@ function multiSelect(arr, left, right, n, compare) {
   }
 }
 
-module.exports = rbush
+export default rbush

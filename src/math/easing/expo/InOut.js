@@ -14,7 +14,7 @@
  *
  * @return {number} The tweened value.
  */
-var InOut = function (v) {
+const InOut = v => {
   if ((v *= 2) < 1) {
     return 0.5 * Math.pow(2, 10 * (v - 1))
   } else {
@@ -22,4 +22,4 @@ var InOut = function (v) {
   }
 }
 
-module.exports = InOut
+export default InOut

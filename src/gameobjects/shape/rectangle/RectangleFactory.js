@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GameObjectFactory = require('../../GameObjectFactory')
-var Rectangle = require('./Rectangle')
+import GameObjectFactory from '../../GameObjectFactory'
+
+import Rectangle from './Rectangle'
 
 /**
  * Creates a new Rectangle Shape Game Object and adds it to the Scene.

@@ -15,8 +15,8 @@
  *
  * @return {boolean} `true` if the provided `key` exists on the `source` object, otherwise `false`.
  */
-var HasValue = function (source, key) {
+const HasValue = (source, key) => {
   return source.hasOwnProperty(key)
 }
 
-module.exports = HasValue
+export default HasValue

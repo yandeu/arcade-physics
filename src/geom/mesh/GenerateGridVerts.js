@@ -4,15 +4,16 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Face = require('./Face')
-var GetFastValue = require('../../utils/object/GetFastValue')
-var Matrix4 = require('../../math/Matrix4')
-var Vector3 = require('../../math/Vector3')
-var Vertex = require('./Vertex')
+import Face from './Face'
 
-var tempPosition = new Vector3()
-var tempRotation = new Vector3()
-var tempMatrix = new Matrix4()
+import GetFastValue from '../../utils/object/GetFastValue'
+import Matrix4 from '../../math/Matrix4'
+import Vector3 from '../../math/Vector3'
+import Vertex from './Vertex'
+
+const tempPosition = new Vector3()
+const tempRotation = new Vector3()
+const tempMatrix = new Matrix4()
 
 /**
  * Creates a grid of vertices based on the given configuration object and optionally adds it to a Mesh.
@@ -43,30 +44,30 @@ var tempMatrix = new Matrix4()
  *
  * @return {Phaser.Types.Geom.Mesh.GenerateGridVertsResult} A Grid Result object, containing the generated vertices and indicies.
  */
-var GenerateGridVerts = function (config) {
-  var mesh = GetFastValue(config, 'mesh')
-  var texture = GetFastValue(config, 'texture', null)
-  var frame = GetFastValue(config, 'frame')
-  var width = GetFastValue(config, 'width', 1)
-  var height = GetFastValue(config, 'height', width)
-  var widthSegments = GetFastValue(config, 'widthSegments', 1)
-  var heightSegments = GetFastValue(config, 'heightSegments', widthSegments)
-  var posX = GetFastValue(config, 'x', 0)
-  var posY = GetFastValue(config, 'y', 0)
-  var posZ = GetFastValue(config, 'z', 0)
-  var rotateX = GetFastValue(config, 'rotateX', 0)
-  var rotateY = GetFastValue(config, 'rotateY', 0)
-  var rotateZ = GetFastValue(config, 'rotateZ', 0)
-  var zIsUp = GetFastValue(config, 'zIsUp', true)
-  var isOrtho = GetFastValue(config, 'isOrtho', mesh ? mesh.dirtyCache[11] : false)
-  var colors = GetFastValue(config, 'colors', [0xffffff])
-  var alphas = GetFastValue(config, 'alphas', [1])
-  var tile = GetFastValue(config, 'tile', false)
-  var flipY = GetFastValue(config, 'flipY', false)
+const GenerateGridVerts = config => {
+  const mesh = GetFastValue(config, 'mesh')
+  let texture = GetFastValue(config, 'texture', null)
+  const frame = GetFastValue(config, 'frame')
+  let width = GetFastValue(config, 'width', 1)
+  let height = GetFastValue(config, 'height', width)
+  const widthSegments = GetFastValue(config, 'widthSegments', 1)
+  const heightSegments = GetFastValue(config, 'heightSegments', widthSegments)
+  const posX = GetFastValue(config, 'x', 0)
+  const posY = GetFastValue(config, 'y', 0)
+  const posZ = GetFastValue(config, 'z', 0)
+  const rotateX = GetFastValue(config, 'rotateX', 0)
+  const rotateY = GetFastValue(config, 'rotateY', 0)
+  const rotateZ = GetFastValue(config, 'rotateZ', 0)
+  const zIsUp = GetFastValue(config, 'zIsUp', true)
+  const isOrtho = GetFastValue(config, 'isOrtho', mesh ? mesh.dirtyCache[11] : false)
+  let colors = GetFastValue(config, 'colors', [0xffffff])
+  let alphas = GetFastValue(config, 'alphas', [1])
+  const tile = GetFastValue(config, 'tile', false)
+  const flipY = GetFastValue(config, 'flipY', false)
 
-  var widthSet = GetFastValue(config, 'width', null)
+  const widthSet = GetFastValue(config, 'width', null)
 
-  var result = {
+  const result = {
     faces: [],
     verts: []
   }
@@ -84,7 +85,7 @@ var GenerateGridVerts = function (config) {
     return result
   }
 
-  var textureFrame = texture.get(frame)
+  const textureFrame = texture.get(frame)
 
   //  If the Mesh is ortho and no width / height is given, we'll default to texture sizes (if set!)
   if (!widthSet && isOrtho && texture && mesh) {
@@ -92,28 +93,28 @@ var GenerateGridVerts = function (config) {
     height = textureFrame.height / mesh.height
   }
 
-  var halfWidth = width / 2
-  var halfHeight = height / 2
+  const halfWidth = width / 2
+  const halfHeight = height / 2
 
-  var gridX = Math.floor(widthSegments)
-  var gridY = Math.floor(heightSegments)
+  const gridX = Math.floor(widthSegments)
+  const gridY = Math.floor(heightSegments)
 
-  var gridX1 = gridX + 1
-  var gridY1 = gridY + 1
+  const gridX1 = gridX + 1
+  const gridY1 = gridY + 1
 
-  var segmentWidth = width / gridX
-  var segmentHeight = height / gridY
+  const segmentWidth = width / gridX
+  const segmentHeight = height / gridY
 
-  var uvs = []
-  var vertices = []
+  const uvs = []
+  const vertices = []
 
-  var ix
-  var iy
+  let ix
+  let iy
 
-  var frameU0 = 0
-  var frameU1 = 1
-  var frameV0 = 0
-  var frameV1 = 1
+  let frameU0 = 0
+  let frameU1 = 1
+  let frameV0 = 0
+  let frameV1 = 1
 
   if (textureFrame) {
     frameU0 = textureFrame.u0
@@ -128,19 +129,19 @@ var GenerateGridVerts = function (config) {
     }
   }
 
-  var frameU = frameU1 - frameU0
-  var frameV = frameV1 - frameV0
+  const frameU = frameU1 - frameU0
+  const frameV = frameV1 - frameV0
 
   for (iy = 0; iy < gridY1; iy++) {
-    var y = iy * segmentHeight - halfHeight
+    const y = iy * segmentHeight - halfHeight
 
     for (ix = 0; ix < gridX1; ix++) {
-      var x = ix * segmentWidth - halfWidth
+      const x = ix * segmentWidth - halfWidth
 
       vertices.push(x, -y)
 
-      var tu = frameU0 + frameU * (ix / gridX)
-      var tv = frameV0 + frameV * (iy / gridY)
+      const tu = frameU0 + frameU * (ix / gridX)
+      const tv = frameV0 + frameV * (iy / gridY)
 
       uvs.push(tu, tv)
     }
@@ -154,35 +155,35 @@ var GenerateGridVerts = function (config) {
     alphas = [alphas]
   }
 
-  var alphaIndex = 0
-  var colorIndex = 0
+  let alphaIndex = 0
+  let colorIndex = 0
 
   for (iy = 0; iy < gridY; iy++) {
     for (ix = 0; ix < gridX; ix++) {
-      var a = (ix + gridX1 * iy) * 2
-      var b = (ix + gridX1 * (iy + 1)) * 2
-      var c = (ix + 1 + gridX1 * (iy + 1)) * 2
-      var d = (ix + 1 + gridX1 * iy) * 2
+      const a = (ix + gridX1 * iy) * 2
+      const b = (ix + gridX1 * (iy + 1)) * 2
+      const c = (ix + 1 + gridX1 * (iy + 1)) * 2
+      const d = (ix + 1 + gridX1 * iy) * 2
 
-      var color = colors[colorIndex]
-      var alpha = alphas[alphaIndex]
+      const color = colors[colorIndex]
+      const alpha = alphas[alphaIndex]
 
-      var vert1 = new Vertex(vertices[a], vertices[a + 1], 0, uvs[a], uvs[a + 1], color, alpha).transformMat4(
+      const vert1 = new Vertex(vertices[a], vertices[a + 1], 0, uvs[a], uvs[a + 1], color, alpha).transformMat4(
         tempMatrix
       )
-      var vert2 = new Vertex(vertices[b], vertices[b + 1], 0, uvs[b], uvs[b + 1], color, alpha).transformMat4(
+      const vert2 = new Vertex(vertices[b], vertices[b + 1], 0, uvs[b], uvs[b + 1], color, alpha).transformMat4(
         tempMatrix
       )
-      var vert3 = new Vertex(vertices[d], vertices[d + 1], 0, uvs[d], uvs[d + 1], color, alpha).transformMat4(
+      const vert3 = new Vertex(vertices[d], vertices[d + 1], 0, uvs[d], uvs[d + 1], color, alpha).transformMat4(
         tempMatrix
       )
-      var vert4 = new Vertex(vertices[b], vertices[b + 1], 0, uvs[b], uvs[b + 1], color, alpha).transformMat4(
+      const vert4 = new Vertex(vertices[b], vertices[b + 1], 0, uvs[b], uvs[b + 1], color, alpha).transformMat4(
         tempMatrix
       )
-      var vert5 = new Vertex(vertices[c], vertices[c + 1], 0, uvs[c], uvs[c + 1], color, alpha).transformMat4(
+      const vert5 = new Vertex(vertices[c], vertices[c + 1], 0, uvs[c], uvs[c + 1], color, alpha).transformMat4(
         tempMatrix
       )
-      var vert6 = new Vertex(vertices[d], vertices[d + 1], 0, uvs[d], uvs[d + 1], color, alpha).transformMat4(
+      const vert6 = new Vertex(vertices[d], vertices[d + 1], 0, uvs[d], uvs[d + 1], color, alpha).transformMat4(
         tempMatrix
       )
 
@@ -221,4 +222,4 @@ var GenerateGridVerts = function (config) {
   return result
 }
 
-module.exports = GenerateGridVerts
+export default GenerateGridVerts

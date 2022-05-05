@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SafeRange = require('./SafeRange')
+import SafeRange from './SafeRange'
 
 /**
  * Returns the total number of elements in the array which have a property matching the given value.
@@ -20,7 +20,7 @@ var SafeRange = require('./SafeRange')
  *
  * @return {number} The total number of elements with properties matching the given value.
  */
-var CountAllMatching = function (array, property, value, startIndex, endIndex) {
+const CountAllMatching = (array, property, value, startIndex, endIndex) => {
   if (startIndex === undefined) {
     startIndex = 0
   }
@@ -28,11 +28,11 @@ var CountAllMatching = function (array, property, value, startIndex, endIndex) {
     endIndex = array.length
   }
 
-  var total = 0
+  let total = 0
 
   if (SafeRange(array, startIndex, endIndex)) {
-    for (var i = startIndex; i < endIndex; i++) {
-      var child = array[i]
+    for (let i = startIndex; i < endIndex; i++) {
+      const child = array[i]
 
       if (child[property] === value) {
         total++
@@ -43,4 +43,4 @@ var CountAllMatching = function (array, property, value, startIndex, endIndex) {
   return total
 }
 
-module.exports = CountAllMatching
+export default CountAllMatching

@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Polygon = require('./Polygon')
+import Polygon from './Polygon'
 
 Polygon.Clone = require('./Clone')
 Polygon.Contains = require('./Contains')
@@ -19,4 +19,4 @@ Polygon.Simplify = require('./Simplify')
 Polygon.Smooth = require('./Smooth')
 Polygon.Translate = require('./Translate')
 
-module.exports = Polygon
+export default Polygon

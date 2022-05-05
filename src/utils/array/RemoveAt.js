@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SpliceOne = require('./SpliceOne')
+import SpliceOne from './SpliceOne'
 
 /**
  * Removes the item from the given position in the array.
@@ -23,7 +23,7 @@ var SpliceOne = require('./SpliceOne')
  *
  * @return {*} The item that was removed.
  */
-var RemoveAt = function (array, index, callback, context) {
+const RemoveAt = (array, index, callback, context) => {
   if (context === undefined) {
     context = array
   }
@@ -32,7 +32,7 @@ var RemoveAt = function (array, index, callback, context) {
     throw new Error('Index out of bounds')
   }
 
-  var item = SpliceOne(array, index)
+  const item = SpliceOne(array, index)
 
   if (callback) {
     callback.call(context, item)
@@ -41,4 +41,4 @@ var RemoveAt = function (array, index, callback, context) {
   return item
 }
 
-module.exports = RemoveAt
+export default RemoveAt

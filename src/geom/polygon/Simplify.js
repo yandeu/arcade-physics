@@ -33,7 +33,7 @@
  * @ignore
  */
 function getSqDist(p1, p2) {
-  var dx = p1.x - p2.x,
+  const dx = p1.x - p2.x,
     dy = p1.y - p2.y
 
   return dx * dx + dy * dy
@@ -45,13 +45,13 @@ function getSqDist(p1, p2) {
  * @ignore
  */
 function getSqSegDist(p, p1, p2) {
-  var x = p1.x,
+  let x = p1.x,
     y = p1.y,
     dx = p2.x - x,
     dy = p2.y - y
 
   if (dx !== 0 || dy !== 0) {
-    var t = ((p.x - x) * dx + (p.y - y) * dy) / (dx * dx + dy * dy)
+    const t = ((p.x - x) * dx + (p.y - y) * dy) / (dx * dx + dy * dy)
 
     if (t > 1) {
       x = p2.x
@@ -74,11 +74,11 @@ function getSqSegDist(p, p1, p2) {
  * @ignore
  */
 function simplifyRadialDist(points, sqTolerance) {
-  var prevPoint = points[0],
-    newPoints = [prevPoint],
-    point
+  let prevPoint = points[0]
+  const newPoints = [prevPoint]
+  let point
 
-  for (var i = 1, len = points.length; i < len; i++) {
+  for (let i = 1, len = points.length; i < len; i++) {
     point = points[i]
 
     if (getSqDist(point, prevPoint) > sqTolerance) {
@@ -98,11 +98,11 @@ function simplifyRadialDist(points, sqTolerance) {
  * @ignore
  */
 function simplifyDPStep(points, first, last, sqTolerance, simplified) {
-  var maxSqDist = sqTolerance,
+  let maxSqDist = sqTolerance,
     index
 
-  for (var i = first + 1; i < last; i++) {
-    var sqDist = getSqSegDist(points[i], points[first], points[last])
+  for (let i = first + 1; i < last; i++) {
+    const sqDist = getSqSegDist(points[i], points[first], points[last])
 
     if (sqDist > maxSqDist) {
       index = i
@@ -129,9 +129,9 @@ function simplifyDPStep(points, first, last, sqTolerance, simplified) {
  * @ignore
  */
 function simplifyDouglasPeucker(points, sqTolerance) {
-  var last = points.length - 1
+  const last = points.length - 1
 
-  var simplified = [points[0]]
+  const simplified = [points[0]]
 
   simplifyDPStep(points, 0, last, sqTolerance, simplified)
 
@@ -157,7 +157,7 @@ function simplifyDouglasPeucker(points, sqTolerance) {
  *
  * @return {Phaser.Geom.Polygon} The input polygon.
  */
-var Simplify = function (polygon, tolerance, highestQuality) {
+const Simplify = (polygon, tolerance, highestQuality) => {
   if (tolerance === undefined) {
     tolerance = 1
   }
@@ -165,10 +165,10 @@ var Simplify = function (polygon, tolerance, highestQuality) {
     highestQuality = false
   }
 
-  var points = polygon.points
+  let points = polygon.points
 
   if (points.length > 2) {
-    var sqTolerance = tolerance * tolerance
+    const sqTolerance = tolerance * tolerance
 
     if (!highestQuality) {
       points = simplifyRadialDist(points, sqTolerance)
@@ -180,4 +180,4 @@ var Simplify = function (polygon, tolerance, highestQuality) {
   return polygon
 }
 
-module.exports = Simplify
+export default Simplify

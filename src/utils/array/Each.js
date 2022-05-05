@@ -17,9 +17,9 @@
  *
  * @return {array} The input array.
  */
-var Each = function (array, callback, context) {
-  var i
-  var args = [null]
+const Each = function (array, callback, context) {
+  let i
+  const args = [null]
 
   for (i = 3; i < arguments.length; i++) {
     args.push(arguments[i])
@@ -34,4 +34,4 @@ var Each = function (array, callback, context) {
   return array
 }
 
-module.exports = Each
+export default Each

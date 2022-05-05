@@ -19,10 +19,10 @@
  *
  * @return {T[]} The shuffled array.
  */
-var Shuffle = function (array) {
-  for (var i = array.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1))
-    var temp = array[i]
+const Shuffle = array => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    const temp = array[i]
     array[i] = array[j]
     array[j] = temp
   }
@@ -30,4 +30,4 @@ var Shuffle = function (array) {
   return array
 }
 
-module.exports = Shuffle
+export default Shuffle

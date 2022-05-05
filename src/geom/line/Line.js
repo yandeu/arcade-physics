@@ -4,12 +4,13 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../utils/Class')
-var GetPoint = require('./GetPoint')
-var GetPoints = require('./GetPoints')
-var GEOM_CONST = require('../const')
-var Random = require('./Random')
-var Vector2 = require('../../math/Vector2')
+import Class from '../../utils/Class'
+
+import GetPoint from './GetPoint'
+import GetPoints from './GetPoints'
+import GEOM_CONST from '../const'
+import Random from './Random'
+import Vector2 from '../../math/Vector2'
 
 /**
  * @classdesc
@@ -25,7 +26,7 @@ var Vector2 = require('../../math/Vector2')
  * @param {number} [x2=0] - The x coordinate of the lines ending point.
  * @param {number} [y2=0] - The y coordinate of the lines ending point.
  */
-var Line = new Class({
+const Line = new Class({
   initialize: function Line(x1, y1, x2, y2) {
     if (x1 === undefined) {
       x1 = 0
@@ -309,4 +310,4 @@ var Line = new Class({
   }
 })
 
-module.exports = Line
+export default Line

@@ -7,7 +7,7 @@
 //  Adapted from [gl-matrix](https://github.com/toji/gl-matrix) by toji
 //  and [vecmath](https://github.com/mattdesl/vecmath) by mattdesl
 
-var Class = require('../utils/Class')
+import Class from '../utils/Class'
 
 /**
  * @classdesc
@@ -24,7 +24,7 @@ var Class = require('../utils/Class')
  * @param {number} [y] - The y component.
  * @param {number} [z] - The z component.
  */
-var Vector3 = new Class({
+const Vector3 = new Class({
   initialize: function Vector3(x, y, z) {
     /**
      * The x component of this Vector.
@@ -164,12 +164,12 @@ var Vector3 = new Class({
    * @return {Phaser.Math.Vector3} This Vector3.
    */
   crossVectors: function (a, b) {
-    var ax = a.x
-    var ay = a.y
-    var az = a.z
-    var bx = b.x
-    var by = b.y
-    var bz = b.z
+    const ax = a.x
+    const ay = a.y
+    const az = a.z
+    const bx = b.x
+    const by = b.y
+    const bz = b.z
 
     this.x = ay * bz - az * by
     this.y = az * bx - ax * bz
@@ -458,9 +458,9 @@ var Vector3 = new Class({
    * @return {number} The distance from this Vector to the given Vector.
    */
   distance: function (v) {
-    var dx = v.x - this.x
-    var dy = v.y - this.y
-    var dz = v.z - this.z || 0
+    const dx = v.x - this.x
+    const dy = v.y - this.y
+    const dz = v.z - this.z || 0
 
     return Math.sqrt(dx * dx + dy * dy + dz * dz)
   },
@@ -476,9 +476,9 @@ var Vector3 = new Class({
    * @return {number} The distance from this Vector to the given Vector, squared.
    */
   distanceSq: function (v) {
-    var dx = v.x - this.x
-    var dy = v.y - this.y
-    var dz = v.z - this.z || 0
+    const dx = v.x - this.x
+    const dy = v.y - this.y
+    const dz = v.z - this.z || 0
 
     return dx * dx + dy * dy + dz * dz
   },
@@ -492,9 +492,9 @@ var Vector3 = new Class({
    * @return {number} The length of this Vector.
    */
   length: function () {
-    var x = this.x
-    var y = this.y
-    var z = this.z
+    const x = this.x
+    const y = this.y
+    const z = this.z
 
     return Math.sqrt(x * x + y * y + z * z)
   },
@@ -508,9 +508,9 @@ var Vector3 = new Class({
    * @return {number} The length of this Vector, squared.
    */
   lengthSq: function () {
-    var x = this.x
-    var y = this.y
-    var z = this.z
+    const x = this.x
+    const y = this.y
+    const z = this.z
 
     return x * x + y * y + z * z
   },
@@ -526,10 +526,10 @@ var Vector3 = new Class({
    * @return {Phaser.Math.Vector3} This Vector3.
    */
   normalize: function () {
-    var x = this.x
-    var y = this.y
-    var z = this.z
-    var len = x * x + y * y + z * z
+    const x = this.x
+    const y = this.y
+    const z = this.z
+    let len = x * x + y * y + z * z
 
     if (len > 0) {
       len = 1 / Math.sqrt(len)
@@ -567,12 +567,12 @@ var Vector3 = new Class({
    * @return {Phaser.Math.Vector3} This Vector3.
    */
   cross: function (v) {
-    var ax = this.x
-    var ay = this.y
-    var az = this.z
-    var bx = v.x
-    var by = v.y
-    var bz = v.z
+    const ax = this.x
+    const ay = this.y
+    const az = this.z
+    const bx = v.x
+    const by = v.y
+    const bz = v.z
 
     this.x = ay * bz - az * by
     this.y = az * bx - ax * bz
@@ -599,9 +599,9 @@ var Vector3 = new Class({
       t = 0
     }
 
-    var ax = this.x
-    var ay = this.y
-    var az = this.z
+    const ax = this.x
+    const ay = this.y
+    const az = this.z
 
     this.x = ax + t * (v.x - ax)
     this.y = ay + t * (v.y - ay)
@@ -621,10 +621,10 @@ var Vector3 = new Class({
    * @return {Phaser.Math.Vector3} This Vector3.
    */
   applyMatrix3: function (mat3) {
-    var x = this.x
-    var y = this.y
-    var z = this.z
-    var m = mat3.val
+    const x = this.x
+    const y = this.y
+    const z = this.z
+    const m = mat3.val
 
     this.x = m[0] * x + m[3] * y + m[6] * z
     this.y = m[1] * x + m[4] * y + m[7] * z
@@ -644,12 +644,12 @@ var Vector3 = new Class({
    * @return {Phaser.Math.Vector3} This Vector3.
    */
   applyMatrix4: function (mat4) {
-    var x = this.x
-    var y = this.y
-    var z = this.z
-    var m = mat4.val
+    const x = this.x
+    const y = this.y
+    const z = this.z
+    const m = mat4.val
 
-    var w = 1 / (m[3] * x + m[7] * y + m[11] * z + m[15])
+    const w = 1 / (m[3] * x + m[7] * y + m[11] * z + m[15])
 
     this.x = (m[0] * x + m[4] * y + m[8] * z + m[12]) * w
     this.y = (m[1] * x + m[5] * y + m[9] * z + m[13]) * w
@@ -669,10 +669,10 @@ var Vector3 = new Class({
    * @return {Phaser.Math.Vector3} This Vector3.
    */
   transformMat3: function (mat) {
-    var x = this.x
-    var y = this.y
-    var z = this.z
-    var m = mat.val
+    const x = this.x
+    const y = this.y
+    const z = this.z
+    const m = mat.val
 
     this.x = x * m[0] + y * m[3] + z * m[6]
     this.y = x * m[1] + y * m[4] + z * m[7]
@@ -692,10 +692,10 @@ var Vector3 = new Class({
    * @return {Phaser.Math.Vector3} This Vector3.
    */
   transformMat4: function (mat) {
-    var x = this.x
-    var y = this.y
-    var z = this.z
-    var m = mat.val
+    const x = this.x
+    const y = this.y
+    const z = this.z
+    const m = mat.val
 
     this.x = m[0] * x + m[4] * y + m[8] * z + m[12]
     this.y = m[1] * x + m[5] * y + m[9] * z + m[13]
@@ -715,15 +715,15 @@ var Vector3 = new Class({
    * @return {Phaser.Math.Vector3} This Vector3.
    */
   transformCoordinates: function (mat) {
-    var x = this.x
-    var y = this.y
-    var z = this.z
-    var m = mat.val
+    const x = this.x
+    const y = this.y
+    const z = this.z
+    const m = mat.val
 
-    var tx = x * m[0] + y * m[4] + z * m[8] + m[12]
-    var ty = x * m[1] + y * m[5] + z * m[9] + m[13]
-    var tz = x * m[2] + y * m[6] + z * m[10] + m[14]
-    var tw = x * m[3] + y * m[7] + z * m[11] + m[15]
+    const tx = x * m[0] + y * m[4] + z * m[8] + m[12]
+    const ty = x * m[1] + y * m[5] + z * m[9] + m[13]
+    const tz = x * m[2] + y * m[6] + z * m[10] + m[14]
+    const tw = x * m[3] + y * m[7] + z * m[11] + m[15]
 
     this.x = tx / tw
     this.y = ty / tw
@@ -744,19 +744,19 @@ var Vector3 = new Class({
    */
   transformQuat: function (q) {
     // benchmarks: http://jsperf.com/quaternion-transform-vec3-implementations
-    var x = this.x
-    var y = this.y
-    var z = this.z
-    var qx = q.x
-    var qy = q.y
-    var qz = q.z
-    var qw = q.w
+    const x = this.x
+    const y = this.y
+    const z = this.z
+    const qx = q.x
+    const qy = q.y
+    const qz = q.z
+    const qw = q.w
 
     // calculate quat * vec
-    var ix = qw * x + qy * z - qz * y
-    var iy = qw * y + qz * x - qx * z
-    var iz = qw * z + qx * y - qy * x
-    var iw = -qx * x - qy * y - qz * z
+    const ix = qw * x + qy * z - qz * y
+    const iy = qw * y + qz * x - qx * z
+    const iz = qw * z + qx * y - qy * x
+    const iw = -qx * x - qy * y - qz * z
 
     // calculate result * inverse quat
     this.x = ix * qw + iw * -qx + iy * -qz - iz * -qy
@@ -778,29 +778,29 @@ var Vector3 = new Class({
    * @return {Phaser.Math.Vector3} This Vector3.
    */
   project: function (mat) {
-    var x = this.x
-    var y = this.y
-    var z = this.z
-    var m = mat.val
+    const x = this.x
+    const y = this.y
+    const z = this.z
+    const m = mat.val
 
-    var a00 = m[0]
-    var a01 = m[1]
-    var a02 = m[2]
-    var a03 = m[3]
-    var a10 = m[4]
-    var a11 = m[5]
-    var a12 = m[6]
-    var a13 = m[7]
-    var a20 = m[8]
-    var a21 = m[9]
-    var a22 = m[10]
-    var a23 = m[11]
-    var a30 = m[12]
-    var a31 = m[13]
-    var a32 = m[14]
-    var a33 = m[15]
+    const a00 = m[0]
+    const a01 = m[1]
+    const a02 = m[2]
+    const a03 = m[3]
+    const a10 = m[4]
+    const a11 = m[5]
+    const a12 = m[6]
+    const a13 = m[7]
+    const a20 = m[8]
+    const a21 = m[9]
+    const a22 = m[10]
+    const a23 = m[11]
+    const a30 = m[12]
+    const a31 = m[13]
+    const a32 = m[14]
+    const a33 = m[15]
 
-    var lw = 1 / (x * a03 + y * a13 + z * a23 + a33)
+    const lw = 1 / (x * a03 + y * a13 + z * a23 + a33)
 
     this.x = (x * a00 + y * a10 + z * a20 + a30) * lw
     this.y = (x * a01 + y * a11 + z * a21 + a31) * lw
@@ -858,14 +858,14 @@ var Vector3 = new Class({
    * @return {Phaser.Math.Vector3} This Vector3.
    */
   unproject: function (viewport, invProjectionView) {
-    var viewX = viewport.x
-    var viewY = viewport.y
-    var viewWidth = viewport.z
-    var viewHeight = viewport.w
+    const viewX = viewport.x
+    const viewY = viewport.y
+    const viewWidth = viewport.z
+    const viewHeight = viewport.w
 
-    var x = this.x - viewX
-    var y = viewHeight - this.y - 1 - viewY
-    var z = this.z
+    const x = this.x - viewX
+    const y = viewHeight - this.y - 1 - viewY
+    const z = this.z
 
     this.x = (2 * x) / viewWidth - 1
     this.y = (2 * y) / viewHeight - 1
@@ -987,4 +987,4 @@ Vector3.BACK = new Vector3(0, 0, -1)
  */
 Vector3.ONE = new Vector3(1, 1, 1)
 
-module.exports = Vector3
+export default Vector3

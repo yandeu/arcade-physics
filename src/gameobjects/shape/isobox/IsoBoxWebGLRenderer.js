@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetCalcMatrix = require('../../GetCalcMatrix')
-var Utils = require('../../../renderer/webgl/Utils')
+import GetCalcMatrix from '../../GetCalcMatrix'
+
+import Utils from '../../../renderer/webgl/Utils'
 
 /**
  * Renders this Game Object with the WebGL Renderer to the given Camera.
@@ -21,40 +22,40 @@ var Utils = require('../../../renderer/webgl/Utils')
  * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera that is rendering the Game Object.
  * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
  */
-var IsoBoxWebGLRenderer = function (renderer, src, camera, parentMatrix) {
+const IsoBoxWebGLRenderer = (renderer, src, camera, parentMatrix) => {
   camera.addToRenderList(src)
 
-  var pipeline = renderer.pipelines.set(src.pipeline)
+  const pipeline = renderer.pipelines.set(src.pipeline)
 
-  var result = GetCalcMatrix(src, camera, parentMatrix)
+  const result = GetCalcMatrix(src, camera, parentMatrix)
 
-  var calcMatrix = pipeline.calcMatrix.copyFrom(result.calc)
+  const calcMatrix = pipeline.calcMatrix.copyFrom(result.calc)
 
-  var size = src.width
-  var height = src.height
+  const size = src.width
+  const height = src.height
 
-  var sizeA = size / 2
-  var sizeB = size / src.projection
+  const sizeA = size / 2
+  const sizeB = size / src.projection
 
-  var alpha = camera.alpha * src.alpha
+  const alpha = camera.alpha * src.alpha
 
   if (!src.isFilled) {
     return
   }
 
-  var tint
+  let tint
 
-  var x0
-  var y0
+  let x0
+  let y0
 
-  var x1
-  var y1
+  let x1
+  let y1
 
-  var x2
-  var y2
+  let x2
+  let y2
 
-  var x3
-  var y3
+  let x3
+  let y3
 
   renderer.pipelines.preBatch(src)
 
@@ -121,4 +122,4 @@ var IsoBoxWebGLRenderer = function (renderer, src, camera, parentMatrix) {
   renderer.pipelines.postBatch(src)
 }
 
-module.exports = IsoBoxWebGLRenderer
+export default IsoBoxWebGLRenderer

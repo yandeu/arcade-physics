@@ -16,8 +16,8 @@
  *
  * @return {Phaser.Geom.Point} The modified `point`.
  */
-var Invert = function (point) {
+const Invert = point => {
   return point.setTo(point.y, point.x)
 }
 
-module.exports = Invert
+export default Invert

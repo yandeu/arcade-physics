@@ -4,23 +4,24 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Vector4 = require('../../math/Vector4')
-var GetLineToPolygon = require('./GetLineToPolygon')
-var Line = require('../line/Line')
+import Vector4 from '../../math/Vector4'
+
+import GetLineToPolygon from './GetLineToPolygon'
+import Line from '../line/Line'
 
 //  Temp calculation segment
-var segment = new Line()
+const segment = new Line()
 
 /**
  * @ignore
  */
 function CheckIntersects(angle, x, y, polygons, intersects) {
-  var dx = Math.cos(angle)
-  var dy = Math.sin(angle)
+  const dx = Math.cos(angle)
+  const dy = Math.sin(angle)
 
   segment.setTo(x, y, x + dx, y + dy)
 
-  var closestIntersect = GetLineToPolygon(segment, polygons)
+  const closestIntersect = GetLineToPolygon(segment, polygons)
 
   if (closestIntersect) {
     intersects.push(new Vector4(closestIntersect.x, closestIntersect.y, angle, closestIntersect.w))
@@ -56,19 +57,19 @@ function SortIntersects(a, b) {
  *
  * @return {Phaser.Math.Vector4[]} An array containing all intersections in Vector4s.
  */
-var GetRaysFromPointToPolygon = function (x, y, polygons) {
+const GetRaysFromPointToPolygon = (x, y, polygons) => {
   if (!Array.isArray(polygons)) {
     polygons = [polygons]
   }
 
-  var intersects = []
-  var angles = []
+  const intersects = []
+  const angles = []
 
-  for (var i = 0; i < polygons.length; i++) {
-    var points = polygons[i].points
+  for (let i = 0; i < polygons.length; i++) {
+    const points = polygons[i].points
 
-    for (var p = 0; p < points.length; p++) {
-      var angle = Math.atan2(points[p].y - y, points[p].x - x)
+    for (let p = 0; p < points.length; p++) {
+      const angle = Math.atan2(points[p].y - y, points[p].x - x)
 
       if (angles.indexOf(angle) === -1) {
         //  +- 0.00001 rads to catch lines behind segment corners
@@ -85,4 +86,4 @@ var GetRaysFromPointToPolygon = function (x, y, polygons) {
   return intersects.sort(SortIntersects)
 }
 
-module.exports = GetRaysFromPointToPolygon
+export default GetRaysFromPointToPolygon

@@ -4,9 +4,10 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Length = require('../line/Length')
-var Line = require('../line/Line')
-var Perimeter = require('./Perimeter')
+import Length from '../line/Length'
+
+import Line from '../line/Line'
+import Perimeter from './Perimeter'
 
 /**
  * Returns an array of Point objects containing the coordinates of the points around the perimeter of the Polygon,
@@ -22,35 +23,35 @@ var Perimeter = require('./Perimeter')
  *
  * @return {Phaser.Geom.Point[]} An array of Point objects pertaining to the points around the perimeter of the Polygon.
  */
-var GetPoints = function (polygon, quantity, stepRate, out) {
+const GetPoints = (polygon, quantity, stepRate, out) => {
   if (out === undefined) {
     out = []
   }
 
-  var points = polygon.points
-  var perimeter = Perimeter(polygon)
+  const points = polygon.points
+  const perimeter = Perimeter(polygon)
 
   //  If quantity is a falsey value (false, null, 0, undefined, etc) then we calculate it based on the stepRate instead.
   if (!quantity && stepRate > 0) {
     quantity = perimeter / stepRate
   }
 
-  for (var i = 0; i < quantity; i++) {
-    var position = perimeter * (i / quantity)
-    var accumulatedPerimeter = 0
+  for (let i = 0; i < quantity; i++) {
+    const position = perimeter * (i / quantity)
+    let accumulatedPerimeter = 0
 
-    for (var j = 0; j < points.length; j++) {
-      var pointA = points[j]
-      var pointB = points[(j + 1) % points.length]
-      var line = new Line(pointA.x, pointA.y, pointB.x, pointB.y)
-      var length = Length(line)
+    for (let j = 0; j < points.length; j++) {
+      const pointA = points[j]
+      const pointB = points[(j + 1) % points.length]
+      const line = new Line(pointA.x, pointA.y, pointB.x, pointB.y)
+      const length = Length(line)
 
       if (position < accumulatedPerimeter || position > accumulatedPerimeter + length) {
         accumulatedPerimeter += length
         continue
       }
 
-      var point = line.getPoint((position - accumulatedPerimeter) / length)
+      const point = line.getPoint((position - accumulatedPerimeter) / length)
       out.push(point)
 
       break
@@ -60,4 +61,4 @@ var GetPoints = function (polygon, quantity, stepRate, out) {
   return out
 }
 
-module.exports = GetPoints
+export default GetPoints

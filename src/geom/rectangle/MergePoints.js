@@ -17,13 +17,13 @@
  *
  * @return {Phaser.Geom.Rectangle} The modified Rectangle.
  */
-var MergePoints = function (target, points) {
-  var minX = target.x
-  var maxX = target.right
-  var minY = target.y
-  var maxY = target.bottom
+const MergePoints = (target, points) => {
+  let minX = target.x
+  let maxX = target.right
+  let minY = target.y
+  let maxY = target.bottom
 
-  for (var i = 0; i < points.length; i++) {
+  for (let i = 0; i < points.length; i++) {
     minX = Math.min(minX, points[i].x)
     maxX = Math.max(maxX, points[i].x)
     minY = Math.min(minY, points[i].y)
@@ -38,4 +38,4 @@ var MergePoints = function (target, points) {
   return target
 }
 
-module.exports = MergePoints
+export default MergePoints

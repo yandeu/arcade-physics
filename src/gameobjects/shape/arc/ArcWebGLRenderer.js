@@ -4,9 +4,10 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetCalcMatrix = require('../../GetCalcMatrix')
-var FillPathWebGL = require('../FillPathWebGL')
-var StrokePathWebGL = require('../StrokePathWebGL')
+import GetCalcMatrix from '../../GetCalcMatrix'
+
+import FillPathWebGL from '../FillPathWebGL'
+import StrokePathWebGL from '../StrokePathWebGL'
 
 /**
  * Renders this Game Object with the WebGL Renderer to the given Camera.
@@ -22,19 +23,19 @@ var StrokePathWebGL = require('../StrokePathWebGL')
  * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera that is rendering the Game Object.
  * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
  */
-var ArcWebGLRenderer = function (renderer, src, camera, parentMatrix) {
+const ArcWebGLRenderer = (renderer, src, camera, parentMatrix) => {
   camera.addToRenderList(src)
 
-  var pipeline = renderer.pipelines.set(src.pipeline)
+  const pipeline = renderer.pipelines.set(src.pipeline)
 
-  var result = GetCalcMatrix(src, camera, parentMatrix)
+  const result = GetCalcMatrix(src, camera, parentMatrix)
 
-  var calcMatrix = pipeline.calcMatrix.copyFrom(result.calc)
+  const calcMatrix = pipeline.calcMatrix.copyFrom(result.calc)
 
-  var dx = src._displayOriginX
-  var dy = src._displayOriginY
+  const dx = src._displayOriginX
+  const dy = src._displayOriginY
 
-  var alpha = camera.alpha * src.alpha
+  const alpha = camera.alpha * src.alpha
 
   renderer.pipelines.preBatch(src)
 
@@ -49,4 +50,4 @@ var ArcWebGLRenderer = function (renderer, src, camera, parentMatrix) {
   renderer.pipelines.postBatch(src)
 }
 
-module.exports = ArcWebGLRenderer
+export default ArcWebGLRenderer

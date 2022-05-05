@@ -4,12 +4,13 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-const Contains = require('./Contains')
-const GetPoint = require('./GetPoint')
-const GetPoints = require('./GetPoints')
-const GEOM_CONST = require('../const')
-const Line = require('../line/Line')
-const Random = require('./Random')
+import Contains from './Contains'
+
+import GetPoint from './GetPoint'
+import GetPoints from './GetPoints'
+import GEOM_CONST from '../const'
+import Line from '../line/Line'
+import Random from './Random'
 
 /**
  * @classdesc

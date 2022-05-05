@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetCalcMatrix = require('../../GetCalcMatrix')
-var Utils = require('../../../renderer/webgl/Utils')
+import GetCalcMatrix from '../../GetCalcMatrix'
+
+import Utils from '../../../renderer/webgl/Utils'
 
 /**
  * Renders this Game Object with the WebGL Renderer to the given Camera.
@@ -21,48 +22,48 @@ var Utils = require('../../../renderer/webgl/Utils')
  * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera that is rendering the Game Object.
  * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
  */
-var GridWebGLRenderer = function (renderer, src, camera, parentMatrix) {
+const GridWebGLRenderer = (renderer, src, camera, parentMatrix) => {
   camera.addToRenderList(src)
 
-  var pipeline = renderer.pipelines.set(src.pipeline)
+  const pipeline = renderer.pipelines.set(src.pipeline)
 
-  var result = GetCalcMatrix(src, camera, parentMatrix)
+  const result = GetCalcMatrix(src, camera, parentMatrix)
 
-  var calcMatrix = pipeline.calcMatrix.copyFrom(result.calc)
+  const calcMatrix = pipeline.calcMatrix.copyFrom(result.calc)
 
   calcMatrix.translate(-src._displayOriginX, -src._displayOriginY)
 
-  var alpha = camera.alpha * src.alpha
+  const alpha = camera.alpha * src.alpha
 
   //  Work out the grid size
 
-  var width = src.width
-  var height = src.height
+  const width = src.width
+  const height = src.height
 
-  var cellWidth = src.cellWidth
-  var cellHeight = src.cellHeight
+  const cellWidth = src.cellWidth
+  const cellHeight = src.cellHeight
 
-  var gridWidth = Math.ceil(width / cellWidth)
-  var gridHeight = Math.ceil(height / cellHeight)
+  const gridWidth = Math.ceil(width / cellWidth)
+  const gridHeight = Math.ceil(height / cellHeight)
 
-  var cellWidthA = cellWidth
-  var cellHeightA = cellHeight
+  let cellWidthA = cellWidth
+  let cellHeightA = cellHeight
 
-  var cellWidthB = cellWidth - (gridWidth * cellWidth - width)
-  var cellHeightB = cellHeight - (gridHeight * cellHeight - height)
+  let cellWidthB = cellWidth - (gridWidth * cellWidth - width)
+  let cellHeightB = cellHeight - (gridHeight * cellHeight - height)
 
-  var fillTint
-  var fillTintColor
+  let fillTint
+  let fillTintColor
 
-  var showCells = src.showCells
-  var showAltCells = src.showAltCells
-  var showOutline = src.showOutline
+  const showCells = src.showCells
+  const showAltCells = src.showAltCells
+  const showOutline = src.showOutline
 
-  var x = 0
-  var y = 0
-  var r = 0
-  var cw = 0
-  var ch = 0
+  let x = 0
+  let y = 0
+  let r = 0
+  let cw = 0
+  let ch = 0
 
   if (showOutline) {
     //  To make room for the grid lines (in case alpha < 1)
@@ -141,8 +142,8 @@ var GridWebGLRenderer = function (renderer, src, camera, parentMatrix) {
   }
 
   if (showOutline && src.outlineFillAlpha > 0) {
-    var strokeTint = pipeline.strokeTint
-    var color = Utils.getTintAppendFloatAlpha(src.outlineFillColor, src.outlineFillAlpha * alpha)
+    const strokeTint = pipeline.strokeTint
+    const color = Utils.getTintAppendFloatAlpha(src.outlineFillColor, src.outlineFillAlpha * alpha)
 
     strokeTint.TL = color
     strokeTint.TR = color
@@ -150,13 +151,13 @@ var GridWebGLRenderer = function (renderer, src, camera, parentMatrix) {
     strokeTint.BR = color
 
     for (x = 1; x < gridWidth; x++) {
-      var x1 = x * cellWidth
+      const x1 = x * cellWidth
 
       pipeline.batchLine(x1, 0, x1, height, 1, 1, 1, 0, false)
     }
 
     for (y = 1; y < gridHeight; y++) {
-      var y1 = y * cellHeight
+      const y1 = y * cellHeight
 
       pipeline.batchLine(0, y1, width, y1, 1, 1, 1, 0, false)
     }
@@ -165,4 +166,4 @@ var GridWebGLRenderer = function (renderer, src, camera, parentMatrix) {
   renderer.pipelines.postBatch(src)
 }
 
-module.exports = GridWebGLRenderer
+export default GridWebGLRenderer

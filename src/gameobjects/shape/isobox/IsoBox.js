@@ -4,9 +4,10 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var IsoBoxRender = require('./IsoBoxRender')
-var Class = require('../../../utils/Class')
-var Shape = require('../Shape')
+import IsoBoxRender from './IsoBoxRender'
+
+import Class from '../../../utils/Class'
+import Shape from '../Shape'
 
 /**
  * @classdesc
@@ -39,7 +40,7 @@ var Shape = require('../Shape')
  * @param {number} [fillLeft=0x999999] - The fill color of the left face of the iso box.
  * @param {number} [fillRight=0xcccccc] - The fill color of the right face of the iso box.
  */
-var IsoBox = new Class({
+const IsoBox = new Class({
   Extends: Shape,
 
   Mixins: [IsoBoxRender],
@@ -216,4 +217,4 @@ var IsoBox = new Class({
   }
 })
 
-module.exports = IsoBox
+export default IsoBox

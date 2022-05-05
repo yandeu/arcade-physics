@@ -8,7 +8,7 @@
  * @namespace Phaser.Math.Distance
  */
 
-module.exports = {
+export default {
   Between: require('./DistanceBetween'),
   BetweenPoints: require('./DistanceBetweenPoints'),
   BetweenPointsSquared: require('./DistanceBetweenPointsSquared'),

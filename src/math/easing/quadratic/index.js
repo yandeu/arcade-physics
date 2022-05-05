@@ -8,7 +8,7 @@
  * @namespace Phaser.Math.Easing.Quadratic
  */
 
-module.exports = {
+export default {
   In: require('./In'),
   Out: require('./Out'),
   InOut: require('./InOut')

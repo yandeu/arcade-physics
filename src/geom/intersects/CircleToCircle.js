@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var DistanceBetween = require('../../math/distance/DistanceBetween')
+import DistanceBetween from '../../math/distance/DistanceBetween'
 
 /**
  * Checks if two Circles intersect.
@@ -17,8 +17,8 @@ var DistanceBetween = require('../../math/distance/DistanceBetween')
  *
  * @return {boolean} `true` if the two Circles intersect, otherwise `false`.
  */
-var CircleToCircle = function (circleA, circleB) {
+const CircleToCircle = (circleA, circleB) => {
   return DistanceBetween(circleA.x, circleA.y, circleB.x, circleB.y) <= circleA.radius + circleB.radius
 }
 
-module.exports = CircleToCircle
+export default CircleToCircle

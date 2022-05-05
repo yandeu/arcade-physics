@@ -8,7 +8,7 @@
  * @namespace Phaser.Math.Snap
  */
 
-module.exports = {
+export default {
   Ceil: require('./SnapCeil'),
   Floor: require('./SnapFloor'),
   To: require('./SnapTo')

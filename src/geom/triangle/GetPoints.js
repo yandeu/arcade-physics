@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Length = require('../line/Length')
-var Point = require('../point/Point')
+import Length from '../line/Length'
+
+import Point from '../point/Point'
 
 /**
  * Returns an array of evenly spaced points on the perimeter of a Triangle.
@@ -22,31 +23,31 @@ var Point = require('../point/Point')
  *
  * @return {(array|Phaser.Geom.Point[])} The modified `out` array, or a new array if none was provided.
  */
-var GetPoints = function (triangle, quantity, stepRate, out) {
+const GetPoints = (triangle, quantity, stepRate, out) => {
   if (out === undefined) {
     out = []
   }
 
-  var line1 = triangle.getLineA()
-  var line2 = triangle.getLineB()
-  var line3 = triangle.getLineC()
+  const line1 = triangle.getLineA()
+  const line2 = triangle.getLineB()
+  const line3 = triangle.getLineC()
 
-  var length1 = Length(line1)
-  var length2 = Length(line2)
-  var length3 = Length(line3)
+  const length1 = Length(line1)
+  const length2 = Length(line2)
+  const length3 = Length(line3)
 
-  var perimeter = length1 + length2 + length3
+  const perimeter = length1 + length2 + length3
 
   //  If quantity is a falsey value (false, null, 0, undefined, etc) then we calculate it based on the stepRate instead.
   if (!quantity && stepRate > 0) {
     quantity = perimeter / stepRate
   }
 
-  for (var i = 0; i < quantity; i++) {
-    var p = perimeter * (i / quantity)
-    var localPosition = 0
+  for (let i = 0; i < quantity; i++) {
+    let p = perimeter * (i / quantity)
+    let localPosition = 0
 
-    var point = new Point()
+    const point = new Point()
 
     //  Which line is it on?
 
@@ -78,4 +79,4 @@ var GetPoints = function (triangle, quantity, stepRate, out) {
   return out
 }
 
-module.exports = GetPoints
+export default GetPoints

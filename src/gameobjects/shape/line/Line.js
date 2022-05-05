@@ -4,10 +4,11 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../../utils/Class')
-var Shape = require('../Shape')
-var GeomLine = require('../../../geom/line/Line')
-var LineRender = require('./LineRender')
+import Class from '../../../utils/Class'
+
+import Shape from '../Shape'
+import GeomLine from '../../../geom/line/Line'
+import LineRender from './LineRender'
 
 /**
  * @classdesc
@@ -43,7 +44,7 @@ var LineRender = require('./LineRender')
  * @param {number} [strokeColor] - The color the line will be drawn in, i.e. 0xff0000 for red.
  * @param {number} [strokeAlpha] - The alpha the line will be drawn in. You can also set the alpha of the overall Shape using its `alpha` property.
  */
-var Line = new Class({
+const Line = new Class({
   Extends: Shape,
 
   Mixins: [LineRender],
@@ -70,8 +71,8 @@ var Line = new Class({
 
     Shape.call(this, scene, 'Line', new GeomLine(x1, y1, x2, y2))
 
-    var width = Math.max(1, this.geom.right - this.geom.left)
-    var height = Math.max(1, this.geom.bottom - this.geom.top)
+    const width = Math.max(1, this.geom.right - this.geom.left)
+    const height = Math.max(1, this.geom.bottom - this.geom.top)
 
     /**
      * The width (or thickness) of the line.
@@ -162,4 +163,4 @@ var Line = new Class({
   }
 })
 
-module.exports = Line
+export default Line

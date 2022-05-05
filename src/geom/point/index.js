@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('./Point')
+import Point from './Point'
 
 Point.Ceil = require('./Ceil')
 Point.Clone = require('./Clone')
@@ -22,4 +22,4 @@ Point.Project = require('./Project')
 Point.ProjectUnit = require('./ProjectUnit')
 Point.SetMagnitude = require('./SetMagnitude')
 
-module.exports = Point
+export default Point

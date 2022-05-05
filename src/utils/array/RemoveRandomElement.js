@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SpliceOne = require('./SpliceOne')
+import SpliceOne from './SpliceOne'
 
 /**
  * Removes a random object from the given array and returns it.
@@ -19,7 +19,7 @@ var SpliceOne = require('./SpliceOne')
  *
  * @return {object} The random element that was removed, or `null` if there were no array elements that fell within the given range.
  */
-var RemoveRandomElement = function (array, start, length) {
+const RemoveRandomElement = (array, start, length) => {
   if (start === undefined) {
     start = 0
   }
@@ -27,9 +27,9 @@ var RemoveRandomElement = function (array, start, length) {
     length = array.length
   }
 
-  var randomIndex = start + Math.floor(Math.random() * length)
+  const randomIndex = start + Math.floor(Math.random() * length)
 
   return SpliceOne(array, randomIndex)
 }
 
-module.exports = RemoveRandomElement
+export default RemoveRandomElement

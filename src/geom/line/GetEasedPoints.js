@@ -4,9 +4,10 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var DistanceBetweenPoints = require('../../math/distance/DistanceBetweenPoints')
-var GetEaseFunction = require('../../tweens/builders/GetEaseFunction')
-var Point = require('../point/Point')
+import DistanceBetweenPoints from '../../math/distance/DistanceBetweenPoints'
+
+import GetEaseFunction from '../../tweens/builders/GetEaseFunction'
+import Point from '../point/Point'
 
 /**
  * Returns an array of `quantity` Points where each point is taken from the given Line,
@@ -43,7 +44,7 @@ var Point = require('../point/Point')
  *
  * @return {Phaser.Geom.Point[]} An array of Geom.Points containing the coordinates of the points on the line.
  */
-var GetEasedPoints = function (line, ease, quantity, collinearThreshold, easeParams) {
+const GetEasedPoints = (line, ease, quantity, collinearThreshold, easeParams) => {
   if (collinearThreshold === undefined) {
     collinearThreshold = 0
   }
@@ -51,19 +52,19 @@ var GetEasedPoints = function (line, ease, quantity, collinearThreshold, easePar
     easeParams = []
   }
 
-  var results = []
+  const results = []
 
-  var x1 = line.x1
-  var y1 = line.y1
+  const x1 = line.x1
+  const y1 = line.y1
 
-  var spaceX = line.x2 - x1
-  var spaceY = line.y2 - y1
+  const spaceX = line.x2 - x1
+  const spaceY = line.y2 - y1
 
-  var easeFunc = GetEaseFunction(ease, easeParams)
+  const easeFunc = GetEaseFunction(ease, easeParams)
 
-  var i
-  var v
-  var q = quantity - 1
+  let i
+  let v
+  const q = quantity - 1
 
   for (i = 0; i < q; i++) {
     v = easeFunc(i / q)
@@ -78,13 +79,13 @@ var GetEasedPoints = function (line, ease, quantity, collinearThreshold, easePar
 
   //  Remove collinear parts
   if (collinearThreshold > 0) {
-    var prevPoint = results[0]
+    let prevPoint = results[0]
 
     //  Store the new results here
-    var sortedResults = [prevPoint]
+    const sortedResults = [prevPoint]
 
     for (i = 1; i < results.length - 1; i++) {
-      var point = results[i]
+      const point = results[i]
 
       if (DistanceBetweenPoints(prevPoint, point) >= collinearThreshold) {
         sortedResults.push(point)
@@ -93,7 +94,7 @@ var GetEasedPoints = function (line, ease, quantity, collinearThreshold, easePar
     }
 
     //  Top and tail
-    var endPoint = results[results.length - 1]
+    const endPoint = results[results.length - 1]
 
     if (DistanceBetweenPoints(prevPoint, endPoint) < collinearThreshold) {
       sortedResults.pop()
@@ -107,4 +108,4 @@ var GetEasedPoints = function (line, ease, quantity, collinearThreshold, easePar
   }
 }
 
-module.exports = GetEasedPoints
+export default GetEasedPoints

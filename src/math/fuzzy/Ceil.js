@@ -15,7 +15,7 @@
  *
  * @return {number} The fuzzy ceiling of the value.
  */
-var Ceil = function (value, epsilon) {
+const Ceil = (value, epsilon) => {
   if (epsilon === undefined) {
     epsilon = 0.0001
   }
@@ -23,4 +23,4 @@ var Ceil = function (value, epsilon) {
   return Math.ceil(value - epsilon)
 }
 
-module.exports = Ceil
+export default Ceil

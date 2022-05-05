@@ -14,8 +14,8 @@
  *
  * @return {boolean} Returns `true` if `value` is a power of two, otherwise `false`.
  */
-var IsValuePowerOfTwo = function (value) {
+const IsValuePowerOfTwo = value => {
   return value > 0 && (value & (value - 1)) === 0
 }
 
-module.exports = IsValuePowerOfTwo
+export default IsValuePowerOfTwo

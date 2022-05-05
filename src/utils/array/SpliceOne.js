@@ -16,16 +16,16 @@
  *
  * @return {*} The item which was spliced (removed).
  */
-var SpliceOne = function (array, index) {
+const SpliceOne = (array, index) => {
   if (index >= array.length) {
     return
   }
 
-  var len = array.length - 1
+  const len = array.length - 1
 
-  var item = array[index]
+  const item = array[index]
 
-  for (var i = index; i < len; i++) {
+  for (let i = index; i < len; i++) {
     array[i] = array[i + 1]
   }
 
@@ -34,4 +34,4 @@ var SpliceOne = function (array, index) {
   return item
 }
 
-module.exports = SpliceOne
+export default SpliceOne

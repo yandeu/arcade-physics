@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Ellipse = require('./Ellipse')
+import Ellipse from './Ellipse'
 
 /**
  * Creates a new Ellipse instance based on the values contained in the given source.
@@ -16,8 +16,8 @@ var Ellipse = require('./Ellipse')
  *
  * @return {Phaser.Geom.Ellipse} A clone of the source Ellipse.
  */
-var Clone = function (source) {
+const Clone = source => {
   return new Ellipse(source.x, source.y, source.width, source.height)
 }
 
-module.exports = Clone
+export default Clone

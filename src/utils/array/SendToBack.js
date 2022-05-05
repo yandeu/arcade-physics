@@ -16,8 +16,8 @@
  *
  * @return {*} The element that was moved.
  */
-var SendToBack = function (array, item) {
-  var currentIndex = array.indexOf(item)
+const SendToBack = (array, item) => {
+  const currentIndex = array.indexOf(item)
 
   if (currentIndex !== -1 && currentIndex > 0) {
     array.splice(currentIndex, 1)
@@ -27,4 +27,4 @@ var SendToBack = function (array, item) {
   return item
 }
 
-module.exports = SendToBack
+export default SendToBack

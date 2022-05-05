@@ -7,7 +7,7 @@
 //  Adapted from [gl-matrix](https://github.com/toji/gl-matrix) by toji
 //  and [vecmath](https://github.com/mattdesl/vecmath) by mattdesl
 
-var Class = require('../utils/Class')
+import Class from '../utils/Class'
 
 /**
  * @classdesc
@@ -25,7 +25,7 @@ var Class = require('../utils/Class')
  * @param {number} [z] - The z component.
  * @param {number} [w] - The w component.
  */
-var Vector4 = new Class({
+const Vector4 = new Class({
   initialize: function Vector4(x, y, z, w) {
     /**
      * The x component of this Vector.
@@ -222,10 +222,10 @@ var Vector4 = new Class({
    * @return {number} The length of this Vector.
    */
   length: function () {
-    var x = this.x
-    var y = this.y
-    var z = this.z
-    var w = this.w
+    const x = this.x
+    const y = this.y
+    const z = this.z
+    const w = this.w
 
     return Math.sqrt(x * x + y * y + z * z + w * w)
   },
@@ -239,10 +239,10 @@ var Vector4 = new Class({
    * @return {number} The length of this Vector, squared.
    */
   lengthSq: function () {
-    var x = this.x
-    var y = this.y
-    var z = this.z
-    var w = this.w
+    const x = this.x
+    const y = this.y
+    const z = this.z
+    const w = this.w
 
     return x * x + y * y + z * z + w * w
   },
@@ -258,11 +258,11 @@ var Vector4 = new Class({
    * @return {Phaser.Math.Vector4} This Vector4.
    */
   normalize: function () {
-    var x = this.x
-    var y = this.y
-    var z = this.z
-    var w = this.w
-    var len = x * x + y * y + z * z + w * w
+    const x = this.x
+    const y = this.y
+    const z = this.z
+    const w = this.w
+    let len = x * x + y * y + z * z + w * w
 
     if (len > 0) {
       len = 1 / Math.sqrt(len)
@@ -308,10 +308,10 @@ var Vector4 = new Class({
       t = 0
     }
 
-    var ax = this.x
-    var ay = this.y
-    var az = this.z
-    var aw = this.w
+    const ax = this.x
+    const ay = this.y
+    const az = this.z
+    const aw = this.w
 
     this.x = ax + t * (v.x - ax)
     this.y = ay + t * (v.y - ay)
@@ -374,10 +374,10 @@ var Vector4 = new Class({
    * @return {number} The distance from this Vector to the given Vector.
    */
   distance: function (v) {
-    var dx = v.x - this.x
-    var dy = v.y - this.y
-    var dz = v.z - this.z || 0
-    var dw = v.w - this.w || 0
+    const dx = v.x - this.x
+    const dy = v.y - this.y
+    const dz = v.z - this.z || 0
+    const dw = v.w - this.w || 0
 
     return Math.sqrt(dx * dx + dy * dy + dz * dz + dw * dw)
   },
@@ -393,10 +393,10 @@ var Vector4 = new Class({
    * @return {number} The distance from this Vector to the given Vector, squared.
    */
   distanceSq: function (v) {
-    var dx = v.x - this.x
-    var dy = v.y - this.y
-    var dz = v.z - this.z || 0
-    var dw = v.w - this.w || 0
+    const dx = v.x - this.x
+    const dy = v.y - this.y
+    const dz = v.z - this.z || 0
+    const dw = v.w - this.w || 0
 
     return dx * dx + dy * dy + dz * dz + dw * dw
   },
@@ -429,11 +429,11 @@ var Vector4 = new Class({
    * @return {Phaser.Math.Vector4} This Vector4.
    */
   transformMat4: function (mat) {
-    var x = this.x
-    var y = this.y
-    var z = this.z
-    var w = this.w
-    var m = mat.val
+    const x = this.x
+    const y = this.y
+    const z = this.z
+    const w = this.w
+    const m = mat.val
 
     this.x = m[0] * x + m[4] * y + m[8] * z + m[12] * w
     this.y = m[1] * x + m[5] * y + m[9] * z + m[13] * w
@@ -454,19 +454,19 @@ var Vector4 = new Class({
    * @return {Phaser.Math.Vector4} This Vector4.
    */
   transformQuat: function (q) {
-    var x = this.x
-    var y = this.y
-    var z = this.z
-    var qx = q.x
-    var qy = q.y
-    var qz = q.z
-    var qw = q.w
+    const x = this.x
+    const y = this.y
+    const z = this.z
+    const qx = q.x
+    const qy = q.y
+    const qz = q.z
+    const qw = q.w
 
     // calculate quat * vec
-    var ix = qw * x + qy * z - qz * y
-    var iy = qw * y + qz * x - qx * z
-    var iz = qw * z + qx * y - qy * x
-    var iw = -qx * x - qy * y - qz * z
+    const ix = qw * x + qy * z - qz * y
+    const iy = qw * y + qz * x - qx * z
+    const iz = qw * z + qx * y - qy * x
+    const iw = -qx * x - qy * y - qz * z
 
     // calculate result * inverse quat
     this.x = ix * qw + iw * -qx + iy * -qz - iz * -qy
@@ -502,4 +502,4 @@ Vector4.prototype.distSq = Vector4.prototype.distanceSq
 Vector4.prototype.len = Vector4.prototype.length
 Vector4.prototype.lenSq = Vector4.prototype.lengthSq
 
-module.exports = Vector4
+export default Vector4

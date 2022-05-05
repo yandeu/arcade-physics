@@ -23,8 +23,8 @@
  *
  * @return {string} A new string, same as the first, but with the first letter capitalized.
  */
-var UppercaseFirst = function (str) {
+const UppercaseFirst = str => {
   return str && str[0].toUpperCase() + str.slice(1)
 }
 
-module.exports = UppercaseFirst
+export default UppercaseFirst

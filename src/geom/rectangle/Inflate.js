@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CenterOn = require('./CenterOn')
+import CenterOn from './CenterOn'
 
 /**
  * Increases the size of a Rectangle by a specified amount.
@@ -22,13 +22,13 @@ var CenterOn = require('./CenterOn')
  *
  * @return {Phaser.Geom.Rectangle} The inflated Rectangle.
  */
-var Inflate = function (rect, x, y) {
-  var cx = rect.centerX
-  var cy = rect.centerY
+const Inflate = (rect, x, y) => {
+  const cx = rect.centerX
+  const cy = rect.centerY
 
   rect.setSize(rect.width + x * 2, rect.height + y * 2)
 
   return CenterOn(rect, cx, cy)
 }
 
-module.exports = Inflate
+export default Inflate

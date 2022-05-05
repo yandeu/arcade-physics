@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Ellipse = require('./Ellipse')
-var GameObjectFactory = require('../../GameObjectFactory')
+import Ellipse from './Ellipse'
+
+import GameObjectFactory from '../../GameObjectFactory'
 
 /**
  * Creates a new Ellipse Shape Game Object and adds it to the Scene.

@@ -17,11 +17,11 @@
  *
  * @return {number} The distance between each point, squared.
  */
-var DistanceSquared = function (x1, y1, x2, y2) {
-  var dx = x1 - x2
-  var dy = y1 - y2
+const DistanceSquared = (x1, y1, x2, y2) => {
+  const dx = x1 - x2
+  const dy = y1 - y2
 
   return dx * dx + dy * dy
 }
 
-module.exports = DistanceSquared
+export default DistanceSquared

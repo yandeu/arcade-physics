@@ -14,7 +14,7 @@
  *
  * @return {number} The normalized angle, in radians.
  */
-var Normalize = function (angle) {
+const Normalize = angle => {
   angle = angle % (2 * Math.PI)
 
   if (angle >= 0) {
@@ -24,4 +24,4 @@ var Normalize = function (angle) {
   }
 }
 
-module.exports = Normalize
+export default Normalize

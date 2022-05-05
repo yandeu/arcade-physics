@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('./Point')
+import Point from './Point'
 
 /**
  * Get the centroid or geometric center of a plane figure (the arithmetic mean position of all the points in the figure).
@@ -20,7 +20,7 @@ var Point = require('./Point')
  *
  * @return {Phaser.Geom.Point} A Point object representing the geometric center of the given points.
  */
-var GetCentroid = function (points, out) {
+const GetCentroid = (points, out) => {
   if (out === undefined) {
     out = new Point()
   }
@@ -29,7 +29,7 @@ var GetCentroid = function (points, out) {
     throw new Error('GetCentroid points argument must be an array')
   }
 
-  var len = points.length
+  const len = points.length
 
   if (len < 1) {
     throw new Error('GetCentroid points array must not be empty')
@@ -37,7 +37,7 @@ var GetCentroid = function (points, out) {
     out.x = points[0].x
     out.y = points[0].y
   } else {
-    for (var i = 0; i < len; i++) {
+    for (let i = 0; i < len; i++) {
       out.x += points[i].x
       out.y += points[i].y
     }
@@ -49,4 +49,4 @@ var GetCentroid = function (points, out) {
   return out
 }
 
-module.exports = GetCentroid
+export default GetCentroid

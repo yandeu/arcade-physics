@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../utils/Class')
-var GEOM_CONST = require('../const')
+import Class from '../../utils/Class'
+
+import GEOM_CONST from '../const'
 
 /**
  * @classdesc
@@ -19,7 +20,7 @@ var GEOM_CONST = require('../const')
  * @param {number} [x=0] - The x coordinate of this Point.
  * @param {number} [y=x] - The y coordinate of this Point.
  */
-var Point = new Class({
+const Point = new Class({
   initialize: function Point(x, y) {
     if (x === undefined) {
       x = 0
@@ -86,4 +87,4 @@ var Point = new Class({
   }
 })
 
-module.exports = Point
+export default Point

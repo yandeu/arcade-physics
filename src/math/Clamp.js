@@ -16,8 +16,8 @@
  *
  * @return {number} The clamped value.
  */
-var Clamp = function (value, min, max) {
+const Clamp = (value, min, max) => {
   return Math.max(min, Math.min(max, value))
 }
 
-module.exports = Clamp
+export default Clamp

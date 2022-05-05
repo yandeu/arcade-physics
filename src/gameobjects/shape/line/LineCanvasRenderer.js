@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var LineStyleCanvas = require('../LineStyleCanvas')
-var SetTransform = require('../../../renderer/canvas/utils/SetTransform')
+import LineStyleCanvas from '../LineStyleCanvas'
+
+import SetTransform from '../../../renderer/canvas/utils/SetTransform'
 
 /**
  * Renders this Game Object with the Canvas Renderer to the given Camera.
@@ -21,14 +22,14 @@ var SetTransform = require('../../../renderer/canvas/utils/SetTransform')
  * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera that is rendering the Game Object.
  * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
  */
-var LineCanvasRenderer = function (renderer, src, camera, parentMatrix) {
+const LineCanvasRenderer = (renderer, src, camera, parentMatrix) => {
   camera.addToRenderList(src)
 
-  var ctx = renderer.currentContext
+  const ctx = renderer.currentContext
 
   if (SetTransform(renderer, ctx, src, camera, parentMatrix)) {
-    var dx = src._displayOriginX
-    var dy = src._displayOriginY
+    const dx = src._displayOriginX
+    const dy = src._displayOriginY
 
     if (src.isStroked) {
       LineStyleCanvas(ctx, src)
@@ -46,4 +47,4 @@ var LineCanvasRenderer = function (renderer, src, camera, parentMatrix) {
   }
 }
 
-module.exports = LineCanvasRenderer
+export default LineCanvasRenderer

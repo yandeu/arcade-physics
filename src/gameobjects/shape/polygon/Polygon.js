@@ -4,13 +4,14 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var PolygonRender = require('./PolygonRender')
-var Class = require('../../../utils/Class')
-var Earcut = require('../../../geom/polygon/Earcut')
-var GetAABB = require('../../../geom/polygon/GetAABB')
-var GeomPolygon = require('../../../geom/polygon/Polygon')
-var Shape = require('../Shape')
-var Smooth = require('../../../geom/polygon/Smooth')
+import PolygonRender from './PolygonRender'
+
+import Class from '../../../utils/Class'
+import Earcut from '../../../geom/polygon/Earcut'
+import GetAABB from '../../../geom/polygon/GetAABB'
+import GeomPolygon from '../../../geom/polygon/Polygon'
+import Shape from '../Shape'
+import Smooth from '../../../geom/polygon/Smooth'
 
 /**
  * @classdesc
@@ -46,7 +47,7 @@ var Smooth = require('../../../geom/polygon/Smooth')
  * @param {number} [fillColor] - The color the polygon will be filled with, i.e. 0xff0000 for red.
  * @param {number} [fillAlpha] - The alpha the polygon will be filled with. You can also set the alpha of the overall Shape using its `alpha` property.
  */
-var Polygon = new Class({
+const Polygon = new Class({
   Extends: Shape,
 
   Mixins: [PolygonRender],
@@ -61,7 +62,7 @@ var Polygon = new Class({
 
     Shape.call(this, scene, 'Polygon', new GeomPolygon(points))
 
-    var bounds = GetAABB(this.geom)
+    const bounds = GetAABB(this.geom)
 
     this.setPosition(x, y)
     this.setSize(bounds.width, bounds.height)
@@ -91,7 +92,7 @@ var Polygon = new Class({
       iterations = 1
     }
 
-    for (var i = 0; i < iterations; i++) {
+    for (let i = 0; i < iterations; i++) {
       Smooth(this.geom)
     }
 
@@ -108,10 +109,10 @@ var Polygon = new Class({
    * @return {this} This Game Object instance.
    */
   updateData: function () {
-    var path = []
-    var points = this.geom.points
+    const path = []
+    const points = this.geom.points
 
-    for (var i = 0; i < points.length; i++) {
+    for (let i = 0; i < points.length; i++) {
       path.push(points[i].x, points[i].y)
     }
 
@@ -124,4 +125,4 @@ var Polygon = new Class({
   }
 })
 
-module.exports = Polygon
+export default Polygon

@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SmoothStep = require('../SmoothStep')
+import SmoothStep from '../SmoothStep'
 
 /**
  * A Smooth Step interpolation method.
@@ -19,8 +19,8 @@ var SmoothStep = require('../SmoothStep')
  *
  * @return {number} The interpolated value.
  */
-var SmoothStepInterpolation = function (t, min, max) {
+const SmoothStepInterpolation = (t, min, max) => {
   return min + (max - min) * SmoothStep(t, 0, 1)
 }
 
-module.exports = SmoothStepInterpolation
+export default SmoothStepInterpolation

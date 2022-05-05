@@ -15,8 +15,8 @@
  *
  * @return {boolean} `true` if the two Rectangles overlap, `false` otherwise.
  */
-var Overlaps = function (rectA, rectB) {
+const Overlaps = (rectA, rectB) => {
   return rectA.x < rectB.right && rectA.right > rectB.x && rectA.y < rectB.bottom && rectA.bottom > rectB.y
 }
 
-module.exports = Overlaps
+export default Overlaps

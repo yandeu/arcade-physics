@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Perimeter = require('./Perimeter')
-var Point = require('../point/Point')
+import Perimeter from './Perimeter'
+
+import Point from '../point/Point'
 
 /**
  * Calculates the coordinates of a point at a certain `position` on the Rectangle's perimeter.
@@ -25,7 +26,7 @@ var Point = require('../point/Point')
  *
  * @return {Phaser.Geom.Point} The updated `output` object, or a new Point if no `output` object was given.
  */
-var GetPoint = function (rectangle, position, out) {
+const GetPoint = (rectangle, position, out) => {
   if (out === undefined) {
     out = new Point()
   }
@@ -37,7 +38,7 @@ var GetPoint = function (rectangle, position, out) {
     return out
   }
 
-  var p = Perimeter(rectangle) * position
+  let p = Perimeter(rectangle) * position
 
   if (position > 0.5) {
     p -= rectangle.width + rectangle.height
@@ -64,4 +65,4 @@ var GetPoint = function (rectangle, position, out) {
   return out
 }
 
-module.exports = GetPoint
+export default GetPoint

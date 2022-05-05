@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Normalize = require('./Normalize')
+import Normalize from './Normalize'
 
 /**
  * Reverse the given angle.
@@ -16,8 +16,8 @@ var Normalize = require('./Normalize')
  *
  * @return {number} The reversed angle, in radians.
  */
-var Reverse = function (angle) {
+const Reverse = angle => {
   return Normalize(angle + Math.PI)
 }
 
-module.exports = Reverse
+export default Reverse

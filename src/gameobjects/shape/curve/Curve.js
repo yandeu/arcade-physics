@@ -4,11 +4,12 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../../utils/Class')
-var CurveRender = require('./CurveRender')
-var Earcut = require('../../../geom/polygon/Earcut')
-var Rectangle = require('../../../geom/rectangle/Rectangle')
-var Shape = require('../Shape')
+import Class from '../../../utils/Class'
+
+import CurveRender from './CurveRender'
+import Earcut from '../../../geom/polygon/Earcut'
+import Rectangle from '../../../geom/rectangle/Rectangle'
+import Shape from '../Shape'
 
 /**
  * @classdesc
@@ -40,7 +41,7 @@ var Shape = require('../Shape')
  * @param {number} [fillColor] - The color the curve will be filled with, i.e. 0xff0000 for red.
  * @param {number} [fillAlpha] - The alpha the curve will be filled with. You can also set the alpha of the overall Shape using its `alpha` property.
  */
-var Curve = new Class({
+const Curve = new Class({
   Extends: Shape,
 
   Mixins: [CurveRender],
@@ -137,8 +138,8 @@ var Curve = new Class({
    * @return {this} This Game Object instance.
    */
   updateData: function () {
-    var bounds = this._curveBounds
-    var smoothness = this._smoothness
+    const bounds = this._curveBounds
+    const smoothness = this._smoothness
 
     //  Update the bounds in case the underlying data has changed
     this.geom.getBounds(bounds, smoothness)
@@ -146,10 +147,10 @@ var Curve = new Class({
     this.setSize(bounds.width, bounds.height)
     this.updateDisplayOrigin()
 
-    var path = []
-    var points = this.geom.getPoints(smoothness)
+    const path = []
+    const points = this.geom.getPoints(smoothness)
 
-    for (var i = 0; i < points.length; i++) {
+    for (let i = 0; i < points.length; i++) {
       path.push(points[i].x, points[i].y)
     }
 
@@ -162,4 +163,4 @@ var Curve = new Class({
   }
 })
 
-module.exports = Curve
+export default Curve

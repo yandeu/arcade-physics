@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point')
+import Point from '../point/Point'
 
 /**
  * Returns the center of a Rectangle as a Point.
@@ -19,7 +19,7 @@ var Point = require('../point/Point')
  *
  * @return {(Phaser.Geom.Point|object)} The modified `out` object, or a new Point if none was provided.
  */
-var GetCenter = function (rect, out) {
+const GetCenter = (rect, out) => {
   if (out === undefined) {
     out = new Point()
   }
@@ -30,4 +30,4 @@ var GetCenter = function (rect, out) {
   return out
 }
 
-module.exports = GetCenter
+export default GetCenter

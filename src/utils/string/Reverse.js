@@ -15,8 +15,8 @@
  *
  * @return {string} The reversed string.
  */
-var Reverse = function (string) {
+const Reverse = string => {
   return string.split('').reverse().join('')
 }
 
-module.exports = Reverse
+export default Reverse

@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Vector3 = require('../../math/Vector3')
+import Vector3 from '../../math/Vector3'
 
 /**
  * Checks for intersection between the two line segments and returns the intersection point as a Vector3,
@@ -22,24 +22,24 @@ var Vector3 = require('../../math/Vector3')
  *
  * @return {Phaser.Math.Vector3} A Vector3 containing the intersection results, or `null`.
  */
-var GetLineToLine = function (line1, line2, out) {
-  var x1 = line1.x1
-  var y1 = line1.y1
-  var x2 = line1.x2
-  var y2 = line1.y2
+const GetLineToLine = (line1, line2, out) => {
+  const x1 = line1.x1
+  const y1 = line1.y1
+  const x2 = line1.x2
+  const y2 = line1.y2
 
-  var x3 = line2.x1
-  var y3 = line2.y1
-  var x4 = line2.x2
-  var y4 = line2.y2
+  const x3 = line2.x1
+  const y3 = line2.y1
+  const x4 = line2.x2
+  const y4 = line2.y2
 
-  var dx1 = x2 - x1
-  var dy1 = y2 - y1
+  const dx1 = x2 - x1
+  const dy1 = y2 - y1
 
-  var dx2 = x4 - x3
-  var dy2 = y4 - y3
+  const dx2 = x4 - x3
+  const dy2 = y4 - y3
 
-  var denom = dy2 * dx1 - dx2 * dy1
+  const denom = dy2 * dx1 - dx2 * dy1
 
   //  Make sure there is not a division by zero - this also indicates that the lines are parallel.
   //  If numA and numB were both equal to zero the lines would be on top of each other (coincidental).
@@ -49,8 +49,8 @@ var GetLineToLine = function (line1, line2, out) {
     return false
   }
 
-  var T2 = (dx1 * (y3 - y1) + dy1 * (x1 - x3)) / (dx2 * dy1 - dy2 * dx1)
-  var T1 = (x3 + dx2 * T2 - x1) / dx1
+  const T2 = (dx1 * (y3 - y1) + dy1 * (x1 - x3)) / (dx2 * dy1 - dy2 * dx1)
+  const T1 = (x3 + dx2 * T2 - x1) / dx1
 
   //  Intersects?
   if (T1 < 0 || T2 < 0 || T2 > 1) {
@@ -64,4 +64,4 @@ var GetLineToLine = function (line1, line2, out) {
   return out.set(x1 + dx1 * T1, y1 + dy1 * T1, T1)
 }
 
-module.exports = GetLineToLine
+export default GetLineToLine

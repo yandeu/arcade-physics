@@ -14,7 +14,7 @@
  *
  * @return {number} The tweened value.
  */
-var Out = function (v) {
+const Out = v => {
   if (v < 1 / 2.75) {
     return 7.5625 * v * v
   } else if (v < 2 / 2.75) {
@@ -26,4 +26,4 @@ var Out = function (v) {
   }
 }
 
-module.exports = Out
+export default Out

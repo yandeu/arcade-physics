@@ -16,7 +16,7 @@
  *
  * @return {number} The tweened value.
  */
-var InOut = function (v, amplitude, period) {
+const InOut = (v, amplitude, period) => {
   if (amplitude === undefined) {
     amplitude = 0.1
   }
@@ -29,7 +29,7 @@ var InOut = function (v, amplitude, period) {
   } else if (v === 1) {
     return 1
   } else {
-    var s = period / 4
+    let s = period / 4
 
     if (amplitude < 1) {
       amplitude = 1
@@ -45,4 +45,4 @@ var InOut = function (v, amplitude, period) {
   }
 }
 
-module.exports = InOut
+export default InOut

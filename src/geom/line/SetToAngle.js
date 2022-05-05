@@ -20,7 +20,7 @@
  *
  * @return {Phaser.Geom.Line} The updated line.
  */
-var SetToAngle = function (line, x, y, angle, length) {
+const SetToAngle = (line, x, y, angle, length) => {
   line.x1 = x
   line.y1 = y
 
@@ -30,4 +30,4 @@ var SetToAngle = function (line, x, y, angle, length) {
   return line
 }
 
-module.exports = SetToAngle
+export default SetToAngle

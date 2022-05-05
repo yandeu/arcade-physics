@@ -4,10 +4,11 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var DegToRad = require('../../../math/DegToRad')
-var FillStyleCanvas = require('../FillStyleCanvas')
-var LineStyleCanvas = require('../LineStyleCanvas')
-var SetTransform = require('../../../renderer/canvas/utils/SetTransform')
+import DegToRad from '../../../math/DegToRad'
+
+import FillStyleCanvas from '../FillStyleCanvas'
+import LineStyleCanvas from '../LineStyleCanvas'
+import SetTransform from '../../../renderer/canvas/utils/SetTransform'
 
 /**
  * Renders this Game Object with the Canvas Renderer to the given Camera.
@@ -23,13 +24,13 @@ var SetTransform = require('../../../renderer/canvas/utils/SetTransform')
  * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera that is rendering the Game Object.
  * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
  */
-var ArcCanvasRenderer = function (renderer, src, camera, parentMatrix) {
+const ArcCanvasRenderer = (renderer, src, camera, parentMatrix) => {
   camera.addToRenderList(src)
 
-  var ctx = renderer.currentContext
+  const ctx = renderer.currentContext
 
   if (SetTransform(renderer, ctx, src, camera, parentMatrix)) {
-    var radius = src.radius
+    const radius = src.radius
 
     ctx.beginPath()
 
@@ -63,4 +64,4 @@ var ArcCanvasRenderer = function (renderer, src, camera, parentMatrix) {
   }
 }
 
-module.exports = ArcCanvasRenderer
+export default ArcCanvasRenderer

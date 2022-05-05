@@ -15,9 +15,9 @@
  *
  * @return {Phaser.Geom.Point} The given point, rotated by the given angle in an anticlockwise direction.
  */
-var Rotate = function (point, angle) {
-  var x = point.x
-  var y = point.y
+const Rotate = (point, angle) => {
+  const x = point.x
+  const y = point.y
 
   point.x = x * Math.cos(angle) - y * Math.sin(angle)
   point.y = x * Math.sin(angle) + y * Math.cos(angle)
@@ -25,4 +25,4 @@ var Rotate = function (point, angle) {
   return point
 }
 
-module.exports = Rotate
+export default Rotate

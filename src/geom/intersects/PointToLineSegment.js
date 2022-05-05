@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var PointToLine = require('./PointToLine')
+import PointToLine from './PointToLine'
 
 /**
  * Checks if a Point is located on the given line segment.
@@ -17,17 +17,17 @@ var PointToLine = require('./PointToLine')
  *
  * @return {boolean} `true` if the Point is on the given line segment, otherwise `false`.
  */
-var PointToLineSegment = function (point, line) {
+const PointToLineSegment = (point, line) => {
   if (!PointToLine(point, line)) {
     return false
   }
 
-  var xMin = Math.min(line.x1, line.x2)
-  var xMax = Math.max(line.x1, line.x2)
-  var yMin = Math.min(line.y1, line.y2)
-  var yMax = Math.max(line.y1, line.y2)
+  const xMin = Math.min(line.x1, line.x2)
+  const xMax = Math.max(line.x1, line.x2)
+  const yMin = Math.min(line.y1, line.y2)
+  const yMax = Math.max(line.y1, line.y2)
 
   return point.x >= xMin && point.x <= xMax && point.y >= yMin && point.y <= yMax
 }
 
-module.exports = PointToLineSegment
+export default PointToLineSegment

@@ -20,7 +20,7 @@
  *
  * @return {number} The snapped value.
  */
-var SnapFloor = function (value, gap, start, divide) {
+const SnapFloor = (value, gap, start, divide) => {
   if (start === undefined) {
     start = 0
   }
@@ -35,4 +35,4 @@ var SnapFloor = function (value, gap, start, divide) {
   return divide ? (start + value) / gap : start + value
 }
 
-module.exports = SnapFloor
+export default SnapFloor

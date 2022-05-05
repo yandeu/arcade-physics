@@ -4,13 +4,14 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var ArcRender = require('./ArcRender')
-var Class = require('../../../utils/Class')
-var DegToRad = require('../../../math/DegToRad')
-var Earcut = require('../../../geom/polygon/Earcut')
-var GeomCircle = require('../../../geom/circle/Circle')
-var MATH_CONST = require('../../../math/const')
-var Shape = require('../Shape')
+import ArcRender from './ArcRender'
+
+import Class from '../../../utils/Class'
+import DegToRad from '../../../math/DegToRad'
+import Earcut from '../../../geom/polygon/Earcut'
+import GeomCircle from '../../../geom/circle/Circle'
+import MATH_CONST from '../../../math/const'
+import Shape from '../Shape'
 
 /**
  * @classdesc
@@ -46,7 +47,7 @@ var Shape = require('../Shape')
  * @param {number} [fillColor] - The color the arc will be filled with, i.e. 0xff0000 for red.
  * @param {number} [fillAlpha] - The alpha the arc will be filled with. You can also set the alpha of the overall Shape using its `alpha` property.
  */
-var Arc = new Class({
+const Arc = new Class({
   Extends: Shape,
 
   Mixins: [ArcRender],
@@ -116,7 +117,7 @@ var Arc = new Class({
 
     this.setPosition(x, y)
 
-    var diameter = this.geom.radius * 2
+    const diameter = this.geom.radius * 2
     this.setSize(diameter, diameter)
 
     if (fillColor !== undefined) {
@@ -164,7 +165,7 @@ var Arc = new Class({
     set: function (value) {
       this.geom.radius = value
 
-      var diameter = value * 2
+      const diameter = value * 2
       this.setSize(diameter, diameter)
       this.updateDisplayOrigin()
       this.updateData()
@@ -320,16 +321,16 @@ var Arc = new Class({
    * @return {this} This Game Object instance.
    */
   updateData: function () {
-    var step = this._iterations
-    var iteration = step
+    const step = this._iterations
+    let iteration = step
 
-    var radius = this.geom.radius
-    var startAngle = DegToRad(this._startAngle)
-    var endAngle = DegToRad(this._endAngle)
-    var anticlockwise = this._anticlockwise
+    const radius = this.geom.radius
+    const startAngle = DegToRad(this._startAngle)
+    let endAngle = DegToRad(this._endAngle)
+    const anticlockwise = this._anticlockwise
 
-    var x = radius
-    var y = radius
+    const x = radius
+    const y = radius
 
     endAngle -= startAngle
 
@@ -345,9 +346,9 @@ var Arc = new Class({
       endAngle = MATH_CONST.PI2 + (endAngle % MATH_CONST.PI2)
     }
 
-    var path = [x + Math.cos(startAngle) * radius, y + Math.sin(startAngle) * radius]
+    const path = [x + Math.cos(startAngle) * radius, y + Math.sin(startAngle) * radius]
 
-    var ta
+    let ta
 
     while (iteration < 1) {
       ta = endAngle * iteration + startAngle
@@ -370,4 +371,4 @@ var Arc = new Class({
   }
 })
 
-module.exports = Arc
+export default Arc

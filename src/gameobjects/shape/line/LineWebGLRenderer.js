@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetCalcMatrix = require('../../GetCalcMatrix')
-var Utils = require('../../../renderer/webgl/Utils')
+import GetCalcMatrix from '../../GetCalcMatrix'
+
+import Utils from '../../../renderer/webgl/Utils'
 
 /**
  * Renders this Game Object with the WebGL Renderer to the given Camera.
@@ -21,32 +22,32 @@ var Utils = require('../../../renderer/webgl/Utils')
  * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera that is rendering the Game Object.
  * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
  */
-var LineWebGLRenderer = function (renderer, src, camera, parentMatrix) {
+const LineWebGLRenderer = (renderer, src, camera, parentMatrix) => {
   camera.addToRenderList(src)
 
-  var pipeline = renderer.pipelines.set(src.pipeline)
+  const pipeline = renderer.pipelines.set(src.pipeline)
 
-  var result = GetCalcMatrix(src, camera, parentMatrix)
+  const result = GetCalcMatrix(src, camera, parentMatrix)
 
   pipeline.calcMatrix.copyFrom(result.calc)
 
-  var dx = src._displayOriginX
-  var dy = src._displayOriginY
-  var alpha = camera.alpha * src.alpha
+  const dx = src._displayOriginX
+  const dy = src._displayOriginY
+  const alpha = camera.alpha * src.alpha
 
   renderer.pipelines.preBatch(src)
 
   if (src.isStroked) {
-    var strokeTint = pipeline.strokeTint
-    var color = Utils.getTintAppendFloatAlpha(src.strokeColor, src.strokeAlpha * alpha)
+    const strokeTint = pipeline.strokeTint
+    const color = Utils.getTintAppendFloatAlpha(src.strokeColor, src.strokeAlpha * alpha)
 
     strokeTint.TL = color
     strokeTint.TR = color
     strokeTint.BL = color
     strokeTint.BR = color
 
-    var startWidth = src._startWidth
-    var endWidth = src._endWidth
+    const startWidth = src._startWidth
+    const endWidth = src._endWidth
 
     pipeline.batchLine(
       src.geom.x1 - dx,
@@ -66,4 +67,4 @@ var LineWebGLRenderer = function (renderer, src, camera, parentMatrix) {
   renderer.pipelines.postBatch(src)
 }
 
-module.exports = LineWebGLRenderer
+export default LineWebGLRenderer

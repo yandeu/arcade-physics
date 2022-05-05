@@ -4,9 +4,10 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var ContainsArray = require('../triangle/ContainsArray')
-var Decompose = require('../triangle/Decompose')
-var LineToLine = require('./LineToLine')
+import ContainsArray from '../triangle/ContainsArray'
+
+import Decompose from '../triangle/Decompose'
+import LineToLine from './LineToLine'
 
 /**
  * Checks if two Triangles intersect.
@@ -21,7 +22,7 @@ var LineToLine = require('./LineToLine')
  *
  * @return {boolean} `true` if the Triangles intersect, otherwise `false`.
  */
-var TriangleToTriangle = function (triangleA, triangleB) {
+const TriangleToTriangle = (triangleA, triangleB) => {
   //  First the cheapest ones:
 
   if (
@@ -33,13 +34,13 @@ var TriangleToTriangle = function (triangleA, triangleB) {
     return false
   }
 
-  var lineAA = triangleA.getLineA()
-  var lineAB = triangleA.getLineB()
-  var lineAC = triangleA.getLineC()
+  const lineAA = triangleA.getLineA()
+  const lineAB = triangleA.getLineB()
+  const lineAC = triangleA.getLineC()
 
-  var lineBA = triangleB.getLineA()
-  var lineBB = triangleB.getLineB()
-  var lineBC = triangleB.getLineC()
+  const lineBA = triangleB.getLineA()
+  const lineBB = triangleB.getLineB()
+  const lineBC = triangleB.getLineC()
 
   //  Now check the lines against each line of TriangleB
   if (LineToLine(lineAA, lineBA) || LineToLine(lineAA, lineBB) || LineToLine(lineAA, lineBC)) {
@@ -56,8 +57,8 @@ var TriangleToTriangle = function (triangleA, triangleB) {
 
   //  Nope, so check to see if any of the points of triangleA are within triangleB
 
-  var points = Decompose(triangleA)
-  var within = ContainsArray(triangleB, points, true)
+  let points = Decompose(triangleA)
+  let within = ContainsArray(triangleB, points, true)
 
   if (within.length > 0) {
     return true
@@ -75,4 +76,4 @@ var TriangleToTriangle = function (triangleA, triangleB) {
   return false
 }
 
-module.exports = TriangleToTriangle
+export default TriangleToTriangle

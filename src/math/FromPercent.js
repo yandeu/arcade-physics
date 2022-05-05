@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Clamp = require('./Clamp')
+import Clamp from './Clamp'
 
 /**
  * Return a value based on the range between `min` and `max` and the percentage given.
@@ -18,10 +18,10 @@ var Clamp = require('./Clamp')
  *
  * @return {number} The value that is `percent` percent between `min` and `max`.
  */
-var FromPercent = function (percent, min, max) {
+const FromPercent = (percent, min, max) => {
   percent = Clamp(percent, 0, 1)
 
   return (max - min) * percent + min
 }
 
-module.exports = FromPercent
+export default FromPercent

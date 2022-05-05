@@ -4,9 +4,10 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../utils/Class')
-var Utils = require('../../renderer/webgl/Utils')
-var Vector3 = require('../../math/Vector3')
+import Class from '../../utils/Class'
+
+import Utils from '../../renderer/webgl/Utils'
+import Vector3 from '../../math/Vector3'
 
 /**
  * @classdesc
@@ -33,7 +34,7 @@ var Vector3 = require('../../math/Vector3')
  * @param {number} [ny=0] - The y normal value of the vertex.
  * @param {number} [nz=0] - The z normal value of the vertex.
  */
-var Vertex = new Class({
+const Vertex = new Class({
   Extends: Vector3,
 
   initialize: function Vertex(x, y, z, u, v, color, alpha, nx, ny, nz) {
@@ -203,16 +204,16 @@ var Vertex = new Class({
    * @param {number} cameraZ - The z position of the MeshCamera.
    */
   transformCoordinatesLocal: function (transformMatrix, width, height, cameraZ) {
-    var x = this.x
-    var y = this.y
-    var z = this.z
+    const x = this.x
+    const y = this.y
+    const z = this.z
 
-    var m = transformMatrix.val
+    const m = transformMatrix.val
 
-    var tx = x * m[0] + y * m[4] + z * m[8] + m[12]
-    var ty = x * m[1] + y * m[5] + z * m[9] + m[13]
-    var tz = x * m[2] + y * m[6] + z * m[10] + m[14]
-    var tw = x * m[3] + y * m[7] + z * m[11] + m[15]
+    const tx = x * m[0] + y * m[4] + z * m[8] + m[12]
+    const ty = x * m[1] + y * m[5] + z * m[9] + m[13]
+    const tz = x * m[2] + y * m[6] + z * m[10] + m[14]
+    const tw = x * m[3] + y * m[7] + z * m[11] + m[15]
 
     this.vx = (tx / tw) * width
     this.vy = -(ty / tw) * height
@@ -242,8 +243,8 @@ var Vertex = new Class({
    * @return {this} This Vertex.
    */
   update: function (a, b, c, d, e, f, roundPixels, alpha) {
-    var tx = this.vx * a + this.vy * c + e
-    var ty = this.vx * b + this.vy * d + f
+    let tx = this.vx * a + this.vy * c + e
+    let ty = this.vx * b + this.vy * d + f
 
     if (roundPixels) {
       tx = Math.round(tx)
@@ -284,4 +285,4 @@ var Vertex = new Class({
   }
 })
 
-module.exports = Vertex
+export default Vertex

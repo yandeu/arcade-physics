@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GameObjectFactory = require('../../GameObjectFactory')
-var Grid = require('./Grid')
+import GameObjectFactory from '../../GameObjectFactory'
+
+import Grid from './Grid'
 
 /**
  * Creates a new Grid Shape Game Object and adds it to the Scene.

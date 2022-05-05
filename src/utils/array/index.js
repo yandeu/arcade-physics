@@ -8,7 +8,7 @@
  * @namespace Phaser.Utils.Array
  */
 
-module.exports = {
+export default {
   Matrix: require('./matrix'),
 
   Add: require('./Add'),

@@ -19,16 +19,16 @@
  *
  * @return {(number|any)} The nearest value found in the array, or if a `key` was given, the nearest object with the matching property value.
  */
-var FindClosestInSorted = function (value, array, key) {
+const FindClosestInSorted = (value, array, key) => {
   if (!array.length) {
     return NaN
   } else if (array.length === 1) {
     return array[0]
   }
 
-  var i = 1
-  var low
-  var high
+  let i = 1
+  let low
+  let high
 
   if (key) {
     if (value < array[0][key]) {
@@ -61,4 +61,4 @@ var FindClosestInSorted = function (value, array, key) {
   }
 }
 
-module.exports = FindClosestInSorted
+export default FindClosestInSorted

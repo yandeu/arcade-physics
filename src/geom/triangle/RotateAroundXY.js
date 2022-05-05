@@ -19,12 +19,12 @@
  *
  * @return {Phaser.Geom.Triangle} The rotated Triangle.
  */
-var RotateAroundXY = function (triangle, x, y, angle) {
-  var c = Math.cos(angle)
-  var s = Math.sin(angle)
+const RotateAroundXY = (triangle, x, y, angle) => {
+  const c = Math.cos(angle)
+  const s = Math.sin(angle)
 
-  var tx = triangle.x1 - x
-  var ty = triangle.y1 - y
+  let tx = triangle.x1 - x
+  let ty = triangle.y1 - y
 
   triangle.x1 = tx * c - ty * s + x
   triangle.y1 = tx * s + ty * c + y
@@ -44,4 +44,4 @@ var RotateAroundXY = function (triangle, x, y, angle) {
   return triangle
 }
 
-module.exports = RotateAroundXY
+export default RotateAroundXY

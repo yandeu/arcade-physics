@@ -16,8 +16,8 @@
  *
  * @return {Phaser.Geom.Point} The Point with `Math.ceil()` applied to its coordinates.
  */
-var Ceil = function (point) {
+const Ceil = point => {
   return point.setTo(Math.ceil(point.x), Math.ceil(point.y))
 }
 
-module.exports = Ceil
+export default Ceil

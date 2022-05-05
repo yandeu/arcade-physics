@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Utils = require('../../renderer/webgl/Utils')
+import Utils from '../../renderer/webgl/Utils'
 
 /**
  * Renders a stroke outline around the given Shape.
@@ -19,30 +19,30 @@ var Utils = require('../../renderer/webgl/Utils')
  * @param {number} dx - The source displayOriginX.
  * @param {number} dy - The source displayOriginY.
  */
-var StrokePathWebGL = function (pipeline, src, alpha, dx, dy) {
-  var strokeTint = pipeline.strokeTint
-  var strokeTintColor = Utils.getTintAppendFloatAlpha(src.strokeColor, src.strokeAlpha * alpha)
+const StrokePathWebGL = (pipeline, src, alpha, dx, dy) => {
+  const strokeTint = pipeline.strokeTint
+  const strokeTintColor = Utils.getTintAppendFloatAlpha(src.strokeColor, src.strokeAlpha * alpha)
 
   strokeTint.TL = strokeTintColor
   strokeTint.TR = strokeTintColor
   strokeTint.BL = strokeTintColor
   strokeTint.BR = strokeTintColor
 
-  var path = src.pathData
-  var pathLength = path.length - 1
-  var lineWidth = src.lineWidth
-  var halfLineWidth = lineWidth / 2
+  const path = src.pathData
+  let pathLength = path.length - 1
+  const lineWidth = src.lineWidth
+  const halfLineWidth = lineWidth / 2
 
-  var px1 = path[0] - dx
-  var py1 = path[1] - dy
+  let px1 = path[0] - dx
+  let py1 = path[1] - dy
 
   if (!src.closePath) {
     pathLength -= 2
   }
 
-  for (var i = 2; i < pathLength; i += 2) {
-    var px2 = path[i] - dx
-    var py2 = path[i + 1] - dy
+  for (let i = 2; i < pathLength; i += 2) {
+    const px2 = path[i] - dx
+    const py2 = path[i + 1] - dy
 
     pipeline.batchLine(
       px1,
@@ -61,4 +61,4 @@ var StrokePathWebGL = function (pipeline, src, alpha, dx, dy) {
   }
 }
 
-module.exports = StrokePathWebGL
+export default StrokePathWebGL

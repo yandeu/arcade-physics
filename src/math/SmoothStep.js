@@ -21,7 +21,7 @@
  *
  * @return {number} The percentage of interpolation, between 0 and 1.
  */
-var SmoothStep = function (x, min, max) {
+const SmoothStep = (x, min, max) => {
   if (x <= min) {
     return 0
   }
@@ -35,4 +35,4 @@ var SmoothStep = function (x, min, max) {
   return x * x * (3 - 2 * x)
 }
 
-module.exports = SmoothStep
+export default SmoothStep

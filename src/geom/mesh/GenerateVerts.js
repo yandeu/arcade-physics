@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Face = require('./Face')
-var Vertex = require('./Vertex')
+import Face from './Face'
+
+import Vertex from './Vertex'
 
 /**
  * Generates a set of Face and Vertex objects by parsing the given data.
@@ -65,7 +66,7 @@ var Vertex = require('./Vertex')
  *
  * @return {Phaser.Types.Geom.Mesh.GenerateVertsResult} The parsed Face and Vertex objects.
  */
-var GenerateVerts = function (vertices, uvs, indicies, containsZ, normals, colors, alphas) {
+const GenerateVerts = (vertices, uvs, indicies, containsZ, normals, colors, alphas) => {
   if (containsZ === undefined) {
     containsZ = false
   }
@@ -81,37 +82,37 @@ var GenerateVerts = function (vertices, uvs, indicies, containsZ, normals, color
     return
   }
 
-  var result = {
+  const result = {
     faces: [],
     vertices: []
   }
 
-  var i
+  let i
 
-  var x
-  var y
-  var z
+  let x
+  let y
+  let z
 
-  var u
-  var v
+  let u
+  let v
 
-  var color
-  var alpha
+  let color
+  let alpha
 
-  var normalX
-  var normalY
-  var normalZ
+  let normalX
+  let normalY
+  let normalZ
 
-  var iInc = containsZ ? 3 : 2
+  const iInc = containsZ ? 3 : 2
 
-  var isColorArray = Array.isArray(colors)
-  var isAlphaArray = Array.isArray(alphas)
+  const isColorArray = Array.isArray(colors)
+  const isAlphaArray = Array.isArray(alphas)
 
   if (Array.isArray(indicies) && indicies.length > 0) {
     for (i = 0; i < indicies.length; i++) {
-      var index1 = indicies[i]
-      var index2 = indicies[i] * 2
-      var index3 = indicies[i] * iInc
+      const index1 = indicies[i]
+      const index2 = indicies[i] * 2
+      const index3 = indicies[i] * iInc
 
       x = vertices[index3]
       y = vertices[index3 + 1]
@@ -136,8 +137,8 @@ var GenerateVerts = function (vertices, uvs, indicies, containsZ, normals, color
       result.vertices.push(new Vertex(x, y, z, u, v, color, alpha, normalX, normalY, normalZ))
     }
   } else {
-    var uvIndex = 0
-    var colorIndex = 0
+    let uvIndex = 0
+    let colorIndex = 0
 
     for (i = 0; i < vertices.length; i += iInc) {
       x = vertices[i]
@@ -168,9 +169,9 @@ var GenerateVerts = function (vertices, uvs, indicies, containsZ, normals, color
   }
 
   for (i = 0; i < result.vertices.length; i += 3) {
-    var vert1 = result.vertices[i]
-    var vert2 = result.vertices[i + 1]
-    var vert3 = result.vertices[i + 2]
+    const vert1 = result.vertices[i]
+    const vert2 = result.vertices[i + 1]
+    const vert3 = result.vertices[i + 2]
 
     result.faces.push(new Face(vert1, vert2, vert3))
   }
@@ -178,4 +179,4 @@ var GenerateVerts = function (vertices, uvs, indicies, containsZ, normals, color
   return result
 }
 
-module.exports = GenerateVerts
+export default GenerateVerts

@@ -5,7 +5,7 @@
  */
 
 //  bitmask flag for GameObject.renderMask
-var _FLAG = 1 // 0001
+const _FLAG = 1 // 0001
 
 /**
  * Provides methods used for setting the visibility of a Game Object.
@@ -15,7 +15,7 @@ var _FLAG = 1 // 0001
  * @since 3.0.0
  */
 
-var Visible = {
+const Visible = {
   /**
    * Private internal value. Holds the visible value.
    *
@@ -71,4 +71,4 @@ var Visible = {
   }
 }
 
-module.exports = Visible
+export default Visible

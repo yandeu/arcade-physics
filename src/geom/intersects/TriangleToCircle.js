@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var LineToCircle = require('./LineToCircle')
-var Contains = require('../triangle/Contains')
+import LineToCircle from './LineToCircle'
+
+import Contains from '../triangle/Contains'
 
 /**
  * Checks if a Triangle and a Circle intersect.
@@ -20,7 +21,7 @@ var Contains = require('../triangle/Contains')
  *
  * @return {boolean} `true` if the Triangle and the `Circle` intersect, otherwise `false`.
  */
-var TriangleToCircle = function (triangle, circle) {
+const TriangleToCircle = (triangle, circle) => {
   //  First the cheapest ones:
 
   if (
@@ -51,4 +52,4 @@ var TriangleToCircle = function (triangle, circle) {
   return false
 }
 
-module.exports = TriangleToCircle
+export default TriangleToCircle

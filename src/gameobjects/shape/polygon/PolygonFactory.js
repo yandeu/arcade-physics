@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GameObjectFactory = require('../../GameObjectFactory')
-var Polygon = require('./Polygon')
+import GameObjectFactory from '../../GameObjectFactory'
+
+import Polygon from './Polygon'
 
 /**
  * Creates a new Polygon Shape Game Object and adds it to the Scene.

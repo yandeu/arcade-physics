@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Wrap = require('../Wrap')
+import Wrap from '../Wrap'
 
 /**
  * Wrap an angle in degrees.
@@ -18,8 +18,8 @@ var Wrap = require('../Wrap')
  *
  * @return {number} The wrapped angle, in degrees.
  */
-var WrapDegrees = function (angle) {
+const WrapDegrees = angle => {
   return Wrap(angle, -180, 180)
 }
 
-module.exports = WrapDegrees
+export default WrapDegrees

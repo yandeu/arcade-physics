@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Vector2 = require('./Vector2')
+import Vector2 from './Vector2'
 
 /**
  * Returns a Vector2 containing the x and y position of the given index in a `width` x `height` sized grid.
@@ -23,14 +23,14 @@ var Vector2 = require('./Vector2')
  *
  * @return {Phaser.Math.Vector2} A Vector2 where the x and y properties contain the given grid index.
  */
-var ToXY = function (index, width, height, out) {
+const ToXY = (index, width, height, out) => {
   if (out === undefined) {
     out = new Vector2()
   }
 
-  var x = 0
-  var y = 0
-  var total = width * height
+  let x = 0
+  let y = 0
+  const total = width * height
 
   if (index > 0 && index <= total) {
     if (index > width - 1) {
@@ -44,4 +44,4 @@ var ToXY = function (index, width, height, out) {
   return out.set(x, y)
 }
 
-module.exports = ToXY
+export default ToXY

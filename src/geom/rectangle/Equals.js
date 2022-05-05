@@ -15,7 +15,7 @@
  *
  * @return {boolean} `true` if the rectangles' properties are an exact match, otherwise `false`.
  */
-var Equals = function (rect, toCompare) {
+const Equals = (rect, toCompare) => {
   return (
     rect.x === toCompare.x &&
     rect.y === toCompare.y &&
@@ -24,4 +24,4 @@ var Equals = function (rect, toCompare) {
   )
 }
 
-module.exports = Equals
+export default Equals

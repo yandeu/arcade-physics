@@ -19,12 +19,12 @@
  *
  * @return {Phaser.Geom.Line} The rotated line.
  */
-var RotateAroundXY = function (line, x, y, angle) {
-  var c = Math.cos(angle)
-  var s = Math.sin(angle)
+const RotateAroundXY = (line, x, y, angle) => {
+  const c = Math.cos(angle)
+  const s = Math.sin(angle)
 
-  var tx = line.x1 - x
-  var ty = line.y1 - y
+  let tx = line.x1 - x
+  let ty = line.y1 - y
 
   line.x1 = tx * c - ty * s + x
   line.y1 = tx * s + ty * c + y
@@ -38,4 +38,4 @@ var RotateAroundXY = function (line, x, y, angle) {
   return line
 }
 
-module.exports = RotateAroundXY
+export default RotateAroundXY

@@ -18,13 +18,13 @@
  *
  * @return {array} The input array.
  */
-var Swap = function (array, item1, item2) {
+const Swap = (array, item1, item2) => {
   if (item1 === item2) {
     return array
   }
 
-  var index1 = array.indexOf(item1)
-  var index2 = array.indexOf(item2)
+  const index1 = array.indexOf(item1)
+  const index2 = array.indexOf(item2)
 
   if (index1 < 0 || index2 < 0) {
     throw new Error('Supplied items must be elements of the same array')
@@ -36,4 +36,4 @@ var Swap = function (array, item1, item2) {
   return array
 }
 
-module.exports = Swap
+export default Swap

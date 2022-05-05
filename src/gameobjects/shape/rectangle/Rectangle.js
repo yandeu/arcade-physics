@@ -4,10 +4,11 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../../utils/Class')
-var GeomRectangle = require('../../../geom/rectangle/Rectangle')
-var Shape = require('../Shape')
-var RectangleRender = require('./RectangleRender')
+import Class from '../../../utils/Class'
+
+import GeomRectangle from '../../../geom/rectangle/Rectangle'
+import Shape from '../Shape'
+import RectangleRender from './RectangleRender'
 
 /**
  * @classdesc
@@ -34,7 +35,7 @@ var RectangleRender = require('./RectangleRender')
  * @param {number} [fillColor] - The color the rectangle will be filled with, i.e. 0xff0000 for red.
  * @param {number} [fillAlpha] - The alpha the rectangle will be filled with. You can also set the alpha of the overall Shape using its `alpha` property.
  */
-var Rectangle = new Class({
+const Rectangle = new Class({
   Extends: Shape,
 
   Mixins: [RectangleRender],
@@ -106,9 +107,9 @@ var Rectangle = new Class({
    * @return {this} This Game Object instance.
    */
   updateData: function () {
-    var path = []
-    var rect = this.geom
-    var line = this._tempLine
+    const path = []
+    const rect = this.geom
+    const line = this._tempLine
 
     rect.getLineA(line)
 
@@ -132,4 +133,4 @@ var Rectangle = new Class({
   }
 })
 
-module.exports = Rectangle
+export default Rectangle

@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GameObjectFactory = require('../../GameObjectFactory')
-var IsoBox = require('./IsoBox')
+import GameObjectFactory from '../../GameObjectFactory'
+
+import IsoBox from './IsoBox'
 
 /**
  * Creates a new IsoBox Shape Game Object and adds it to the Scene.

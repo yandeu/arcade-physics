@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CheckMatrix = require('./CheckMatrix')
-var TransposeMatrix = require('./TransposeMatrix')
+import CheckMatrix from './CheckMatrix'
+
+import TransposeMatrix from './TransposeMatrix'
 
 /**
  * Rotates the array matrix based on the given rotation value.
@@ -40,7 +41,7 @@ var TransposeMatrix = require('./TransposeMatrix')
  *
  * @return {T[][]} The rotated matrix array. The source matrix should be discard for the returned matrix.
  */
-var RotateMatrix = function (matrix, direction) {
+const RotateMatrix = (matrix, direction) => {
   if (direction === undefined) {
     direction = 90
   }
@@ -60,7 +61,7 @@ var RotateMatrix = function (matrix, direction) {
     matrix.reverse()
     matrix = TransposeMatrix(matrix)
   } else if (Math.abs(direction) === 180 || direction === 'rotate180') {
-    for (var i = 0; i < matrix.length; i++) {
+    for (let i = 0; i < matrix.length; i++) {
       matrix[i].reverse()
     }
 
@@ -70,4 +71,4 @@ var RotateMatrix = function (matrix, direction) {
   return matrix
 }
 
-module.exports = RotateMatrix
+export default RotateMatrix

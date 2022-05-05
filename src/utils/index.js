@@ -8,7 +8,7 @@
  * @namespace Phaser.Utils
  */
 
-module.exports = {
+export default {
   Array: require('./array/'),
   Base64: require('./base64/'),
   Objects: require('./object/'),

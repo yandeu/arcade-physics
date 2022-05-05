@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point')
+import Point from '../point/Point'
 
 /**
  * Returns a Point object containing the coordinates of a point on the circumference of the Circle based on the given angle.
@@ -20,7 +20,7 @@ var Point = require('../point/Point')
  *
  * @return {(Phaser.Geom.Point|object)} A Point object where the `x` and `y` properties are the point on the circumference.
  */
-var CircumferencePoint = function (circle, angle, out) {
+const CircumferencePoint = (circle, angle, out) => {
   if (out === undefined) {
     out = new Point()
   }
@@ -31,4 +31,4 @@ var CircumferencePoint = function (circle, angle, out) {
   return out
 }
 
-module.exports = CircumferencePoint
+export default CircumferencePoint

@@ -8,7 +8,7 @@
  * @namespace Phaser.Utils.Base64
  */
 
-module.exports = {
+export default {
   ArrayBufferToBase64: require('./ArrayBufferToBase64'),
   Base64ToArrayBuffer: require('./Base64ToArrayBuffer')
 }

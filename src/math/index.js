@@ -4,14 +4,15 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CONST = require('./const')
-var Extend = require('../utils/object/Extend')
+import CONST from './const'
+
+import Extend from '../utils/object/Extend'
 
 /**
  * @namespace Phaser.Math
  */
 
-var PhaserMath = {
+let PhaserMath = {
   //  Collections of functions
   Angle: require('./angle/'),
   Distance: require('./distance/'),
@@ -80,4 +81,4 @@ PhaserMath = Extend(false, PhaserMath, CONST)
 
 //  Export it
 
-module.exports = PhaserMath
+export default PhaserMath

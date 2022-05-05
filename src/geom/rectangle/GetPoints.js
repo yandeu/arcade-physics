@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetPoint = require('./GetPoint')
-var Perimeter = require('./Perimeter')
+import GetPoint from './GetPoint'
+
+import Perimeter from './Perimeter'
 
 //  Return an array of points from the perimeter of the rectangle
 //  each spaced out based on the quantity or step required
@@ -25,7 +26,7 @@ var Perimeter = require('./Perimeter')
  *
  * @return {(array|Phaser.Geom.Point[])} An array of Points from the perimeter of the rectangle.
  */
-var GetPoints = function (rectangle, quantity, stepRate, out) {
+const GetPoints = (rectangle, quantity, stepRate, out) => {
   if (out === undefined) {
     out = []
   }
@@ -35,8 +36,8 @@ var GetPoints = function (rectangle, quantity, stepRate, out) {
     quantity = Perimeter(rectangle) / stepRate
   }
 
-  for (var i = 0; i < quantity; i++) {
-    var position = i / quantity
+  for (let i = 0; i < quantity; i++) {
+    const position = i / quantity
 
     out.push(GetPoint(rectangle, position))
   }
@@ -44,4 +45,4 @@ var GetPoints = function (rectangle, quantity, stepRate, out) {
   return out
 }
 
-module.exports = GetPoints
+export default GetPoints

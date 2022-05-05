@@ -4,8 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Rectangle = require('./Rectangle')
-var MATH_CONST = require('../../math/const')
+import Rectangle from './Rectangle'
+
+import MATH_CONST from '../../math/const'
 
 //  points is an array of Point-like objects,
 //  either 2 dimensional arrays, or objects with public x/y properties:
@@ -28,7 +29,7 @@ var MATH_CONST = require('../../math/const')
  *
  * @return {Phaser.Geom.Rectangle} The adjusted `out` Rectangle, or a new Rectangle if none was provided.
  */
-var FromPoints = function (points, out) {
+const FromPoints = (points, out) => {
   if (out === undefined) {
     out = new Rectangle()
   }
@@ -37,17 +38,17 @@ var FromPoints = function (points, out) {
     return out
   }
 
-  var minX = Number.MAX_VALUE
-  var minY = Number.MAX_VALUE
+  let minX = Number.MAX_VALUE
+  let minY = Number.MAX_VALUE
 
-  var maxX = MATH_CONST.MIN_SAFE_INTEGER
-  var maxY = MATH_CONST.MIN_SAFE_INTEGER
+  let maxX = MATH_CONST.MIN_SAFE_INTEGER
+  let maxY = MATH_CONST.MIN_SAFE_INTEGER
 
-  var p
-  var px
-  var py
+  let p
+  let px
+  let py
 
-  for (var i = 0; i < points.length; i++) {
+  for (let i = 0; i < points.length; i++) {
     p = points[i]
 
     if (Array.isArray(p)) {
@@ -73,4 +74,4 @@ var FromPoints = function (points, out) {
   return out
 }
 
-module.exports = FromPoints
+export default FromPoints

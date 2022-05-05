@@ -8,7 +8,7 @@
  * @namespace Phaser.Utils.Objects
  */
 
-module.exports = {
+export default {
   Clone: require('./Clone'),
   DeepCopy: require('./DeepCopy'),
   Extend: require('./Extend'),

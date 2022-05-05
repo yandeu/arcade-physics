@@ -4,10 +4,11 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Circumference = require('./Circumference')
-var CircumferencePoint = require('./CircumferencePoint')
-var FromPercent = require('../../math/FromPercent')
-var MATH_CONST = require('../../math/const')
+import Circumference from './Circumference'
+
+import CircumferencePoint from './CircumferencePoint'
+import FromPercent from '../../math/FromPercent'
+import MATH_CONST from '../../math/const'
 
 /**
  * Returns an array of Point objects containing the coordinates of the points around the circumference of the Circle,
@@ -23,7 +24,7 @@ var MATH_CONST = require('../../math/const')
  *
  * @return {Phaser.Geom.Point[]} An array of Point objects pertaining to the points around the circumference of the circle.
  */
-var GetPoints = function (circle, quantity, stepRate, out) {
+const GetPoints = (circle, quantity, stepRate, out) => {
   if (out === undefined) {
     out = []
   }
@@ -33,8 +34,8 @@ var GetPoints = function (circle, quantity, stepRate, out) {
     quantity = Circumference(circle) / stepRate
   }
 
-  for (var i = 0; i < quantity; i++) {
-    var angle = FromPercent(i / quantity, 0, MATH_CONST.PI2)
+  for (let i = 0; i < quantity; i++) {
+    const angle = FromPercent(i / quantity, 0, MATH_CONST.PI2)
 
     out.push(CircumferencePoint(circle, angle))
   }
@@ -42,4 +43,4 @@ var GetPoints = function (circle, quantity, stepRate, out) {
   return out
 }
 
-module.exports = GetPoints
+export default GetPoints

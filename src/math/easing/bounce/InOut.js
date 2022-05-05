@@ -14,8 +14,8 @@
  *
  * @return {number} The tweened value.
  */
-var InOut = function (v) {
-  var reverse = false
+const InOut = v => {
+  let reverse = false
 
   if (v < 0.5) {
     v = 1 - v * 2
@@ -41,4 +41,4 @@ var InOut = function (v) {
   }
 }
 
-module.exports = InOut
+export default InOut

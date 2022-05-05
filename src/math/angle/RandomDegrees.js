@@ -5,7 +5,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var FloatBetween = require('../FloatBetween')
+import FloatBetween from '../FloatBetween'
 
 /**
  * Returns a random angle in the range [-180, 180].
@@ -15,8 +15,8 @@ var FloatBetween = require('../FloatBetween')
  *
  * @return {number} The angle, in degrees.
  */
-var RandomDegrees = function () {
+const RandomDegrees = () => {
   return FloatBetween(-180, 180)
 }
 
-module.exports = RandomDegrees
+export default RandomDegrees

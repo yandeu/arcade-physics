@@ -15,7 +15,7 @@
  *
  * @return {number} The tweened value.
  */
-var In = function (v, overshoot) {
+const In = (v, overshoot) => {
   if (overshoot === undefined) {
     overshoot = 1.70158
   }
@@ -23,4 +23,4 @@ var In = function (v, overshoot) {
   return v * v * ((overshoot + 1) * v - overshoot)
 }
 
-module.exports = In
+export default In

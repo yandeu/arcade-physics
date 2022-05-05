@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CONST = require('./const')
+import CONST from './const'
 
 /**
  * Convert the given angle from degrees, to the equivalent angle in radians.
@@ -16,8 +16,8 @@ var CONST = require('./const')
  *
  * @return {number} The given angle converted to radians.
  */
-var DegToRad = function (degrees) {
+const DegToRad = degrees => {
   return degrees * CONST.DEG_TO_RAD
 }
 
-module.exports = DegToRad
+export default DegToRad

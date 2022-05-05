@@ -8,7 +8,7 @@
  * @namespace Phaser.Utils.Array.Matrix
  */
 
-module.exports = {
+export default {
   CheckMatrix: require('./CheckMatrix'),
   MatrixToString: require('./MatrixToString'),
   ReverseColumns: require('./ReverseColumns'),

@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var RotateMatrix = require('./RotateMatrix')
+import RotateMatrix from './RotateMatrix'
 
 /**
  * Rotates the array matrix to the left (or -90 degrees)
@@ -33,8 +33,8 @@ var RotateMatrix = require('./RotateMatrix')
  *
  * @return {T[][]} The rotated matrix array. The source matrix should be discard for the returned matrix.
  */
-var RotateRight = function (matrix) {
+const RotateRight = matrix => {
   return RotateMatrix(matrix, -90)
 }
 
-module.exports = RotateRight
+export default RotateRight

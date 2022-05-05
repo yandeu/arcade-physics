@@ -4,14 +4,15 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CONST = require('./const')
-var Extend = require('../utils/object/Extend')
+import CONST from './const'
+
+import Extend from '../utils/object/Extend'
 
 /**
  * @namespace Phaser.Geom
  */
 
-var Geom = {
+let Geom = {
   Circle: require('./circle'),
   Ellipse: require('./ellipse'),
   Intersects: require('./intersects'),
@@ -26,4 +27,4 @@ var Geom = {
 //   Merge in the consts
 Geom = Extend(false, Geom, CONST)
 
-module.exports = Geom
+export default Geom

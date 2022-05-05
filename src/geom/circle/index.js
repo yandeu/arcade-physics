@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Circle = require('./Circle')
+import Circle from './Circle'
 
 Circle.Area = require('./Area')
 Circle.Circumference = require('./Circumference')
@@ -22,4 +22,4 @@ Circle.Offset = require('./Offset')
 Circle.OffsetPoint = require('./OffsetPoint')
 Circle.Random = require('./Random')
 
-module.exports = Circle
+export default Circle

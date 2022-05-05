@@ -16,7 +16,7 @@
  *
  * @return {boolean} `true` if the point is within the Rectangle's bounds, otherwise `false`.
  */
-var Contains = function (rect, x, y) {
+const Contains = (rect, x, y) => {
   if (rect.width <= 0 || rect.height <= 0) {
     return false
   }
@@ -24,4 +24,4 @@ var Contains = function (rect, x, y) {
   return rect.x <= x && rect.x + rect.width >= x && rect.y <= y && rect.y + rect.height >= y
 }
 
-module.exports = Contains
+export default Contains

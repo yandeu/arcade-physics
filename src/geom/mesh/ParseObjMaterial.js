@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetColor = require('../../display/color/GetColor')
+import GetColor from '../../display/color/GetColor'
 
 /**
  * Takes a Wavefront Material file and extracts the diffuse reflectivity of the named
@@ -24,21 +24,21 @@ var GetColor = require('../../display/color/GetColor')
  *
  * @return {object} The parsed material colors, where each property of the object matches the material name.
  */
-var ParseObjMaterial = function (mtl) {
-  var output = {}
+const ParseObjMaterial = mtl => {
+  const output = {}
 
-  var lines = mtl.split('\n')
+  const lines = mtl.split('\n')
 
-  var currentMaterial = ''
+  let currentMaterial = ''
 
-  for (var i = 0; i < lines.length; i++) {
-    var line = lines[i].trim()
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim()
 
     if (line.indexOf('#') === 0 || line === '') {
       continue
     }
 
-    var lineItems = line.replace(/\s\s+/g, ' ').trim().split(' ')
+    const lineItems = line.replace(/\s\s+/g, ' ').trim().split(' ')
 
     switch (lineItems[0].toLowerCase()) {
       case 'newmtl': {
@@ -49,9 +49,9 @@ var ParseObjMaterial = function (mtl) {
       //  The diffuse reflectivity of the current material
       //  Support r, [g], [b] format, where g and b are optional
       case 'kd': {
-        var r = Math.floor(lineItems[1] * 255)
-        var g = lineItems.length >= 2 ? Math.floor(lineItems[2] * 255) : r
-        var b = lineItems.length >= 3 ? Math.floor(lineItems[3] * 255) : r
+        const r = Math.floor(lineItems[1] * 255)
+        const g = lineItems.length >= 2 ? Math.floor(lineItems[2] * 255) : r
+        const b = lineItems.length >= 3 ? Math.floor(lineItems[3] * 255) : r
 
         output[currentMaterial] = GetColor(r, g, b)
 
@@ -63,4 +63,4 @@ var ParseObjMaterial = function (mtl) {
   return output
 }
 
-module.exports = ParseObjMaterial
+export default ParseObjMaterial

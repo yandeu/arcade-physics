@@ -5,8 +5,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetLineToRectangle = require('./GetLineToRectangle')
-var RectangleToRectangle = require('./RectangleToRectangle')
+import GetLineToRectangle from './GetLineToRectangle'
+
+import RectangleToRectangle from './RectangleToRectangle'
 
 /**
  * Checks if two Rectangles intersect and returns the intersection points as a Point object array.
@@ -22,16 +23,16 @@ var RectangleToRectangle = require('./RectangleToRectangle')
  *
  * @return {array} An array with the points of intersection if objects intersect, otherwise an empty array.
  */
-var GetRectangleToRectangle = function (rectA, rectB, out) {
+const GetRectangleToRectangle = (rectA, rectB, out) => {
   if (out === undefined) {
     out = []
   }
 
   if (RectangleToRectangle(rectA, rectB)) {
-    var lineA = rectA.getLineA()
-    var lineB = rectA.getLineB()
-    var lineC = rectA.getLineC()
-    var lineD = rectA.getLineD()
+    const lineA = rectA.getLineA()
+    const lineB = rectA.getLineB()
+    const lineC = rectA.getLineC()
+    const lineD = rectA.getLineD()
 
     GetLineToRectangle(lineA, rectB, out)
     GetLineToRectangle(lineB, rectB, out)
@@ -42,4 +43,4 @@ var GetRectangleToRectangle = function (rectA, rectB, out) {
   return out
 }
 
-module.exports = GetRectangleToRectangle
+export default GetRectangleToRectangle

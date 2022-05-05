@@ -20,18 +20,18 @@
  *
  * @return {*} The value of the requested key.
  */
-var GetValue = function (source, key, defaultValue) {
+const GetValue = (source, key, defaultValue) => {
   if (!source || typeof source === 'number') {
     return defaultValue
   } else if (source.hasOwnProperty(key)) {
     return source[key]
   } else if (key.indexOf('.') !== -1) {
-    var keys = key.split('.')
-    var parent = source
-    var value = defaultValue
+    const keys = key.split('.')
+    let parent = source
+    let value = defaultValue
 
     //  Use for loop here so we can break early
-    for (var i = 0; i < keys.length; i++) {
+    for (let i = 0; i < keys.length; i++) {
       if (parent.hasOwnProperty(keys[i])) {
         //  Yes it has a key property, let's carry on down
         value = parent[keys[i]]
@@ -50,4 +50,4 @@ var GetValue = function (source, key, defaultValue) {
   }
 }
 
-module.exports = GetValue
+export default GetValue

@@ -14,10 +14,10 @@
  *
  * @return {object} A deep copy of the original object.
  */
-var DeepCopy = function (inObject) {
-  var outObject
-  var value
-  var key
+const DeepCopy = inObject => {
+  let outObject
+  let value
+  let key
 
   if (typeof inObject !== 'object' || inObject === null) {
     //  inObject is not an object
@@ -37,4 +37,4 @@ var DeepCopy = function (inObject) {
   return outObject
 }
 
-module.exports = DeepCopy
+export default DeepCopy

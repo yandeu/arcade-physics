@@ -16,7 +16,7 @@
  *
  * @return {Phaser.Geom.Rectangle} The modified Rectangle.
  */
-var CeilAll = function (rect) {
+const CeilAll = rect => {
   rect.x = Math.ceil(rect.x)
   rect.y = Math.ceil(rect.y)
   rect.width = Math.ceil(rect.width)
@@ -25,4 +25,4 @@ var CeilAll = function (rect) {
   return rect
 }
 
-module.exports = CeilAll
+export default CeilAll

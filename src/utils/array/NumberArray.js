@@ -30,11 +30,11 @@
  *
  * @return {(number[]|string[])} The array of number values, or strings if a prefix or suffix was provided.
  */
-var NumberArray = function (start, end, prefix, suffix) {
-  var result = []
+const NumberArray = (start, end, prefix, suffix) => {
+  const result = []
 
-  var i
-  var asString = false
+  let i
+  let asString = false
 
   if (prefix || suffix) {
     asString = true
@@ -69,4 +69,4 @@ var NumberArray = function (start, end, prefix, suffix) {
   return result
 }
 
-module.exports = NumberArray
+export default NumberArray

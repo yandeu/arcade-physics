@@ -14,8 +14,8 @@
  *
  * @return {number} The perimeter of the Rectangle, equal to `(width * 2) + (height * 2)`.
  */
-var Perimeter = function (rect) {
+const Perimeter = rect => {
   return 2 * (rect.width + rect.height)
 }
 
-module.exports = Perimeter
+export default Perimeter

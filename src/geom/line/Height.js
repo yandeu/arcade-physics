@@ -14,8 +14,8 @@
  *
  * @return {number} The height of the line.
  */
-var Height = function (line) {
+const Height = line => {
   return Math.abs(line.y1 - line.y2)
 }
 
-module.exports = Height
+export default Height

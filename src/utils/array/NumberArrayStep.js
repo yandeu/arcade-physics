@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var RoundAwayFromZero = require('../../math/RoundAwayFromZero')
+import RoundAwayFromZero from '../../math/RoundAwayFromZero'
 
 /**
  * Create an array of numbers (positive and/or negative) progressing from `start`
@@ -43,7 +43,7 @@ var RoundAwayFromZero = require('../../math/RoundAwayFromZero')
  *
  * @return {number[]} The array of number values.
  */
-var NumberArrayStep = function (start, end, step) {
+const NumberArrayStep = (start, end, step) => {
   if (start === undefined) {
     start = 0
   }
@@ -59,11 +59,11 @@ var NumberArrayStep = function (start, end, step) {
     start = 0
   }
 
-  var result = []
+  const result = []
 
-  var total = Math.max(RoundAwayFromZero((end - start) / (step || 1)), 0)
+  const total = Math.max(RoundAwayFromZero((end - start) / (step || 1)), 0)
 
-  for (var i = 0; i < total; i++) {
+  for (let i = 0; i < total; i++) {
     result.push(start)
     start += step
   }
@@ -71,4 +71,4 @@ var NumberArrayStep = function (start, end, step) {
   return result
 }
 
-module.exports = NumberArrayStep
+export default NumberArrayStep

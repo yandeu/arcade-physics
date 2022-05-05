@@ -5,7 +5,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var FloatBetween = require('../FloatBetween')
+import FloatBetween from '../FloatBetween'
 
 /**
  * Returns a random angle in the range [-pi, pi].
@@ -15,8 +15,8 @@ var FloatBetween = require('../FloatBetween')
  *
  * @return {number} The angle, in radians.
  */
-var Random = function () {
+const Random = () => {
   return FloatBetween(-Math.PI, Math.PI)
 }
 
-module.exports = Random
+export default Random

@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point')
+import Point from '../point/Point'
 
 /**
  * Returns a random Point from within the area of the given Triangle.
@@ -19,21 +19,21 @@ var Point = require('../point/Point')
  *
  * @return {Phaser.Geom.Point} A Point object holding the coordinates of a random position within the Triangle.
  */
-var Random = function (triangle, out) {
+const Random = (triangle, out) => {
   if (out === undefined) {
     out = new Point()
   }
 
   //  Basis vectors
-  var ux = triangle.x2 - triangle.x1
-  var uy = triangle.y2 - triangle.y1
+  const ux = triangle.x2 - triangle.x1
+  const uy = triangle.y2 - triangle.y1
 
-  var vx = triangle.x3 - triangle.x1
-  var vy = triangle.y3 - triangle.y1
+  const vx = triangle.x3 - triangle.x1
+  const vy = triangle.y3 - triangle.y1
 
   //  Random point within the unit square
-  var r = Math.random()
-  var s = Math.random()
+  let r = Math.random()
+  let s = Math.random()
 
   //  Point outside the triangle? Remap it.
   if (r + s >= 1) {
@@ -47,4 +47,4 @@ var Random = function (triangle, out) {
   return out
 }
 
-module.exports = Random
+export default Random

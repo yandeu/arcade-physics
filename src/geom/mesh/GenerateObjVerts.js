@@ -4,14 +4,15 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Face = require('./Face')
-var Matrix4 = require('../../math/Matrix4')
-var Vector3 = require('../../math/Vector3')
-var Vertex = require('./Vertex')
+import Face from './Face'
 
-var tempPosition = new Vector3()
-var tempRotation = new Vector3()
-var tempMatrix = new Matrix4()
+import Matrix4 from '../../math/Matrix4'
+import Vector3 from '../../math/Vector3'
+import Vertex from './Vertex'
+
+const tempPosition = new Vector3()
+const tempRotation = new Vector3()
+const tempMatrix = new Matrix4()
 
 /**
  * This method will return an object containing Face and Vertex instances, generated
@@ -60,7 +61,7 @@ var tempMatrix = new Matrix4()
  *
  * @return {Phaser.Types.Geom.Mesh.GenerateVertsResult} The parsed Face and Vertex objects.
  */
-var GenerateObjVerts = function (data, mesh, scale, x, y, z, rotateX, rotateY, rotateZ, zIsUp) {
+const GenerateObjVerts = (data, mesh, scale, x, y, z, rotateX, rotateY, rotateZ, zIsUp) => {
   if (scale === undefined) {
     scale = 1
   }
@@ -86,52 +87,52 @@ var GenerateObjVerts = function (data, mesh, scale, x, y, z, rotateX, rotateY, r
     zIsUp = true
   }
 
-  var result = {
+  const result = {
     faces: [],
     verts: []
   }
 
-  var materials = data.materials
+  const materials = data.materials
 
   tempPosition.set(x, y, z)
   tempRotation.set(rotateX, rotateY, rotateZ)
   tempMatrix.fromRotationXYTranslation(tempRotation, tempPosition, zIsUp)
 
-  for (var m = 0; m < data.models.length; m++) {
-    var model = data.models[m]
+  for (let m = 0; m < data.models.length; m++) {
+    const model = data.models[m]
 
-    var vertices = model.vertices
-    var textureCoords = model.textureCoords
-    var faces = model.faces
+    const vertices = model.vertices
+    const textureCoords = model.textureCoords
+    const faces = model.faces
 
-    for (var i = 0; i < faces.length; i++) {
-      var face = faces[i]
+    for (let i = 0; i < faces.length; i++) {
+      const face = faces[i]
 
-      var v1 = face.vertices[0]
-      var v2 = face.vertices[1]
-      var v3 = face.vertices[2]
+      const v1 = face.vertices[0]
+      const v2 = face.vertices[1]
+      const v3 = face.vertices[2]
 
-      var m1 = vertices[v1.vertexIndex]
-      var m2 = vertices[v2.vertexIndex]
-      var m3 = vertices[v3.vertexIndex]
+      const m1 = vertices[v1.vertexIndex]
+      const m2 = vertices[v2.vertexIndex]
+      const m3 = vertices[v3.vertexIndex]
 
-      var t1 = v1.textureCoordsIndex
-      var t2 = v2.textureCoordsIndex
-      var t3 = v3.textureCoordsIndex
+      const t1 = v1.textureCoordsIndex
+      const t2 = v2.textureCoordsIndex
+      const t3 = v3.textureCoordsIndex
 
-      var uv1 = t1 === -1 ? { u: 0, v: 1 } : textureCoords[t1]
-      var uv2 = t2 === -1 ? { u: 0, v: 0 } : textureCoords[t2]
-      var uv3 = t3 === -1 ? { u: 1, v: 1 } : textureCoords[t3]
+      const uv1 = t1 === -1 ? { u: 0, v: 1 } : textureCoords[t1]
+      const uv2 = t2 === -1 ? { u: 0, v: 0 } : textureCoords[t2]
+      const uv3 = t3 === -1 ? { u: 1, v: 1 } : textureCoords[t3]
 
-      var color = 0xffffff
+      let color = 0xffffff
 
       if (face.material !== '' && materials[face.material]) {
         color = materials[face.material]
       }
 
-      var vert1 = new Vertex(m1.x * scale, m1.y * scale, m1.z * scale, uv1.u, uv1.v, color).transformMat4(tempMatrix)
-      var vert2 = new Vertex(m2.x * scale, m2.y * scale, m2.z * scale, uv2.u, uv2.v, color).transformMat4(tempMatrix)
-      var vert3 = new Vertex(m3.x * scale, m3.y * scale, m3.z * scale, uv3.u, uv3.v, color).transformMat4(tempMatrix)
+      const vert1 = new Vertex(m1.x * scale, m1.y * scale, m1.z * scale, uv1.u, uv1.v, color).transformMat4(tempMatrix)
+      const vert2 = new Vertex(m2.x * scale, m2.y * scale, m2.z * scale, uv2.u, uv2.v, color).transformMat4(tempMatrix)
+      const vert3 = new Vertex(m3.x * scale, m3.y * scale, m3.z * scale, uv3.u, uv3.v, color).transformMat4(tempMatrix)
 
       result.verts.push(vert1, vert2, vert3)
       result.faces.push(new Face(vert1, vert2, vert3))
@@ -146,4 +147,4 @@ var GenerateObjVerts = function (data, mesh, scale, x, y, z, rotateX, rotateY, r
   return result
 }
 
-module.exports = GenerateObjVerts
+export default GenerateObjVerts

@@ -16,10 +16,10 @@
  *
  * @return {Phaser.Geom.Polygon} The modified Polygon.
  */
-var Reverse = function (polygon) {
+const Reverse = polygon => {
   polygon.points.reverse()
 
   return polygon
 }
 
-module.exports = Reverse
+export default Reverse

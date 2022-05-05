@@ -4,10 +4,11 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Contains = require('../circle/Contains')
-var Point = require('../point/Point')
+import Contains from '../circle/Contains'
 
-var tmp = new Point()
+import Point from '../point/Point'
+
+const tmp = new Point()
 
 /**
  * Checks for intersection between the line segment and circle.
@@ -23,7 +24,7 @@ var tmp = new Point()
  *
  * @return {boolean} `true` if the two objects intersect, otherwise `false`.
  */
-var LineToCircle = function (line, circle, nearest) {
+const LineToCircle = (line, circle, nearest) => {
   if (nearest === undefined) {
     nearest = tmp
   }
@@ -42,19 +43,19 @@ var LineToCircle = function (line, circle, nearest) {
     return true
   }
 
-  var dx = line.x2 - line.x1
-  var dy = line.y2 - line.y1
+  const dx = line.x2 - line.x1
+  const dy = line.y2 - line.y1
 
-  var lcx = circle.x - line.x1
-  var lcy = circle.y - line.y1
+  const lcx = circle.x - line.x1
+  const lcy = circle.y - line.y1
 
   //  project lc onto d, resulting in vector p
-  var dLen2 = dx * dx + dy * dy
-  var px = dx
-  var py = dy
+  const dLen2 = dx * dx + dy * dy
+  let px = dx
+  let py = dy
 
   if (dLen2 > 0) {
-    var dp = (lcx * dx + lcy * dy) / dLen2
+    const dp = (lcx * dx + lcy * dy) / dLen2
 
     px *= dp
     py *= dp
@@ -64,9 +65,9 @@ var LineToCircle = function (line, circle, nearest) {
   nearest.y = line.y1 + py
 
   //  len2 of p
-  var pLen2 = px * px + py * py
+  const pLen2 = px * px + py * py
 
   return pLen2 <= dLen2 && px * dx + py * dy >= 0 && Contains(circle, nearest.x, nearest.y)
 }
 
-module.exports = LineToCircle
+export default LineToCircle

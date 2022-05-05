@@ -15,8 +15,8 @@
  *
  * @return {number} The positive difference of the two given numbers.
  */
-var Difference = function (a, b) {
+const Difference = (a, b) => {
   return Math.abs(a - b)
 }
 
-module.exports = Difference
+export default Difference

@@ -8,7 +8,7 @@
  * @namespace Phaser.Structs.Events
  */
 
-module.exports = {
+export default {
   PROCESS_QUEUE_ADD: 'add',
   PROCESS_QUEUE_REMOVE: 'remove'
 }

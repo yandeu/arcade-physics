@@ -14,12 +14,12 @@
  *
  * @return {number} The factorial of the given number.
  */
-var Factorial = function (value) {
+const Factorial = value => {
   if (value === 0) {
     return 1
   }
 
-  var res = value
+  let res = value
 
   while (--value) {
     res *= value
@@ -28,4 +28,4 @@ var Factorial = function (value) {
   return res
 }
 
-module.exports = Factorial
+export default Factorial

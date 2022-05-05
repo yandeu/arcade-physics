@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point')
+import Point from '../point/Point'
 
 /**
  * Returns the size of the Rectangle, expressed as a Point object.
@@ -20,7 +20,7 @@ var Point = require('../point/Point')
  *
  * @return {(Phaser.Geom.Point|object)} A Point object where `x` holds the width and `y` holds the height of the Rectangle.
  */
-var GetSize = function (rect, out) {
+const GetSize = (rect, out) => {
   if (out === undefined) {
     out = new Point()
   }
@@ -31,4 +31,4 @@ var GetSize = function (rect, out) {
   return out
 }
 
-module.exports = GetSize
+export default GetSize

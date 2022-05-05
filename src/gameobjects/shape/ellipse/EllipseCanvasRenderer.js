@@ -4,9 +4,10 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var FillStyleCanvas = require('../FillStyleCanvas')
-var LineStyleCanvas = require('../LineStyleCanvas')
-var SetTransform = require('../../../renderer/canvas/utils/SetTransform')
+import FillStyleCanvas from '../FillStyleCanvas'
+
+import LineStyleCanvas from '../LineStyleCanvas'
+import SetTransform from '../../../renderer/canvas/utils/SetTransform'
 
 /**
  * Renders this Game Object with the Canvas Renderer to the given Camera.
@@ -22,20 +23,20 @@ var SetTransform = require('../../../renderer/canvas/utils/SetTransform')
  * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera that is rendering the Game Object.
  * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
  */
-var EllipseCanvasRenderer = function (renderer, src, camera, parentMatrix) {
+const EllipseCanvasRenderer = (renderer, src, camera, parentMatrix) => {
   camera.addToRenderList(src)
 
-  var ctx = renderer.currentContext
+  const ctx = renderer.currentContext
 
   if (SetTransform(renderer, ctx, src, camera, parentMatrix)) {
-    var dx = src._displayOriginX
-    var dy = src._displayOriginY
+    const dx = src._displayOriginX
+    const dy = src._displayOriginY
 
-    var path = src.pathData
-    var pathLength = path.length - 1
+    const path = src.pathData
+    let pathLength = path.length - 1
 
-    var px1 = path[0] - dx
-    var py1 = path[1] - dy
+    const px1 = path[0] - dx
+    const py1 = path[1] - dy
 
     ctx.beginPath()
 
@@ -45,9 +46,9 @@ var EllipseCanvasRenderer = function (renderer, src, camera, parentMatrix) {
       pathLength -= 2
     }
 
-    for (var i = 2; i < pathLength; i += 2) {
-      var px2 = path[i] - dx
-      var py2 = path[i + 1] - dy
+    for (let i = 2; i < pathLength; i += 2) {
+      const px2 = path[i] - dx
+      const py2 = path[i + 1] - dy
 
       ctx.lineTo(px2, py2)
     }
@@ -71,4 +72,4 @@ var EllipseCanvasRenderer = function (renderer, src, camera, parentMatrix) {
   }
 }
 
-module.exports = EllipseCanvasRenderer
+export default EllipseCanvasRenderer

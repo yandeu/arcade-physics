@@ -34,7 +34,7 @@
  *
  * @return {string} The padded string.
  */
-var Pad = function (str, len, pad, dir) {
+const Pad = (str, len, pad, dir) => {
   if (len === undefined) {
     len = 0
   }
@@ -47,7 +47,7 @@ var Pad = function (str, len, pad, dir) {
 
   str = str.toString()
 
-  var padlen = 0
+  let padlen = 0
 
   if (len + 1 >= str.length) {
     switch (dir) {
@@ -56,8 +56,8 @@ var Pad = function (str, len, pad, dir) {
         break
 
       case 3:
-        var right = Math.ceil((padlen = len - str.length) / 2)
-        var left = padlen - right
+        const right = Math.ceil((padlen = len - str.length) / 2)
+        const left = padlen - right
         str = new Array(left + 1).join(pad) + str + new Array(right + 1).join(pad)
         break
 
@@ -70,4 +70,4 @@ var Pad = function (str, len, pad, dir) {
   return str
 }
 
-module.exports = Pad
+export default Pad

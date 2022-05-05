@@ -31,7 +31,7 @@ function Compare(a, b) {
  */
 function Process(array, compare) {
   // Short-circuit when there's nothing to sort.
-  var len = array.length
+  const len = array.length
 
   if (len <= 1) {
     return array
@@ -40,12 +40,12 @@ function Process(array, compare) {
   // Rather than dividing input, simply iterate chunks of 1, 2, 4, 8, etc.
   // Chunks are the size of the left or right hand in merge sort.
   // Stop when the left-hand covers all of the array.
-  var buffer = new Array(len)
+  let buffer = new Array(len)
 
-  for (var chk = 1; chk < len; chk *= 2) {
+  for (let chk = 1; chk < len; chk *= 2) {
     RunPass(array, compare, chk, buffer)
 
-    var tmp = array
+    const tmp = array
 
     array = buffer
 
@@ -66,17 +66,17 @@ function Process(array, compare) {
  * @param {array} result - The array to store the result in.
  */
 function RunPass(arr, comp, chk, result) {
-  var len = arr.length
-  var i = 0
+  const len = arr.length
+  let i = 0
 
   // Step size / double chunk size.
-  var dbl = chk * 2
+  const dbl = chk * 2
 
   // Bounds of the left and right chunks.
-  var l, r, e
+  let l, r, e
 
   // Iterators over the left and right chunk.
-  var li, ri
+  let li, ri
 
   // Iterate over pairs of chunks.
   for (l = 0; l < len; l += dbl) {
@@ -133,12 +133,12 @@ function RunPass(arr, comp, chk, result) {
  *
  * @return {array} The sorted result.
  */
-var StableSort = function (array, compare) {
+const StableSort = (array, compare) => {
   if (compare === undefined) {
     compare = Compare
   }
 
-  var result = Process(array, compare)
+  const result = Process(array, compare)
 
   // This simply copies back if the result isn't in the original array, which happens on an odd number of passes.
   if (result !== array) {
@@ -148,4 +148,4 @@ var StableSort = function (array, compare) {
   return array
 }
 
-module.exports = StableSort
+export default StableSort

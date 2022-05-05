@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Rectangle = require('./Rectangle')
+import Rectangle from './Rectangle'
 
 /**
  * Creates a new Rectangle which is identical to the given one.
@@ -16,8 +16,8 @@ var Rectangle = require('./Rectangle')
  *
  * @return {Phaser.Geom.Rectangle} The newly created Rectangle, which is separate from the given one.
  */
-var Clone = function (source) {
+const Clone = source => {
   return new Rectangle(source.x, source.y, source.width, source.height)
 }
 
-module.exports = Clone
+export default Clone

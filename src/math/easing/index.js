@@ -8,7 +8,7 @@
  * @namespace Phaser.Math.Easing
  */
 
-module.exports = {
+export default {
   Back: require('./back'),
   Bounce: require('./bounce'),
   Circular: require('./circular'),

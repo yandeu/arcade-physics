@@ -14,12 +14,12 @@
  *
  * @return {number} The circumference of th Ellipse.
  */
-var Circumference = function (ellipse) {
-  var rx = ellipse.width / 2
-  var ry = ellipse.height / 2
-  var h = Math.pow(rx - ry, 2) / Math.pow(rx + ry, 2)
+const Circumference = ellipse => {
+  const rx = ellipse.width / 2
+  const ry = ellipse.height / 2
+  const h = Math.pow(rx - ry, 2) / Math.pow(rx + ry, 2)
 
   return Math.PI * (rx + ry) * (1 + (3 * h) / (10 + Math.sqrt(4 - 3 * h)))
 }
 
-module.exports = Circumference
+export default Circumference

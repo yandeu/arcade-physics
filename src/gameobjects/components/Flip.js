@@ -12,7 +12,7 @@
  * @since 3.0.0
  */
 
-var Flip = {
+const Flip = {
   /**
    * The horizontally flipped state of the Game Object.
    *
@@ -147,4 +147,4 @@ var Flip = {
   }
 }
 
-module.exports = Flip
+export default Flip

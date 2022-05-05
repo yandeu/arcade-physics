@@ -18,7 +18,7 @@
  *
  * @return {boolean} `true` if `a` is fuzzily less than `b`, otherwise `false`.
  */
-var LessThan = function (a, b, epsilon) {
+const LessThan = (a, b, epsilon) => {
   if (epsilon === undefined) {
     epsilon = 0.0001
   }
@@ -26,4 +26,4 @@ var LessThan = function (a, b, epsilon) {
   return a < b + epsilon
 }
 
-module.exports = LessThan
+export default LessThan

@@ -17,7 +17,7 @@
  *
  * @return {Phaser.Types.Math.SinCosTable} The generated values.
  */
-var SinCosTableGenerator = function (length, sinAmp, cosAmp, frequency) {
+const SinCosTableGenerator = (length, sinAmp, cosAmp, frequency) => {
   if (sinAmp === undefined) {
     sinAmp = 1
   }
@@ -30,10 +30,10 @@ var SinCosTableGenerator = function (length, sinAmp, cosAmp, frequency) {
 
   frequency *= Math.PI / length
 
-  var cos = []
-  var sin = []
+  const cos = []
+  const sin = []
 
-  for (var c = 0; c < length; c++) {
+  for (let c = 0; c < length; c++) {
     cosAmp -= sinAmp * frequency
     sinAmp += cosAmp * frequency
 
@@ -48,4 +48,4 @@ var SinCosTableGenerator = function (length, sinAmp, cosAmp, frequency) {
   }
 }
 
-module.exports = SinCosTableGenerator
+export default SinCosTableGenerator

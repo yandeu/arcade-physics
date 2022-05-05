@@ -19,12 +19,12 @@
  *
  * @return {Phaser.Math.Vector2} The given Vector.
  */
-var RandomXY = function (vector, scale) {
+const RandomXY = (vector, scale) => {
   if (scale === undefined) {
     scale = 1
   }
 
-  var r = Math.random() * 2 * Math.PI
+  const r = Math.random() * 2 * Math.PI
 
   vector.x = Math.cos(r) * scale
   vector.y = Math.sin(r) * scale
@@ -32,4 +32,4 @@ var RandomXY = function (vector, scale) {
   return vector
 }
 
-module.exports = RandomXY
+export default RandomXY

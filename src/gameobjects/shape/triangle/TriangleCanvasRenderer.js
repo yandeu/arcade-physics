@@ -4,9 +4,10 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var FillStyleCanvas = require('../FillStyleCanvas')
-var LineStyleCanvas = require('../LineStyleCanvas')
-var SetTransform = require('../../../renderer/canvas/utils/SetTransform')
+import FillStyleCanvas from '../FillStyleCanvas'
+
+import LineStyleCanvas from '../LineStyleCanvas'
+import SetTransform from '../../../renderer/canvas/utils/SetTransform'
 
 /**
  * Renders this Game Object with the Canvas Renderer to the given Camera.
@@ -22,21 +23,21 @@ var SetTransform = require('../../../renderer/canvas/utils/SetTransform')
  * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera that is rendering the Game Object.
  * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
  */
-var TriangleCanvasRenderer = function (renderer, src, camera, parentMatrix) {
+const TriangleCanvasRenderer = (renderer, src, camera, parentMatrix) => {
   camera.addToRenderList(src)
 
-  var ctx = renderer.currentContext
+  const ctx = renderer.currentContext
 
   if (SetTransform(renderer, ctx, src, camera, parentMatrix)) {
-    var dx = src._displayOriginX
-    var dy = src._displayOriginY
+    const dx = src._displayOriginX
+    const dy = src._displayOriginY
 
-    var x1 = src.geom.x1 - dx
-    var y1 = src.geom.y1 - dy
-    var x2 = src.geom.x2 - dx
-    var y2 = src.geom.y2 - dy
-    var x3 = src.geom.x3 - dx
-    var y3 = src.geom.y3 - dy
+    const x1 = src.geom.x1 - dx
+    const y1 = src.geom.y1 - dy
+    const x2 = src.geom.x2 - dx
+    const y2 = src.geom.y2 - dy
+    const x3 = src.geom.x3 - dx
+    const y3 = src.geom.y3 - dy
 
     ctx.beginPath()
 
@@ -63,4 +64,4 @@ var TriangleCanvasRenderer = function (renderer, src, camera, parentMatrix) {
   }
 }
 
-module.exports = TriangleCanvasRenderer
+export default TriangleCanvasRenderer
