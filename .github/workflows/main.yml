@@ -49,6 +49,7 @@ jobs:
           mkdir tmp -p
           mv index.html tmp/index.html
           mv bundle tmp
+          mv demo tmp
           ls tmp
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           npx deploy-website gh tmp
