@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="./bundle/arcade-physics.min.js"></script>
+    <script src="https://pixijs.download/v6.3.1/pixi.min.js"></script>
   </head>
   <body>
     <style>
@@ -15,9 +16,12 @@
       body {
         font-family: Arial, Helvetica, sans-serif;
         color: #f8f8f2;
-      }
-      h1 {
         text-align: center;
+        margin-bottom: 5em;
+      }
+
+      h2 {
+        margin-top: 2em;
       }
       #wrapper {
         width: 100%;
@@ -27,6 +31,7 @@
         max-width: 100%;
         display: block;
         background: #0c0e14;
+        margin-bottom: 3em;
       }
     </style>
 
@@ -53,7 +58,9 @@
     </div>
 
     <div id="wrapper">
-      <canvas id="myCanvas" width="800" height="450" style="border: 1px solid #000000"> </canvas>
+      <h2>Debug Physics</h2>
+      <canvas id="myCanvas" width="800" height="450"></canvas>
+      <h2>Use Physics with PixiJS</h2>
     </div>
 
     <script>
@@ -87,11 +94,11 @@
       // physics
       const physics = new ArcadePhysics(config)
 
-      // player
-      const player = physics.add.body(20, 20, 64, 64)
-      player.setVelocityX(20)
-      player.setBounce(0.6)
-      player.setCollideWorldBounds(true)
+      // box
+      const box = physics.add.body(20, 20, 64, 64)
+      box.setVelocityX(20)
+      box.setBounce(0.6)
+      box.setCollideWorldBounds(true)
 
       // ball
       const ball = physics.add.body(206, 20)
@@ -103,8 +110,8 @@
       const platform = physics.add.staticBody(60, 350, 160, 32)
 
       // colliders
-      physics.add.collider(player, ball)
-      physics.add.collider(player, platform)
+      physics.add.collider(box, ball)
+      physics.add.collider(box, platform)
       physics.add.collider(ball, platform)
 
       let tick = 0
@@ -126,6 +133,35 @@
       }
 
       requestAnimationFrame(update)
+    </script>
+
+    <script type="module">
+      const app = new PIXI.Application({ width: 800, height: 450 })
+      const wrapper = document.getElementById('wrapper')
+      wrapper.appendChild(app.view)
+
+      const pixi_box = PIXI.Sprite.from('demo/box.png')
+      const pixi_ball = PIXI.Sprite.from('demo/ball.png')
+      const pixi_platform = PIXI.Sprite.from('demo/platform.png')
+
+      /**
+       * Cartoon jungle vector created by brgfx (https://www.freepik.com/brgfx)
+       * https://www.freepik.com/vectors/cartoon-jungle
+       */
+      const pixi_background = PIXI.Sprite.from('demo/background.jpg')
+
+      app.stage.addChild(pixi_background, pixi_box, pixi_ball, pixi_platform)
+
+      app.ticker.add(delta => {
+        pixi_box.x = box.x
+        pixi_box.y = box.y
+
+        pixi_ball.x = ball.x
+        pixi_ball.y = ball.y
+
+        pixi_platform.x = platform.x
+        pixi_platform.y = platform.y
+      })
     </script>
   </body>
 </html>
