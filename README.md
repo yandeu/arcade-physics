@@ -2,17 +2,20 @@
 <h1>Arcade Physics<br /><small>(without Phaser)</small></h1>
 </div>
 
-<div style="margin-bottom: 8px; text-align: center">
-  <a href="https://github.com/yandeu/arcade-physics/actions/workflows/main.yml">
+<div style="text-align: center; margin-bottom: 8px">
+  <a style="text-decoration: none" href="https://github.com/yandeu/arcade-physics/actions/workflows/main.yml">
     <img src="https://github.com/yandeu/arcade-physics/actions/workflows/main.yml/badge.svg" alt="CI" />
   </a>
-  <a href="https://github.com/yandeu/arcade-physics/tree/gh-pages/bundle">
+  <a style="text-decoration: none" href="https://github.com/yandeu/arcade-physics/tree/gh-pages/bundle">
     <img
       src="https://badgen.net/badgesize/gzip/yandeu/arcade-physics/gh-pages/bundle/arcade-physics.min.js"
       alt="gzip size"
     />
   </a>
-  <a href="https://codecov.io/gh/yandeu/arcade-physics">
+  <a style="text-decoration: none" href="https://www.npmjs.com/package/arcade-physics">
+    <img src="https://img.shields.io/npm/v/arcade-physics" alt="version" />
+  </a>
+  <a style="text-decoration: none" href="https://codecov.io/gh/yandeu/arcade-physics">
     <img
       src="https://codecov.io/gh/yandeu/arcade-physics/branch/main/graph/badge.svg?token=7LZVKzgHUT"
       alt="codecov"
