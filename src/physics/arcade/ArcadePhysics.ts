@@ -467,22 +467,15 @@ export class ArcadePhysics {
    *
    * @return {number} The angle (in radians) that the object should be visually set to in order to match its new velocity.
    */
-  moveTo(gameObject, x, y, speed, maxTime) {
-    if (speed === undefined) {
-      speed = 60
-    }
-    if (maxTime === undefined) {
-      maxTime = 0
-    }
-
-    const angle = Math.atan2(y - gameObject.y, x - gameObject.x)
+  moveTo(body: Body | StaticBody, x: number, y: number, speed = 60, maxTime = 0): number {
+    const angle = Math.atan2(y - body.y, x - body.x)
 
     if (maxTime > 0) {
       //  We know how many pixels we need to move, but how fast?
-      speed = DistanceBetween(gameObject.x, gameObject.y, x, y) / (maxTime / 1000)
+      speed = DistanceBetween(body.x, body.y, x, y) / (maxTime / 1000)
     }
 
-    gameObject.body.velocity.setToPolar(angle, speed)
+    body.velocity.setToPolar(angle, speed)
 
     return angle
   }
@@ -505,8 +498,8 @@ export class ArcadePhysics {
    *
    * @return {number} The angle (in radians) that the object should be visually set to in order to match its new velocity.
    */
-  moveToObject(gameObject, destination, speed, maxTime) {
-    return this.moveTo(gameObject, destination.x, destination.y, speed, maxTime)
+  moveToObject(body: Body | StaticBody, destination: { x: number; y: number }, speed = 60, maxTime = 0) {
+    return this.moveTo(body, destination.x, destination.y, speed, maxTime)
   }
 
   /**
