@@ -70,24 +70,11 @@
       var ctx = canvas.getContext('2d')
 
       const config = {
-        sys: {
-          game: {
-            config: {}
-          },
-          settings: {
-            physics: {
-              debug: true,
-              gravity: {
-                x: 0,
-                y: 300
-              }
-            }
-          },
-          scale: {
-            width: 800,
-            height: 450
-          },
-          queueDepthSort: () => {}
+        width: 800,
+        height: 450,
+        gravity: {
+          x: 0,
+          y: 300
         }
       }
 
