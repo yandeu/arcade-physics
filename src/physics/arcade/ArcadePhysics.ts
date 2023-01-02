@@ -15,6 +15,16 @@ import { World } from './World'
 import type { Body } from './Body'
 import { StaticBody } from './StaticBody'
 
+export interface ArcadeWorldConfig {
+  overlapBias?: number
+  gravity: {
+    x: number
+    y: number
+  }
+  width: number
+  height: number
+}
+
 /**
  * The Arcade Physics Plugin belongs to a Scene and sets up and manages the Scene's physics simulation.
  * It also holds some useful methods for moving and rotating Arcade Physics Bodies.
@@ -35,7 +45,16 @@ export class ArcadePhysics {
   world!: World
   add!: Factory
 
-  constructor(scene) {
+  constructor(config: ArcadeWorldConfig) {
+    const scene = {
+      sys: {
+        scale: { width: config.width, height: config.height },
+        settings: {
+          physics: config
+        }
+      }
+    }
+
     /** The Scene that this Plugin belongs to. */
     this.scene = scene
 
@@ -132,8 +151,8 @@ export class ArcadePhysics {
    * @return {Phaser.Types.Physics.Arcade.ArcadeWorldConfig} The physics configuration.
    */
   getConfig() {
-    const gameConfig = this.systems.game.config.physics || {}
-    const sceneConfig = this.systems.settings.physics || {}
+    const gameConfig = this.systems.game?.config?.physics || {}
+    const sceneConfig = this.systems.settings?.physics || {}
 
     const config = { ...gameConfig, ...sceneConfig }
     return config

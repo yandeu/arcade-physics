@@ -1,25 +1,12 @@
 const { ArcadePhysics } = require('../lib/index.js')
 
 const config = {
-  sys: {
-    game: {
-      config: {}
-    },
-    settings: {
-      physics: {
-        debug: true,
-        gravity: {
-          x: 0,
-          y: 200
-        }
-      }
-    },
-    scale: {
-      width: 800,
-      height: 600
-    },
-    queueDepthSort: () => {}
-  }
+  gravity: {
+    x: 0,
+    y: 200
+  },
+  width: 800,
+  height: 600
 }
 
 const physics = new ArcadePhysics(config)
