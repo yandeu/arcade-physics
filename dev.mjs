@@ -1,3 +1,4 @@
+import 'source-map-support/register.js'
 import { ArcadePhysics } from './lib/index.js'
 
 const config = {
