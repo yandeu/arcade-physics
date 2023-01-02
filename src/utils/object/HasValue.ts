@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 /**
  * @author       Richard Davey <rich@photonstorm.com>
  * @copyright    2020 Photon Storm Ltd.
