@@ -4,10 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-import Vector3 from '../math/Vector3'
-
-import Matrix4 from '../math/Matrix4'
-import Quaternion from '../math/Quaternion'
+import Vector3 from '../math/Vector3.js'
+import Matrix4 from '../math/Matrix4.js'
+import Quaternion from '../math/Quaternion.js'
 
 const tmpMat4 = new Matrix4()
 const tmpQuat = new Quaternion()
@@ -28,7 +27,7 @@ const tmpVec3 = new Vector3()
  *
  * @return {Phaser.Math.Vector3} The given vector.
  */
-const RotateVec3 = (vec, axis, radians) => {
+export const RotateVec3 = (vec, axis, radians) => {
   //  Set the quaternion to our axis angle
   tmpQuat.setAxisAngle(axis, radians)
 
@@ -38,5 +37,3 @@ const RotateVec3 = (vec, axis, radians) => {
   //  Multiply our vector by the rotation matrix
   return vec.transformMat4(tmpMat4)
 }
-
-export default RotateVec3

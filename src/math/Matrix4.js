@@ -27,8 +27,8 @@ const EPSILON = 0.000001
  *
  * @param {Phaser.Math.Matrix4} [m] - Optional Matrix4 to copy values from.
  */
-const Matrix4 = new Class({
-  initialize: function Matrix4(m) {
+class Matrix4 {
+  constructor(m) {
     /**
      * The matrix values.
      *
@@ -45,7 +45,7 @@ const Matrix4 = new Class({
       //  Default to identity
       this.identity()
     }
-  },
+  }
 
   /**
    * Make a clone of this Matrix4.
@@ -55,9 +55,9 @@ const Matrix4 = new Class({
    *
    * @return {Phaser.Math.Matrix4} A clone of this Matrix4.
    */
-  clone: function () {
+  clone() {
     return new Matrix4(this)
-  },
+  }
 
   /**
    * This method is an alias for `Matrix4.copy`.
@@ -69,9 +69,9 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  set: function (src) {
+  set(src) {
     return this.copy(src)
-  },
+  }
 
   /**
    * Sets all values of this Matrix4.
@@ -98,7 +98,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4 instance.
    */
-  setValues: function (m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33) {
+  setValues(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33) {
     const out = this.val
 
     out[0] = m00
@@ -119,7 +119,7 @@ const Matrix4 = new Class({
     out[15] = m33
 
     return this
-  },
+  }
 
   /**
    * Copy the values of a given Matrix into this Matrix.
@@ -131,7 +131,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  copy: function (src) {
+  copy(src) {
     const a = src.val
 
     return this.setValues(
@@ -152,7 +152,7 @@ const Matrix4 = new Class({
       a[14],
       a[15]
     )
-  },
+  }
 
   /**
    * Set the values of this Matrix from the given array.
@@ -164,7 +164,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  fromArray: function (a) {
+  fromArray(a) {
     return this.setValues(
       a[0],
       a[1],
@@ -183,7 +183,7 @@ const Matrix4 = new Class({
       a[14],
       a[15]
     )
-  },
+  }
 
   /**
    * Reset this Matrix.
@@ -195,9 +195,9 @@ const Matrix4 = new Class({
    *
    * @return {Phaser.Math.Matrix4} This Matrix4.
    */
-  zero: function () {
+  zero() {
     return this.setValues(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-  },
+  }
 
   /**
    * Generates a transform matrix based on the given position, scale and rotation.
@@ -211,7 +211,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  transform: function (position, scale, rotation) {
+  transform(position, scale, rotation) {
     const rotMatrix = _tempMat1.fromQuat(rotation)
 
     const rm = rotMatrix.val
@@ -241,7 +241,7 @@ const Matrix4 = new Class({
       position.z,
       1
     )
-  },
+  }
 
   /**
    * Set the `x`, `y` and `z` values of this Matrix.
@@ -255,7 +255,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  xyz: function (x, y, z) {
+  xyz(x, y, z) {
     this.identity()
 
     const out = this.val
@@ -265,7 +265,7 @@ const Matrix4 = new Class({
     out[14] = z
 
     return this
-  },
+  }
 
   /**
    * Set the scaling values of this Matrix.
@@ -279,7 +279,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  scaling: function (x, y, z) {
+  scaling(x, y, z) {
     this.zero()
 
     const out = this.val
@@ -290,7 +290,7 @@ const Matrix4 = new Class({
     out[15] = 1
 
     return this
-  },
+  }
 
   /**
    * Reset this Matrix to an identity (default) matrix.
@@ -300,9 +300,9 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  identity: function () {
+  identity() {
     return this.setValues(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
-  },
+  }
 
   /**
    * Transpose this Matrix.
@@ -312,7 +312,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  transpose: function () {
+  transpose() {
     const a = this.val
 
     const a01 = a[1]
@@ -336,7 +336,7 @@ const Matrix4 = new Class({
     a[14] = a23
 
     return this
-  },
+  }
 
   /**
    * Copies the given Matrix4 into this Matrix and then inverses it.
@@ -348,11 +348,11 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  getInverse: function (m) {
+  getInverse(m) {
     this.copy(m)
 
     return this.invert()
-  },
+  }
 
   /**
    * Invert this Matrix.
@@ -362,7 +362,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  invert: function () {
+  invert() {
     const a = this.val
 
     const a00 = a[0]
@@ -427,7 +427,7 @@ const Matrix4 = new Class({
       (a31 * b01 - a30 * b03 - a32 * b00) * det,
       (a20 * b03 - a21 * b01 + a22 * b00) * det
     )
-  },
+  }
 
   /**
    * Calculate the adjoint, or adjugate, of this Matrix.
@@ -437,7 +437,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  adjoint: function () {
+  adjoint() {
     const a = this.val
 
     const a00 = a[0]
@@ -478,7 +478,7 @@ const Matrix4 = new Class({
       -(a00 * (a11 * a32 - a12 * a31) - a10 * (a01 * a32 - a02 * a31) + a30 * (a01 * a12 - a02 * a11)),
       a00 * (a11 * a22 - a12 * a21) - a10 * (a01 * a22 - a02 * a21) + a20 * (a01 * a12 - a02 * a11)
     )
-  },
+  }
 
   /**
    * Calculate the determinant of this Matrix.
@@ -488,7 +488,7 @@ const Matrix4 = new Class({
    *
    * @return {number} The determinant of this Matrix.
    */
-  determinant: function () {
+  determinant() {
     const a = this.val
 
     const a00 = a[0]
@@ -526,7 +526,7 @@ const Matrix4 = new Class({
 
     // Calculate the determinant
     return b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06
-  },
+  }
 
   /**
    * Multiply this Matrix by the given Matrix.
@@ -538,7 +538,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  multiply: function (src) {
+  multiply(src) {
     const a = this.val
 
     const a00 = a[0]
@@ -605,7 +605,7 @@ const Matrix4 = new Class({
     a[15] = b0 * a03 + b1 * a13 + b2 * a23 + b3 * a33
 
     return this
-  },
+  }
 
   /**
    * Multiply the values of this Matrix4 by those given in the `src` argument.
@@ -617,7 +617,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  multiplyLocal: function (src) {
+  multiplyLocal(src) {
     const a = this.val
     const b = src.val
 
@@ -642,7 +642,7 @@ const Matrix4 = new Class({
       a[12] * b[2] + a[13] * b[6] + a[14] * b[10] + a[15] * b[14],
       a[12] * b[3] + a[13] * b[7] + a[14] * b[11] + a[15] * b[15]
     )
-  },
+  }
 
   /**
    * Multiplies the given Matrix4 object with this Matrix.
@@ -656,9 +656,9 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  premultiply: function (m) {
+  premultiply(m) {
     return this.multiplyMatrices(m, this)
-  },
+  }
 
   /**
    * Multiplies the two given Matrix4 objects and stores the results in this Matrix.
@@ -671,7 +671,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  multiplyMatrices: function (a, b) {
+  multiplyMatrices(a, b) {
     const am = a.val
     const bm = b.val
 
@@ -727,7 +727,7 @@ const Matrix4 = new Class({
       a31 * b14 + a32 * b24 + a33 * b34 + a34 * b44,
       a41 * b14 + a42 * b24 + a43 * b34 + a44 * b44
     )
-  },
+  }
 
   /**
    * Translate this Matrix using the given Vector.
@@ -739,9 +739,9 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  translate: function (v) {
+  translate(v) {
     return this.translateXYZ(v.x, v.y, v.z)
-  },
+  }
 
   /**
    * Translate this Matrix using the given values.
@@ -755,7 +755,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  translateXYZ: function (x, y, z) {
+  translateXYZ(x, y, z) {
     const a = this.val
 
     a[12] = a[0] * x + a[4] * y + a[8] * z + a[12]
@@ -764,7 +764,7 @@ const Matrix4 = new Class({
     a[15] = a[3] * x + a[7] * y + a[11] * z + a[15]
 
     return this
-  },
+  }
 
   /**
    * Apply a scale transformation to this Matrix.
@@ -778,9 +778,9 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  scale: function (v) {
+  scale(v) {
     return this.scaleXYZ(v.x, v.y, v.z)
-  },
+  }
 
   /**
    * Apply a scale transformation to this Matrix.
@@ -794,7 +794,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  scaleXYZ: function (x, y, z) {
+  scaleXYZ(x, y, z) {
     const a = this.val
 
     a[0] = a[0] * x
@@ -813,7 +813,7 @@ const Matrix4 = new Class({
     a[11] = a[11] * z
 
     return this
-  },
+  }
 
   /**
    * Derive a rotation matrix around the given axis.
@@ -826,7 +826,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  makeRotationAxis: function (axis, angle) {
+  makeRotationAxis(axis, angle) {
     // Based on http://www.gamedev.net/reference/articles/article1199.asp
 
     const c = Math.cos(angle)
@@ -856,7 +856,7 @@ const Matrix4 = new Class({
       0,
       1
     )
-  },
+  }
 
   /**
    * Apply a rotation transformation to this Matrix.
@@ -869,7 +869,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  rotate: function (rad, axis) {
+  rotate(rad, axis) {
     const a = this.val
     let x = axis.x
     let y = axis.y
@@ -941,7 +941,7 @@ const Matrix4 = new Class({
       a32,
       a33
     )
-  },
+  }
 
   /**
    * Rotate this matrix on its X axis.
@@ -953,7 +953,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  rotateX: function (rad) {
+  rotateX(rad) {
     const a = this.val
     const s = Math.sin(rad)
     const c = Math.cos(rad)
@@ -979,7 +979,7 @@ const Matrix4 = new Class({
     a[11] = a23 * c - a13 * s
 
     return this
-  },
+  }
 
   /**
    * Rotate this matrix on its Y axis.
@@ -991,7 +991,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  rotateY: function (rad) {
+  rotateY(rad) {
     const a = this.val
     const s = Math.sin(rad)
     const c = Math.cos(rad)
@@ -1017,7 +1017,7 @@ const Matrix4 = new Class({
     a[11] = a03 * s + a23 * c
 
     return this
-  },
+  }
 
   /**
    * Rotate this matrix on its Z axis.
@@ -1029,7 +1029,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  rotateZ: function (rad) {
+  rotateZ(rad) {
     const a = this.val
     const s = Math.sin(rad)
     const c = Math.cos(rad)
@@ -1055,7 +1055,7 @@ const Matrix4 = new Class({
     a[7] = a13 * c - a03 * s
 
     return this
-  },
+  }
 
   /**
    * Set the values of this Matrix from the given rotation Quaternion and translation Vector.
@@ -1068,7 +1068,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  fromRotationTranslation: function (q, v) {
+  fromRotationTranslation(q, v) {
     //  Quaternion math
     const x = q.x
     const y = q.y
@@ -1112,7 +1112,7 @@ const Matrix4 = new Class({
       v.z,
       1
     )
-  },
+  }
 
   /**
    * Set the values of this Matrix from the given Quaternion.
@@ -1124,7 +1124,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  fromQuat: function (q) {
+  fromQuat(q) {
     const x = q.x
     const y = q.y
     const z = q.z
@@ -1167,7 +1167,7 @@ const Matrix4 = new Class({
       0,
       1
     )
-  },
+  }
 
   /**
    * Generate a frustum matrix with the given bounds.
@@ -1184,7 +1184,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  frustum: function (left, right, bottom, top, near, far) {
+  frustum(left, right, bottom, top, near, far) {
     const rl = 1 / (right - left)
     const tb = 1 / (top - bottom)
     const nf = 1 / (near - far)
@@ -1210,7 +1210,7 @@ const Matrix4 = new Class({
       far * near * 2 * nf,
       0
     )
-  },
+  }
 
   /**
    * Generate a perspective projection matrix with the given bounds.
@@ -1225,7 +1225,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  perspective: function (fovy, aspect, near, far) {
+  perspective(fovy, aspect, near, far) {
     const f = 1.0 / Math.tan(fovy / 2)
     const nf = 1 / (near - far)
 
@@ -1250,7 +1250,7 @@ const Matrix4 = new Class({
       2 * far * near * nf,
       0
     )
-  },
+  }
 
   /**
    * Generate a perspective projection matrix with the given bounds.
@@ -1265,7 +1265,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  perspectiveLH: function (width, height, near, far) {
+  perspectiveLH(width, height, near, far) {
     return this.setValues(
       (2 * near) / width,
       0,
@@ -1287,7 +1287,7 @@ const Matrix4 = new Class({
       (near * far) / (near - far),
       0
     )
-  },
+  }
 
   /**
    * Generate an orthogonal projection matrix with the given bounds.
@@ -1304,7 +1304,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  ortho: function (left, right, bottom, top, near, far) {
+  ortho(left, right, bottom, top, near, far) {
     let lr = left - right
     let bt = bottom - top
     let nf = near - far
@@ -1335,7 +1335,7 @@ const Matrix4 = new Class({
       (far + near) * nf,
       1
     )
-  },
+  }
 
   /**
    * Generate a right-handed look-at matrix with the given eye position, target and up axis.
@@ -1349,7 +1349,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  lookAtRH: function (eye, target, up) {
+  lookAtRH(eye, target, up) {
     const m = this.val
 
     _z.subVectors(eye, target)
@@ -1389,7 +1389,7 @@ const Matrix4 = new Class({
     m[10] = _z.z
 
     return this
-  },
+  }
 
   /**
    * Generate a look-at matrix with the given eye position, focal point, and up axis.
@@ -1403,7 +1403,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  lookAt: function (eye, center, up) {
+  lookAt(eye, center, up) {
     const eyex = eye.x
     const eyey = eye.y
     const eyez = eye.z
@@ -1489,7 +1489,7 @@ const Matrix4 = new Class({
       -(z0 * eyex + z1 * eyey + z2 * eyez),
       1
     )
-  },
+  }
 
   /**
    * Set the values of this matrix from the given `yaw`, `pitch` and `roll` values.
@@ -1503,7 +1503,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  yawPitchRoll: function (yaw, pitch, roll) {
+  yawPitchRoll(yaw, pitch, roll) {
     this.zero()
     _tempMat1.zero()
     _tempMat2.zero()
@@ -1549,7 +1549,7 @@ const Matrix4 = new Class({
     this.multiplyLocal(_tempMat2)
 
     return this
-  },
+  }
 
   /**
    * Generate a world matrix from the given rotation, position, scale, view matrix and projection matrix.
@@ -1565,7 +1565,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  setWorldMatrix: function (rotation, position, scale, viewMatrix, projectionMatrix) {
+  setWorldMatrix(rotation, position, scale, viewMatrix, projectionMatrix) {
     this.yawPitchRoll(rotation.y, rotation.x, rotation.z)
 
     _tempMat1.scaling(scale.x, scale.y, scale.z)
@@ -1583,7 +1583,7 @@ const Matrix4 = new Class({
     }
 
     return this
-  },
+  }
 
   /**
    * Multiplies this Matrix4 by the given `src` Matrix4 and stores the results in the `out` Matrix4.
@@ -1596,7 +1596,7 @@ const Matrix4 = new Class({
    *
    * @return {Phaser.Math.Matrix4} This `out` Matrix4.
    */
-  multiplyToMat4: function (src, out) {
+  multiplyToMat4(src, out) {
     const a = this.val
     const b = src.val
 
@@ -1655,7 +1655,7 @@ const Matrix4 = new Class({
       b30 * a02 + b31 * a12 + b32 * a22 + b33 * a32,
       b30 * a03 + b31 * a13 + b32 * a23 + b33 * a33
     )
-  },
+  }
 
   /**
    * Takes the rotation and position vectors and builds this Matrix4 from them.
@@ -1669,7 +1669,7 @@ const Matrix4 = new Class({
    *
    * @return {this} This Matrix4.
    */
-  fromRotationXYTranslation: function (rotation, position, translateFirst) {
+  fromRotationXYTranslation(rotation, position, translateFirst) {
     const x = position.x
     const y = position.y
     const z = position.z
@@ -1707,7 +1707,7 @@ const Matrix4 = new Class({
     }
 
     return this.setValues(cy, c01, c02, 0, 0, cx, sx, 0, sy, c21, c22, 0, a30, a31, a32, 1)
-  },
+  }
 
   /**
    * Returns the maximum axis scale from this Matrix4.
@@ -1717,7 +1717,7 @@ const Matrix4 = new Class({
    *
    * @return {number} The maximum axis scale.
    */
-  getMaxScaleOnAxis: function () {
+  getMaxScaleOnAxis() {
     const m = this.val
 
     const scaleXSq = m[0] * m[0] + m[1] * m[1] + m[2] * m[2]
@@ -1726,7 +1726,7 @@ const Matrix4 = new Class({
 
     return Math.sqrt(Math.max(scaleXSq, scaleYSq, scaleZSq))
   }
-})
+}
 
 /**
  * @ignore

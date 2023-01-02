@@ -7,8 +7,6 @@
 //  Adapted from [gl-matrix](https://github.com/toji/gl-matrix) by toji
 //  and [vecmath](https://github.com/mattdesl/vecmath) by mattdesl
 
-import Class from '../utils/Class'
-
 /**
  * @classdesc
  * A three-dimensional matrix.
@@ -22,8 +20,8 @@ import Class from '../utils/Class'
  *
  * @param {Phaser.Math.Matrix3} [m] - Optional Matrix3 to copy values from.
  */
-const Matrix3 = new Class({
-  initialize: function Matrix3(m) {
+class Matrix3 {
+  constructor(m) {
     /**
      * The matrix values.
      *
@@ -40,7 +38,7 @@ const Matrix3 = new Class({
       //  Default to identity
       this.identity()
     }
-  },
+  }
 
   /**
    * Make a clone of this Matrix3.
@@ -50,9 +48,9 @@ const Matrix3 = new Class({
    *
    * @return {Phaser.Math.Matrix3} A clone of this Matrix3.
    */
-  clone: function () {
+  clone() {
     return new Matrix3(this)
-  },
+  }
 
   /**
    * This method is an alias for `Matrix3.copy`.
@@ -64,9 +62,9 @@ const Matrix3 = new Class({
    *
    * @return {Phaser.Math.Matrix3} This Matrix3.
    */
-  set: function (src) {
+  set(src) {
     return this.copy(src)
-  },
+  }
 
   /**
    * Copy the values of a given Matrix into this Matrix.
@@ -78,7 +76,7 @@ const Matrix3 = new Class({
    *
    * @return {Phaser.Math.Matrix3} This Matrix3.
    */
-  copy: function (src) {
+  copy(src) {
     const out = this.val
     const a = src.val
 
@@ -93,7 +91,7 @@ const Matrix3 = new Class({
     out[8] = a[8]
 
     return this
-  },
+  }
 
   /**
    * Copy the values of a given Matrix4 into this Matrix3.
@@ -105,7 +103,7 @@ const Matrix3 = new Class({
    *
    * @return {Phaser.Math.Matrix3} This Matrix3.
    */
-  fromMat4: function (m) {
+  fromMat4(m) {
     const a = m.val
     const out = this.val
 
@@ -120,7 +118,7 @@ const Matrix3 = new Class({
     out[8] = a[10]
 
     return this
-  },
+  }
 
   /**
    * Set the values of this Matrix from the given array.
@@ -132,7 +130,7 @@ const Matrix3 = new Class({
    *
    * @return {Phaser.Math.Matrix3} This Matrix3.
    */
-  fromArray: function (a) {
+  fromArray(a) {
     const out = this.val
 
     out[0] = a[0]
@@ -146,7 +144,7 @@ const Matrix3 = new Class({
     out[8] = a[8]
 
     return this
-  },
+  }
 
   /**
    * Reset this Matrix to an identity (default) matrix.
@@ -156,7 +154,7 @@ const Matrix3 = new Class({
    *
    * @return {Phaser.Math.Matrix3} This Matrix3.
    */
-  identity: function () {
+  identity() {
     const out = this.val
 
     out[0] = 1
@@ -170,7 +168,7 @@ const Matrix3 = new Class({
     out[8] = 1
 
     return this
-  },
+  }
 
   /**
    * Transpose this Matrix.
@@ -180,7 +178,7 @@ const Matrix3 = new Class({
    *
    * @return {Phaser.Math.Matrix3} This Matrix3.
    */
-  transpose: function () {
+  transpose() {
     const a = this.val
     const a01 = a[1]
     const a02 = a[2]
@@ -194,7 +192,7 @@ const Matrix3 = new Class({
     a[7] = a12
 
     return this
-  },
+  }
 
   /**
    * Invert this Matrix.
@@ -204,7 +202,7 @@ const Matrix3 = new Class({
    *
    * @return {Phaser.Math.Matrix3} This Matrix3.
    */
-  invert: function () {
+  invert() {
     const a = this.val
 
     const a00 = a[0]
@@ -241,7 +239,7 @@ const Matrix3 = new Class({
     a[8] = (a11 * a00 - a01 * a10) * det
 
     return this
-  },
+  }
 
   /**
    * Calculate the adjoint, or adjugate, of this Matrix.
@@ -251,7 +249,7 @@ const Matrix3 = new Class({
    *
    * @return {Phaser.Math.Matrix3} This Matrix3.
    */
-  adjoint: function () {
+  adjoint() {
     const a = this.val
 
     const a00 = a[0]
@@ -275,7 +273,7 @@ const Matrix3 = new Class({
     a[8] = a00 * a11 - a01 * a10
 
     return this
-  },
+  }
 
   /**
    * Calculate the determinant of this Matrix.
@@ -285,7 +283,7 @@ const Matrix3 = new Class({
    *
    * @return {number} The determinant of this Matrix.
    */
-  determinant: function () {
+  determinant() {
     const a = this.val
 
     const a00 = a[0]
@@ -299,7 +297,7 @@ const Matrix3 = new Class({
     const a22 = a[8]
 
     return a00 * (a22 * a11 - a12 * a21) + a01 * (-a22 * a10 + a12 * a20) + a02 * (a21 * a10 - a11 * a20)
-  },
+  }
 
   /**
    * Multiply this Matrix by the given Matrix.
@@ -311,7 +309,7 @@ const Matrix3 = new Class({
    *
    * @return {Phaser.Math.Matrix3} This Matrix3.
    */
-  multiply: function (src) {
+  multiply(src) {
     const a = this.val
 
     const a00 = a[0]
@@ -349,7 +347,7 @@ const Matrix3 = new Class({
     a[8] = b20 * a02 + b21 * a12 + b22 * a22
 
     return this
-  },
+  }
 
   /**
    * Translate this Matrix using the given Vector.
@@ -361,7 +359,7 @@ const Matrix3 = new Class({
    *
    * @return {Phaser.Math.Matrix3} This Matrix3.
    */
-  translate: function (v) {
+  translate(v) {
     const a = this.val
     const x = v.x
     const y = v.y
@@ -371,7 +369,7 @@ const Matrix3 = new Class({
     a[8] = x * a[2] + y * a[5] + a[8]
 
     return this
-  },
+  }
 
   /**
    * Apply a rotation transformation to this Matrix.
@@ -383,7 +381,7 @@ const Matrix3 = new Class({
    *
    * @return {Phaser.Math.Matrix3} This Matrix3.
    */
-  rotate: function (rad) {
+  rotate(rad) {
     const a = this.val
 
     const a00 = a[0]
@@ -405,7 +403,7 @@ const Matrix3 = new Class({
     a[5] = c * a12 - s * a02
 
     return this
-  },
+  }
 
   /**
    * Apply a scale transformation to this Matrix.
@@ -419,7 +417,7 @@ const Matrix3 = new Class({
    *
    * @return {Phaser.Math.Matrix3} This Matrix3.
    */
-  scale: function (v) {
+  scale(v) {
     const a = this.val
     const x = v.x
     const y = v.y
@@ -433,7 +431,7 @@ const Matrix3 = new Class({
     a[5] = y * a[5]
 
     return this
-  },
+  }
 
   /**
    * Set the values of this Matrix from the given Quaternion.
@@ -445,7 +443,7 @@ const Matrix3 = new Class({
    *
    * @return {Phaser.Math.Matrix3} This Matrix3.
    */
-  fromQuat: function (q) {
+  fromQuat(q) {
     const x = q.x
     const y = q.y
     const z = q.z
@@ -482,7 +480,7 @@ const Matrix3 = new Class({
     out[8] = 1 - (xx + yy)
 
     return this
-  },
+  }
 
   /**
    * Set the values of this Matrix3 to be normalized from the given Matrix4.
@@ -494,7 +492,7 @@ const Matrix3 = new Class({
    *
    * @return {Phaser.Math.Matrix3} This Matrix3.
    */
-  normalFromMat4: function (m) {
+  normalFromMat4(m) {
     const a = m.val
     const out = this.val
 
@@ -556,6 +554,6 @@ const Matrix3 = new Class({
 
     return this
   }
-})
+}
 
 export default Matrix3

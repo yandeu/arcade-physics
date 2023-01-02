@@ -5,8 +5,6 @@
  */
 
 import Clamp from './Clamp'
-
-import Class from '../utils/Class'
 import Matrix4 from './Matrix4'
 import NOOP from '../utils/NOOP'
 
@@ -24,8 +22,8 @@ const tempMatrix = new Matrix4()
  * @param {number} [y] - The y component.
  * @param {number} [z] - The z component.
  */
-const Euler = new Class({
-  initialize: function Euler(x, y, z, order) {
+class Euler {
+  constructor(x, y, z, order) {
     if (x === undefined) {
       x = 0
     }
@@ -45,57 +43,45 @@ const Euler = new Class({
     this._order = order
 
     this.onChangeCallback = NOOP
-  },
+  }
 
-  x: {
-    get: function () {
-      return this._x
-    },
+  get x() {
+    return this._x
+  }
 
-    set: function (value) {
-      this._x = value
+  set x(value) {
+    this._x = value
+    this.onChangeCallback(this)
+  }
 
-      this.onChangeCallback(this)
-    }
-  },
+  get y() {
+    return this._y
+  }
 
-  y: {
-    get: function () {
-      return this._y
-    },
+  set y(value) {
+    this._y = value
+    this.onChangeCallback(this)
+  }
 
-    set: function (value) {
-      this._y = value
+  get z() {
+    return this._z
+  }
 
-      this.onChangeCallback(this)
-    }
-  },
+  set z(value) {
+    this._z = value
+    this.onChangeCallback(this)
+  }
 
-  z: {
-    get: function () {
-      return this._z
-    },
+  get order() {
+    return this._order
+  }
 
-    set: function (value) {
-      this._z = value
+  set order(value) {
+    this._order = value
+    this.onChangeCallback(this)
+  }
 
-      this.onChangeCallback(this)
-    }
-  },
-
-  order: {
-    get: function () {
-      return this._order
-    },
-
-    set: function (value) {
-      this._order = value
-
-      this.onChangeCallback(this)
-    }
-  },
-
-  set: function (x, y, z, order) {
+  set(x, y, z, order) {
     if (order === undefined) {
       order = this._order
     }
@@ -108,13 +94,13 @@ const Euler = new Class({
     this.onChangeCallback(this)
 
     return this
-  },
+  }
 
-  copy: function (euler) {
+  copy(euler) {
     return this.set(euler.x, euler.y, euler.z, euler.order)
-  },
+  }
 
-  setFromQuaternion: function (quaternion, order, update) {
+  setFromQuaternion(quaternion, order, update) {
     if (order === undefined) {
       order = this._order
     }
@@ -125,9 +111,9 @@ const Euler = new Class({
     tempMatrix.fromQuat(quaternion)
 
     return this.setFromRotationMatrix(tempMatrix, order, update)
-  },
+  }
 
-  setFromRotationMatrix: function (matrix, order, update) {
+  setFromRotationMatrix(matrix, order, update) {
     if (order === undefined) {
       order = this._order
     }
@@ -244,10 +230,9 @@ const Euler = new Class({
 
     return this
   }
-})
+}
 
 Euler.RotationOrders = ['XYZ', 'YXZ', 'ZXY', 'ZYX', 'YZX', 'XZY']
-
 Euler.DefaultOrder = 'XYZ'
 
 export default Euler
