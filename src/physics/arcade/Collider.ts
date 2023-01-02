@@ -6,6 +6,7 @@
 
 import type { Body } from './Body'
 import type { StaticBody } from './StaticBody'
+import { ArcadePhysicsCallback, ArcadeProcessCallback } from './typedefs/types'
 import type { World } from './World'
 
 export class Collider {
@@ -31,8 +32,8 @@ export class Collider {
     public overlapOnly: boolean,
     public body1: Body | StaticBody | Array<Body | StaticBody>,
     public body2: Body | StaticBody | Array<Body | StaticBody>,
-    public collideCallback,
-    public processCallback,
+    public collideCallback: ArcadePhysicsCallback,
+    public processCallback: ArcadeProcessCallback,
     public callbackContext
   ) {}
 
@@ -41,13 +42,13 @@ export class Collider {
    *
    * Phaser does not use this value, it's for your own reference.
    */
-  setName(name: string): this {
+  public setName(name: string): this {
     this.name = name
     return this
   }
 
   /** Called by World as part of its step processing, initial operation of collision checking. */
-  update(): void {
+  private update(): void {
     this.world.collideObjects(
       this.body1,
       this.body2,
@@ -72,7 +73,9 @@ export class Collider {
     // @ts-ignore
     this.body2 = null
 
+    // @ts-ignore
     this.collideCallback = null
+    // @ts-ignore
     this.processCallback = null
     this.callbackContext = null
   }

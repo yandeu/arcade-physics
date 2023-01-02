@@ -28,6 +28,12 @@ import { Body } from './Body'
 import { Collider } from './Collider'
 import { ProcessQueue } from '../../structs/ProcessQueue'
 import { Vector2 } from '../../math/Vector2'
+import type {
+  ArcadePhysicsCallback,
+  ArcadeProcessCallback,
+  ArcadeWorldDefaults,
+  ArcadeWorldTreeMinMax
+} from './typedefs/types'
 
 interface ArcadeWorldConfig {
   /* @default 60 */
@@ -106,19 +112,12 @@ export class World extends EventEmitter {
   _total: number
   drawDebug: boolean
   debugGraphic: any
-  defaults: {
-    debugShowBody: boolean
-    debugShowStaticBody: boolean
-    debugShowVelocity: boolean
-    bodyDebugColor: number
-    staticBodyDebugColor: number
-    velocityDebugColor: number
-  }
+  defaults: ArcadeWorldDefaults
   maxEntries: number
   useTree: boolean
   tree: RTree
   staticTree: RTree
-  treeMinMax: { minX: number; minY: number; maxX: number; maxY: number }
+  treeMinMax: ArcadeWorldTreeMinMax
 
   private _tempMatrix: TransformMatrix
   private _tempMatrix2: TransformMatrix
@@ -235,13 +234,6 @@ export class World extends EventEmitter {
      */
     this.debugGraphic
 
-    /**
-     * Default debug display settings for new Bodies.
-     *
-     * @name Phaser.Physics.Arcade.World#defaults
-     * @type {Phaser.Types.Physics.Arcade.ArcadeWorldDefaults}
-     * @since 3.0.0
-     */
     this.defaults = {
       debugShowBody: GetValue(config, 'debugShowBody', true),
       debugShowStaticBody: GetValue(config, 'debugShowStaticBody', true),
@@ -307,13 +299,6 @@ export class World extends EventEmitter {
      */
     this.staticTree = new RTree(this.maxEntries)
 
-    /**
-     * Recycled input for tree searches.
-     *
-     * @name Phaser.Physics.Arcade.World#treeMinMax
-     * @type {Phaser.Types.Physics.Arcade.ArcadeWorldTreeMinMax}
-     * @since 3.0.0
-     */
     this.treeMinMax = { minX: 0, minY: 0, maxX: 0, maxY: 0 }
 
     /**
@@ -712,7 +697,7 @@ export class World extends EventEmitter {
    *
    * @return {Phaser.Physics.Arcade.Collider} The Collider that was created.
    */
-  addCollider(
+  public addCollider(
     body1: Body | StaticBody | Array<Body | StaticBody>,
     body2: Body | StaticBody | Array<Body | StaticBody>,
     collideCallback,
@@ -758,7 +743,7 @@ export class World extends EventEmitter {
    *
    * @return {Phaser.Physics.Arcade.Collider} The Collider that was created.
    */
-  addOverlap(
+  public addOverlap(
     body1: Body | StaticBody | Array<Body | StaticBody>,
     body2: Body | StaticBody | Array<Body | StaticBody>,
     collideCallback,
@@ -799,7 +784,7 @@ export class World extends EventEmitter {
    *
    * @return {Phaser.Physics.Arcade.World} This World object.
    */
-  removeCollider(collider) {
+  public removeCollider(collider) {
     this.colliders.remove(collider)
 
     return this
@@ -1553,17 +1538,11 @@ export class World extends EventEmitter {
    */
   collide(
     body1: Body | StaticBody,
-    body2: Body | StaticBody | Array<Body | StaticBody>,
-    collideCallback,
-    processCallback,
-    callbackContext
+    body2: Body | StaticBody,
+    collideCallback?: ArcadePhysicsCallback,
+    processCallback?: ArcadeProcessCallback,
+    callbackContext?: any
   ) {
-    if (collideCallback === undefined) {
-      collideCallback = null
-    }
-    if (processCallback === undefined) {
-      processCallback = null
-    }
     if (callbackContext === undefined) {
       callbackContext = collideCallback
     }
@@ -1590,10 +1569,10 @@ export class World extends EventEmitter {
   collideObjects(
     body1: Body | StaticBody | Array<Body | StaticBody>,
     body2: Body | StaticBody | Array<Body | StaticBody>,
-    collideCallback,
-    processCallback,
-    callbackContext,
-    overlapOnly
+    collideCallback?: ArcadePhysicsCallback,
+    processCallback?: ArcadeProcessCallback,
+    callbackContext?: any,
+    overlapOnly?: boolean
   ) {
     let i
     let j
@@ -1669,11 +1648,11 @@ export class World extends EventEmitter {
    */
   collideHandler(
     body1: Body | StaticBody,
-    body2: Body | StaticBody | Array<Body | StaticBody>,
-    collideCallback,
-    processCallback,
-    callbackContext,
-    overlapOnly
+    body2: Body | StaticBody,
+    collideCallback?: ArcadePhysicsCallback,
+    processCallback?: ArcadeProcessCallback,
+    callbackContext?: any,
+    overlapOnly?: boolean
   ) {
     //  Collide Group with Self
     //  Only collide valid objects
@@ -1785,16 +1764,16 @@ export class World extends EventEmitter {
   collideBodyVsBody(
     body1: Body | StaticBody,
     body2: Body | StaticBody,
-    collideCallback,
-    processCallback,
-    callbackContext,
-    overlapOnly
-  ) {
+    collideCallback?: ArcadePhysicsCallback,
+    processCallback?: ArcadeProcessCallback,
+    callbackContext?: any,
+    overlapOnly?: boolean
+  ): boolean {
     if (!body1.isBody || !body2.isBody) return false
 
     if (this.separate(body1, body2, processCallback, callbackContext, overlapOnly)) {
       if (collideCallback) {
-        collideCallback.call(callbackContext, body1, body2)
+        collideCallback.call(callbackContext, body1 as any, body2 as any)
       }
 
       this._total++

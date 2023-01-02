@@ -11,6 +11,7 @@ import { Vector2 } from '../../math/Vector2'
 import { Object2D } from './Object2D'
 import { World } from './World'
 import type { Body } from './Body'
+import { ArcadeBodyBounds, CollisionCallback } from './typedefs/types'
 
 export class StaticBody {
   gameObject: Object2D
@@ -55,13 +56,7 @@ export class StaticBody {
   overlapR: number
   embedded: boolean
   collideWorldBounds: boolean
-  checkCollision: {
-    none: boolean
-    up: boolean
-    down: boolean
-    left: boolean
-    right: boolean
-  }
+  checkCollision: CollisionCallback
   touching: {
     none: boolean
     up: boolean
@@ -84,8 +79,8 @@ export class StaticBody {
     right: boolean
   }
   physicsType: number
-  _dx: number
-  _dy: number
+  private _dx: number = 0
+  private _dy: number = 0
 
   isBody = true
 
@@ -349,13 +344,7 @@ export class StaticBody {
      */
     this.collideWorldBounds = false
 
-    /**
-     * Whether this StaticBody is checked for collisions and for which directions. You can set `checkCollision.none = false` to disable collision checks.
-     *
-     * @name Phaser.Physics.Arcade.StaticBody#checkCollision
-     * @type {Phaser.Types.Physics.Arcade.ArcadeBodyCollision}
-     * @since 3.0.0
-     */
+    /** Whether this StaticBody is checked for collisions and for which directions. You can set `checkCollision.none = false` to disable collision checks. */
     this.checkCollision = {
       none: false,
       up: true,
@@ -369,7 +358,7 @@ export class StaticBody {
      * Avoid using it.
      *
      * @name Phaser.Physics.Arcade.StaticBody#touching
-     * @type {Phaser.Types.Physics.Arcade.ArcadeBodyCollision}
+     * @type {Phaser.Types.Physics.Arcade.CollisionCallback}
      * @since 3.0.0
      */
     this.touching = {
@@ -386,7 +375,7 @@ export class StaticBody {
      * The values are always false for a Static Body.
      *
      * @name Phaser.Physics.Arcade.StaticBody#wasTouching
-     * @type {Phaser.Types.Physics.Arcade.ArcadeBodyCollision}
+     * @type {Phaser.Types.Physics.Arcade.CollisionCallback}
      * @since 3.0.0
      */
     this.wasTouching = {
@@ -402,7 +391,7 @@ export class StaticBody {
      * Avoid using it.
      *
      * @name Phaser.Physics.Arcade.StaticBody#blocked
-     * @type {Phaser.Types.Physics.Arcade.ArcadeBodyCollision}
+     * @type {Phaser.Types.Physics.Arcade.CollisionCallback}
      * @since 3.0.0
      */
     this.blocked = {
@@ -448,39 +437,39 @@ export class StaticBody {
     this._dy = 0
   }
 
-  /**
-   * Changes the Game Object this Body is bound to.
-   * First it removes its reference from the old Game Object, then sets the new one.
-   * You can optionally update the position and dimensions of this Body to reflect that of the new Game Object.
-   *
-   * @method Phaser.Physics.Arcade.StaticBody#setGameObject
-   * @since 3.1.0
-   *
-   * @param {Phaser.GameObjects.GameObject} gameObject - The new Game Object that will own this Body.
-   * @param {boolean} [update=true] - Reposition and resize this Body to match the new Game Object?
-   *
-   * @return {Phaser.Physics.Arcade.StaticBody} This Static Body object.
-   *
-   * @see Phaser.Physics.Arcade.StaticBody#updateFromGameObject
-   */
-  setGameObject(gameObject, update) {
-    if (gameObject && gameObject !== this.gameObject) {
-      //  Remove this body from the old game object
-      // @ts-ignore
-      this.gameObject.body = null
+  // /**
+  //  * Changes the Game Object this Body is bound to.
+  //  * First it removes its reference from the old Game Object, then sets the new one.
+  //  * You can optionally update the position and dimensions of this Body to reflect that of the new Game Object.
+  //  *
+  //  * @method Phaser.Physics.Arcade.StaticBody#setGameObject
+  //  * @since 3.1.0
+  //  *
+  //  * @param {Phaser.GameObjects.GameObject} gameObject - The new Game Object that will own this Body.
+  //  * @param {boolean} [update=true] - Reposition and resize this Body to match the new Game Object?
+  //  *
+  //  * @return {Phaser.Physics.Arcade.StaticBody} This Static Body object.
+  //  *
+  //  * @see Phaser.Physics.Arcade.StaticBody#updateFromGameObject
+  //  */
+  // setGameObject(gameObject, update) {
+  //   if (gameObject && gameObject !== this.gameObject) {
+  //     //  Remove this body from the old game object
+  //     // @ts-ignore
+  //     this.gameObject.body = null
 
-      gameObject.body = this
+  //     gameObject.body = this
 
-      //  Update our reference
-      this.gameObject = gameObject
-    }
+  //     //  Update our reference
+  //     this.gameObject = gameObject
+  //   }
 
-    if (update) {
-      this.updateFromGameObject()
-    }
+  //   if (update) {
+  //     this.updateFromGameObject()
+  //   }
 
-    return this
-  }
+  //   return this
+  // }
 
   preUpdate() {
     // nothing to pre-update on a static body.
@@ -702,14 +691,10 @@ export class StaticBody {
   /**
    * Returns the x and y coordinates of the top left and bottom right points of the StaticBody.
    *
-   * @method Phaser.Physics.Arcade.StaticBody#getBounds
-   * @since 3.0.0
-   *
-   * @param {Phaser.Types.Physics.Arcade.ArcadeBodyBounds} obj - The object which will hold the coordinates of the bounds.
-   *
-   * @return {Phaser.Types.Physics.Arcade.ArcadeBodyBounds} The same object that was passed with `x`, `y`, `right` and `bottom` values matching the respective values of the StaticBody.
+   * @param {ArcadeBodyBounds} obj - The object which will hold the coordinates of the bounds.
+   * @return {ArcadeBodyBounds} The same object that was passed with `x`, `y`, `right` and `bottom` values matching the respective values of the StaticBody.
    */
-  getBounds(obj) {
+  getBounds(obj: ArcadeBodyBounds): ArcadeBodyBounds {
     obj.x = this.x
     obj.y = this.y
     obj.right = this.right

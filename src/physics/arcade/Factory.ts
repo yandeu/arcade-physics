@@ -6,6 +6,7 @@
 
 import { Body } from './Body'
 import { StaticBody } from './StaticBody'
+import { ArcadePhysicsCallback, ArcadeProcessCallback, CollisionCallback } from './typedefs/types'
 import type { World } from './World'
 
 export class Factory {
@@ -27,14 +28,14 @@ export class Factory {
   }
 
   /** Creates a new Dynamic Arcade Body. */
-  body(x: number, y: number, width = 64, height = 64): Body {
+  public body(x: number, y: number, width = 64, height = 64): Body {
     const body = new Body(this.world, x, y, width, height)
     this.world.add(body)
     return body
   }
 
   /** Creates a new Static Arcade Physics Body. */
-  staticBody(x: number, y: number, width = 64, height = 64): StaticBody {
+  public staticBody(x: number, y: number, width = 64, height = 64): StaticBody {
     const staticBody = new StaticBody(this.world, x, y, width, height)
     this.world.add(staticBody)
     return staticBody
@@ -51,12 +52,12 @@ export class Factory {
    *
    * @return The Collider that was created.
    */
-  collider(
+  public collider(
     body1: Body | StaticBody | Array<Body | StaticBody>,
     body2: Body | StaticBody | Array<Body | StaticBody>,
-    collideCallback?,
-    processCallback?,
-    callbackContext?
+    collideCallback?: CollisionCallback,
+    processCallback?: CollisionCallback,
+    callbackContext?: any
   ) {
     return this.world.addCollider(body1, body2, collideCallback, processCallback, callbackContext)
   }
@@ -72,18 +73,18 @@ export class Factory {
    *
    * @return The Collider that was created.
    */
-  overlap(
+  public overlap(
     body1: Body | StaticBody | Array<Body | StaticBody>,
     body2: Body | StaticBody | Array<Body | StaticBody>,
-    collideCallback?,
-    processCallback?,
-    callbackContext?
+    collideCallback?: ArcadePhysicsCallback,
+    processCallback?: ArcadeProcessCallback,
+    callbackContext?: any
   ) {
     return this.world.addOverlap(body1, body2, collideCallback, processCallback, callbackContext)
   }
 
   /** Destroys this Factory. */
-  destroy(): void {
+  public destroy(): void {
     // @ts-ignore
     this.world = null
     // @ts-ignore

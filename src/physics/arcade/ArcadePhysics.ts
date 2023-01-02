@@ -15,15 +15,8 @@ import { World } from './World'
 import type { Body } from './Body'
 import { StaticBody } from './StaticBody'
 
-export interface ArcadeWorldConfig {
-  overlapBias?: number
-  gravity: {
-    x: number
-    y: number
-  }
-  width: number
-  height: number
-}
+import type { ArcadeWorldConfig } from './typedefs/types'
+export type { ArcadeWorldConfig }
 
 /**
  * The Arcade Physics Plugin belongs to a Scene and sets up and manages the Scene's physics simulation.
