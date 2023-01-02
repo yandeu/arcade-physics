@@ -30,9 +30,11 @@
   "author": "Yannick Deubel (https://github.com/yandeu)",
   "license": "MIT",
   "dependencies": {
-    "eventemitter3": "^4.0.7"
+    "eventemitter3": "^4.0.7",
+    "rbush": "^3.0.1"
   },
   "devDependencies": {
+    "@types/rbush": "^3.0.0",
     "@yandeu/eslint-config": "^0.0.3",
     "@yandeu/prettier-config": "^0.0.3",
     "jest": "^28.0.3",

@@ -1,5 +1,6 @@
 import { Body } from '../Body'
 import { StaticBody } from '../StaticBody'
+import { World } from '../World'
 
 /**
  * This method will search the given rectangular area and return an array of all physics bodies that
@@ -23,16 +24,17 @@ import { StaticBody } from '../StaticBody'
  *
  * @return {(Phaser.Physics.Arcade.Body[]|Phaser.Physics.Arcade.StaticBody[])} An array of bodies that overlap with the given area.
  */
-const OverlapRect = function (world, x, y, width, height, includeDynamic, includeStatic) {
-  if (includeDynamic === undefined) {
-    includeDynamic = true
-  }
-  if (includeStatic === undefined) {
-    includeStatic = false
-  }
-
-  let dynamicBodies: Body[] = []
-  let staticBodies: Array<Body | StaticBody> = []
+const OverlapRect = function (
+  world: World,
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  includeDynamic = true,
+  includeStatic = false
+): Array<Body | StaticBody> {
+  let dynamicBodies: Array<Body> = []
+  let staticBodies: Array<StaticBody> = []
 
   const minMax = world.treeMinMax
 
@@ -47,7 +49,9 @@ const OverlapRect = function (world, x, y, width, height, includeDynamic, includ
 
   if (includeDynamic && world.useTree) {
     dynamicBodies = world.tree.search(minMax)
-  } else if (includeDynamic) {
+  }
+  //
+  else if (includeDynamic) {
     const bodies = world.bodies
 
     const fakeBody = {
@@ -62,16 +66,14 @@ const OverlapRect = function (world, x, y, width, height, includeDynamic, includ
       isCircle: false
     }
 
-    const intersects = world.intersects
-
-    bodies.iterate(function (target) {
-      if (intersects(target, fakeBody)) {
+    bodies.forEach(target => {
+      if (world.intersects(target, fakeBody as any)) {
         dynamicBodies.push(target)
       }
     })
   }
 
-  return staticBodies.concat(dynamicBodies)
+  return [...staticBodies, ...dynamicBodies]
 }
 
 export default OverlapRect

@@ -584,7 +584,7 @@ export class ArcadePhysics {
    *
    * @return {(Phaser.Physics.Arcade.Body[]|Phaser.Physics.Arcade.StaticBody[])} An array of bodies that overlap with the given area.
    */
-  overlapRect(x, y, width, height, includeDynamic, includeStatic) {
+  overlapRect(x: number, y: number, width: number, height: number, includeDynamic = true, includeStatic = false) {
     return OverlapRect(this.world, x, y, width, height, includeDynamic, includeStatic)
   }
 

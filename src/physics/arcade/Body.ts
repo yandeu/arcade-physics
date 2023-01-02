@@ -353,6 +353,20 @@ export class Body {
     this._sy = gameObject.scaleY
   }
 
+  // used for the btree
+  get minX() {
+    return this.x
+  }
+  get minY() {
+    return this.y
+  }
+  get maxX() {
+    return this.x + this.width
+  }
+  get maxY() {
+    return this.y + this.height
+  }
+
   /**
    * Updates the Body's `transform`, `width`, `height`, and `center` from its Game Object.
    * The Body's `position` isn't changed.

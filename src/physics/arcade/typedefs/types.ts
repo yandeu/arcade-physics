@@ -1,3 +1,4 @@
+import { BBox } from 'rbush'
 import { StaticBody } from '../StaticBody'
 
 export interface ArcadeBodyBounds {
@@ -58,16 +59,7 @@ export interface ArcadeWorldDefaults {
 }
 
 /** Recycled input for tree searches. */
-export interface ArcadeWorldTreeMinMax {
-  /** The minimum x value used in RTree searches. */
-  minX: number
-  /** The minimum y value used in RTree searches. */
-  minY: number
-  /** The maximum x value used in RTree searches. */
-  maxX: number
-  /** The maximum y value used in RTree searches. */
-  maxY: number
-}
+export type ArcadeWorldTreeMinMax = BBox
 
 export interface CheckCollisionObject {
   /** Will bodies collide with the top side of the world bounds? */

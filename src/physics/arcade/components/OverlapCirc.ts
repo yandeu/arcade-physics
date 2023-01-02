@@ -3,6 +3,8 @@ import { Circle } from '../../../geom/circle/Circle'
 import CircleToCircle from '../../../geom/intersects/CircleToCircle'
 import CircleToRectangle from '../../../geom/intersects/CircleToRectangle'
 import { Body } from '../Body'
+import { StaticBody } from '../StaticBody'
+import { World } from '../World'
 
 /**
  * This method will search the given circular area and return an array of all physics bodies that
@@ -25,7 +27,14 @@ import { Body } from '../Body'
  *
  * @return {(Phaser.Physics.Arcade.Body[]|Phaser.Physics.Arcade.StaticBody[])} An array of bodies that overlap with the given area.
  */
-const OverlapCirc = function (world, x, y, radius, includeDynamic, includeStatic) {
+const OverlapCirc = function (
+  world: World,
+  x: number,
+  y: number,
+  radius: number,
+  includeDynamic = true,
+  includeStatic = false
+): Array<Body | StaticBody> {
   const bodiesInRect = OverlapRect(
     world,
     x - radius,
@@ -34,7 +43,7 @@ const OverlapCirc = function (world, x, y, radius, includeDynamic, includeStatic
     2 * radius,
     includeDynamic,
     includeStatic
-  ) as Body[]
+  ) as Array<Body | StaticBody>
 
   if (bodiesInRect.length === 0) {
     return bodiesInRect
@@ -42,7 +51,7 @@ const OverlapCirc = function (world, x, y, radius, includeDynamic, includeStatic
 
   const area = new Circle(x, y, radius)
   const circFromBody = new Circle()
-  const bodiesInArea: Body[] = []
+  const bodiesInArea: Array<Body | StaticBody> = []
 
   for (let i = 0; i < bodiesInRect.length; i++) {
     const body = bodiesInRect[i]

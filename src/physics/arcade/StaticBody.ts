@@ -437,6 +437,20 @@ export class StaticBody {
     this._dy = 0
   }
 
+  // used for the btree
+  get minX() {
+    return this.x
+  }
+  get minY() {
+    return this.y
+  }
+  get maxX() {
+    return this.x + this.width
+  }
+  get maxY() {
+    return this.y + this.height
+  }
+
   // /**
   //  * Changes the Game Object this Body is bound to.
   //  * First it removes its reference from the old Game Object, then sets the new one.

@@ -449,9 +449,9 @@ export class World extends EventEmitter {
   add(body: Body | StaticBody) {
     if (body.physicsType === CONST.PHYSICS_TYPE.DYNAMIC_BODY) {
       this.bodies.add(body as Body)
+      this.tree.insert(body)
     } else if (body.physicsType === CONST.PHYSICS_TYPE.STATIC_BODY) {
       this.staticBodies.add(body as StaticBody)
-
       this.staticTree.insert(body)
     }
 
@@ -535,8 +535,8 @@ export class World extends EventEmitter {
    */
   remove(body) {
     if (body.physicsType === CONST.PHYSICS_TYPE.DYNAMIC_BODY) {
-      this.tree.remove(body)
       this.bodies.delete(body)
+      this.tree.remove(body)
     } else if (body.physicsType === CONST.PHYSICS_TYPE.STATIC_BODY) {
       this.staticBodies.delete(body)
       this.staticTree.remove(body)
@@ -867,7 +867,7 @@ export class World extends EventEmitter {
       //  Optionally populate our dynamic collision tree
       if (this.useTree) {
         this.tree.clear()
-        this.tree.load(bodies)
+        this.tree.load(Array.from(bodies))
       }
 
       //  Process any colliders
@@ -917,7 +917,7 @@ export class World extends EventEmitter {
     //  Optionally populate our dynamic collision tree
     if (this.useTree) {
       this.tree.clear()
-      this.tree.load(bodies)
+      this.tree.load(Array.from(bodies))
     }
 
     //  Process any colliders
@@ -1456,7 +1456,7 @@ export class World extends EventEmitter {
    *
    * @return {boolean} True if the two bodies intersect, otherwise false.
    */
-  circleBodyIntersects(circle, body) {
+  circleBodyIntersects(circle: Body | StaticBody, body: Body | StaticBody) {
     const x = Clamp(circle.center.x, body.left, body.right)
     const y = Clamp(circle.center.y, body.top, body.bottom)
 
