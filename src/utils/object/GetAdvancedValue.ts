@@ -5,7 +5,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-import { RND } from '../../math/index.js'
+import RND from '../../math/Random.js'
 import GetValue from './GetValue'
 
 /**
