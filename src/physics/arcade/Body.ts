@@ -10,15 +10,12 @@ import Events from './events'
 import { Rectangle } from '../../geom/rectangle/Rectangle'
 import RectangleContains from '../../geom/rectangle/Contains'
 import { Vector2 } from '../../math/Vector2'
-import { Object2D } from './Object2D'
 import { World } from './World'
 
 /** A Dynamic Arcade Body. */
 export class Body {
   /** The Arcade Physics simulation this Body belongs to. */
   public world: World
-  /** The Game Object this Body belongs to. */
-  public gameObject: Object2D
   /** Whether the Body is drawn to the debug display. */
   public debugShowBody: boolean
   /** Whether the Body's velocity is drawn to the debug display. */
@@ -34,8 +31,6 @@ export class Body {
    * The true radius is equal to `halfWidth`.
    */
   public radius = 0
-  /** The offset of this Body's position from its Game Object's position, in source pixels. */
-  public offset = new Vector2()
   /** The position of this Body within the simulation. */
   public position: Vector2
   /** The position of this Body during the previous step. */
@@ -297,25 +292,19 @@ export class Body {
   public isBody = true
 
   constructor(world: World, x: number, y: number, width = 64, height = 64) {
-    const gameObject = new Object2D(world.scene, x, y, width, height)
-
     this.world = world
-    this.gameObject = gameObject
 
     this.debugShowBody = world.defaults.debugShowBody
     this.debugShowVelocity = world.defaults.debugShowVelocity
     this.debugBodyColor = world.defaults.bodyDebugColor
 
-    this.position = new Vector2(
-      gameObject.x - gameObject.scaleX * gameObject.displayOriginX,
-      gameObject.y - gameObject.scaleY * gameObject.displayOriginY
-    )
+    this.position = new Vector2(x, y)
 
     this.prev = this.position.clone()
     this.prevFrame = this.position.clone()
 
-    this.rotation = gameObject.angle
-    this.preRotation = gameObject.angle
+    this.rotation = 0
+    this.preRotation = 0
 
     this.width = width
     this.height = height
@@ -329,8 +318,8 @@ export class Body {
     this.center = new Vector2(this.position.x + this.halfWidth, this.position.y + this.halfHeight)
     this.customBoundsRectangle = world.bounds
 
-    this._sx = gameObject.scaleX
-    this._sy = gameObject.scaleY
+    this._sx = 1
+    this._sy = 1
   }
 
   // used for the btree
@@ -498,8 +487,8 @@ export class Body {
         }
       }
 
-      this.gameObject.x += dx
-      this.gameObject.y += dy
+      // this.gameObject.x += dx
+      // this.gameObject.y += dy
     }
 
     if (dx < 0) {
@@ -515,7 +504,7 @@ export class Body {
     }
 
     if (this.allowRotation) {
-      this.gameObject.angle += this.deltaZ()
+      // this.gameObject.angle += this.deltaZ()
     }
 
     this._tx = dx
@@ -583,28 +572,11 @@ export class Body {
 
   /**
    * Sizes and positions this Body, as a rectangle.
-   * Modifies the Body `offset` if `center` is true (the default).
-   * Resets the width and height to match current frame, if no width and height provided and a frame is found.
    *
-   * @param width - The width of the Body in pixels. Cannot be zero. If not given, and the parent Game Object has a frame, it will use the frame width.
-   * @param height - The height of the Body in pixels. Cannot be zero. If not given, and the parent Game Object has a frame, it will use the frame height.
-   * @param center - Modify the Body's `offset`, placing the Body's center on its Game Object's center. Only works if the Game Object has the `getCenter` method.
+   * @param width - The width of the Body in pixels. Cannot be zero.
+   * @param height - The height of the Body in pixels. Cannot be zero.
    */
-  setSize(width: number, height: number, center = true): this {
-    if (center === undefined) {
-      center = true
-    }
-
-    const gameObject = this.gameObject
-
-    // if (!width && gameObject.frame) {
-    //   width = gameObject.frame.realWidth
-    // }
-
-    // if (!height && gameObject.frame) {
-    //   height = gameObject.frame.realHeight
-    // }
-
+  setSize(width: number, height: number): this {
     this.sourceWidth = width
     this.sourceHeight = height
 
@@ -616,13 +588,6 @@ export class Body {
 
     this.updateCenter()
 
-    if (center && gameObject.getCenter) {
-      const ox = (gameObject.width - width) / 2
-      const oy = (gameObject.height - height) / 2
-
-      this.offset.set(ox, oy)
-    }
-
     this.isCircle = false
     this.radius = 0
 
@@ -633,17 +598,8 @@ export class Body {
    * Sizes and positions this Body, as a circle.
    *
    * @param radius - The radius of the Body, in source pixels.
-   * @param offsetX - The horizontal offset of the Body from its Game Object, in source pixels.
-   * @param offsetY - The vertical offset of the Body from its Game Object, in source pixels.
    */
-  setCircle(radius: number, offsetX?: number, offsetY?: number): this {
-    if (offsetX === undefined) {
-      offsetX = this.offset.x
-    }
-    if (offsetY === undefined) {
-      offsetY = this.offset.y
-    }
-
+  setCircle(radius: number): this {
     if (radius > 0) {
       this.isCircle = true
       this.radius = radius
@@ -657,8 +613,6 @@ export class Body {
       this.halfWidth = Math.floor(this.width / 2)
       this.halfHeight = Math.floor(this.height / 2)
 
-      this.offset.set(offsetX, offsetY)
-
       this.updateCenter()
     } else {
       this.isCircle = false
@@ -668,30 +622,22 @@ export class Body {
   }
 
   /**
-   * Sets this Body's parent Game Object to the given coordinates and resets this Body at the new coordinates.
+   * Resets this Body at the new coordinates.
    * If the Body had any velocity or acceleration it is lost as a result of calling this.
    *
-   * @param x - The horizontal position to place the Game Object.
-   * @param y - The vertical position to place the Game Object.
+   * @param x - The horizontal position to place the Body.
+   * @param y - The vertical position to place the Body.
    */
   reset(x: number, y: number) {
     this.stop()
 
-    const gameObject = this.gameObject
-
-    gameObject.setPosition(x, y)
-
-    if (gameObject.getTopLeft) {
-      gameObject.getTopLeft(this.position)
-    } else {
-      this.position.set(x, y)
-    }
+    this.position.set(x, y)
 
     this.prev.copy(this.position)
     this.prevFrame.copy(this.position)
 
-    this.rotation = gameObject.angle
-    this.preRotation = gameObject.angle
+    // this.rotation = gameObject.angle
+    // this.preRotation = gameObject.angle
 
     this.updateCenter()
     this.resetFlags(true)

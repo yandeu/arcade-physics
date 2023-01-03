@@ -8,13 +8,11 @@ import CircleContains from '../../geom/circle/Contains'
 import RectangleContains from '../../geom/rectangle/Contains'
 import CONST from './const'
 import { Vector2 } from '../../math/Vector2'
-import { Object2D } from './Object2D'
 import { World } from './World'
 import type { Body } from './Body'
 import { ArcadeBodyBounds, CollisionCallback } from './typedefs/types'
 
 export class StaticBody {
-  gameObject: Object2D
   debugShowBody: boolean
   debugBodyColor: number
   /** Whether this Static Body is updated by the physics simulation. */
@@ -101,11 +99,6 @@ export class StaticBody {
    * @param height
    */
   constructor(public world: World, x: number, y: number, width = 64, height = 64) {
-    const gameObject = new Object2D(world.scene, x, y, width, height)
-
-    /** The Game Object this Static Body belongs to. */
-    this.gameObject = gameObject
-
     /** Whether the Static Body's boundary is drawn to the debug display. */
     this.debugShowBody = world.defaults.debugShowStaticBody
 
@@ -116,7 +109,7 @@ export class StaticBody {
      * The position of this Static Body within the simulation.
      * @type {Phaser.Math.Vector2}
      */
-    this.position = new Vector2(gameObject.x - width * gameObject.originX, gameObject.y - height * gameObject.originY)
+    this.position = new Vector2(x, y)
 
     /**
      * The width of the Static Body's boundary, in pixels.
@@ -493,36 +486,7 @@ export class StaticBody {
   }
 
   /**
-   * Syncs the Static Body's position and size with its parent Game Object.
-   *
-   * @method Phaser.Physics.Arcade.StaticBody#updateFromGameObject
-   * @since 3.1.0
-   *
-   * @return {Phaser.Physics.Arcade.StaticBody} This Static Body object.
-   */
-  updateFromGameObject() {
-    this.world.staticTree.remove(this)
-
-    const gameObject = this.gameObject
-
-    // gameObject.getTopLeft(this.position)
-
-    this.width = gameObject.displayWidth
-    this.height = gameObject.displayHeight
-
-    this.halfWidth = Math.abs(this.width / 2)
-    this.halfHeight = Math.abs(this.height / 2)
-
-    this.center.set(this.position.x + this.halfWidth, this.position.y + this.halfHeight)
-
-    this.world.staticTree.insert(this)
-
-    return this
-  }
-
-  /**
    * Sets the size of the Static Body.
-   * When `center` is true, also repositions it.
    * Resets the width and height to match current frame, if no width and height provided and a frame is found.
    *
    * @method Phaser.Physics.Arcade.StaticBody#setSize
@@ -530,17 +494,10 @@ export class StaticBody {
    *
    * @param {number} [width] - The width of the Static Body in pixels. Cannot be zero. If not given, and the parent Game Object has a frame, it will use the frame width.
    * @param {number} [height] - The height of the Static Body in pixels. Cannot be zero. If not given, and the parent Game Object has a frame, it will use the frame height.
-   * @param {boolean} [center=true] - Place the Static Body's center on its Game Object's center. Only works if the Game Object has the `getCenter` method.
    *
    * @return {Phaser.Physics.Arcade.StaticBody} This Static Body object.
    */
-  setSize(width, height, center) {
-    if (center === undefined) {
-      center = true
-    }
-
-    const gameObject = this.gameObject
-
+  setSize(width, height) {
     this.world.staticTree.remove(this)
 
     this.width = width
@@ -548,19 +505,6 @@ export class StaticBody {
 
     this.halfWidth = Math.floor(width / 2)
     this.halfHeight = Math.floor(height / 2)
-
-    // if (center && gameObject.getCenter) {
-    //   let ox = gameObject.displayWidth / 2
-    //   let oy = gameObject.displayHeight / 2
-
-    //   this.position.x -= this.offset.x
-    //   this.position.y -= this.offset.y
-
-    //   this.offset.set(ox - this.halfWidth, oy - this.halfHeight)
-
-    //   this.position.x += this.offset.x
-    //   this.position.y += this.offset.y
-    // }
 
     this.updateCenter()
 
@@ -633,24 +577,13 @@ export class StaticBody {
    * @method Phaser.Physics.Arcade.StaticBody#reset
    * @since 3.0.0
    *
-   * @param {number} [x] - The x coordinate to reset the body to. If not given will use the parent Game Object's coordinate.
-   * @param {number} [y] - The y coordinate to reset the body to. If not given will use the parent Game Object's coordinate.
+   * @param {number} [x] - The x coordinate to reset the body to.
+   * @param {number} [y] - The y coordinate to reset the body to.
    */
-  reset(x, y) {
-    const gameObject = this.gameObject
-
-    if (x === undefined) {
-      x = gameObject.x
-    }
-    if (y === undefined) {
-      y = gameObject.y
-    }
-
+  reset(x: number, y: number) {
     this.world.staticTree.remove(this)
 
-    gameObject.setPosition(x, y)
-
-    // gameObject.getTopLeft(this.position)
+    this.position.set(x, y)
 
     this.updateCenter()
 

@@ -19,7 +19,6 @@ import RTree from '../../structs/RTree'
 import { Rectangle } from '../../geom/rectangle/Rectangle'
 import { SeparateX } from './SeparateX'
 import { SeparateY } from './SeparateY'
-import { TransformMatrix } from '../../gameobjects/components/TransformMatrix'
 import Wrap from '../../math/Wrap'
 import CONST from './const'
 import MATH_CONST from '../../math/const'
@@ -119,8 +118,6 @@ export class World extends EventEmitter {
   staticTree: RTree
   treeMinMax: ArcadeWorldTreeMinMax
 
-  private _tempMatrix: TransformMatrix
-  private _tempMatrix2: TransformMatrix
   /** The amount of elapsed ms since the last frame. */
   private _elapsed = 0
 
@@ -300,26 +297,6 @@ export class World extends EventEmitter {
     this.staticTree = new RTree(this.maxEntries)
 
     this.treeMinMax = { minX: 0, minY: 0, maxX: 0, maxY: 0 }
-
-    /**
-     * A temporary Transform Matrix used by bodies for calculations without them needing their own local copy.
-     *
-     * @name Phaser.Physics.Arcade.World#_tempMatrix
-     * @type {Phaser.GameObjects.Components.TransformMatrix}
-     * @private
-     * @since 3.12.0
-     */
-    this._tempMatrix = new TransformMatrix()
-
-    /**
-     * A temporary Transform Matrix used by bodies for calculations without them needing their own local copy.
-     *
-     * @name Phaser.Physics.Arcade.World#_tempMatrix2
-     * @type {Phaser.GameObjects.Components.TransformMatrix}
-     * @private
-     * @since 3.12.0
-     */
-    this._tempMatrix2 = new TransformMatrix()
 
     if (this.drawDebug) {
       this.createDebugGraphic()
@@ -1198,7 +1175,7 @@ export class World extends EventEmitter {
     }
 
     //  They overlap. Is there a custom process callback? If it returns true then we can carry on, otherwise we should abort.
-    if (processCallback && processCallback.call(callbackContext, body1.gameObject, body2.gameObject) === false) {
+    if (processCallback && processCallback.call(callbackContext, body1, body2) === false) {
       return false
     }
 
@@ -1260,10 +1237,10 @@ export class World extends EventEmitter {
     if (result) {
       if (overlapOnly) {
         if (body1.onOverlap || body2.onOverlap) {
-          this.emit(Events.OVERLAP, body1.gameObject, body2.gameObject, body1, body2)
+          this.emit(Events.OVERLAP, body1, body2)
         }
       } else if (body1.onCollide || body2.onCollide) {
-        this.emit(Events.COLLIDE, body1.gameObject, body2.gameObject, body1, body2)
+        this.emit(Events.COLLIDE, body1, body2)
       }
     }
 
@@ -1340,7 +1317,7 @@ export class World extends EventEmitter {
       body2.customSeparateX
     ) {
       if (overlap !== 0 && (body1.onOverlap || body2.onOverlap)) {
-        this.emit(Events.OVERLAP, body1.gameObject, body2.gameObject, body1, body2)
+        this.emit(Events.OVERLAP, body1, body2)
       }
 
       //  return true if there was some overlap, otherwise false
@@ -1400,7 +1377,7 @@ export class World extends EventEmitter {
     body2.velocity.y *= body2.bounce.y
 
     if (body1.onCollide || body2.onCollide) {
-      this.emit(Events.COLLIDE, body1.gameObject, body2.gameObject, body1, body2)
+      this.emit(Events.COLLIDE, body1, body2)
     }
 
     return true
