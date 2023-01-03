@@ -17,6 +17,7 @@ object.setVelocityX(5)
 let tick = 0
 const update = () => {
   physics.world.update(tick * 1000, 1000 / 60)
+  physics.world.postUpdate(tick * 1000, 1000 / 60)
   tick++
 }
 

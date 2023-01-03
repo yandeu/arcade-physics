@@ -24,6 +24,7 @@ let tick = 0
 const update = () => {
   pos.push(ball.bottom.toFixed(2))
   physics.world.update(tick * 1000, 1000 / 60)
+  physics.world.postUpdate(tick * 1000, 1000 / 60)
   tick++
 }
 

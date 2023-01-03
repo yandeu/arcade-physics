@@ -20,6 +20,7 @@ const update = () => {
 
   tick++
   physics.world.update(tick * 1000, 1000 / 60)
+  physics.world.postUpdate(tick * 1000, 1000 / 60)
 }
 
 const getPosition = () => {

@@ -27,6 +27,7 @@ let tick = 0
 const update = () => {
   console.log(platform.y.toFixed(2), player.y.toFixed(2))
   physics.world.update(tick * 1000, 1000 / 60)
+  physics.world.postUpdate(tick * 1000, 1000 / 60)
   tick++
 }
 
