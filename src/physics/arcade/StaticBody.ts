@@ -521,39 +521,6 @@ export class StaticBody {
   }
 
   /**
-   * Positions the Static Body at an offset from its Game Object.
-   *
-   * @method Phaser.Physics.Arcade.StaticBody#setOffset
-   * @since 3.4.0
-   *
-   * @param {number} x - The horizontal offset of the Static Body from the Game Object's `x`.
-   * @param {number} y - The vertical offset of the Static Body from the Game Object's `y`.
-   *
-   * @return {Phaser.Physics.Arcade.StaticBody} This Static Body object.
-   */
-  setOffset(x, y) {
-    if (y === undefined) {
-      y = x
-    }
-
-    this.world.staticTree.remove(this)
-
-    this.position.x -= this.offset.x
-    this.position.y -= this.offset.y
-
-    this.offset.set(x, y)
-
-    this.position.x += this.offset.x
-    this.position.y += this.offset.y
-
-    this.updateCenter()
-
-    this.world.staticTree.insert(this)
-
-    return this
-  }
-
-  /**
    * Sets the size of the Static Body.
    * When `center` is true, also repositions it.
    * Resets the width and height to match current frame, if no width and height provided and a frame is found.

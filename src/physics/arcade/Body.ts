@@ -367,68 +367,9 @@ export class Body {
     return this.y + this.height
   }
 
-  /**
-   * Updates the Body's `transform`, `width`, `height`, and `center` from its Game Object.
-   * The Body's `position` isn't changed.
-   */
-  updateBounds() {
-    const sprite = this.gameObject
-
-    //  Container?
-
-    const transform = this.transform
-
-    transform.x = sprite.x
-    transform.y = sprite.y
-    transform.rotation = sprite.angle
-    transform.scaleX = sprite.scaleX
-    transform.scaleY = sprite.scaleY
-    transform.displayOriginX = sprite.displayOriginX
-    transform.displayOriginY = sprite.displayOriginY
-
-    let recalc = false
-
-    const asx = Math.abs(transform.scaleX)
-    const asy = Math.abs(transform.scaleY)
-
-    if (this._sx !== asx || this._sy !== asy) {
-      this.width = this.sourceWidth * asx
-      this.height = this.sourceHeight * asy
-      this._sx = asx
-      this._sy = asy
-      recalc = true
-    }
-
-    if (recalc) {
-      this.halfWidth = Math.floor(this.width / 2)
-      this.halfHeight = Math.floor(this.height / 2)
-      this.updateCenter()
-    }
-  }
-
   /** Updates the Body's `center` from its `position`, `width`, and `height`. */
   updateCenter() {
     this.center.set(this.position.x + this.halfWidth, this.position.y + this.halfHeight)
-  }
-
-  /**
-   * Updates the Body's `position`, `width`, `height`, and `center` from its Game Object and `offset`.
-   *
-   * You don't need to call this for Dynamic Bodies, as it happens automatically during the physics step.
-   * But you could use it if you have modified the Body offset or Game Object transform and need to immediately
-   * read the Body's new `position` or `center`.
-   *
-   * To resynchronize the Body with its Game Object, use `reset()` instead.
-   */
-  updateFromGameObject() {
-    this.updateBounds()
-
-    const transform = this.transform
-
-    this.position.x = transform.x + transform.scaleX * (this.offset.x - transform.displayOriginX)
-    this.position.y = transform.y + transform.scaleY * (this.offset.y - transform.displayOriginY)
-
-    this.updateCenter()
   }
 
   /**
@@ -661,23 +602,6 @@ export class Body {
   }
 
   /**
-   * Sets the offset of the Body's position from its Game Object's position.
-   * The Body's `position` isn't changed until the next `preUpdate`.
-   *
-   * @param {number} x - The horizontal offset, in source pixels.
-   * @param {number} [y=x] - The vertical offset, in source pixels.
-   */
-  setOffset(x: number, y?: number): this {
-    if (y === undefined) {
-      y = x
-    }
-
-    this.offset.set(x, y)
-
-    return this
-  }
-
-  /**
    * Sizes and positions this Body, as a rectangle.
    * Modifies the Body `offset` if `center` is true (the default).
    * Resets the width and height to match current frame, if no width and height provided and a frame is found.
@@ -789,7 +713,6 @@ export class Body {
     this.rotation = gameObject.angle
     this.preRotation = gameObject.angle
 
-    this.updateBounds()
     this.updateCenter()
     this.resetFlags(true)
   }
