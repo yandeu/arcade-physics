@@ -784,9 +784,9 @@ export class StaticBody {
    * @method Phaser.Physics.Arcade.StaticBody#drawDebug
    * @since 3.0.0
    *
-   * @param {Phaser.GameObjects.Graphics} graphic - The Graphics object to use for the debug drawing of the StaticBody.
+   * @param {CanvasRenderingContext2D} Context2D - The Context2D to use for the debug drawing of the StaticBody.
    */
-  drawDebug(graphic) {
+  drawDebug(ctx: CanvasRenderingContext2D) {
     const pos = this.position
 
     const x = pos.x + this.halfWidth
@@ -808,20 +808,20 @@ export class StaticBody {
     }
 
     const strokeRect = (x, y, w, h) => {
-      graphic.rect(x, y, w, h)
+      ctx.rect(x, y, w, h)
     }
 
     const lineStyle = (width, color, unknown?) => {
-      graphic.lineWidth = width
-      graphic.strokeStyle = colorToHex(color)
+      ctx.lineWidth = width
+      ctx.strokeStyle = colorToHex(color)
     }
 
     const strokeCircle = (x, y, radius) => {
-      graphic.arc(x, y, radius, 0, 2 * Math.PI)
+      ctx.arc(x, y, radius, 0, 2 * Math.PI)
     }
 
     if (this.debugShowBody) {
-      graphic.beginPath()
+      ctx.beginPath()
       lineStyle(defaultStrokeWidth, this.debugBodyColor || 0x0000ff, 1)
 
       if (this.isCircle) {
@@ -829,7 +829,7 @@ export class StaticBody {
       } else {
         strokeRect(pos.x, pos.y, this.width, this.height)
       }
-      graphic.stroke()
+      ctx.stroke()
     }
   }
 

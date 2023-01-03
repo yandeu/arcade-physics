@@ -902,9 +902,9 @@ export class Body {
    * @method Phaser.Physics.Arcade.Body#drawDebug
    * @since 3.0.0
    *
-   * @param {Phaser.GameObjects.Graphics} graphic - The Graphics object to draw on.
+   * @param {CanvasRenderingContext2D} Context2D - The Context2D to draw on.
    */
-  drawDebug(graphic /* ctx */) {
+  drawDebug(ctx: CanvasRenderingContext2D) {
     const pos = this.position
 
     const x = pos.x + this.halfWidth
@@ -913,8 +913,8 @@ export class Body {
     const defaultStrokeWidth = 1
 
     const lineBetween = (x1, y1, x2, y2) => {
-      graphic.moveTo(x1, y1)
-      graphic.lineTo(x2, y2)
+      ctx.moveTo(x1, y1)
+      ctx.lineTo(x2, y2)
     }
 
     const colorToHex = num => {
@@ -931,16 +931,16 @@ export class Body {
     }
 
     const lineStyle = (width, color, unknown?) => {
-      graphic.lineWidth = width
-      graphic.strokeStyle = colorToHex(color)
+      ctx.lineWidth = width
+      ctx.strokeStyle = colorToHex(color)
     }
 
     const strokeCircle = (x, y, radius) => {
-      graphic.arc(x, y, radius, 0, 2 * Math.PI)
+      ctx.arc(x, y, radius, 0, 2 * Math.PI)
     }
 
     if (this.debugShowBody) {
-      graphic.beginPath()
+      ctx.beginPath()
 
       lineStyle(defaultStrokeWidth, this.debugBodyColor)
 
@@ -965,14 +965,14 @@ export class Body {
         }
       }
 
-      graphic.stroke()
+      ctx.stroke()
     }
 
     if (this.debugShowVelocity) {
-      graphic.beginPath()
+      ctx.beginPath()
       lineStyle(defaultStrokeWidth, this.world?.defaults?.velocityDebugColor || 0x00ff00, 1)
       lineBetween(x, y, x + this.velocity.x / 2, y + this.velocity.y / 2)
-      graphic.stroke()
+      ctx.stroke()
     }
   }
 
