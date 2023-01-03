@@ -42,3 +42,8 @@ https://yandeu.github.io/arcade-physics/
 ## Usage
 
 See [index.html](https://github.com/yandeu/arcade-physics/blob/main/index.html)
+
+## Breaking Changes
+
+- In version >= 0.0.3 the config has been simplified. Please have a look at:  
+  https://github.com/yandeu/arcade-physics/blob/main/index.html#L72
