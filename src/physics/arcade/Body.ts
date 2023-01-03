@@ -19,16 +19,6 @@ export class Body {
   public world: World
   /** The Game Object this Body belongs to. */
   public gameObject: Object2D
-  /** Transformations applied to this Body. */
-  public transform: {
-    x: number
-    y: number
-    rotation: number
-    scaleX: number
-    scaleY: number
-    displayOriginX: number
-    displayOriginY: number
-  }
   /** Whether the Body is drawn to the debug display. */
   public debugShowBody: boolean
   /** Whether the Body's velocity is drawn to the debug display. */
@@ -312,16 +302,6 @@ export class Body {
     this.world = world
     this.gameObject = gameObject
 
-    this.transform = {
-      x: gameObject.x,
-      y: gameObject.y,
-      rotation: gameObject.angle,
-      scaleX: gameObject.scaleX,
-      scaleY: gameObject.scaleY,
-      displayOriginX: gameObject.displayOriginX,
-      displayOriginY: gameObject.displayOriginY
-    }
-
     this.debugShowBody = world.defaults.debugShowBody
     this.debugShowVelocity = world.defaults.debugShowVelocity
     this.debugBodyColor = world.defaults.bodyDebugColor
@@ -429,7 +409,7 @@ export class Body {
     // MOD(yandeu): not sure we can to call this here
     // this.updateFromGameObject()
 
-    this.rotation = this.transform.rotation
+    // this.rotation = this.transform.rotation
     this.preRotation = this.rotation
 
     if (this.moves) {
