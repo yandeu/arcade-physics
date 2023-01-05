@@ -29,7 +29,8 @@ Completely detach the Arcade Physics from the PhaserJS package and convert it to
 
 ## Features
 
-TileMap and Group support has been removed. Instead of Group, use an array.
+- Group support has been removed. Instead of Group, use an array.
+- The TileMap files are still there, but can't be used as of now.
 
 ## Demo (client-side)
 
