@@ -48,3 +48,13 @@ See [index.html](https://github.com/yandeu/arcade-physics/blob/main/index.html)
 
 - In version >= 0.0.3 the config has been simplified. Please have a look at:  
   https://github.com/yandeu/arcade-physics/blob/main/index.html#L72
+
+## License
+
+Licensed under LGPL-3.0  
+Copyright (c) 2023, [Yannick Deubel](https://github.com/yandeu)
+
+This project is a fork of [photonstorm/phaser](https://github.com/photonstorm/phaser) which is licensed under MIT  
+Copyright (c) 2020 Richard Davey, Photon Storm Ltd.
+
+Please have a look at the [LICENSE](LICENSE) for more details.

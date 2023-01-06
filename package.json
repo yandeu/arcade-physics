@@ -28,7 +28,7 @@
     "Phaser"
   ],
   "author": "Yannick Deubel (https://github.com/yandeu)",
-  "license": "MIT",
+  "license": "LGPL-3.0",
   "dependencies": {
     "eventemitter3": "^4.0.7",
     "rbush": "^3.0.1"
