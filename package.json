@@ -1,6 +1,6 @@
 {
   "name": "arcade-physics",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Use Arcade Physics without Phaser.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
