@@ -12,9 +12,9 @@ export interface ArcadeBodyBounds {
   bottom: number
 }
 
-export interface CollisionCallback {
+export interface Collision {
   /** True if the Body is not colliding. */
-  none: boolean
+  none?: boolean
   /** True if the Body is colliding on its upper edge. */
   up: boolean
   /** True if the Body is colliding on its lower edge. */
@@ -24,6 +24,8 @@ export interface CollisionCallback {
   /** True if the Body is colliding on its right edge. */
   right: boolean
 }
+
+export type CollisionCallback = () => Collision
 
 export type ArcadeProcessCallback = () => boolean
 

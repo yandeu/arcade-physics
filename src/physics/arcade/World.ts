@@ -31,7 +31,8 @@ import type {
   ArcadePhysicsCallback,
   ArcadeProcessCallback,
   ArcadeWorldDefaults,
-  ArcadeWorldTreeMinMax
+  ArcadeWorldTreeMinMax,
+  Collision
 } from './typedefs/types'
 
 interface ArcadeWorldConfig {
@@ -91,7 +92,7 @@ export class World extends EventEmitter {
   gravity: Vector2
   /** A boundary constraining Bodies. */
   bounds: Rectangle
-  checkCollision: { up: any; down: any; left: any; right: any }
+  checkCollision: Collision
   fps: number
   fixedStep: number
   _frameTime: number

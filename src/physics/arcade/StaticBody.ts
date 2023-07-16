@@ -10,7 +10,7 @@ import CONST from './const'
 import { Vector2 } from '../../math/Vector2'
 import { World } from './World'
 import type { Body } from './Body'
-import { ArcadeBodyBounds, CollisionCallback } from './typedefs/types'
+import { ArcadeBodyBounds, Collision } from './typedefs/types'
 
 export class StaticBody {
   debugShowBody: boolean
@@ -54,7 +54,7 @@ export class StaticBody {
   overlapR: number
   embedded: boolean
   collideWorldBounds: boolean
-  checkCollision: CollisionCallback
+  checkCollision: Collision
   touching: {
     none: boolean
     up: boolean
