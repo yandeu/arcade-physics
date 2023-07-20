@@ -6,7 +6,7 @@
 
 import { Body } from './Body'
 import { StaticBody } from './StaticBody'
-import { ArcadePhysicsCallback, ArcadeProcessCallback, CollisionCallback } from './typedefs/types'
+import { ArcadePhysicsCallback, ArcadeProcessCallback } from './typedefs/types'
 import type { World } from './World'
 
 export class Factory {
@@ -55,8 +55,8 @@ export class Factory {
   public collider(
     body1: Body | StaticBody | Array<Body | StaticBody>,
     body2: Body | StaticBody | Array<Body | StaticBody>,
-    collideCallback?: CollisionCallback,
-    processCallback?: CollisionCallback,
+    collideCallback?: ArcadePhysicsCallback,
+    processCallback?: ArcadeProcessCallback,
     callbackContext?: any
   ) {
     return this.world.addCollider(body1, body2, collideCallback, processCallback, callbackContext)

@@ -1,5 +1,6 @@
 import { BBox } from 'rbush'
 import { StaticBody } from '../StaticBody'
+import { Body } from '../Body'
 
 export interface ArcadeBodyBounds {
   /** The left edge. */
@@ -32,7 +33,7 @@ export type ArcadeProcessCallback = () => boolean
 export type ArcadePhysicsCallback = (
   body1: Body | StaticBody,
   body2: Body | StaticBody
-) => (body1: Body | StaticBody, body2: Body | StaticBody) => void
+ ) => void
 
 export interface ArcadeWorldConfig {
   overlapBias?: number

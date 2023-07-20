@@ -678,20 +678,13 @@ export class World extends EventEmitter {
   public addCollider(
     body1: Body | StaticBody | Array<Body | StaticBody>,
     body2: Body | StaticBody | Array<Body | StaticBody>,
-    collideCallback,
-    processCallback,
-    callbackContext
+    collideCallback?: ArcadePhysicsCallback,
+    processCallback?: ArcadeProcessCallback,
+    callbackContext?: any
   ) {
-    if (collideCallback === undefined) {
-      collideCallback = null
-    }
-    if (processCallback === undefined) {
-      processCallback = null
-    }
     if (callbackContext === undefined) {
       callbackContext = collideCallback
     }
-
     const collider = new Collider(this, false, body1, body2, collideCallback, processCallback, callbackContext)
 
     this.colliders.add(collider)
