@@ -1,5 +1,6 @@
 import { BBox } from 'rbush'
 import { StaticBody } from '../StaticBody'
+import { Body } from '../Body'
 
 export interface ArcadeBodyBounds {
   /** The left edge. */
@@ -12,9 +13,9 @@ export interface ArcadeBodyBounds {
   bottom: number
 }
 
-export interface CollisionCallback {
+export interface Collision {
   /** True if the Body is not colliding. */
-  none: boolean
+  none?: boolean
   /** True if the Body is colliding on its upper edge. */
   up: boolean
   /** True if the Body is colliding on its lower edge. */
@@ -25,12 +26,14 @@ export interface CollisionCallback {
   right: boolean
 }
 
+export type CollisionCallback = () => Collision
+
 export type ArcadeProcessCallback = () => boolean
 
 export type ArcadePhysicsCallback = (
   body1: Body | StaticBody,
   body2: Body | StaticBody
-) => (body1: Body | StaticBody, body2: Body | StaticBody) => void
+ ) => void
 
 export interface ArcadeWorldConfig {
   overlapBias?: number
