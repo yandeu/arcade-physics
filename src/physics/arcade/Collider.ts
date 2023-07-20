@@ -32,9 +32,9 @@ export class Collider {
     public overlapOnly: boolean,
     public body1: Body | StaticBody | Array<Body | StaticBody>,
     public body2: Body | StaticBody | Array<Body | StaticBody>,
-    public collideCallback: ArcadePhysicsCallback,
-    public processCallback: ArcadeProcessCallback,
-    public callbackContext
+    public collideCallback?: ArcadePhysicsCallback,
+    public processCallback?: ArcadeProcessCallback,
+    public callbackContext?: any
   ) {}
 
   /**
