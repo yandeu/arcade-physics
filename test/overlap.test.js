@@ -1,4 +1,7 @@
-const { ArcadePhysics } = require('../lib/index.js')
+// @ts-check
+import test from 'node:test'
+import assert from 'assert'
+import { LoadArcadePhysics } from '../dist/index.js'
 
 const config = {
   gravity: {
@@ -9,7 +12,7 @@ const config = {
   height: 600
 }
 
-const physics = new ArcadePhysics(config)
+const physics = await LoadArcadePhysics(config)
 
 const addBody = (x, y, isCircle = false, radius = 0) => {
   const body = physics.add.body(x, y)
@@ -28,22 +31,25 @@ addBody(200, 200, true, 50)
 addStaticBody(100, 100)
 addStaticBody(200, 200, true, 50)
 
+physics.world.update(1 * 1000, 1000 / 60)
+physics.world.postUpdate()
+
 test('get overlapRect', () => {
-  const bodies = physics.overlapRect(50, 50, 200, 200)
-  expect(bodies.length).toBe(2)
+  const bodies = physics.overlapRect(50, 50, 200, 200, true)
+  assert.strictEqual(bodies.length, 2)
 })
 
 test('get overlapRect incl. static bodies', () => {
   const bodies = physics.overlapRect(50, 50, 200, 200, true, true)
-  expect(bodies.length).toBe(4)
+  assert.strictEqual(bodies.length, 4)
 })
 
 test('get overlapCirc', () => {
   const bodies = physics.overlapCirc(100, 100, 10)
-  expect(bodies.length).toBe(1)
+  assert.strictEqual(bodies.length, 1)
 })
 
 test('get overlapCirc', () => {
   const bodies = physics.overlapCirc(100, 100, 10, true, true)
-  expect(bodies.length).toBe(2)
+  assert.strictEqual(bodies.length, 2)
 })

@@ -1,0 +1,146 @@
+/**
+ * @author       Richard Davey <rich@phaser.io>
+ * @copyright    2013-2026 Phaser Studio Inc.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var CanvasInterpolation = require('../display/canvas/CanvasInterpolation');
+var CanvasPool = require('../display/canvas/CanvasPool');
+var CONST = require('../const');
+var Features = require('../device/Features');
+
+/**
+ * Called automatically by Phaser.Game and responsible for creating the renderer it will use.
+ *
+ * Inspects the game configuration to determine the appropriate render type (WebGL, Canvas, or Headless),
+ * validates that the chosen renderer is supported by the current device, sets up the canvas element
+ * (either adopting one provided in the game config or creating a new one from the CanvasPool), applies
+ * any canvas CSS styles and pixel art interpolation settings, then instantiates and assigns the renderer
+ * to `game.renderer`.
+ *
+ * Relies upon two webpack global flags, `WEBGL_RENDERER` and `CANVAS_RENDERER`, which are defined at
+ * build time and inlined into the bundle as compile-time constants. They are not available as runtime
+ * variables and determine which renderer classes are included in the build.
+ *
+ * @function Phaser.Core.CreateRenderer
+ * @since 3.0.0
+ *
+ * @param {Phaser.Game} game - The Phaser.Game instance on which the renderer will be set.
+ */
+var CreateRenderer = function (game)
+{
+    var config = game.config;
+
+    if ((config.customEnvironment || config.canvas) && config.renderType === CONST.AUTO)
+    {
+        throw new Error('Must set explicit renderType in custom environment');
+    }
+
+    //  Not a custom environment, didn't provide their own canvas and not headless, so determine the renderer:
+    if (!config.customEnvironment && !config.canvas && config.renderType !== CONST.HEADLESS)
+    {
+        if (config.renderType === CONST.AUTO)
+        {
+            config.renderType = Features.webGL ? CONST.WEBGL : CONST.CANVAS;
+        }
+
+        if (config.renderType === CONST.WEBGL)
+        {
+            if (!Features.webGL) { throw new Error('Cannot create WebGL context, aborting.'); }
+        }
+        else if (config.renderType === CONST.CANVAS)
+        {
+            if (!Features.canvas) { throw new Error('Cannot create Canvas context, aborting.'); }
+        }
+        else
+        {
+            throw new Error('Unknown value for renderer type: ' + config.renderType);
+        }
+    }
+
+    //  Pixel Art mode?
+    if (!config.antialias)
+    {
+        CanvasPool.disableSmoothing();
+    }
+
+    var baseSize = game.scale.baseSize;
+
+    var width = baseSize.width;
+    var height = baseSize.height;
+
+    //  Does the game config provide its own canvas element to use?
+    if (config.canvas)
+    {
+        game.canvas = config.canvas;
+
+        game.canvas.width = width;
+        game.canvas.height = height;
+    }
+    else
+    {
+        game.canvas = CanvasPool.create(game, width, height, config.renderType);
+    }
+
+    //  Does the game config provide some canvas css styles to use?
+    if (config.canvasStyle)
+    {
+        game.canvas.style = config.canvasStyle;
+    }
+
+    //  Pixel Art mode?
+    if (!config.antialias)
+    {
+        CanvasInterpolation.setCrisp(game.canvas);
+    }
+
+    if (config.renderType === CONST.HEADLESS)
+    {
+        //  Nothing more to do here
+        return;
+    }
+
+    var CanvasRenderer;
+    var WebGLRenderer;
+
+    if (typeof WEBGL_RENDERER && typeof CANVAS_RENDERER)
+    {
+        CanvasRenderer = require('../renderer/canvas/CanvasRenderer');
+        WebGLRenderer = require('../renderer/webgl/WebGLRenderer');
+
+        //  Let the config pick the renderer type, as both are included
+        if (config.renderType === CONST.WEBGL)
+        {
+            game.renderer = new WebGLRenderer(game);
+        }
+        else
+        {
+            game.renderer = new CanvasRenderer(game);
+            game.context = game.renderer.gameContext;
+        }
+    }
+
+    if (typeof WEBGL_RENDERER && !typeof CANVAS_RENDERER)
+    {
+        WebGLRenderer = require('../renderer/webgl/WebGLRenderer');
+
+        //  Force the type to WebGL, regardless what was requested
+        config.renderType = CONST.WEBGL;
+
+        game.renderer = new WebGLRenderer(game);
+    }
+
+    if (!typeof WEBGL_RENDERER && typeof CANVAS_RENDERER)
+    {
+        CanvasRenderer = require('../renderer/canvas/CanvasRenderer');
+
+        //  Force the type to Canvas, regardless what was requested
+        config.renderType = CONST.CANVAS;
+
+        game.renderer = new CanvasRenderer(game);
+
+        game.context = game.renderer.gameContext;
+    }
+};
+
+module.exports = CreateRenderer;

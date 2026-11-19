@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arcade Physics Demo</title>
+    <link rel="stylesheet" href="site.css" />
+    <script src="./js/pixi.min.js"></script>
+  </head>
+  <body class="page-demo">
+
+    <header class="site-nav">
+      <a class="brand" href="index.html">Arcade Physics</a>
+      <nav>
+        <a href="index.html" aria-current="page">Demo</a>
+        <a href="tilemap.html">Tilemap</a>
+        <a href="server.html">Node / Bun</a>
+        <a href="https://github.com/yandeu/arcade-physics#readme">Docs</a>
+        <a href="https://www.npmjs.com/package/arcade-physics">npm</a>
+        <a href="https://github.com/yandeu/arcade-physics">GitHub</a>
+      </nav>
+    </header>
+    <main class="content">
+
+    <h1>Arcade Physics<br /><small>(without Phaser)</small></h1>
+
+    <div id="wrapper">
+      <h2>Debug Physics</h2>
+      <canvas id="myCanvas" width="800" height="450"></canvas>
+      <h2>Use Physics with PixiJS</h2>
+    </div>
+
+    <script type="module">
+      import { LoadArcadePhysics, DebugGraphics } from '../dist/arcade-physics.min.js'
+
+      var canvas = document.getElementById('myCanvas')
+      var ctx = canvas.getContext('2d')
+
+      const config = {
+        width: 800,
+        height: 450,
+        gravity: {
+          x: 0,
+          y: 300
+        }
+      }
+
+      // physics
+      const physics = await LoadArcadePhysics(config)
+      // set debug color for static bodies to red
+      physics.world.defaults.staticBodyDebugColor = parseInt('ff0000', 16)
+
+      // box
+      var box = physics.add.body(20, 20, 64, 64)
+      box.setVelocityX(20)
+      box.setBounce(0.6)
+      box.setCollideWorldBounds(true)
+
+      // ball
+      var ball = physics.add.body(206, 20)
+      ball.setCircle(32)
+      ball.setBounce(0.8)
+      ball.setCollideWorldBounds(true)
+
+      // platform
+      var platform = physics.add.staticBody(60, 350, 160, 32)
+
+      // colliders
+      physics.add.collider(box, ball)
+      physics.add.collider(box, platform)
+      physics.add.collider(ball, platform)
+
+      console.log(physics.world.defaults.velocityDebugColor)
+      console.log(physics.world.defaults.staticBodyDebugColor)
+
+      const debugGraphic = new DebugGraphics(ctx)
+
+      let tick = 0
+      const update = () => {
+        physics.world.update(tick * 1000, 1000 / 60)
+        physics.world.postUpdate(tick * 1000, 1000 / 60)
+        tick++
+
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+
+        // draw debug
+
+        physics.world.bodies.forEach(b => {
+          b.drawDebug(debugGraphic)
+        })
+        physics.world.staticBodies.forEach(b => {
+          b.drawDebug(debugGraphic)
+        })
+
+        requestAnimationFrame(update)
+      }
+
+      requestAnimationFrame(update)
+
+      /**
+       *
+       * THE PART BELOW IN THE PIXI.JS EXAMPLE
+       *
+       */
+
+      const app = new PIXI.Application({ width: 800, height: 450 })
+      // The demo has no Pixi interactions. Let touch drags scroll the page.
+      app.renderer.plugins.interaction.autoPreventDefault = false
+      app.view.style.touchAction = 'pan-y'
+      const wrapper = document.getElementById('wrapper')
+      wrapper.appendChild(app.view)
+
+      const pixi_box = PIXI.Sprite.from('img/box.png')
+      const pixi_ball = PIXI.Sprite.from('img/ball.png')
+      const pixi_platform = PIXI.Sprite.from('img/platform.png')
+
+      /**
+       * Cartoon jungle vector created by brgfx (https://www.freepik.com/brgfx)
+       * https://www.freepik.com/vectors/cartoon-jungle
+       */
+      const pixi_background = PIXI.Sprite.from('img/background.jpg')
+
+      app.stage.addChild(pixi_background, pixi_box, pixi_ball, pixi_platform)
+
+      app.ticker.add(delta => {
+        pixi_box.x = box.x
+        pixi_box.y = box.y
+
+        pixi_ball.x = ball.x
+        pixi_ball.y = ball.y
+
+        pixi_platform.x = platform.x
+        pixi_platform.y = platform.y
+      })
+    </script>
+
+    <div id="combined">
+      <h2>Images with Debug Overlay</h2>
+      <div class="stack">
+        <div id="combined-pixi"></div>
+        <canvas id="debugOverlay" width="800" height="450"></canvas>
+      </div>
+    </div>
+
+    <script type="module">
+      import { LoadArcadePhysics, DebugGraphics } from '../dist/arcade-physics.min.js'
+
+      const WIDTH = 800
+      const HEIGHT = 450
+
+      // physics (its own world, same setup as the scenes above)
+      const physics = await LoadArcadePhysics({
+        width: WIDTH,
+        height: HEIGHT,
+        gravity: { x: 0, y: 300 }
+      })
+      physics.world.defaults.staticBodyDebugColor = parseInt('ff0000', 16)
+
+      const box = physics.add.body(20, 20, 64, 64)
+      box.setVelocityX(20)
+      box.setBounce(0.6)
+      box.setCollideWorldBounds(true)
+
+      const ball = physics.add.body(206, 20)
+      ball.setCircle(32)
+      ball.setBounce(0.8)
+      ball.setCollideWorldBounds(true)
+
+      const platform = physics.add.staticBody(60, 350, 160, 32)
+
+      physics.add.collider(box, ball)
+      physics.add.collider(box, platform)
+      physics.add.collider(ball, platform)
+
+      // images (PixiJS)
+      const app = new PIXI.Application({ width: WIDTH, height: HEIGHT })
+      // The demo has no Pixi interactions. Let touch drags scroll the page.
+      app.renderer.plugins.interaction.autoPreventDefault = false
+      app.view.style.touchAction = 'pan-y'
+      document.getElementById('combined-pixi').appendChild(app.view)
+
+      const pixi_background = PIXI.Sprite.from('img/background.jpg')
+      const pixi_box = PIXI.Sprite.from('img/box.png')
+      const pixi_ball = PIXI.Sprite.from('img/ball.png')
+      const pixi_platform = PIXI.Sprite.from('img/platform.png')
+
+      app.stage.addChild(pixi_background, pixi_box, pixi_ball, pixi_platform)
+
+      // debug overlay, drawn on top of the Pixi canvas
+      const overlay = document.getElementById('debugOverlay')
+      const octx = overlay.getContext('2d')
+      const debugGraphic = new DebugGraphics(octx)
+      debugGraphic.defaultStrokeWidth = 3 // thicker debug lines in this overlay, default is 1
+
+      let tick = 0
+      app.ticker.add(() => {
+        physics.world.update(tick * 1000, 1000 / 60)
+        physics.world.postUpdate(tick * 1000, 1000 / 60)
+        tick++
+
+        pixi_box.x = box.x
+        pixi_box.y = box.y
+        pixi_ball.x = ball.x
+        pixi_ball.y = ball.y
+        pixi_platform.x = platform.x
+        pixi_platform.y = platform.y
+
+        octx.clearRect(0, 0, WIDTH, HEIGHT)
+        physics.world.bodies.forEach(b => {
+          b.drawDebug(debugGraphic)
+        })
+        physics.world.staticBodies.forEach(b => {
+          b.drawDebug(debugGraphic)
+        })
+      })
+    </script>
+
+    </main>
+    <footer class="site-footer">
+      <nav>
+        <a href="index.html">Demo</a>
+        <a href="tilemap.html">Tilemap</a>
+        <a href="server.html">Node / Bun</a>
+        <a href="https://github.com/yandeu/arcade-physics#readme">Docs</a>
+        <a href="https://github.com/yandeu/arcade-physics/issues">Issues</a>
+        <a href="https://github.com/yandeu/arcade-physics/blob/main/LICENSE">MIT License</a>
+        <a href="https://html2app.dev/tools/arcade-physics">html2app</a>
+      </nav>
+      <p>
+        © 2026 <a href="https://github.com/yandeu">Yannick Deubel</a>. Background image by
+        <a href="https://www.freepik.com/vectors/cartoon-jungle">brgfx on Freepik</a>. Built on
+        <a href="https://pixijs.com">PixiJS</a> (MIT).
+      </p>
+    </footer>
+  </body>
+</html>

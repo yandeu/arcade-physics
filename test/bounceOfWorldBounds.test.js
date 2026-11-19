@@ -1,4 +1,7 @@
-const { ArcadePhysics } = require('../lib/index.js')
+// @ts-check
+import test from 'node:test'
+import assert from 'assert'
+import { LoadArcadePhysics } from '../dist/index.js'
 
 const config = {
   gravity: {
@@ -10,7 +13,7 @@ const config = {
 }
 
 // physics
-const physics = new ArcadePhysics(config)
+const physics = await LoadArcadePhysics(config)
 
 const ball = physics.add.body(20, 580, 10, 10)
 
@@ -24,7 +27,7 @@ let tick = 0
 const update = () => {
   pos.push(ball.bottom.toFixed(2))
   physics.world.update(tick * 1000, 1000 / 60)
-  physics.world.postUpdate(tick * 1000, 1000 / 60)
+  physics.world.postUpdate()
   tick++
 }
 
@@ -33,7 +36,7 @@ for (let i = 0; i < 25; i++) {
 }
 
 test('ball should bounce of the world bounds', () => {
-  expect(pos[0]).toBe('590.00')
-  expect(pos[8]).toBe('600.00')
-  expect(pos[17]).toBe('590.00')
+  assert.strictEqual(pos[0], '590.00')
+  assert.strictEqual(pos[8], '600.00')
+  assert.strictEqual(pos[17], '590.00')
 })

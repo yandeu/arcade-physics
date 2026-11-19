@@ -1,4 +1,7 @@
-const { ArcadePhysics } = require('../lib/index.js')
+// @ts-check
+import test from 'node:test'
+import assert from 'assert'
+import { LoadArcadePhysics } from '../dist/index.js'
 
 const config = {
   gravity: {
@@ -9,12 +12,11 @@ const config = {
   height: 600
 }
 
-const physics = new ArcadePhysics(config)
+const physics = await LoadArcadePhysics(config)
 
 const makeObject = (x, y) => {
   const object = physics.add.body(x, y)
-  object.bounceX = 1
-  object.bounceY = 1
+  object.setBounce(1)
   object.collideWorldBounds = true
   return object
 }
@@ -32,10 +34,14 @@ test('get closest and furthest', () => {
   const closest = physics.closest(pointer)
   const furthest = physics.furthest(pointer)
 
-  expect(Math.round(closest.x)).toBe(500)
-  expect(Math.round(closest.y)).toBe(200)
-  expect(Math.round(furthest.x)).toBe(100)
-  expect(Math.round(furthest.y)).toBe(150)
+  if (closest == null || furthest == null) {
+    throw 'closest or furthest is null.'
+  }
+
+  assert.strictEqual(Math.round(closest.x), 500)
+  assert.strictEqual(Math.round(closest.y), 200)
+  assert.strictEqual(Math.round(furthest.x), 100)
+  assert.strictEqual(Math.round(furthest.y), 150)
 })
 
 test('get closest and furthest', () => {
@@ -46,8 +52,12 @@ test('get closest and furthest', () => {
   const closest = physics.closest(pointer)
   const furthest = physics.furthest(pointer)
 
-  expect(Math.round(closest.x)).toBe(498)
-  expect(Math.round(closest.y)).toBe(198)
-  expect(Math.round(furthest.x)).toBe(99)
-  expect(Math.round(furthest.y)).toBe(152)
+  if (closest == null || furthest == null) {
+    throw 'closest or furthest is null.'
+  }
+
+  assert.strictEqual(Math.round(closest.x), 498)
+  assert.strictEqual(Math.round(closest.y), 198)
+  assert.strictEqual(Math.round(furthest.x), 99)
+  assert.strictEqual(Math.round(furthest.y), 152)
 })

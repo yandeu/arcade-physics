@@ -1,4 +1,7 @@
-const { ArcadePhysics } = require('../lib/index.js')
+// @ts-check
+import test from 'node:test'
+import assert from 'assert'
+import { LoadArcadePhysics } from '../dist/index.js'
 
 const config = {
   gravity: {
@@ -9,7 +12,7 @@ const config = {
   height: 600
 }
 
-const physics = new ArcadePhysics(config)
+const physics = await LoadArcadePhysics(config)
 
 const object = physics.add.body(5, 0)
 object.setVelocityX(5)
@@ -17,7 +20,7 @@ object.setVelocityX(5)
 let tick = 0
 const update = () => {
   physics.world.update(tick * 1000, 1000 / 60)
-  physics.world.postUpdate(tick * 1000, 1000 / 60)
+  physics.world.postUpdate()
   tick++
 }
 
@@ -29,22 +32,22 @@ test('x and y coordinates', () => {
   // alias
   const c = getCoordinates
 
-  expect(c().x).toBe('5.00')
-  expect(c().y).toBe('0.00')
+  assert.strictEqual(c().x, '5.00')
+  assert.strictEqual(c().y, '0.00')
 
   update()
-  expect(c().x).toBe('5.08')
-  expect(c().y).toBe('0.06')
+  assert.strictEqual(c().x, '5.08')
+  assert.strictEqual(c().y, '0.06')
 
   update()
-  expect(c().x).toBe('5.17')
-  expect(c().y).toBe('0.17')
+  assert.strictEqual(c().x, '5.17')
+  assert.strictEqual(c().y, '0.17')
 
   update()
-  expect(c().x).toBe('5.25')
-  expect(c().y).toBe('0.33')
+  assert.strictEqual(c().x, '5.25')
+  assert.strictEqual(c().y, '0.33')
 
   update()
-  expect(c().x).toBe('5.33')
-  expect(c().y).toBe('0.56')
+  assert.strictEqual(c().x, '5.33')
+  assert.strictEqual(c().y, '0.56')
 })

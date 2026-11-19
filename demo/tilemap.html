@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arcade Physics Tilemap Demo</title>
+    <link rel="stylesheet" href="site.css" />
+    <script src="./js/pixi.min.js"></script>
+  </head>
+  <body class="page-demo">
+
+    <header class="site-nav">
+      <a class="brand" href="index.html">Arcade Physics</a>
+      <nav>
+        <a href="index.html">Demo</a>
+        <a href="tilemap.html" aria-current="page">Tilemap</a>
+        <a href="server.html">Node / Bun</a>
+        <a href="https://github.com/yandeu/arcade-physics#readme">Docs</a>
+        <a href="https://www.npmjs.com/package/arcade-physics">npm</a>
+        <a href="https://github.com/yandeu/arcade-physics">GitHub</a>
+      </nav>
+    </header>
+    <main class="content">
+
+    <h1>Arcade Physics<br /><small>Tilemap</small></h1>
+    <p>Bodies can only move on sand. Gray tiles are solid. Tiles are from the Kenney Tiny Dungeon pack (CC0).</p>
+
+    <h2>Use Tiles with PixiJS</h2>
+    <div class="scene" id="tilesPixi"></div>
+
+    <h2>Debug Physics</h2>
+    <canvas id="debugCanvas" width="512" height="320"></canvas>
+
+    <!-- shared map data and layout -->
+    <script type="module">
+      import {
+        LoadArcadePhysics,
+        DebugGraphics,
+        createTileLayer,
+        createTilesFromGrid,
+        collideBodyVsTiles
+      } from '../dist/arcade-physics.min.js'
+      import { solidGrid, TILE_SIZE } from './tilemap/tilemap-data.mjs'
+
+      const WIDTH = 512
+      const HEIGHT = 320
+
+      // Creates the same bodies in every scene. Each scene gets its own physics world.
+      const setupWorld = async () => {
+        const physics = await LoadArcadePhysics({ width: WIDTH, height: HEIGHT, gravity: { x: 0, y: 0 } })
+        const layer = createTileLayer({ tileWidth: TILE_SIZE, tileHeight: TILE_SIZE })
+        const solidTiles = createTilesFromGrid(layer, solidGrid)
+
+        const ball = physics.add.body(60, 292, 12, 12)
+        ball.setVelocity(70, 60)
+        ball.setBounce(1)
+        ball.setCollideWorldBounds(true)
+
+        const box = physics.add.body(300, 292, 14, 14)
+        box.setVelocityX(-90)
+        box.setBounce(1)
+        box.setCollideWorldBounds(true)
+
+        return { physics, solidTiles, ball, box, bodies: [ball, box] }
+      }
+
+      // Draws the solid tiles as filled gray rectangles.
+      const drawSolidTiles = (ctx, solidTiles) => {
+        ctx.fillStyle = '#3a4058'
+        for (const tile of solidTiles) {
+          ctx.fillRect(tile.x * TILE_SIZE, tile.y * TILE_SIZE, TILE_SIZE, TILE_SIZE)
+        }
+      }
+
+      // Scene 1: debug only.
+      {
+        const { physics, solidTiles, bodies } = await setupWorld()
+        const canvas = document.getElementById('debugCanvas')
+        const ctx = canvas.getContext('2d')
+        const debugGraphic = new DebugGraphics(ctx)
+
+        let tick = 0
+        const update = () => {
+          physics.world.update(tick * 1000, 1000 / 60)
+          for (const body of bodies) {
+            collideBodyVsTiles(body, solidTiles)
+          }
+          physics.world.postUpdate()
+          tick++
+
+          ctx.clearRect(0, 0, WIDTH, HEIGHT)
+          drawSolidTiles(ctx, solidTiles)
+          physics.world.bodies.forEach(b => {
+            b.drawDebug(debugGraphic)
+          })
+
+          requestAnimationFrame(update)
+        }
+        requestAnimationFrame(update)
+      }
+    </script>
+
+    <!-- Scene 2: images only. -->
+    <script type="module">
+      import {
+        LoadArcadePhysics,
+        createTileLayer,
+        createTilesFromGrid,
+        collideBodyVsTiles
+      } from '../dist/arcade-physics.min.js'
+      import { dungeonGrid, solidGrid, TILE_SIZE } from './tilemap/tilemap-data.mjs'
+
+      const WIDTH = 512
+      const HEIGHT = 320
+      const SHEET = 'tilemap/tilemap_packed.png'
+      const SHEET_COLUMNS = 12
+
+      const physics = await LoadArcadePhysics({ width: WIDTH, height: HEIGHT, gravity: { x: 0, y: 0 } })
+      const layer = createTileLayer({ tileWidth: TILE_SIZE, tileHeight: TILE_SIZE })
+      const solidTiles = createTilesFromGrid(layer, solidGrid)
+
+      const ball = physics.add.body(60, 292, 12, 12)
+      ball.setVelocity(70, 60)
+      ball.setBounce(1)
+      ball.setCollideWorldBounds(true)
+
+      const box = physics.add.body(300, 292, 14, 14)
+      box.setVelocityX(-90)
+      box.setBounce(1)
+      box.setCollideWorldBounds(true)
+
+      const bodies = [ball, box]
+
+      const app = new PIXI.Application({ width: WIDTH, height: HEIGHT })
+      // The demo has no Pixi interactions. Let touch drags scroll the page.
+      app.renderer.plugins.interaction.autoPreventDefault = false
+      app.view.style.touchAction = 'pan-y'
+      document.getElementById('tilesPixi').appendChild(app.view)
+
+      // Wait for the tileset image so frames can be cut from it.
+      const base = PIXI.BaseTexture.from(SHEET)
+      if (!base.valid) {
+        await new Promise(resolve => base.once('loaded', resolve))
+      }
+
+      const frame = gid => {
+        const index = gid - 1
+        const col = index % SHEET_COLUMNS
+        const row = Math.floor(index / SHEET_COLUMNS)
+        return new PIXI.Texture(base, new PIXI.Rectangle(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE))
+      }
+
+      // draw every non-empty cell of the map, not only the solid tiles
+      dungeonGrid.forEach((row, y) => {
+        row.forEach((gid, x) => {
+          if (gid === 0) return
+          const sprite = new PIXI.Sprite(frame(gid))
+          sprite.x = x * TILE_SIZE
+          sprite.y = y * TILE_SIZE
+          app.stage.addChild(sprite)
+        })
+      })
+
+      // the ball and box are added after the tiles, so they draw on top
+      const ballSprite = PIXI.Sprite.from('img/ball.png')
+      const boxSprite = PIXI.Sprite.from('img/box.png')
+      app.stage.addChild(ballSprite, boxSprite)
+
+      let tick = 0
+      app.ticker.add(() => {
+        physics.world.update(tick * 1000, 1000 / 60)
+        for (const body of bodies) {
+          collideBodyVsTiles(body, solidTiles)
+        }
+        physics.world.postUpdate()
+        tick++
+
+        ballSprite.x = ball.x
+        ballSprite.y = ball.y
+        ballSprite.width = ball.width
+        ballSprite.height = ball.height
+
+        boxSprite.x = box.x
+        boxSprite.y = box.y
+        boxSprite.width = box.width
+        boxSprite.height = box.height
+      })
+    </script>
+
+    </main>
+    <footer class="site-footer">
+      <nav>
+        <a href="index.html">Demo</a>
+        <a href="tilemap.html">Tilemap</a>
+        <a href="server.html">Node / Bun</a>
+        <a href="https://github.com/yandeu/arcade-physics#readme">Docs</a>
+        <a href="https://github.com/yandeu/arcade-physics/issues">Issues</a>
+        <a href="https://github.com/yandeu/arcade-physics/blob/main/LICENSE">MIT License</a>
+        <a href="https://html2app.dev/tools/arcade-physics">html2app</a>
+      </nav>
+      <p>
+        © 2026 <a href="https://github.com/yandeu">Yannick Deubel</a>. Tiles are from the
+        <a href="https://kenney.nl">Kenney</a> Tiny Dungeon pack (CC0). Built on
+        <a href="https://pixijs.com">PixiJS</a> (MIT).
+      </p>
+    </footer>
+  </body>
+</html>

@@ -1,9 +1,13 @@
-/*
+# Ignore everything, then re-include only the files the published package needs.
+*
 
-!/.npmrc
-!/LICENSE
-!/README.md
-!/bundle
-!/lib
-!/package.json
-!/readme
+!package.json
+!LICENSE
+!README.md
+!dist/
+!dist/index.js
+!dist/phaser.d.ts
+!dist/matter.d.ts
+!dist/index.d.ts
+!dist/ArcadePhysics.d.mts
+!dist/ArcadeTilemap.d.mts

@@ -1,0 +1,4 @@
+[submodule "src/phaser"]
+	path = src/phaser
+	url = git@github.com:phaserjs/phaser.git
+	shallow = true

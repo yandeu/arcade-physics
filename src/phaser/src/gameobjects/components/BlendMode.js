@@ -1,0 +1,124 @@
+/**
+ * @author       Richard Davey <rich@phaser.io>
+ * @copyright    2013-2026 Phaser Studio Inc.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var BlendModes = require('../../renderer/BlendModes');
+
+/**
+ * Provides methods used for setting the blend mode of a Game Object.
+ * Blend modes control how a Game Object is composited onto the display when rendered.
+ * They determine how the pixels of the object are blended with the pixels already on screen,
+ * enabling effects such as additive lighting, screen blending, and erasing.
+ *
+ * This component is designed to be applied as a mixin to Game Objects and should not be
+ * used directly. Any Game Object that mixes in this component gains the `blendMode` property
+ * and the `setBlendMode` method.
+ *
+ * @namespace Phaser.GameObjects.Components.BlendMode
+ * @since 3.0.0
+ */
+
+var BlendMode = {
+
+    /**
+     * Private internal value. Holds the current blend mode.
+     *
+     * @name Phaser.GameObjects.Components.BlendMode#_blendMode
+     * @type {number}
+     * @private
+     * @default 0
+     * @since 3.0.0
+     */
+    _blendMode: BlendModes.NORMAL,
+
+    /**
+     * Sets the Blend Mode being used by this Game Object.
+     *
+     * This can be a const, such as `Phaser.BlendModes.SCREEN`, or an integer, such as 4 (for Overlay)
+     *
+     * Under WebGL only the following Blend Modes are available:
+     *
+     * * NORMAL
+     * * ADD
+     * * MULTIPLY
+     * * SCREEN
+     * * ERASE
+     *
+     * Canvas has more available depending on browser support.
+     *
+     * You can also create your own custom Blend Modes in WebGL.
+     *
+     * Blend modes have different effects under Canvas and WebGL, and from browser to browser, depending
+     * on support. Blend Modes also cause a WebGL batch flush should it encounter a new blend mode. For these
+     * reasons try to be careful about the construction of your Scene and the frequency with which blend modes
+     * are used.
+     *
+     * @name Phaser.GameObjects.Components.BlendMode#blendMode
+     * @type {(Phaser.BlendModes|string|number)}
+     * @since 3.0.0
+     */
+    blendMode: {
+
+        get: function ()
+        {
+            return this._blendMode;
+        },
+
+        set: function (value)
+        {
+            if (typeof value === 'string')
+            {
+                value = BlendModes[value];
+            }
+
+            value |= 0;
+
+            if (value >= -1)
+            {
+                this._blendMode = value;
+            }
+        }
+
+    },
+
+    /**
+     * Sets the Blend Mode being used by this Game Object.
+     *
+     * This can be a const, such as `Phaser.BlendModes.SCREEN`, or an integer, such as 4 (for Overlay)
+     *
+     * Under WebGL only the following Blend Modes are available:
+     *
+     * * NORMAL
+     * * ADD
+     * * MULTIPLY
+     * * SCREEN
+     * * ERASE (only works when rendering to a framebuffer, like a Render Texture)
+     *
+     * Canvas has more available depending on browser support.
+     *
+     * You can also create your own custom Blend Modes in WebGL.
+     *
+     * Blend modes have different effects under Canvas and WebGL, and from browser to browser, depending
+     * on support. Blend Modes also cause a WebGL batch flush should it encounter a new blend mode. For these
+     * reasons try to be careful about the construction of your Scene and the frequency with which blend modes
+     * are used.
+     *
+     * @method Phaser.GameObjects.Components.BlendMode#setBlendMode
+     * @since 3.0.0
+     *
+     * @param {(string|Phaser.BlendModes|number)} value - The BlendMode value. Either a string, a CONST or a number.
+     *
+     * @return {this} This Game Object instance.
+     */
+    setBlendMode: function (value)
+    {
+        this.blendMode = value;
+
+        return this;
+    }
+
+};
+
+module.exports = BlendMode;

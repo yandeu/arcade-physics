@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arcade Physics on Node.js and Bun</title>
+    <link rel="stylesheet" href="site.css" />
+  </head>
+  <body class="page-server">
+
+    <header class="site-nav">
+      <a class="brand" href="index.html">Arcade Physics</a>
+      <nav>
+        <a href="index.html">Demo</a>
+        <a href="tilemap.html">Tilemap</a>
+        <a href="server.html" aria-current="page">Node / Bun</a>
+        <a href="https://github.com/yandeu/arcade-physics#readme">Docs</a>
+        <a href="https://www.npmjs.com/package/arcade-physics">npm</a>
+        <a href="https://github.com/yandeu/arcade-physics">GitHub</a>
+      </nav>
+    </header>
+    <main class="content">
+      <h1>Arcade Physics<br /><small>on Node.js and Bun</small></h1>
+    <p class="intro">
+      The same code runs on Node.js and Bun without a browser. The window below runs this script in your browser and
+      prints its output to the terminal underneath.
+    </p>
+
+    <div class="window code">
+      <div class="window-bar">
+        <span class="dot dot-red"></span>
+        <span class="dot dot-yellow"></span>
+        <span class="dot dot-green"></span>
+        <span class="title">index.mjs</span>
+      </div>
+<pre><code>import { LoadArcadePhysics } from 'arcade-physics'
+
+const physics = await LoadArcadePhysics({ width: 800, height: 450, gravity: { x: 0, y: 300 } })
+
+const box = physics.add.body(20, 20, 64, 64)
+box.setBounce(0.6)
+box.setCollideWorldBounds(true)
+
+const platform = physics.add.staticBody(60, 350, 160, 32)
+physics.add.collider(box, platform)
+
+let tick = 0
+const timer = setInterval(() => {
+  physics.world.update(tick * 1000, 1000 / 60)
+  physics.world.postUpdate()
+  tick++
+
+  if (tick % 30 === 0) {
+    console.log(`tick ${tick}: box x=${box.x.toFixed(1)} y=${box.y.toFixed(1)}`)
+  }
+  if (tick === 240) {
+    clearInterval(timer)
+    console.log('done')
+  }
+}, 16)</code></pre>
+    </div>
+
+    <div class="window terminal">
+      <div class="window-bar">
+        <span class="dot dot-red"></span>
+        <span class="dot dot-yellow"></span>
+        <span class="dot dot-green"></span>
+        <span class="title">terminal</span>
+      </div>
+<pre><span class="prompt">$ node index.mjs</span>
+<span id="output"></span></pre>
+    </div>
+    <p class="caption">Output from a browser run. Node.js 22 and Bun 1.2 print the same lines.</p>
+
+    <script type="module">
+      import { LoadArcadePhysics } from '../dist/arcade-physics.min.js'
+
+      const output = document.getElementById('output')
+      // Mirrors console.log in the snippet above, but writes into the terminal window.
+      const log = (...args) => {
+        output.textContent += args.join(' ') + '\n'
+      }
+
+      const physics = await LoadArcadePhysics({ width: 800, height: 450, gravity: { x: 0, y: 300 } })
+
+      const box = physics.add.body(20, 20, 64, 64)
+      box.setBounce(0.6)
+      box.setCollideWorldBounds(true)
+
+      const platform = physics.add.staticBody(60, 350, 160, 32)
+      physics.add.collider(box, platform)
+
+      let tick = 0
+      const timer = setInterval(() => {
+        physics.world.update(tick * 1000, 1000 / 60)
+        physics.world.postUpdate()
+        tick++
+
+        if (tick % 30 === 0) {
+          log(`tick ${tick}: box x=${box.x.toFixed(1)} y=${box.y.toFixed(1)}`)
+        }
+        if (tick === 240) {
+          clearInterval(timer)
+          log('done')
+        }
+      }, 16)
+    </script>
+    </main>
+
+    <footer class="site-footer">
+      <nav>
+        <a href="index.html">Demo</a>
+        <a href="tilemap.html">Tilemap</a>
+        <a href="server.html">Node / Bun</a>
+        <a href="https://github.com/yandeu/arcade-physics#readme">Docs</a>
+        <a href="https://github.com/yandeu/arcade-physics/issues">Issues</a>
+        <a href="https://github.com/yandeu/arcade-physics/blob/main/LICENSE">MIT License</a>
+        <a href="https://html2app.dev/tools/arcade-physics">html2app</a>
+      </nav>
+      <p>© 2026 <a href="https://github.com/yandeu">Yannick Deubel</a>. MIT licensed.</p>
+    </footer>
+  </body>
+</html>

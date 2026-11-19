@@ -1,0 +1,53 @@
+/**
+ * @author       Richard Davey <rich@phaser.io>
+ * @copyright    2013-2026 Phaser Studio Inc.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Vector2 = require('./Vector2');
+
+/**
+ * Takes the `x` and `y` coordinates and transforms them into the local coordinate
+ * space defined by the given position, rotation, and scale values. This performs
+ * an inverse transformation, converting a point from world space into the equivalent
+ * local-space coordinates of a Game Object or other transformed entity. This is
+ * useful for hit-testing or pointer input when you need to determine where a
+ * world-space point falls within a transformed object's local coordinate system.
+ *
+ * @function Phaser.Math.TransformXY
+ * @since 3.0.0
+ *
+ * @param {number} x - The x coordinate to be transformed.
+ * @param {number} y - The y coordinate to be transformed.
+ * @param {number} positionX - Horizontal position of the transform point.
+ * @param {number} positionY - Vertical position of the transform point.
+ * @param {number} rotation - Rotation of the transform point, in radians.
+ * @param {number} scaleX - Horizontal scale of the transform point.
+ * @param {number} scaleY - Vertical scale of the transform point.
+ * @param {Phaser.Types.Math.Vector2Like} [output] - The output vector, point or object for the translated coordinates.
+ *
+ * @return {Phaser.Types.Math.Vector2Like} The translated point.
+ */
+var TransformXY = function (x, y, positionX, positionY, rotation, scaleX, scaleY, output)
+{
+    if (output === undefined) { output = new Vector2(); }
+
+    var radianSin = Math.sin(rotation);
+    var radianCos = Math.cos(rotation);
+
+    // Rotate and Scale
+    var a = radianCos * scaleX;
+    var b = radianSin * scaleX;
+    var c = -radianSin * scaleY;
+    var d = radianCos * scaleY;
+
+    //  Invert
+    var id = 1 / ((a * d) + (c * -b));
+
+    output.x = (d * id * x) + (-c * id * y) + (((positionY * c) - (positionX * d)) * id);
+    output.y = (a * id * y) + (-b * id * x) + (((-positionY * a) + (positionX * b)) * id);
+
+    return output;
+};
+
+module.exports = TransformXY;

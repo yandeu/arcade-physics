@@ -1,4 +1,7 @@
-const { ArcadePhysics } = require('../lib/index.js')
+// @ts-check
+import test from 'node:test'
+import assert from 'assert'
+import { LoadArcadePhysics } from '../dist/index.js'
 
 const config = {
   gravity: {
@@ -10,7 +13,7 @@ const config = {
 }
 
 // physics
-const physics = new ArcadePhysics(config)
+const physics = await LoadArcadePhysics(config)
 
 const bodies = []
 
@@ -39,7 +42,7 @@ test('should not throw any error', () => {
   let tick = 0
   const update = () => {
     physics.world.update(tick * 1000, 1000 / 60)
-    physics.world.postUpdate(tick * 1000, 1000 / 60)
+    physics.world.postUpdate()
     tick++
   }
 

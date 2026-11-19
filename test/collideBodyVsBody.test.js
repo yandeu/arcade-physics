@@ -1,4 +1,7 @@
-const { ArcadePhysics } = require('../lib/index.js')
+// @ts-check
+import test from 'node:test'
+import assert from 'assert'
+import { LoadArcadePhysics } from '../dist/index.js'
 
 const config = {
   gravity: {
@@ -10,7 +13,7 @@ const config = {
 }
 
 // physics
-const physics = new ArcadePhysics(config)
+const physics = await LoadArcadePhysics(config)
 
 // player (new)
 const player = physics.add.body(20, 20, 4, 8)
@@ -23,7 +26,7 @@ physics.add.collider(player, platform)
 let tick = 0
 const update = () => {
   physics.world.update(tick * 1000, 1000 / 60)
-  physics.world.postUpdate(tick * 1000, 1000 / 60)
+  physics.world.postUpdate()
   tick++
 }
 
@@ -32,6 +35,6 @@ for (let i = 0; i < 25; i++) {
 }
 
 test('platform and player should collide', () => {
-  expect(player.y.toFixed(2)).toBe('32.00')
-  expect(platform.y.toFixed(2)).toBe('40.00')
+  assert.strictEqual(player.y.toFixed(2), '32.00')
+  assert.strictEqual(platform.y.toFixed(2), '40.00')
 })

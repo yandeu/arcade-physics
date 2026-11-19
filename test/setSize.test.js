@@ -1,5 +1,7 @@
-const { experiments } = require('webpack')
-const { ArcadePhysics } = require('../lib/index.js')
+// @ts-check
+import test from 'node:test'
+import assert from 'assert'
+import { LoadArcadePhysics } from '../dist/index.js'
 
 const config = {
   gravity: {
@@ -10,7 +12,7 @@ const config = {
   height: 600
 }
 
-const physics = new ArcadePhysics(config)
+const physics = await LoadArcadePhysics(config)
 
 const body = physics.add.body(0, 0)
 const staticBody = physics.add.staticBody(0, 0)
@@ -18,7 +20,7 @@ const staticBody = physics.add.staticBody(0, 0)
 let tick = 0
 const update = () => {
   physics.world.update(tick * 1000, 1000 / 60)
-  physics.world.postUpdate(tick * 1000, 1000 / 60)
+  physics.world.postUpdate()
   tick++
 }
 
@@ -26,13 +28,13 @@ test('get default width and height', () => {
   update()
   {
     const { width, height } = body
-    expect(width).toBe(64)
-    expect(height).toBe(64)
+    assert.strictEqual(width, 64)
+    assert.strictEqual(height, 64)
   }
   {
     const { width, height } = staticBody
-    expect(width).toBe(64)
-    expect(height).toBe(64)
+    assert.strictEqual(width, 64)
+    assert.strictEqual(height, 64)
   }
 })
 
@@ -41,13 +43,13 @@ test('get updated width and height', () => {
   {
     body.setSize(50, 50)
     const { width, height } = body
-    expect(width).toBe(50)
-    expect(height).toBe(50)
+    assert.strictEqual(width, 50)
+    assert.strictEqual(height, 50)
   }
   {
     staticBody.setSize(50, 50)
     const { width, height } = staticBody
-    expect(width).toBe(50)
-    expect(height).toBe(50)
+    assert.strictEqual(width, 50)
+    assert.strictEqual(height, 50)
   }
 })

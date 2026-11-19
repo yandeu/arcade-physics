@@ -1,0 +1,85 @@
+/**
+ * @author       Richard Davey <rich@phaser.io>
+ * @copyright    2013-2026 Phaser Studio Inc.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Vector2 = require('../../math/Vector2');
+var Length = require('../line/Length');
+
+/**
+ * Returns a point along the perimeter of a Triangle as a Vector2, based on a normalized position value.
+ *
+ * The `position` parameter is a value between 0 and 1, where 0 and 1 both map to the start of
+ * line A (the first vertex). The point is calculated by traversing the triangle's perimeter in
+ * order: line A, then line B, then line C.
+ *
+ * @function Phaser.Geom.Triangle.GetPoint
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Math.Vector2} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Triangle} triangle - The Triangle to get the point on its perimeter from.
+ * @param {number} position - A normalized value between 0 and 1 representing a position along the triangle's perimeter. Both 0 and 1 return the start of line A.
+ * @param {Phaser.Math.Vector2} [out] - An optional Vector2 point to store the result in. If not given, a new Vector2 will be created.
+ *
+ * @return {Phaser.Math.Vector2} A Vector2 point containing the coordinates of the position on the triangle's perimeter.
+ */
+var GetPoint = function (triangle, position, out)
+{
+    if (out === undefined) { out = new Vector2(); }
+
+    var line1 = triangle.getLineA();
+    var line2 = triangle.getLineB();
+    var line3 = triangle.getLineC();
+
+    if (position <= 0 || position >= 1)
+    {
+        out.x = line1.x1;
+        out.y = line1.y1;
+
+        return out;
+    }
+
+    var length1 = Length(line1);
+    var length2 = Length(line2);
+    var length3 = Length(line3);
+
+    var perimeter = length1 + length2 + length3;
+
+    var p = perimeter * position;
+    var localPosition = 0;
+
+    //  Which line is it on?
+
+    if (p < length1)
+    {
+        //  Line 1
+        localPosition = p / length1;
+
+        out.x = line1.x1 + (line1.x2 - line1.x1) * localPosition;
+        out.y = line1.y1 + (line1.y2 - line1.y1) * localPosition;
+    }
+    else if (p > length1 + length2)
+    {
+        //  Line 3
+        p -= length1 + length2;
+        localPosition = p / length3;
+
+        out.x = line3.x1 + (line3.x2 - line3.x1) * localPosition;
+        out.y = line3.y1 + (line3.y2 - line3.y1) * localPosition;
+    }
+    else
+    {
+        //  Line 2
+        p -= length1;
+        localPosition = p / length2;
+
+        out.x = line2.x1 + (line2.x2 - line2.x1) * localPosition;
+        out.y = line2.y1 + (line2.y2 - line2.y1) * localPosition;
+    }
+
+    return out;
+};
+
+module.exports = GetPoint;

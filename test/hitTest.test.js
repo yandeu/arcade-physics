@@ -1,4 +1,7 @@
-const { ArcadePhysics } = require('../lib/index.js')
+// @ts-check
+import test from 'node:test'
+import assert from 'assert'
+import { LoadArcadePhysics } from '../dist/index.js'
 
 const config = {
   gravity: {
@@ -9,15 +12,15 @@ const config = {
   height: 600
 }
 
-const physics = new ArcadePhysics(config)
+const physics = await LoadArcadePhysics(config)
 
 const body = physics.add.body(0, 0, 64, 64)
 const staticBody = physics.add.staticBody(0, 0, 64, 64)
 
 test('hitTest', () => {
-  expect(body.hitTest(20, 20)).toBeTruthy()
-  expect(body.hitTest(80, 20)).toBeFalsy()
+  assert.ok(body.hitTest(20, 20) == true)
+  assert.ok(body.hitTest(80, 20) === false)
 
-  expect(staticBody.hitTest(20, 20)).toBeTruthy()
-  expect(staticBody.hitTest(80, 20)).toBeFalsy()
+  assert.ok(staticBody.hitTest(20, 20) === true)
+  assert.ok(staticBody.hitTest(80, 20) === false)
 })

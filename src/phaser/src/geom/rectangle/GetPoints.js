@@ -1,0 +1,45 @@
+/**
+ * @author       Richard Davey <rich@phaser.io>
+ * @copyright    2013-2026 Phaser Studio Inc.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var GetPoint = require('./GetPoint');
+var Perimeter = require('./Perimeter');
+
+/**
+ * Return an array of Vector2 points from the perimeter of the rectangle, each spaced out based on the quantity or step required.
+ *
+ * @function Phaser.Geom.Rectangle.GetPoints
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Math.Vector2[]} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} rectangle - The Rectangle object to get the points from.
+ * @param {number} quantity - The number of evenly spaced points from the rectangle's perimeter to return. If falsey, stepRate param will be used to calculate the number of points.
+ * @param {number} stepRate - Step between points. Used to calculate the number of points to return when quantity is falsey. Ignored if quantity is positive.
+ * @param {Phaser.Math.Vector2[]} [out] - An optional array to store the points in.
+ *
+ * @return {Phaser.Math.Vector2[]} An array of Vector2 points from the perimeter of the rectangle.
+ */
+var GetPoints = function (rectangle, quantity, stepRate, out)
+{
+    if (out === undefined) { out = []; }
+
+    //  If quantity is a falsey value (false, null, 0, undefined, etc) then we calculate it based on the stepRate instead.
+    if (!quantity && stepRate > 0)
+    {
+        quantity = Perimeter(rectangle) / stepRate;
+    }
+
+    for (var i = 0; i < quantity; i++)
+    {
+        var position = i / quantity;
+
+        out.push(GetPoint(rectangle, position));
+    }
+
+    return out;
+};
+
+module.exports = GetPoints;

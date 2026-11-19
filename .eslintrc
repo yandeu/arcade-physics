@@ -1,6 +1,0 @@
-{
-  "extends": "@yandeu/eslint-config",
-  "rules": {
-    "sort-imports": "off"
-  }
-}

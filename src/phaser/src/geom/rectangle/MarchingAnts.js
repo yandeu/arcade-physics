@@ -1,0 +1,118 @@
+/**
+ * @author       Richard Davey <rich@phaser.io>
+ * @copyright    2013-2026 Phaser Studio Inc.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
+ */
+
+var Perimeter = require('./Perimeter');
+var Vector2 = require('../../math/Vector2');
+
+/**
+ * Returns an array of Vector2 points evenly distributed around the perimeter of the Rectangle. This is
+ * commonly used to create a "marching ants" selection effect, where the returned points are used to
+ * animate a dashed outline that appears to march around the border of the rectangle.
+ *
+ * You can control the spacing of the points either by providing a pixel `step` distance between each
+ * point, or by specifying the total `quantity` of points to distribute evenly around the full perimeter.
+ * If both are omitted, an empty array is returned. If `step` is provided, `quantity` is derived from
+ * the perimeter length divided by the step. If only `quantity` is provided, the step is derived instead.
+ *
+ * @function Phaser.Geom.Rectangle.MarchingAnts
+ * @since 3.0.0
+ *
+ * @generic {Phaser.Math.Vector2[]} O - [out,$return]
+ *
+ * @param {Phaser.Geom.Rectangle} rect - The Rectangle to get the perimeter points from.
+ * @param {number} [step] - The distance between each point of the perimeter. Set to `null` if you wish to use the `quantity` parameter instead.
+ * @param {number} [quantity] - The total number of points to return. The step is then calculated based on the length of the Rectangle, divided by this value.
+ * @param {Phaser.Math.Vector2[]} [out] - An array in which the perimeter points will be stored. If not given, a new array instance is created.
+ *
+ * @return {Phaser.Math.Vector2[]} An array containing the perimeter points from the Rectangle.
+ */
+var MarchingAnts = function (rect, step, quantity, out)
+{
+    if (out === undefined) { out = []; }
+
+    if (!step && !quantity)
+    {
+        //  Bail out
+        return out;
+    }
+
+    //  If step is a falsey value (false, null, 0, undefined, etc) then we calculate
+    //  it based on the quantity instead, otherwise we always use the step value
+    if (!step)
+    {
+        step = Perimeter(rect) / quantity;
+    }
+    else
+    {
+        quantity = Math.round(Perimeter(rect) / step);
+    }
+
+    var x = rect.x;
+    var y = rect.y;
+    var face = 0;
+
+    //  Loop across each face of the rectangle
+
+    for (var i = 0; i < quantity; i++)
+    {
+        out.push(new Vector2(x, y));
+
+        switch (face)
+        {
+
+            //  Top face
+            case 0:
+                x += step;
+
+                if (x >= rect.right)
+                {
+                    face = 1;
+                    y += (x - rect.right);
+                    x = rect.right;
+                }
+                break;
+
+            //  Right face
+            case 1:
+                y += step;
+
+                if (y >= rect.bottom)
+                {
+                    face = 2;
+                    x -= (y - rect.bottom);
+                    y = rect.bottom;
+                }
+                break;
+
+            //  Bottom face
+            case 2:
+                x -= step;
+
+                if (x <= rect.left)
+                {
+                    face = 3;
+                    y -= (rect.left - x);
+                    x = rect.left;
+                }
+                break;
+
+            //  Left face
+            case 3:
+                y -= step;
+
+                if (y <= rect.top)
+                {
+                    face = 0;
+                    y = rect.top;
+                }
+                break;
+        }
+    }
+
+    return out;
+};
+
+module.exports = MarchingAnts;

@@ -1,0 +1,28 @@
+var v = require('vivid-cli');
+
+v.log('{bgBlue}{white}                                                                  ');
+v.log('{bgBlue}{white}  ██████╗ ██╗  ██╗ █████╗ ███████╗███████╗██████╗     ██╗  ██╗    ');
+v.log('{bgBlue}{white}  ██╔══██╗██║  ██║██╔══██╗██╔════╝██╔════╝██╔══██╗    ██║  ██║    ');
+v.log('{bgBlue}{white}  ██████╔╝███████║███████║███████╗█████╗  ██████╔╝    ███████║    ');
+v.log('{bgBlue}{white}  ██╔═══╝ ██╔══██║██╔══██║╚════██║██╔══╝  ██╔══██╗    ╚════██║    ');
+v.log('{bgBlue}{white}  ██║     ██║  ██║██║  ██║███████║███████╗██║  ██║         ██║    ');
+v.log('{bgBlue}{white}  ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝         ╚═╝    ');
+v.log('{bgBlue}{white}                                                                  ');
+v.log('');
+v.log('{yellow}{bold} Available commands:{/bold}');
+v.log('');
+v.log('{green}  npm run {white}build            {cyan}Build dev version of Phaser via Webpack');
+v.log('{green}  npm run {white}watch            {cyan}Build dev & put Webpack in watch mode');
+v.log('{green}  npm run {white}dist             {cyan}Build dist versions of Phaser');
+v.log('{green}  npm run {white}lint             {cyan}ESLint check Phaser source');
+v.log('{green}  npm run {white}lintfix          {cyan}ESLint check and fix Phaser source');
+v.log('{green}  npm run {white}sloc             {cyan}Get source code & comments line count');
+v.log('{green}  npm run {white}bundleshaders    {cyan}Convert vert/frag shaders to js');
+v.log('');
+v.log('{yellow}{bold} TypeScript:{/bold}');
+v.log('');
+v.log('{green}  npm run {white}build-tsgen      {cyan}Build the TypeScript Defs parser');
+v.log('{green}  npm run {white}tsgen            {cyan}Generate the TypeScript Defs');
+v.log('{green}  npm run {white}test-ts          {cyan}Test the TypeScript Defs');
+v.log('');
+v.log('{bgBlue}{white}  https://phaser.io                       https://docs.phaser.io  ');

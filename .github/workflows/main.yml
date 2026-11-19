@@ -1,57 +1,93 @@
 name: CI
 
-on:
-  push:
-    branches-ignore:
-      - gh-pages
-  pull_request:
-    branches-ignore:
-      - gh-pages
+on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      actions: write
-      contents: write
-      pages: write
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
+        with:
+          submodules: 'true'
 
       - name: Use Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v7
         with:
-          node-version: 16.x
+          node-version: 24.x
 
       - name: Install Dependencies
         run: npm ci
 
-      - name: Build Packages
-        run: npm run tsc && npm run bundle
+      - name: Build
+        run: npm run build
 
       - name: Run Tests
         run: npm test
 
-      - name: Run Prettier
-        run: npm run format
+  pages:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
 
-      - name: Run ESLint
-        run: npm run lint
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
 
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
+    concurrency:
+      group: pages
+      cancel-in-progress: false
 
-      - name: Deploy to gh-pages
-        if: github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          submodules: 'true'
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24.x
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      # The demos load ../dist/arcade-physics.min.js, so the site keeps demo/ and dist/
+      # side by side. The root page redirects to the demo.
+      - name: Assemble site
         run: |
-          mkdir tmp -p
-          mv index.html tmp/index.html
-          mv bundle tmp
-          mv demo tmp
-          ls tmp
-          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          npx deploy-website gh tmp
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          mkdir -p _site/dist
+          cp -r demo _site/demo
+          cp dist/arcade-physics.min.js dist/arcade-physics.min.js.map _site/dist/
+          cat > _site/index.html <<'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+            <head>
+              <meta charset="UTF-8" />
+              <meta http-equiv="refresh" content="0; url=demo/index.html" />
+              <link rel="canonical" href="demo/index.html" />
+              <title>Arcade Physics</title>
+            </head>
+            <body>
+              <a href="demo/index.html">Go to the Arcade Physics demo</a>
+            </body>
+          </html>
+          EOF
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

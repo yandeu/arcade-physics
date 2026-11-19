@@ -1,0 +1,235 @@
+/* Shared styles for the demo pages: reset, top navigation, footer, and the demo canvases.
+   Page-specific rules are scoped by a class on <body>: "page-demo" (index.html and tilemap.html)
+   and "page-server" (server.html). */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: #2c3349;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #f8f8f2;
+  margin-bottom: 5em;
+}
+
+body.page-demo {
+  text-align: center;
+}
+
+/* Page content, centred and limited to the same width as the header and footer. */
+.content {
+  margin: 0 auto;
+  max-width: 860px;
+  padding: 0 1em;
+  box-sizing: border-box;
+}
+
+.site-nav {
+  max-width: 860px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5em 1.5em;
+  padding: 0.75em 1.25em;
+  background: #232a3d;
+  border-bottom: 1px solid #3a4058;
+}
+
+.site-nav .brand {
+  font-weight: bold;
+  color: #f8f8f2;
+  text-decoration: none;
+}
+
+.site-nav nav,
+.site-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5em 1.25em;
+}
+
+.site-nav a,
+.site-footer a {
+  color: #8be9fd;
+  text-decoration: none;
+}
+
+.site-nav a:hover,
+.site-footer a:hover,
+.site-nav a[aria-current='page'] {
+  text-decoration: underline;
+}
+
+.site-footer {
+  max-width: 860px;
+  margin: 3em auto 0;
+  box-sizing: border-box;
+  padding: 1.5em 1.25em 2em;
+  border-top: 1px solid #3a4058;
+  font-size: 0.9em;
+  color: #c9cbd6;
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 1em 0 0;
+  line-height: 1.5;
+}
+
+.site-footer a:not(.brand) {
+  color: #8be9fd;
+}
+
+/* Demo pages (index.html, tilemap.html) */
+
+h2 {
+  margin-top: 2em;
+}
+
+canvas {
+  margin: 0 auto;
+  max-width: 100%;
+  display: block;
+  background: #0c0e14;
+  margin-bottom: 3em;
+}
+
+#wrapper {
+  width: 100%;
+}
+
+.stack {
+  position: relative;
+  width: 800px;
+  max-width: 100%;
+  margin: 0 auto 3em;
+}
+
+.stack > #combined-pixi canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  background: transparent;
+}
+
+.stack > canvas#debugOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background: transparent;
+  pointer-events: none;
+}
+
+.scene {
+  position: relative;
+  width: 512px;
+  max-width: 100%;
+  margin: 0 auto 3em;
+}
+
+.scene > #tilesPixi canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  background: transparent;
+}
+
+/* Server page (server.html) */
+
+body.page-server h1 {
+  text-align: center;
+  margin-top: 1em;
+}
+
+body.page-server .intro {
+  text-align: center;
+  line-height: 1.5;
+}
+
+body.page-server .window {
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1.5em 0;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  border: 1px solid #3a4058;
+}
+
+body.page-server .window-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: #232a3d;
+  font-size: 13px;
+  color: #c9cbd6;
+}
+
+body.page-server .dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+body.page-server .dot-red {
+  background: #ff5f56;
+}
+
+body.page-server .dot-yellow {
+  background: #ffbd2e;
+}
+
+body.page-server .dot-green {
+  background: #27c93f;
+}
+
+body.page-server .window-bar .title {
+  margin-left: 8px;
+}
+
+body.page-server pre {
+  margin: 0;
+  padding: 16px;
+  overflow-x: auto;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+body.page-server .code pre {
+  background: #0c0e14;
+  color: #f8f8f2;
+}
+
+body.page-server .terminal pre {
+  background: #111;
+  color: #50fa7b;
+  min-height: 12em;
+  white-space: pre-wrap;
+}
+
+body.page-server .terminal .prompt {
+  color: #8be9fd;
+}
+
+body.page-server .caption {
+  font-size: 0.9em;
+  color: #c9cbd6;
+  text-align: center;
+}
